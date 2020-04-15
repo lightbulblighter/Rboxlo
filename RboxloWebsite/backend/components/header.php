@@ -1,10 +1,13 @@
 <?php
     include_once(BASE_PATH ."/backend/configuration.php");
     
-	$title = BASE_NAME;
 	if (!empty($page_name))
 	{
-		$title .= " | " . $page_name;
+		$title = $page_name ." | ". BASE_NAME;
+	}
+	else
+	{
+		$title = BASE_NAME;
 	}
 ?>
 
