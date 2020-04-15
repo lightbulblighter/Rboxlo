@@ -1,0 +1,22 @@
+.card {
+    background-color: #15181d;
+        box-shadow: 0 1px 5px 0 rgba(255, 255, 255, .14), 0 2px 10px 0 rgba(115, 115, 115, .12)
+}
+
+h1, h2, h3, h4, h5, h6, p, * {
+    color: #ddd;
+}
+
+.btn-purple {
+    background-color: #333 !important;
+}
+
+.purple.accent-4 {
+    background-color: #51166f !important;
+}
+
+body {
+    background-image: url();
+    background: linear-gradient(#1c1c1c,#262626);
+}
+
