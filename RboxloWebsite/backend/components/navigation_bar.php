@@ -38,7 +38,11 @@
             </li>
 
             <li class="nav-item">
-				<a class="nav-link" href="/forum/"><i class="material-icons">forum</i><span>Forums</span></a>
+				<a class="nav-link" href="/forums/"><i class="material-icons">forum</i><span>Forums</span></a>
+            </li>
+			
+			 <li class="nav-item">
+				<a class="nav-link" href="/blog/"><i class="material-icons">message</i><span>Blog</span></a>
             </li>
 
             <?php
@@ -53,7 +57,7 @@
 		<ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Money">
                <a href="/my/money" class="nav-link">
-                    <i class="material-icons">local_atm</i>
+                    <i class="material-icons">attach_money</i>
                     <span class="money-text"><?php echo($_SESSION["user"]["coins"]); ?></span>
                 </a>
             </li>
