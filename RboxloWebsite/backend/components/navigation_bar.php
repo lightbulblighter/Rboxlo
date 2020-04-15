@@ -37,17 +37,17 @@
 				<a class="nav-link" href="/"><i class="material-icons">home</i><span>Home</span></a>
             </li>
 
+            <?php
+                endif;
+            ?>
+
             <li class="nav-item">
 				<a class="nav-link" href="/forums/"><i class="material-icons">forum</i><span>Forums</span></a>
             </li>
 			
-			 <li class="nav-item">
+			<li class="nav-item">
 				<a class="nav-link" href="/blog/"><i class="material-icons">message</i><span>Blog</span></a>
             </li>
-
-            <?php
-                endif;
-            ?>
 		</ul>
 
 		<?php
