@@ -61,18 +61,18 @@
 			
             <li class="nav-item avatar dropdown">
 				<a class="nav-link dropdown-toggle waves-effect waves-light user-text" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="img-fluid rounded-circle z-depth-0" style="margin-right: 5px;">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="img-fluid rounded-circle z-depth-0 mr-1">
                     <b><?php echo($_SESSION["user"]["username"]); ?></b>
                 </a>
 				
                 <div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-5">
 					<a class="dropdown-item waves-effect waves-light" href="/settings">
-                        <i class="material-icons" style="font-size: 1.1rem;">settings</i>
+                        <i class="material-icons" style="font-size: 1rem;">settings</i>
                         <span>Settings</span>
                     </a>
 					
                     <a class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#logoutModal">
-                        <i class="material-icons" style="font-size: 1.1rem;">exit_to_app</i>
+                        <i class="material-icons" style="font-size: 1rem;">exit_to_app</i>
                         <span>Logout</span>
                     </a>
 				</div>

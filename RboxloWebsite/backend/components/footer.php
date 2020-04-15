@@ -4,7 +4,7 @@
 
 <footer class="page-footer center-on-small-only stylish-color-dark">
 	<div class="container pt-1 pb-1">
-		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block" style="max-width: 500px">
+		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-1 mt-2" style="max-width: 350px">
 		<div class="row">
 			<div class="col-md-4">
 				<h5 class="title mb-4 mt-3 font-bold">About</h5>
@@ -12,7 +12,7 @@
 				<p>Read more about <?php echo(BASE_NAME); ?> and our mission at our <a href="/about">About</a> page.</p>
 			</div>
 			<hr class="clearfix w-100 d-md-none">
-			<div class="col-md-5 mx-auto" style="text-align: right;">
+			<div class="col-md-5 mx-auto text-right">
 				<h5 class="title mb-4 mt-3 font-bold">More Links</h5>
 				<ul class="nb-ul">
 					<li><a href="/about">About</a></li>
@@ -25,8 +25,8 @@
 		</div>
 	</div>
 	<div class="footer-copyright">
-		<div class="container-fluid text-center pt-1 pb-1">
-			<span><?php echo(BASE_NAME); ?> is made with <i class="material-icons">favorite</i> by <?php echo(BASE_AUTHORS); ?>.</span>
+		<div class="container-fluid text-center pt-2 pb-2">
+			<span><?php echo(BASE_NAME); ?> is made with <i class="material-icons" style="font-size: 1rem" data-toggle="tooltip" title="lots of love <3">favorite</i> by <?php echo(BASE_AUTHORS); ?>.</span>
 		</div>
 	</div>
 </footer>

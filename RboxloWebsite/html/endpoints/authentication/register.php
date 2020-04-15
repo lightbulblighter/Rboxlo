@@ -10,15 +10,15 @@
                     // However, one issue with this is that we have to have nested if-else cases.
                     // It sucks, but that's life.
 
-    if (isset($_POST["information"]))
+    if (!isset($_POST["information"]))
+    {
+        $message = "Nothing was sent.";
+        $error = true;
+    }
+
+    if (!$error)
     {
         $information = json_decode($_POST["information"], true);
-        
-        if (!isset($information["csrf"]) || empty($information["csrf"]) || !isset($information["username"]) || !isset($information["password"]) || !isset($information["confirmed_password"]) || !isset($information["email"]) || empty($information["confirmed_password"]) || empty($information["email"]) || empty($information["username"]) || empty($information["password"]) && !$error)
-        {
-            $message = "One of the required values for registration was not received, or was not sent.";
-            $error = true;
-        }
         
         if ($information["csrf"] !== $_SESSION["csrf"] && !$error)
         {
@@ -105,7 +105,7 @@
                     $error = true;
                 }
 
-                $email = str_replace(str_replace(strstr($email, "@"), "", strstr($email, "+")), "", $email);
+                $email = str_replace(str_replace(strstr($email, "@"), "", strstr($email, "+")), "", $email); // strip the tag from address, e.g john+alt@gmail.com -> john@gmail.com
                 $email = filter_var(trim($information["email"]), FILTER_SANITIZE_EMAIL);
 
                 if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL) && !$error)
@@ -310,10 +310,6 @@
                 }
             }
         }
-    }
-    else
-    {
-        $message = "Nothing was sent.";
     }
 
     exit(json_encode([

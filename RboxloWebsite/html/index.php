@@ -122,13 +122,13 @@
 		<div class="container">
 			<div class="row pt-5 mt-3">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/core/html/img/full.png" style="width: 500px;" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
+                    <h1><img src="/core/html/img/full.png" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
                     <h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
 					<iframe width="500" height="415" src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</div>
 				<div class="col-md-6 col-xl-5 offset-xl-1">
 					<div class="card" style="width: 32rem">
-						<div class="card-header purple accent-3 lighten-1 white-text">
+						<div class="card-header purple accent-3 white-text">
 							Create an account
 						</div>
 						<div class="card-body mx-4">
@@ -161,6 +161,13 @@
 								<label for="confirmed_password">Confirm password</label>
 							</div>
 
+							<div class="pb-3 mt-0 mb-0" align="center">
+								<p class="font-small blue-text d-flex justify-content-end"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
+								<div class="mb-1">
+									<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+								</div>
+							</div>
+
 							<?php
 								if (INVITE_ONLY):
 							?>
@@ -176,11 +183,6 @@
 								endif;
 							?>
 
-							<div class="md-form pb-3 mt-0 mb-0" align="center">
-								<p class="font-small blue-text d-flex justify-content-end"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
-								<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>" style="margin-bottom: 5px;"></div>
-							</div>
-
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="13confirm" required="required">
 								<label class="form-check-label" for="13confirm">I am 13 years old or older</label>
@@ -193,7 +195,7 @@
 							
 							<br>
 						
-							<div class="text-center mb-3" style="margin-top: 0px; padding-top: 0px;">
+							<div class="text-center mb-2 mt-0 pt-0">
 								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light" name="submit">Sign Up</button>
 							</div>
 						</form>

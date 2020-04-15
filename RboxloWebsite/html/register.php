@@ -117,12 +117,12 @@
         <div class="container">
 			<div class="row flex-center pt-5 mt-3">
 				<div class="card" style="width: 40rem">
-					<div class="card-header purple accent-3 lighten-1 white-text">
+					<div class="card-header purple accent-3 white-text">
 						Sign Up
 					</div>
 
                     <div class="card-body mx-4">
-						<form id="register-form">
+					<form id="register-form">
 							<div class="md-form">
 								<i class="material-icons prefix grey-text active">person</i>
 								<input type="text" id="username" name="username" class="form-control mb-1" required="required">
@@ -150,6 +150,13 @@
 								<label for="confirmed_password">Confirm password</label>
 							</div>
 
+							<div class="pb-3 mt-0 mb-0" align="center">
+								<p class="font-small blue-text d-flex justify-content-end"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
+								<div class="mb-1">
+									<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+								</div>
+							</div>
+
 							<?php
 								if (INVITE_ONLY):
 							?>
@@ -165,11 +172,6 @@
 								endif;
 							?>
 
-							<div class="md-form pb-3 mt-0 mb-0" align="center">
-								<p class="font-small blue-text d-flex justify-content-end"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
-								<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>" style="margin-bottom: 5px;"></div>
-							</div>
-
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="13confirm" required="required">
 								<label class="form-check-label" for="13confirm">I am 13 years old or older</label>
@@ -182,7 +184,7 @@
 							
 							<br>
 						
-							<div class="text-center mb-3" style="margin-top: 0px; padding-top: 0px;">
+							<div class="text-center mb-2 mt-0 pt-0">
 								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light" name="submit">Sign Up</button>
 							</div>
 						</form>

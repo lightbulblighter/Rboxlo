@@ -17,6 +17,14 @@
 
     function is_profane($text)
     {
+        foreach (PROFANITY as $bad_word)
+        {
+            if (strpos($text, $bad_word) !== false)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
     

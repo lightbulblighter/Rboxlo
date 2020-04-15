@@ -85,7 +85,7 @@
         <div class="container">
 			<div class="row flex-center pt-5 mt-3">
 				<div class="card" style="width: 40rem">
-					<div class="card-header purple accent-3 lighten-1 white-text">
+					<div class="card-header purple accent-3 white-text">
 						Login
 					</div>
 
@@ -105,7 +105,7 @@
 							
 							<br>
 						
-							<div class="text-center mb-3 mt-0 pt-0" style="margin-top: 0px; padding-top: 0px;">
+							<div class="text-center mb-3 mt-0 pt-0">
 								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light" name="submit">Login</button>
 							</div>
 						</form>

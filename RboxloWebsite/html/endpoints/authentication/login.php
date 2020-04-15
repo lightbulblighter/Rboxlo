@@ -11,19 +11,31 @@
                     // However, one issue with this is that we have to have nested if-else cases.
                     // It sucks, but that's life.
 
-    if (isset($_POST["information"]))
+    if (!isset($_POST["information"]))
+    {
+        $message = "Nothing was sent.";
+        $error = true;
+    }
+
+    if (!$error)
     {
         $information = json_decode($_POST["information"], true);
-        
-        if (!isset($information["username"]) || !isset($information["password"]) || !isset($information["csrf"]) || empty($information["username"]) || empty($information["password"]) || empty($information["csrf"]))
-        {
-            $message = "One of the required values for authentication was not received, or was not sent.";
-            $error = true;
-        }
 
         if ($information["csrf"] !== $_SESSION["csrf"] && !$error)
         {
             $message = "Invalid CSRF token.";
+            $error = true;
+        }
+
+        if (!isset($information["username"]) || empty($information["username"]) || strlen($information["username"]) <= 0 && !$error)
+        {
+            $message = "In order to sign in, you need to specify a username.";
+            $error = true;
+        }
+
+        if (!isset($information["password"]) || empty($information["password"]) || strlen($information["password"]) <= 0 && !$error)
+        {
+            $message = "In order to sign in, you need to specify a password.";
             $error = true;
         }
 
@@ -58,10 +70,6 @@
                 $message = "That user could not be found!";
             }
         }
-    }
-    else
-    {
-        $message = "Nothing was sent.";
     }
 
     exit(json_encode([
