@@ -39,7 +39,6 @@ CREATE TABLE `email_verification_keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` text NOT NULL,
   `uid` int(11) NOT NULL,
-  `used` int(11) NOT NULL DEFAULT '0',
   `generated` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -93,4 +92,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- 2020-04-15 07:03:20
+-- 2020-04-15 07:09:28
