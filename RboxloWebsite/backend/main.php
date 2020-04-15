@@ -1,6 +1,4 @@
 <?php
-    ob_start();
-	
     // Debugging
         
     if (MAINTENANCE)
