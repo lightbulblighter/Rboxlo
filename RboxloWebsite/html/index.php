@@ -161,18 +161,13 @@
 								<label for="confirmed_password">Confirm password</label>
 							</div>
 
-							<div class="pb-3 mt-0 mb-0" align="center">
-								<p class="font-small blue-text d-flex justify-content-end"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
-								<div class="mb-1">
-									<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
-								</div>
-							</div>
+							<p class="font-small blue-text d-flex justify-content-end mb-0"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
 
 							<?php
 								if (INVITE_ONLY):
 							?>
 
-							<div class="md-form mb-0">
+							<div class="md-form mb-4 mt-1">
 								<i class="material-icons prefix grey-text">fingerprint</i>
 								<input type="text" id="invite_key" name="invite_key" class="form-control mb-1" required="required">
 								<label for="invite_key">Invite key</label>
@@ -182,6 +177,12 @@
 							<?php
 								endif;
 							?>
+
+							<div class="pb-3 mb-0" align="center">
+								<div class="mb-1">
+									<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+								</div>
+							</div>
 
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="13confirm" required="required">
