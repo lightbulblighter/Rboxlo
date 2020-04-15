@@ -7,3 +7,4 @@ RboxloWebsite.code-workspace
 
 RboxloWebsite/backend/configuration.php
 RboxloWebsite/html/adminer.php
+RboxloWebsite/backend/key.pem
