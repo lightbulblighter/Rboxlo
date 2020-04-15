@@ -66,7 +66,7 @@
                 </a>
 				
                 <div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-5">
-					<a class="dropdown-item waves-effect waves-light" href="/settings">
+					<a class="dropdown-item waves-effect waves-light" href="/my/settings">
                         <i class="material-icons" style="font-size: 1rem;">settings</i>
                         <span>Settings</span>
                     </a>
@@ -134,7 +134,7 @@
 			</div>
 
 			<div class="modal-footer">
-			    <a role="button" class="btn btn-danger" href="/logout">Logout</a>
+			    <a role="button" class="btn btn-danger" href="/my/logout">Logout</a>
 			</div>
 		</div>
 	</div>
