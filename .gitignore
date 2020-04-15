@@ -3,7 +3,7 @@ RboxloRCC/
 RboxloClient/
 RboxloWebsite/assets
 
-RboxloWebsite.code-workspace
+Rboxlo.code-workspace
 
 RboxloWebsite/backend/configuration.php
 RboxloWebsite/html/adminer.php
