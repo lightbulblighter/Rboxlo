@@ -12,7 +12,7 @@
         error_reporting(0);
     }
 
-    ini_set("session.use_strict_mode", true); // session sekewrity
+    ini_set("session.use_strict_mode", true);
     date_default_timezone_set("America/Chicago");
     session_start();
 
