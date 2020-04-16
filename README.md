@@ -11,4 +11,4 @@ We love open-source, and we want to show that by us licensing Rboxlo under the M
 If you see a vulnerability, or some other issue that needs to be resolved, please do at least one of the three:
  - Raise a GitHub issue
  - Disclose it to me through the Rboxlo discord
- - E-Mail me
+ - E-Mail us (rboxlo6969@gmail.com)
