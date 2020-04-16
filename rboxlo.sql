@@ -81,7 +81,7 @@ CREATE TABLE `users` (
   `email` text NOT NULL,
   `register_ip` text NOT NULL,
   `last_ip` text NOT NULL,
-  `coins` bigint(20) NOT NULL DEFAULT '200',
+  `money` bigint(20) NOT NULL DEFAULT '100',
   `joindate` int(11) NOT NULL,
   `avatar` text NOT NULL,
   `email_verified` tinyint(4) NOT NULL DEFAULT '0',
