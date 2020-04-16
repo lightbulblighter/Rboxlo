@@ -102,6 +102,8 @@
 								<input type="password" id="password" name="password" class="form-control mb-1" required="required">
 								<label for="password">Password</label>
 							</div>
+
+							<p class="font-small blue-text d-flex justify-content-end mb-0"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
 							
 							<br>
 						

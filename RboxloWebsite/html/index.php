@@ -17,7 +17,7 @@
 		?>
 		<meta property="og:title" content="<?php echo(BASE_NAME); ?>">
 		<meta property="og:image" content="https://<?php echo(BASE_URL); ?>/core/html/img/backdrop.png"/>
-		<meta property="og:image:type"  content="image/png"/>
+		<meta property="og:image:type" content="image/png"/>
 		<meta property="og:description" content="<?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!" />
 	</head>
 	<body>
@@ -123,7 +123,8 @@
 			<div class="row pt-5 mt-3">
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
-                    <h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
+					<h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
+					<div class="embed-container"><iframe src="https://www.youtube.com/embed/QILiHiTD3uc" frameborder="0" allowfullscreen></iframe></div>
 				</div>
 				<div class="col-md-6 col-xl-5 offset-xl-1">
 					<div class="card" style="width: 32rem">
@@ -159,8 +160,6 @@
 								<input type="password" id="confirmed_password" name="confirmed_password" class="form-control" required="required">
 								<label for="confirmed_password">Confirm password</label>
 							</div>
-
-							<p class="font-small blue-text d-flex justify-content-end mb-0"><a href="/forgot-credentials" class="blue-text ml-1">Forgot Username / Password?</a></p>
 
 							<?php
 								if (INVITE_ONLY):
