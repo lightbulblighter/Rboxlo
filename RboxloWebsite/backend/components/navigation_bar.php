@@ -13,9 +13,7 @@
 
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
-			<?php
-				if (isset($_SESSION["user"])):
-			?>
+			<?php if (isset($_SESSION["user"])): ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="/my/dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
@@ -29,17 +27,13 @@
 				<a class="nav-link" href="/catalog/"><i class="material-icons">shopping_cart</i><span>Catalog</span></a>
             </li>
 
-            <?php
-                else:
-            ?>
+            <?php else: ?>
 
             <li class="nav-item">
 				<a class="nav-link" href="/"><i class="material-icons">home</i><span>Home</span></a>
             </li>
 
-            <?php
-                endif;
-            ?>
+            <?php endif; ?>
 
             <li class="nav-item">
 				<a class="nav-link" href="/forums/"><i class="material-icons">forum</i><span>Forums</span></a>
@@ -50,9 +44,7 @@
             </li>
 		</ul>
 
-		<?php
-            if (isset($_SESSION["user"])):
-        ?>
+		<?php if (isset($_SESSION["user"])): ?>
 
 		<ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Money">
@@ -83,9 +75,7 @@
 			</li>
         </ul>
 
-        <?php
-            else:
-        ?>
+        <?php else: ?>
         
         <ul class="navbar-nav ml-auto">
 			<li class="nav-item">
@@ -101,27 +91,17 @@
 			</li>
 		</ul>
 
-        <?php
-            endif;
-        ?>
+        <?php endif; ?>
     </div>
 </nav>
 
-<?php
-    if (isset($_SESSION["user"])):
-?>
-
-<?php
-    if (!$_SESSION["user"]["email_verified"]):
-?>
+<?php if (isset($_SESSION["user"]) && !$_SESSION["user"]["email_verified"]): ?>
 
 <div class="alert text-center" id="alert" style="background-color: #ff4238">
     Hey <b><?php echo($_SESSION["user"]["username"]); ?></b>, in order to access some features on <?php echo(BASE_NAME); ?>, you need to <a href="/my/verify" style="color: #41bbf4; font-weight: bold">verify your E-Mail address!</a>
 </div>
 
-<?php
-    endif;
-?>
+<?php endif; ?>
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -144,8 +124,4 @@
 	</div>
 </div>
 
-<!-- TODO: Add second navbar --> 
-
-<?php
-    endif;
-?>
+<?php endif; ?>
