@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<?php
-			build_header("404");
+			build_header("400");
 		?>
 	</head>
 	<body>
