@@ -12,7 +12,6 @@
     define("BASE_URL", "rb.ozzt.pw");
     define("BASE_VERSION", "1.0.0");
     define("BASE_PATH", "/var/www");
-    define("BASE_AUTHORS", "lightbulblighter");
     
     /* CRYPT */
     define("CRYPT_KEY", "");

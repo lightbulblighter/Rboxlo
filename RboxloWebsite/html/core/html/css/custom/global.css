@@ -5,6 +5,9 @@
 .navbar a {
 	vertical-align: middle;
 }
+.border-light-grey {
+	border-color: #545e6d !important;
+}
 .cube-icon {
 	padding-right: 0 !important;
 }

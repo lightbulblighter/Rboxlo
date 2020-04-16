@@ -122,9 +122,8 @@
 		<div class="container">
 			<div class="row pt-5 mt-3">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/core/html/img/full.png" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
+                    <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
                     <h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
-					<iframe width="500" height="415" src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</div>
 				<div class="col-md-6 col-xl-5 offset-xl-1">
 					<div class="card" style="width: 32rem">
@@ -191,7 +190,7 @@
 
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="read_documents" required="required">
-								<label class="form-check-label" for="read_documents">I have read and agree to the <a href="/terms-of-service">Terms of Service</a> and the <a href="/privacy-policy">Privacy Policy</a></label>
+								<label class="form-check-label" for="read_documents">I have read and agree to the <a href="/about/terms-of-service">Terms of Service</a> and the <a href="/about/privacy-policy">Privacy Policy</a></label>
 							</div>
 							
 							<br>

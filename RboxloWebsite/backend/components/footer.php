@@ -3,30 +3,21 @@
 ?>
 
 <footer class="page-footer center-on-small-only stylish-color-dark">
-	<div class="container pt-1 pb-1">
-		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-1 mt-2" style="max-width: 350px">
-		<div class="row">
-			<div class="col-md-4">
-				<h5 class="title mb-4 mt-3 font-bold">About</h5>
-				<p>Use of this site means that you, the user, have agreed to the <a href="/terms-of-service">Terms of Service</a> and have read the <a href="/privacy-policy">Privacy Policy</a>.</p>
-				<p>Read more about <?php echo(BASE_NAME); ?> and our mission at our <a href="/about">About</a> page.</p>
-			</div>
-			<hr class="clearfix w-100 d-md-none">
-			<div class="col-md-5 mx-auto text-right">
-				<h5 class="title mb-4 mt-3 font-bold">More Links</h5>
-				<ul class="nb-ul">
-					<li><a href="/about">About</a></li>
-					<li><a href="/privacy-policy">Privacy Policy</a></li>
-					<li><a href="/copyright">Copyright</a></li>
-					<li><a href="/terms-of-service">Terms of Service</a></li>
-					<li><a href="<?php echo(GITHUB_URL); ?>">GitHub</a></li>
-				</ul>
-			</div>
-		</div>
+	<div class="container pt-1 pb-4">
+		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" style="max-width: 500px">
+		<hr class="border-light-grey">
+
+		<ul class="nb-ul list-group list-group-horizontal">
+			<li class="flex-fill text-center"><a href="/about/mission" class="text-white font-weight-light h5">About Us</a></li>
+			<li class="flex-fill text-center"><a href="/about/privacy" class="text-white font-weight-light h5">Privacy</a></li>
+			<li class="flex-fill text-center"><a href="/about/copyright" class="text-white font-weight-light h5">Copyright</a></li>
+			<li class="flex-fill text-center"><a href="/about/terms-of-service" class="text-white font-weight-light h5">Terms of Service</a></li>
+			<li class="flex-fill text-center"><a href="https://www.github.com/lighterlightbulb/Rboxlo" class="text-white font-weight-light h5">GitHub</a></li>
+		</ul>
 	</div>
 	<div class="footer-copyright">
 		<div class="container-fluid text-center pt-2 pb-2">
-			<span><?php echo(BASE_NAME); ?> is made with <i class="material-icons" style="font-size: 1rem" data-toggle="tooltip" title="lots of love <3">favorite</i> by <?php echo(BASE_AUTHORS); ?>.</span>
+			<span>Rboxlo is made with <i class="material-icons" style="font-size: 1rem" data-toggle="tooltip" title="" data-original-title="lots of love <3">favorite</i> by many different contributors.</span>
 		</div>
 	</div>
 </footer>
