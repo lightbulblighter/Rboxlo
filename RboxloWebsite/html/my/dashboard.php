@@ -59,6 +59,8 @@
 			</div>
 		</div>
 		
+		<br><br><br>
+		
 		<?php
 			build_footer();
 		?>
