@@ -86,4 +86,9 @@
         header("Location: ". $location);
         exit();
     }
+	
+	function endsWith($haystack, $needle) 
+	{
+		return substr_compare($haystack, $needle, -strlen($needle)) === 0;
+	}
 ?>
