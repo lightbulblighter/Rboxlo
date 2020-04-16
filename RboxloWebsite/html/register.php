@@ -144,7 +144,7 @@
 								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>.</span>
 							</div>
 							
-							<div class="md-form mb-0">
+							<div class="md-form">
 								<i class="material-icons prefix grey-text">vpn_key</i>
 								<input type="password" id="confirmed_password" name="confirmed_password" class="form-control" required="required">
 								<label for="confirmed_password">Confirm password</label>
@@ -154,7 +154,7 @@
 								if (INVITE_ONLY):
 							?>
 
-							<div class="md-form mb-4 mt-1">
+							<div class="md-form mt-1">
 								<i class="material-icons prefix grey-text">fingerprint</i>
 								<input type="text" id="invite_key" name="invite_key" class="form-control mb-1" required="required">
 								<label for="invite_key">Invite key</label>

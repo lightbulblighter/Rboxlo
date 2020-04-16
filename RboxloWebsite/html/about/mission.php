@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<?php
-			build_header("Landing");
+			build_header("About Us");
 		?>
 	</head>
 	<body>
@@ -25,6 +25,39 @@
                 </div>
             </div>
         </div>
+
+		<div class="container">
+			<div class="card">
+				<div class="rounded-top mdb-color purple accent-3 pt-3 pl-3 pb-3">
+					<span class="white-text">What is this?</span>
+				</div>
+				<div class="card-body">
+					<p></p>
+				</div>  
+			</div>
+
+			<br><br>
+
+			<div class="card">
+				<div class="rounded-top mdb-color purple accent-3 pt-3 pl-3 pb-3">
+					<span class="white-text">What is our goal?</span>
+				</div>
+				<div class="card-body">
+					<p></p>
+				</div>  
+			</div>
+
+			<br><br>
+
+			<div class="card">
+				<div class="rounded-top mdb-color purple accent-3 pt-3 pl-3 pb-3">
+					<span class="white-text">Who made this?</span>
+				</div>
+				<div class="card-body">
+					<p></p>
+				</div>  
+			</div>
+		</div>
 
 		<?php
 			build_footer();

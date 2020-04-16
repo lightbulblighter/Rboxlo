@@ -124,7 +124,7 @@
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
 					<h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
-					<div class="embed-container"><iframe src="https://www.youtube.com/embed/QILiHiTD3uc" frameborder="0" allowfullscreen></iframe></div>
+					<div class="embed-container"><iframe src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allowfullscreen></iframe></div>
 				</div>
 				<div class="col-md-6 col-xl-5 offset-xl-1">
 					<div class="card" style="width: 32rem">
@@ -155,7 +155,7 @@
 								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>.</span>
 							</div>
 							
-							<div class="md-form mb-0">
+							<div class="md-form">
 								<i class="material-icons prefix grey-text">vpn_key</i>
 								<input type="password" id="confirmed_password" name="confirmed_password" class="form-control" required="required">
 								<label for="confirmed_password">Confirm password</label>

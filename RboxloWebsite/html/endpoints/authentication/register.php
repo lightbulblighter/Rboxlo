@@ -80,12 +80,6 @@
                     $error = true;
                 }
 
-                if (is_profane($information["username"]) && !$error)
-                {
-                    $message = "Your username is not appropriate for use on ". BASE_NAME .".";
-                    $error = true;
-                }
-
                 if (strlen($username) < 3 && !$error)
                 {
                     $message = "Your username has to be at least 3 characters or more.";
