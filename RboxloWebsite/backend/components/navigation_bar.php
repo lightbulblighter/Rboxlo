@@ -103,6 +103,8 @@
 
 <?php endif; ?>
 
+<?php if (isset($_SESSION["user"])): ?>
+
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
