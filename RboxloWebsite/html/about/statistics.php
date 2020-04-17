@@ -23,8 +23,8 @@
             {
                 endpoint("/statistics", "GET", null, function(response)
                 {
-                    $("#cpu").textContent = response.cpu
-                    $("#ram").textContent = response.ram
+                    $("#cpu").text(response.cpu + "%")
+                    $("#ram").text(response.ram + "%")
                 })
             }, 1000)
         </script>
