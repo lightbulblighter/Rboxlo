@@ -53,17 +53,17 @@
 				<div class="card-body mx-4">
                     <span class="h3">Numbers</span><span> as of <?php echo(date("m/d/Y")); ?></span>
                     
-                    <ul>
+                    <ul class="mt-1">
                         <li>There are currently <?php echo($users); ?> unique users registered on <?php echo(BASE_NAME); ?>.</li>
                     </ul>
 
                     <br>
                         
                     <span class="h3">Website performance</span>
-                    <p>
-                        Currently, the CPU load on the website is at <span id="cpu">0%</span>
+                    <p class="mt-1">
+                        Currently, the CPU load on the website is at approximately <span id="cpu">0%</span>
                         <br>
-                        Currently, the RAM usage on the website is at <span id="ram">0%</span>
+                        Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>
                         <br><br>
                         Get more detailed website performance satistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> netdata panel</a>.
                     </p>
