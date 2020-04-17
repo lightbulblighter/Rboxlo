@@ -26,6 +26,14 @@
             <li class="nav-item">
 				<a class="nav-link" href="/catalog/"><i class="material-icons">shopping_cart</i><span>Catalog</span></a>
             </li>
+            
+            <?php if ($_SESSION["user"]["rank"] >= 1): ?>
+            
+            <li class="nav-item">
+				<a class="nav-link" href="/admin/"><i class="material-icons">build</i><span>Admin</span></a>
+            </li>
+            
+            <?php endif; ?>
 
             <?php else: ?>
 
