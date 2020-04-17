@@ -4,7 +4,7 @@
 
 <footer class="page-footer center-on-small-only stylish-color-dark">
 	<div class="container pt-1 pb-4">
-		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" style="max-width: 500px">
+		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" style="width: 400px">
 		<hr class="border-light-grey">
 
 		<ul class="nb-ul list-group list-group-horizontal">
