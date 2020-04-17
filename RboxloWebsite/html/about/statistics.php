@@ -23,8 +23,8 @@
             {
                 endpoint("/statistics", "GET", null, function(response)
                 {
-                    $("#cpu").innerHTML(response.cpu)
-                    $("#ram").innerHTML(response.ram)
+                    $("#cpu").textContent = response.cpu
+                    $("#ram").textContent = response.ram
                 })
             }, 1000)
         </script>
@@ -61,13 +61,13 @@
                         
                     <span class="h3">Website performance</span>
                     <p>
-                        Currently, the CPU load on the website is at <span id="cpu"></span>
+                        Currently, the CPU load on the website is at <span id="cpu">0%</span>
                         <br>
-                        Currently, the RAM usage on the website is at <span id="ram"></span>
+                        Currently, the RAM usage on the website is at <span id="ram">0%</span>
                         <br><br>
                         Get more detailed website performance satistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> netdata panel</a>.
                     </p>
-                    
+
 				</div>  
             </div>
         </div>
