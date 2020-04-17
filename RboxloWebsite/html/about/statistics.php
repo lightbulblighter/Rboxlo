@@ -16,17 +16,24 @@
 			build_navigation_bar();
         ?>  
         
-        <script type="text/javascript" src="/core/html/js/api.js" async defer></script>
+        <script type="text/javascript" src="/core/html/js/api.js"></script>
 
         <script type="text/javascript">
-            window.setInterval(function()
+			function update() 
+			{
+				endpoint("/statistics", "GET", null, (response) =>
+				{
+					$("#cpu").text(response.cpu + "%")
+					$("#ram").text(response.ram + "%")
+				})
+			}
+			
+			setInterval(() =>
             {
-                endpoint("/statistics", "GET", null, function(response)
-                {
-                    $("#cpu").text(response.cpu + "%")
-                    $("#ram").text(response.ram + "%")
-                })
+				update()
             }, 1000)
+			
+			update()
         </script>
 
         <div class="jumbotron card card-image" style="background-image: url(/core/html/img/about_backdrop.png)">
@@ -61,9 +68,9 @@
                         
                     <span class="h3">Website performance</span>
                     <p class="mt-1">
-                        Currently, the CPU load on the website is at approximately <span id="cpu">0%</span>
+                        Currently, the CPU load on the website is at approximately <span id="cpu">0%</span>.
                         <br>
-                        Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>
+                        Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>.
                         <br><br>
                         Get more detailed website performance satistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> netdata panel</a>.
                     </p>
