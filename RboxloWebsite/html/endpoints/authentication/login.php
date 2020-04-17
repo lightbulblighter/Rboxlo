@@ -10,7 +10,7 @@
     $error = false; // This variable is set so we don't perform additional checks if we already know that something is invalid.
                     // However, one issue with this is that we have to have nested if-else cases.
                     // It sucks, but that's life.
-
+                    
     if (!isset($_POST["information"]))
     {
         $message = "Nothing was sent.";

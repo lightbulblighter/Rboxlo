@@ -6,7 +6,7 @@ function endpoint(endpoint, method, form, callback)
 
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({information: form}),
+        data: "information=" + JSON.stringify(form),
 
         success: callback
     })
