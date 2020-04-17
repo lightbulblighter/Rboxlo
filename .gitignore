@@ -6,5 +6,5 @@ RboxloWebsite/assets
 Rboxlo.code-workspace
 
 RboxloWebsite/backend/configuration.php
-RboxloWebsite/html/adminer.php
+RboxloWebsite/html/admin/adminer.php
 RboxloWebsite/backend/key.pem
