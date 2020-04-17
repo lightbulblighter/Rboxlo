@@ -2044,16 +2044,3 @@ as$I){echo"<tr>","<th>".h($I["Name"]),"<td>".($I["Execute at"]?lang(287)."<td>".
 script("ajaxSetHtml('".js_escape(ME)."script=db');");}}}page_footer();
 
 ?>
-
-<?php
-	if (!isset($_SESSION["user"]))
-	{
-		redirect("/login");
-	}
-		
-	if ($_SESSION["user"]["rank"] <= 0)
-	{
-		require_once(file_build_path("html", "error", "403.php"));
-		exit();
-	}
-?>
