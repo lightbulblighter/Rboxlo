@@ -1,6 +1,6 @@
 # Rboxlo
 
-Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rb.ozzt.pw/about/mission
+Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rb.ozzt.pw/about/mission.
 
 Pay us a visit at https://rb.ozzt.pw/!
 

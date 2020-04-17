@@ -76,7 +76,7 @@
 				</div>
 				<div class="card-body">
 					<p>
-						<?php echo(BASE_NAME); ?> is created by a team of young, aspiring developers of whose contributions you can see on the <a href="<?php echo(GITHUB_URL); ?>/graphs/contributors">GitHub contributors page.</a>
+						<?php echo(BASE_NAME); ?> is created by a team of young, aspiring developers of whose contributions you can see on the <a href="<?php echo(GITHUB_URL); ?>/graphs/contributors">GitHub contributors page</a>.
 						<br><br>
 						You can contribute too! Create a pull request, solve an issue, or add a new feature; these are the beauties of being open source.
 					</p>
