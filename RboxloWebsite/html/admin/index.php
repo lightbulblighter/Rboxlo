@@ -27,22 +27,25 @@
 			build_navigation_bar();
 		?>
 
+		<div class="jumbotron card card-image" style="background-image: url(/core/html/img/admin_backdrop.png)">
+            <div class="text-white text-center">
+                <div>
+					<h1 class="card-title h1-responsive font-weight-bold">Admin Panel</h1>
+                </div>
+            </div>
+		</div>
+		
         <div class="container">
-			<div class="row flex-center pt-5 mt-3">
-				<div class="card" style="width: 40rem">
-					<div class="card-header purple accent-3 white-text">
-						Admin Panel
-					</div>
-
-                    <div class="card-body mx-4">
-
-                        <?php if (INVITE_ONLY): ?>
-                        <a href="/admin/invite">Generate invite key</a>
-                        <?php endif; ?>
-
-                    </div>
-
+			<div class="card" style="width: 40rem">
+				<div class="card-header purple accent-3 white-text">
+					Admin Panel
 				</div>
+
+                <div class="card-body mx-4">
+                    <?php if (INVITE_ONLY): ?>
+                    <a href="/admin/invite">Generate invite key</a>
+                    <?php endif; ?>
+                </div>
 			</div>
 		</div>
 
