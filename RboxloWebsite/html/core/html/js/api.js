@@ -4,9 +4,10 @@ function endpoint(endpoint, method, form, callback)
         url: "/endpoints" + endpoint,
         type: method,
 
-        contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: "information=" + JSON.stringify(form),
+        data: {
+            information: JSON.stringify(form)
+        },
 
         success: callback
     })
