@@ -41,6 +41,12 @@
 
 		<div class="container">
 			<div class="card">
+                <?php
+                    $statement = $GLOBALS["sql"]->prepare("SELECT COUNT(*) FROM `users`");
+                    $statement->execute();
+                    $users = $statement->fetchColumn();
+                ?>
+                
 				<div class="rounded-top mdb-color purple accent-3 pt-3 pl-3 pb-3">
 					<span class="white-text">Website statistics</span>
 				</div>
