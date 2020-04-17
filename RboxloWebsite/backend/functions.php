@@ -86,9 +86,37 @@
         header("Location: ". $location);
         exit();
     }
-	
+    
+    // str functions
+    function contains($haystack, $needle)
+    {
+        return strpos($haystack, $needle) !== false;
+    }
+    
 	function ends_with($haystack, $needle) 
 	{
 		return substr_compare($haystack, $needle, -strlen($needle)) === 0;
-	}
+    }
+    
+    // sys-functions
+    function file_build_path(...$segments)
+    {
+        return BASE_PATH . join(DIRECTORY_SEPATATOR, $segments);
+    }
+    
+    function get_server_memory_usage()
+    {
+        $free = (string)trim(shell_exec("free"));
+    
+        $mem = explode(" ", explode("\n", $free)[1]);
+        $mem = array_filter($mem);
+        $mem = array_merge($mem);
+    
+        return $mem[2] / $mem[1] * 100;
+    }
+    
+    function get_server_cpu_usage()
+    {
+        return sys_getloadavg()[0];
+    }
 ?>

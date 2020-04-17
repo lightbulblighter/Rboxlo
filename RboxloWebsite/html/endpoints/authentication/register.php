@@ -16,6 +16,12 @@
         $error = true;
     }
 
+    if (isset($_SESSION["user"]))
+    {
+        $message = "You cannot create new accounts while logged in!";
+        $error = true;
+    }
+
     if (!$error)
     {
         $information = json_decode($_POST["information"], true);
@@ -280,8 +286,8 @@
                                 ]);
 
                                 // Create account
-                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `coins`, `joindate`, `avatar`, `email_verified`, `preferences`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                                $statement->execute([$username, $password, $email, $ip, $ip, 200, time(), $avatar, 0, $preferences]);
+                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                $statement->execute([$username, $password, $email, $ip, $ip, 200, time(), $avatar, 0, $preferences, time()]);
 
                                 // Get user
                                 $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `username` = ?");

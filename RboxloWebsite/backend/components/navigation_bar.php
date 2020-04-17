@@ -50,6 +50,7 @@
             <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Money">
                <a href="/my/money" class="nav-link">
                     <i class="material-icons">attach_money</i>
+                    
                     <?php
                         // get money
                         $statement = $GLOBALS["sql"]->prepare("SELECT `money` FROM `users` WHERE `id` = ?");

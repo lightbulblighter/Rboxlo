@@ -31,6 +31,7 @@
     define("EMAIL_PASSWORD", "");
 
     /* misc */ 
+    define("TIMEZONE", "America/Chicago");
     define("PROFANITY", [""]);
     define("INVITE_ONLY", true);
     define("GITHUB_URL", "https://www.github.com/lighterlightbulb/Rboxlo");

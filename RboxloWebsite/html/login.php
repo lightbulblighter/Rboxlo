@@ -33,16 +33,16 @@
 					csrf: "<?php echo($_SESSION["csrf"]); ?>"
 				}
 
-				login(information, function(response)
+				endpoint("/authentication/login", "POST", information, function(response)
 				{
 					toastr.options = {
-						"closeButton": !status,
-						"timeOut": response["success"] ? 2000 : 5000
+						"closeButton": !response.success,
+						"timeOut": response.success ? 2000 : 5000
 					}
 
-					toastr[response["success"] ? "success" : "error"](response["message"], response["success"] ? "Successfully logged in!" : "An error occurred.")
+					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
 
-					if (response["success"])
+					if (response.success)
 					{
 						setTimeout(function()
 						{

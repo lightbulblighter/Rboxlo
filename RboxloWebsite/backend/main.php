@@ -12,8 +12,8 @@
         error_reporting(0);
     }
 
-    ini_set("session.use_strict_mode", true);
-    date_default_timezone_set("America/Chicago");
+    ini_set("session.use_strict_mode", true); // Session security
+    date_default_timezone_set(TIMEZONE);
     session_start();
 
     if (!isset($_SESSION["csrf"]) || empty($_SESSION["csrf"]))

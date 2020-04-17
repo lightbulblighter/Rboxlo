@@ -43,16 +43,16 @@
 					csrf: "<?php echo($_SESSION["csrf"]); ?>"
 				}
 
-				register(information, function(response)
+				endpoint("/authentication/register", "POST", information, function(response)
 				{
 					toastr.options = {
-						"closeButton": !status,
-						"timeOut": response["success"] ? 2000 : 5000
+						"closeButton": !response.success,
+						"timeOut": response.success ? 2000 : 5000
 					}
 
-					toastr[response["success"] ? "success" : "error"](response["message"], response["success"] ? "Success!" : "An error occurred.")
+					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
 
-					if (response["success"])
+					if (response.success)
 					{
 						setTimeout(function()
 						{
@@ -129,21 +129,21 @@
 								<label for="username">Username</label>
 								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem">Please choose an appropriate username.</span>
 							</div>
-							
+								
 							<div class="md-form">
 								<i class="material-icons prefix grey-text">email</i>
 								<input type="email" id="email" name="email" class="form-control mb-1" required="required">
 								<label for="email">E-Mail address</label>
 								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem">Give us a valid E-Mail address; this will be used for verification.</span>
 							</div>
-							
+								
 							<div class="md-form">
 								<i class="material-icons prefix grey-text">vpn_key</i>
 								<input type="password" id="password" name="password" class="form-control mb-1" required="required">
 								<label for="password">Password</label>
 								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>.</span>
 							</div>
-							
+								
 							<div class="md-form">
 								<i class="material-icons prefix grey-text">vpn_key</i>
 								<input type="password" id="confirmed_password" name="confirmed_password" class="form-control" required="required">
@@ -154,7 +154,7 @@
 								if (INVITE_ONLY):
 							?>
 
-							<div class="md-form mt-1">
+							<div class="md-form mb-4 mt-1">
 								<i class="material-icons prefix grey-text">fingerprint</i>
 								<input type="text" id="invite_key" name="invite_key" class="form-control mb-1" required="required">
 								<label for="invite_key">Invite key</label>
@@ -178,11 +178,11 @@
 
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="read_documents" required="required">
-								<label class="form-check-label" for="read_documents">I have read and agree to the <a href="/terms-of-service">Terms of Service</a> and the <a href="/privacy-policy">Privacy Policy</a></label>
+								<label class="form-check-label" for="read_documents">I have read and agree to the <a href="/about/terms-of-service">Terms of Service</a> and the <a href="/about/privacy-policy">Privacy Policy</a></label>
 							</div>
-							
+								
 							<br>
-						
+							
 							<div class="text-center mb-2 mt-0 pt-0">
 								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light" name="submit">Sign Up</button>
 							</div>

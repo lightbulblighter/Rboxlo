@@ -17,6 +17,12 @@
         $error = true;
     }
 
+    if (isset($_SESSION["user"]))
+    {
+        $message = "You are already logged in!";
+        $error = true;
+    }
+
     if (!$error)
     {
         $information = json_decode($_POST["information"], true);
