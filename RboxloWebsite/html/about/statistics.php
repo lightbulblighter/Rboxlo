@@ -46,28 +46,28 @@
                     $statement->execute();
                     $users = $statement->fetchColumn();
                 ?>
-                
+
 				<div class="rounded-top mdb-color purple accent-3 pt-3 pl-3 pb-3">
 					<span class="white-text">Website statistics</span>
 				</div>
 				<div class="card-body mx-4">
-					<p>
-                        <h3>Numbers <h5>as of <?php echo(date("m/d/Y")); ?></h3>
-                        <ul>
-                            <li>There are currently <?php echo($users); ?> unique users registered on <?php echo(BASE_NAME); ?>.</li>
-                        </ul>
+                    <span class="h3">Numbers</span><span> as of <?php echo(date("m/d/Y")); ?></span>
+                    
+                    <ul>
+                        <li>There are currently <?php echo($users); ?> unique users registered on <?php echo(BASE_NAME); ?>.</li>
+                    </ul>
 
-                        <br><br>
+                    <br>
                         
-                        <h3>Website performance</h3>
-                        <p>
-                            Currently, the CPU load on the website is at <span id="cpu"></span>
-                            <br>
-                            Currently, the RAM usage on the website is at <span id="ram"></span>
-                            <br><br>
-                            Get more detailed website performance satistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> netdata panel</a>.
-                        </p>
-					</p>
+                    <span class="h3">Website performance</span>
+                    <p>
+                        Currently, the CPU load on the website is at <span id="cpu"></span>
+                        <br>
+                        Currently, the RAM usage on the website is at <span id="ram"></span>
+                        <br><br>
+                        Get more detailed website performance satistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> netdata panel</a>.
+                    </p>
+                    
 				</div>  
             </div>
         </div>
