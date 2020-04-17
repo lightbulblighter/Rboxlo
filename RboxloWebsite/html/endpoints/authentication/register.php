@@ -299,7 +299,7 @@
                                 $_SESSION["user"]["password"] = ""; // dont keep the hash in session just in case
 
                                 // Copy default thumbnail for this user
-                                copy(BASE_PATH ."/html/renders/users/0.png", BASE_PATH ."/html/renders/users/". $_SESSION["user"]["id"] .".png");
+                                copy(file_build_path("html", "renders", "users", "0.png"), file_build_path("html", "renders", "users", $_SESSION["user"]["id"] .".png"));
                                 
                                 // Return success
                                 $success = true;
