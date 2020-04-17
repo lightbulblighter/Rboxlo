@@ -33,7 +33,7 @@
 					csrf: "<?php echo($_SESSION["csrf"]); ?>"
 				}
 
-				endpoint("/authentication/login", "POST", information, function(response)
+				endpoint("/authentication/login", "POST", information, (response) =>
 				{
 					toastr.options = {
 						"closeButton": !response.success,
