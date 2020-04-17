@@ -101,7 +101,7 @@
     // sys-functions
     function file_build_path(...$segments)
     {
-        return BASE_PATH . join(DIRECTORY_SEPATATOR, $segments);
+        return BASE_PATH . "/" .join(DIRECTORY_SEPARATOR, $segments);
     }
     
     function get_server_memory_usage()
