@@ -45,7 +45,7 @@
                     <div class="card">
                         <div class="card-header purple accent-3 white-text">Administration</div>
                         
-                        <div class="card-body-mx-4">
+                        <div class="card-body-mx-4 py-4 px-4">
                             <div class="card gradient-card">
                                 <a href="/admin/adminer">
                                     <div class="text-white mask purple-gradient-rgba">
@@ -86,7 +86,7 @@
                     <div class="card">
                         <div class="card-header purple accent-3 white-text">Moderation</div>
                         
-                        <div class="card-body-mx-4">
+                        <div class="card-body-mx-4 py-4 px-4">
                             <div class="card gradient-card">
                                 <a href="/admin/moderate-user">
                                     <div class="text-white mask purple-gradient-rgba">
