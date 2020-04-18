@@ -113,7 +113,7 @@
 
 <?php if (isset($_SESSION["user"]) && !$_SESSION["user"]["email_verified"]): ?>
 
-<div class="alert text-center" id="alert" style="background-color: #ff4238">
+<div class="news text-center pt-2 pb-2 news-red">
     Hey <b><?php echo($_SESSION["user"]["username"]); ?></b>, in order to access some features on <?php echo(BASE_NAME); ?>, you need to <a href="/my/verify" style="color: #41bbf4; font-weight: bold">verify your E-Mail address!</a>
 </div>
 

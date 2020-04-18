@@ -120,7 +120,7 @@
 		</script>
 
 		<div class="container">
-			<div class="row pt-5 mt-3">
+			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
 					<h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
@@ -199,9 +199,10 @@
 								</div>
 							</form>
 						</div>
-					</div>
-					<div class="modal-footer mx-5 pt-3 mb-1">
-						<p class="font-small grey-text d-flex justify-content-end">Already a member? <a href="/login" class="blue-text ml-1"> Login</a></p>
+
+						<div class="modal-footer mx-5 pt-3 mb-1">
+							<p class="font-small grey-text d-flex justify-content-end">Already a member? <a href="/login" class="blue-text ml-1"> Login</a></p>
+						</div>
 					</div>
 				</div>
 			</div>
