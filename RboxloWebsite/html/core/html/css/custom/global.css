@@ -14,35 +14,8 @@
 .nb-ul {
 	list-style-type: none;
 }
-garlicoin {
-	display: block;
-	background: url(/core/html/img/garlicoin.svg);
-}
-.cube-text {
-	padding-left: 5px !important;
-}
 .navbar .nav-item .nav-link {
 	display: inline-flex;
-}
-.error-icon {
-	font-size: 1.5rem;
-	margin-top: 1rem;
-	color: #FF3547 !important;
-}
-
-.error-text {
-	margin-left: 47.5px !important;
-	color: #FF3547 !important;
-	font-size: 0.9rem;
-}
-
-.error-form {
-	margin-bottom: 0.2rem !important;
-	border-bottom: 1px solid #FF3547 !important;
-}
-
-.error-label {
-	color: #FF3547 !important;
 }
 .navbar .nav-item .nav-link span {
 	margin-left: 5px;
@@ -71,23 +44,6 @@ footer.page-footer a {
 	color: #41bbf4;
 	font-weight: bold;
 }
-.pt-5 {
-	padding-top: 0rem!important;
-}
-.mt-3 {
-	margin-top: 0rem!important;
-}
-.pt-5 py-5 {
-	padding-top: 0rem!important;
-}
-.mt-3 my-3 {
-	margin-top: 0rem!important;
-}
-.registration-error {
-	background-color: #ff3849;
-	width: 28rem; 
-	border-radius: 3px;
-}
 .vertical-alignment-helper {
     display:table;
     height: 100%;
@@ -108,13 +64,14 @@ footer.page-footer a {
     margin: 0 auto;
     pointer-events:all;
 }
-
-.alert {
+.news {
 	color: white; 
 	height: 35px; 
-	padding-top: 5px; 
 	margin: 0px;
 	border-radius: 0px;
+}
+.news-red {
+	background-color: #ff3636;
 }
 
 /* embedresponsively */

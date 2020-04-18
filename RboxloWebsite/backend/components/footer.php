@@ -8,12 +8,12 @@
 		<hr class="border-light-grey">
 
 		<ul class="nb-ul list-group list-group-horizontal">
-			<li class="flex-fill text-center"><a href="/about/mission" class="text-white font-weight-light h5">About Us</a></li>
-			<li class="flex-fill text-center"><a href="/about/privacy" class="text-white font-weight-light h5">Privacy</a></li>
-			<li class="flex-fill text-center"><a href="/about/copyright" class="text-white font-weight-light h5">Copyright</a></li>
-			<li class="flex-fill text-center"><a href="/about/terms-of-service" class="text-white font-weight-light h5">Terms of Service</a></li>
-			<li class="flex-fill text-center"><a href="/about/statistics" class="text-white font-weight-light h5">Statistics</a></li>
-			<li class="flex-fill text-center"><a href="https://www.github.com/lighterlightbulb/Rboxlo" class="text-white font-weight-light h5">GitHub</a></li>
+			<li class="flex-fill text-center"><a href="/about/mission" class="text-white font-weight-light h5-responsive">About Us</a></li>
+			<li class="flex-fill text-center"><a href="/about/privacy" class="text-white font-weight-light h5-responsive">Privacy</a></li>
+			<li class="flex-fill text-center"><a href="/about/copyright" class="text-white font-weight-light h5-responsive">Copyright</a></li>
+			<li class="flex-fill text-center"><a href="/about/terms-of-service" class="text-white font-weight-light h5-responsive">Terms of Service</a></li>
+			<li class="flex-fill text-center"><a href="/about/statistics" class="text-white font-weight-light h5-responsive">Statistics</a></li>
+			<li class="flex-fill text-center"><a href="https://www.github.com/lighterlightbulb/Rboxlo" class="text-white font-weight-light h5-responsive">GitHub</a></li>
 		</ul>
 	</div>
 	<div class="footer-copyright">
