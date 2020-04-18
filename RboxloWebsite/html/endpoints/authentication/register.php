@@ -286,7 +286,7 @@
                                 ]);
 
                                 // Create account
-                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 $statement->execute([$username, $password, $email, $ip, $ip, 200, time(), $avatar, 0, $preferences, time()]);
 
                                 // Get user
