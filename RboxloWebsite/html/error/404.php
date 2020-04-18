@@ -17,7 +17,7 @@
 		?>
 
         <div class="container">
-			<div class="row flex-center pt-5 mt-3">
+			<div class="row flex-center">
                 <div class="card" style="width: 40rem">
 					<div class="card-header purple accent-3 white-text">
                         Error
@@ -26,7 +26,7 @@
                     <div class="card-body mx-4">
                         <div class="text-center">
                             <h1>404</h1>
-                            Sorry, but that page could not be found or no longer exists.
+                            Sorry, but that page could not be found, or no longer exists.
                         </div>
                     </div>
 

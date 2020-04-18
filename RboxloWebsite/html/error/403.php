@@ -17,7 +17,7 @@
 		?>
 
         <div class="container">
-			<div class="row flex-center pt-5 mt-3">
+			<div class="row flex-center">
                 <div class="card" style="width: 40rem">
 					<div class="card-header purple accent-3 white-text">
                         Error
