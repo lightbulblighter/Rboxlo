@@ -55,7 +55,7 @@
 		<?php if (isset($_SESSION["user"])): ?>
 
 		<ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Money">
+            <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Rbux">
                <a href="/my/money" class="nav-link">
                     <i class="material-icons">attach_money</i>
                     
