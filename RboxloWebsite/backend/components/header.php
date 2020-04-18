@@ -21,3 +21,6 @@
 <link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/mdb.min.css">
 <link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/mdb-plugins-gathered.min.css">
 <link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/custom/global.css?v=<?php echo(BASE_VERSION); ?>">
+<style>
+	@import url("/core/html/css/custom/dark.css") (prefers-color-scheme: dark);
+</style>
