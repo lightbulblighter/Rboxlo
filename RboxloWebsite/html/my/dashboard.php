@@ -31,8 +31,8 @@
 		<div class="container">
 			<div class="card-columns d-flex justify-content-left">
 				<div class="card card-body" style="max-width: 20rem;">
-					<h4>Hello, <b><?php echo($_SESSION["user"]["username"]); ?></b>!</h4>
-					<img src="<?php echo(get_thumbnail($_SESSION["user"]["id"], "user")); ?>" style="max-height:300px;">
+					<h4 class="text-truncate">Hello, <b><?php echo($_SESSION["user"]["username"]); ?></b>!</h4>
+					<img class="img-fluid" src="<?php echo(get_thumbnail($_SESSION["user"]["id"], "user")); ?>" style="width: 300px">
 				</div>
 
 				<div class="w-100 ml-3">

@@ -10,11 +10,6 @@
         setcookie(session_name(), "", 0, "/");
     }
 
-    function get_thumbnail($id, $type)
-    {
-        return "/renders/". $type ."s/". $id .".png";
-    }
-
     function is_profane($text)
     {
         foreach (PROFANITY as $bad_word)

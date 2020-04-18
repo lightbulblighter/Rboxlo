@@ -12,7 +12,7 @@
 	{
 		header("HTTP/1.1 404 Not Found");
 		
-		require_once(BASE_PATH ."/html/error/404.php");
+		require_once(file_build_path("html", "error", "404.php"));
 		exit();
 	}
 ?>

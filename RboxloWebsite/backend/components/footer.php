@@ -1,7 +1,3 @@
-<?php
-	include_once(BASE_PATH ."/backend/configuration.php");
-?>
-
 <footer class="page-footer center-on-small-only stylish-color-dark">
 	<div class="container pt-1 pb-4">
 		<img src="/core/html/img/full.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" style="width: 400px">

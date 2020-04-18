@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<?php
-			build_header("Dashboard");
+			build_header("Verify E-Mail");
 		?>
 	</head>
 	<body>

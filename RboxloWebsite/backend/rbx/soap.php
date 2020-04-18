@@ -36,7 +36,7 @@
         return $envelope;
     }
 
-    function soap_send_envelope($envelope, $ip, $action)
+    function soap_send_envelope($ip, $action, $envelope)
     {
         // cURL is used for this function instead of file_get_contents because it's better and versatile.
 
@@ -79,11 +79,11 @@
 
     /* RBX */
 
-    function soap_execute_script($id, $script, $encode = false)
+    function soap_execute_script($ip, $id, $script, $encode = false)
     {
         $script = $encode ? get_loadstring($script) : $script;
 
-        soap_send_envelope(soap_get_envelope("Execute", [
+        soap_send_envelope($ip, "Execute", soap_get_envelope("Execute", [
             [
                 "submethod" => "script",
                 "content" => $script
@@ -95,9 +95,9 @@
         ]));
     }
 
-    function soap_create_job($id, $information)
+    function soap_create_job($ip, $id, $information)
     {
-        soap_send_envelope(soap_get_envelope("OpenJob", [
+        soap_send_envelope($ip, "OpenJob", soap_get_envelope("OpenJob", [
             [
                 "submethod" => "job",
                 "details" => [
@@ -117,9 +117,9 @@
         ]));
     }
 
-    function soap_close_job($id)
+    function soap_close_job($ip, $id)
     {
-        soap_send_envelope(soap_get_envelope("CloseJob", [
+        soap_send_envelope($ip, "CloseJob", soap_get_envelope("CloseJob", [
             [
                 "submethod" => "jobID",
                 "content" => $id

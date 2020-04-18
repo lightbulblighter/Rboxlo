@@ -1,4 +1,4 @@
 <?php
-    require_once("/var/www/backend/rbx/script.php");
-    require_once("/var/www/backend/rbx/soap.php");
+    require_once(file_build_path("backend", "rbx", "script.php"));
+    require_once(file_build_path("backend", "rbx", "soap.php"));
 ?>

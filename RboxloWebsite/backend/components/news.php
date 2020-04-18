@@ -1,6 +1,4 @@
 <?php
-	include_once(BASE_PATH ."/backend/database.php");
-
     $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `news` ORDER BY `id`");
     $statement->execute();
 

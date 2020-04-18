@@ -1,1 +1,0 @@
-{"jobId":"073afe5d-5f8c-44e2-bdb9-2dd32f9bf4ff","status":2,"joinScriptUrl":"http://ab.ozzt.pw/game/join.ashx","authenticationUrl":"http://ab.ozzt.pw/auth","authenticationTicket":"epic","message":null}

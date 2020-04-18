@@ -19,26 +19,26 @@
      
     $id = $_GET["id"];
 
-    if (file_exists(BASE_PATH ."/assets/". $id))
+    if (file_exists(file_build_path("assets", $id)))
     {
-        readfile(BASE_PATH ."/assets/". $id);
+        readfile(file_build_path("assets", $id));
     }
-    else if (file_exists(BASE_PATH ."/assets/". $id . ".script"))
+    else if (file_exists(file_build_path("assets", $id . ".script")))
     {
         header("Content-Type: text/plain");
         
-        echo(file_get_contents(BASE_PATH ."/assets/". $id));
+        echo(file_get_contents(file_build_path("assets", $id . ".script")));
     }
     else if (file_exists(BASE_PATH ."/assets/". $id . ".corescript"))
     {
         header("Content-Type: text/plain");
         
-        $script = file_get_contents(BASE_PATH ."/assets/". $id);
+        $script = file_get_contents(file_build_path("assets", $id . ".corescript"));
         $signature = get_signature($script);
 
         echo("--rbxsig%". $signature ."%\n");
         echo("--rbxid%". $id ."%\n")
-        echo(file_get_contents(BASE_PATH ."/assets/". $id));
+        echo(file_get_contents(file_build_path("assets", $id . ".corescript")));
     }
     else
     {
