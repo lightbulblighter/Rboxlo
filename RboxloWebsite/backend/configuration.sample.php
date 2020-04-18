@@ -31,6 +31,7 @@
     define("EMAIL_PASSWORD", "");
 
     /* misc */ 
+    define("GA_TAG", "");
     define("TIMEZONE", "America/Chicago");
     define("PROFANITY", [""]);
     define("INVITE_ONLY", false);
