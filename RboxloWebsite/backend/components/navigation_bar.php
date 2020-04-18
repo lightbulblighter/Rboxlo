@@ -39,7 +39,7 @@
 				<a class="nav-link" href="/blog/"><i class="material-icons">message</i><span>Blog</span></a>
             </li>
 
-            <?php if (isset($_SESSION["user"]["rank"]) && $_SESSION["user"]["rank"] >= 1): ?>
+            <?php if ($_SESSION["user"]["rank"] >= 1): ?>
             
             <li class="nav-item">
 				<a class="nav-link" href="/admin/"><i class="material-icons">build</i><span>Admin</span></a>
