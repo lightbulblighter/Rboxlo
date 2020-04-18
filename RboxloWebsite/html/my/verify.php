@@ -21,8 +21,8 @@
 			build_navigation_bar();
 		?>
 
-		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<script src="/core/html/js/authentication.js" async defer></script>
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+		<script type="text/javascript" src="/core/html/js/api.js" async defer></script>
 		
 		<script type="text/javascript">
 			function form_verify()
