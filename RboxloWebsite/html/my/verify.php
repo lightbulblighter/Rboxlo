@@ -53,21 +53,21 @@
 					endif;
 				?>
 
-				email_verify(information, function(response)
+				endpoint("/authentication/email_verify", "POST", information, (response) =>
 				{
 					toastr.options = {
-						"closeButton": !status,
-						"timeOut": response["success"] ? 2000 : 5000
+						"closeButton": !response.success,
+						"timeOut": response.success ? 2000 : 5000
 					}
 
-					toastr[response["success"] ? "success" : "error"](response["message"], response["success"] ? "Successfully sent E-Mail!" : "An error occurred.")
+					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
 
-					if (response["success"])
+					if (response.success)
 					{
 						setTimeout(function()
 						{
 							location.replace("/my/dashboard")
-						}, 2000)
+						}, 3000)
 					}
 					else
 					{

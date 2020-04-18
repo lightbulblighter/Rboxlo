@@ -281,8 +281,7 @@
                                 ]);
 
                                 $preferences = json_encode([
-                                    "blurb" => "",
-                                    "theme" => "light"
+                                    "blurb" => ""
                                 ]);
 
                                 // Create account

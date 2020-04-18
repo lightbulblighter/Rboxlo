@@ -86,9 +86,9 @@ CREATE TABLE `users` (
   `avatar` text NOT NULL,
   `email_verified` tinyint(4) NOT NULL DEFAULT '0',
   `preferences` text NOT NULL,
+  `last_reward` int(11) NOT NULL, 
   `rank` tinyint(4) NOT NULL DEFAULT '0',
   `ssc` tinyint(4) NOT NULL DEFAULT '0',
-  `last_reward` int(11) NOT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
