@@ -23,6 +23,14 @@
 				<a class="nav-link" href="/catalog/"><i class="material-icons">shopping_cart</i><span>Catalog</span></a>
             </li>
 
+            <?php if ($_SESSION["user"]["rank"] >= 1): ?>
+            
+            <li class="nav-item">
+				<a class="nav-link" href="/admin/"><i class="material-icons">build</i><span>Admin</span></a>
+            </li>
+            
+            <?php endif; ?>
+
             <?php else: ?>
 
             <li class="nav-item">
@@ -38,14 +46,6 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/blog/"><i class="material-icons">message</i><span>Blog</span></a>
             </li>
-
-            <?php if ($_SESSION["user"]["rank"] >= 1): ?>
-            
-            <li class="nav-item">
-				<a class="nav-link" href="/admin/"><i class="material-icons">build</i><span>Admin</span></a>
-            </li>
-            
-            <?php endif; ?>
 		</ul>
 
 		<?php if (isset($_SESSION["user"])): ?>
