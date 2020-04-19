@@ -53,10 +53,28 @@
 
             if ($result)
             {
-                if (password_verify($information["password"], $result["password"]))
+                if (!is_base64($result["password"]))
+                {
+                    // Update values to be crypted
+                    $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `last_ip` = ?, `register_ip` = ? WHERE `id` = ?");
+                    $statement->execute([$result["email"], $result["password"], $result["last_ip"], $result["register_ip"]]);
+
+                    // Get new values!
+                    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `id` = ?");
+                    $statement->execute([$result["id"]]);
+
+                    $result = $statement->fetch(PDO::FETCH_ASSOC);
+                }
+
+                if (password_verify($information["password"], _crypt($result["password"], "decrypt")))
                 {
                     $_SESSION["user"] = $result;
                     $_SESSION["user"]["password"] = "";
+
+                    // Crypt
+                    $_SESSION["user"]["email"] = _crypt($_SESSION["user"]["email"], "decrypt");
+                    $_SESSION["user"]["last_ip"] = _crypt($_SESSION["user"]["last_ip"], "decrypt");
+                    $_SESSION["user"]["register_ip"] = _crypt($_SESSION["user"]["register_ip"], "decrypt");
 
                     if (!file_exists(BASE_PATH ."/html/renders/users/". $_SESSION["user"]["id"] .".png"))
                     {
