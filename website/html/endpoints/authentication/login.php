@@ -71,11 +71,11 @@
                 {
                     // See if password needs rehashing (I didn't use insecure hashing like md5 or sha1, this is to convert Argon2i hashes to Argon2id)
                     // Check commit history if you're skeptical ¯\_(ツ)_/¯
-                    if (password_get_info($result["password"])["algoName"] !== "argon2id")
+                    if (password_get_info(_crypt($result["password"], "decrypt"))["algoName"] !== "argon2id")
                     {
                         // Update
                         $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
-                        $statement->execute([password_hash($information["password"], PASSWORD_ARGON2ID), $result["id"]]);
+                        $statement->execute([_crypt(password_hash($information["password"], PASSWORD_ARGON2ID)), $result["id"]]);
                     }
 
                     $_SESSION["user"] = $result;

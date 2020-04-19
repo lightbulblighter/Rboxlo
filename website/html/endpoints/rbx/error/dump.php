@@ -1,7 +1,6 @@
 <?php
-    // GET ${BASE_URL}/Error/Dmp.ashx?filename=%s
-    // POST ${BASE_URL}/Error/Dmp.ashx?%s
+    // Log stuff... soon
+    header("Content-Type: text/plain");
 
-    exit(var_dump($_POST));
     exit("OK");
 ?>
