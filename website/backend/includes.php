@@ -1,8 +1,8 @@
 <?php
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../constant/configuration.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/functions.php");
 	
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/main.php");
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/functions.php");
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/database.php");
 	
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/html.php");
