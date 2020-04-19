@@ -72,6 +72,8 @@
                         <br>
                         Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>.
                         <br><br>
+						Running <b><?php echo(BASE_NAME ." " .get_version()); ?></b>.
+						<br><br>
                         Get more detailed website performance statistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> Netdata panel</a>.
                     </p>
 

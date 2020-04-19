@@ -119,4 +119,29 @@
     {
         return sys_getloadavg()[0];
     }
+	
+	function get_version()
+	{
+		$version = "";
+		
+		$semver = @file_get_contents(file_build_path("packaging", "version"));
+		$hash = @substr(file_get_contents(file_build_path("packaging", "hash")), 0, 7);
+		
+		if ($semver) 
+		{
+			$version .= $semver;
+		}		
+		
+		// Only available if built
+		if ($hash) 
+		{
+			$version .= "-" .$hash ." (Docker)";
+		}
+		
+		if ($version) {
+			return $version;
+		} else {
+			return "Unknown";
+		}
+	}
 ?>
