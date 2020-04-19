@@ -111,8 +111,8 @@
 	{
 		$version = "";
 		
-		$semver = @file_get_contents(file_build_path("packaging", "version"));
-		$hash = @substr(file_get_contents(file_build_path("packaging", "hash")), 0, 7);
+		$semver = @file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../packaging/version");
+		$hash = @substr(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../packaging/hash"), 0, 7);
 		
 		if ($semver) 
 		{
