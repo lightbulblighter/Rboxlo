@@ -8,7 +8,7 @@
     
     if ($_SESSION["user"]["rank"] <= 0)
     {
-        require_once(file_build_path("html", "error", "403.php"));
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../html/error/403.php");
         exit();
     }
 ?>
