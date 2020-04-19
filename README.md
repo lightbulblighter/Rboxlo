@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/blob/master/assets/FullLogo.png?raw=true" alt="Rboxlo" style="width: 500px">
+<img src="https://github.com/lighterlightbulb/Rboxlo/blob/master/assets/FullLogo.png?raw=true" alt="Rboxlo" style="width: 400px">
 
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
 	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/rboxlo" alt="GitHub commit activity">
