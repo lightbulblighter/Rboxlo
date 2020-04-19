@@ -1,0 +1,10 @@
+version: "2"
+services:
+  rboxlo:
+    image: lightbulblighter/rboxlo
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/nginx/logs:/var/log/nginx
+      - ./data/site/config:/var/www/config
+      - ./data/site/renders:/var/www/renders

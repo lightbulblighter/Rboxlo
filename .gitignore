@@ -1,10 +1,14 @@
 RboxloStudio/
 RboxloRCC/
 RboxloClient/
-RboxloWebsite/assets
+website/assets
 
 Rboxlo.code-workspace
 
-RboxloWebsite/backend/configuration.php
-RboxloWebsite/html/admin/adminer.php
-RboxloWebsite/backend/key.pem
+website/backend/configuration.php
+website/html/admin/adminer.php
+website/backend/key.pem
+
+# Docker
+data/
+docker-compose-local.yml
