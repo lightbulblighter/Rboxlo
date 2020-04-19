@@ -45,7 +45,7 @@
             $error = true;
         }
 
-        if (!$error)//
+        if (!$error)
         {
             $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE username = ? OR email = ?");
             $statement->execute([$information["username"], $information["username"]]);
