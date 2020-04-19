@@ -76,9 +76,9 @@
                     $_SESSION["user"]["last_ip"] = _crypt($_SESSION["user"]["last_ip"], "decrypt");
                     $_SESSION["user"]["register_ip"] = _crypt($_SESSION["user"]["register_ip"], "decrypt");
 
-                    if (!file_exists(BASE_PATH ."/html/renders/users/". $_SESSION["user"]["id"] .".png"))
+                    if (!file_exists(BASE_PATH ."/renders/users/". $_SESSION["user"]["id"] .".png"))
                     {
-                        copy(BASE_PATH ."/html/renders/users/0.png", BASE_PATH ."/html/renders/users/". $_SESSION["user"]["id"] .".png");
+                        copy(BASE_PATH ."/renders/users/0.png", BASE_PATH ."/renders/users/". $_SESSION["user"]["id"] .".png");
                     }
 
                     $success = true;
