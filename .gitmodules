@@ -1,0 +1,4 @@
+[submodule "website/constant/phpmailer"]
+	path = website/constant/phpmailer
+	url = https://github.com/PHPMailer/PHPMailer
+	ignore = dirty
