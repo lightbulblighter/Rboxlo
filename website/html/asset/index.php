@@ -1,3 +1,3 @@
 <?php
-    require_once("/var/www/backend/rbx/asset.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/asset.php");
 ?>

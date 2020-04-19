@@ -1,22 +1,22 @@
 <?php
     function build_js()
     {
-        include_once(file_build_path("backend", "components", "javascript.php"));
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/javascript.php");
     }
 
     function build_navigation_bar()
     {
-        include_once(file_build_path("backend", "components", "navigation_bar.php"));
-        include_once(file_build_path("backend", "components", "news.php"));
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/navigation_bar.php");
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/news.php");
     }
 
     function build_header($page_name = "")
     {
-        include_once(file_build_path("backend", "components", "header.php"));
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/header.php");
     }
 
     function build_footer()
     {
-        include_once(file_build_path("backend", "components", "footer.php"));
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/footer.php");
     }
 ?>

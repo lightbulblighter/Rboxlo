@@ -1,6 +1,4 @@
 <?php
-    // Debugging
-        
     if (MAINTENANCE)
     {
         ini_set("display_errors", 1);

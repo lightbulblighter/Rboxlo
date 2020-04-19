@@ -1,5 +1,5 @@
 <?php 
-	require_once("/var/www/backend/includes.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 	
 	// If the user is logged in, redirect them to their dashboard from the landing page
 	if (isset($_SESSION["user"]))

@@ -1,9 +1,9 @@
 <?php
-    require_once("/var/www/backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
-    require_once("/var/www/backend/phpmailer/src/Exception.php");
-    require_once("/var/www/backend/phpmailer/src/PHPMailer.php");
-    require_once("/var/www/backend/phpmailer/src/SMTP.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/PHPMailer/src/Exception.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/PHPMailer/src/PHPMailer.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/PHPMailer/src/SMTP.php");
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
@@ -24,6 +24,12 @@
         $error = true;
     }
 
+    if (!isset($_SESSION["user"]) && !$error)
+    {
+        $message = "You need to be logged in in order to verify your E-Mail address.";
+        $error = true;
+    }
+
     if (!$error)
     {
         $information = json_decode($_POST["information"], true);
@@ -34,16 +40,10 @@
             $error = true;
         }
 
-        if (!isset($_SESSION["user"]) && !$error)
-        {
-            $message = "You need to be logged in in order to verify your E-Mail address.";
-            $error = true;
-        }
-
         // Verify recaptcha
         if (!isset($information["recaptcha"]) || empty($information["recaptcha"]) && !$error)
         {
-            $message = "Please solve the captcha.";
+            $message = "Please solve the reCAPTCHA.";
             $error = true;
         }
 
@@ -52,7 +52,7 @@
             
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $data = [
-                    "secret" => RECAPTCHA_PRIVATE_KEY,
+                    "secret" => G_RECAPTCHA_PRIVATE_KEY,
                     "response" => $information["recaptcha"],
                     "remoteip" => get_user_ip()
                 ];
@@ -70,21 +70,21 @@
             
             if (!$result["success"])
             {
-                $message = "You failed to solve the captcha challenge.";
+                $message = "You failed to solve the reCAPTCHA challenge. Please try again.";
                 $error = false;
             }
         }
 
         if ($information["send"] && !$error) // if it is sent, do this
         {
-            // Delete existing keys
-            $statement = $sql->prepare("DELETE FROM `email_verification_keys` WHERE `uid` = ?");
+            // Delete existing tokens
+            $statement = $sql->prepare("DELETE FROM `email_verification_tokens` WHERE `uid` = ?");
             $statement->execute([$_SESSION["user"]["id"]]);
 
-            // Create a token (or key)
+            // Create a verification token
             $token = hash("sha256", bin2hex(random_bytes(64)));
 
-            $statement = $sql->prepare("INSERT INTO `email_verification_keys` (`key`, `generated`, `uid`) VALUES (?, ?, ?)");
+            $statement = $sql->prepare("INSERT INTO `email_verification_tokens` (`token`, `generated`, `uid`) VALUES (?, ?, ?)");
             $statement->execute([$token, time(), $_SESSION["user"]["id"]]);
 
             // Get user's email
@@ -131,49 +131,49 @@
         }
         else if (!$error)
         {
-            if (empty($information["verification_key"]) || !isset($information["verification_key"]) && !$error)
+            if (empty($information["token"]) || !isset($information["token"]) && !$error)
             {
-                $message = "You need to specify a verification key.";
+                $message = "You need to specify a token for verification.";
                 $error = true;
             }
 
-            if (!ctype_alnum($information["verification_key"]) || strlen($information["verification_key"]) !== 64 && !$error)
+            if (!ctype_alnum($information["token"]) || strlen($information["token"]) !== 64 && !$error)
             {
-                $message = "Invalid verification key.";
+                $message = "Invalid token.";
                 $error = true;
             }
 
             // funny db stuff
             if (!$error)
             {
-                $statement = $GLOBALS["sql"]->prepare("SELECT `generated`, `uid` FROM `email_verification_keys` WHERE `key` = ?");
-                $statement->execute([$information["verification_key"]]);
+                $statement = $GLOBALS["sql"]->prepare("SELECT `generated`, `uid` FROM `email_verification_tokens` WHERE `token` = ?");
+                $statement->execute([$information["token"]]);
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if (!$result)
                 {
-                    $message = "That verification key doesn't exist.";
+                    $message = "That token doesn't exist.";
                     $error = true;
                 }
                 
                 if (!$error)
                 {
                     $elapsed = time() - $result["generated"];
-                    if ($elapsed >= 900)
+                    if ($elapsed >= 900) // If 15 minutes have elapsed since token generation
                     {
-                        $message = "That verification key has expired (15 minute timeout.) Please use a new one.";
+                        $message = "That verification token has expired (15 minute timeout.) Please use a new one.";
                         $error = true;
                     }
 
                     // passed all checks - do this:
-                    // -> delete key
+                    // -> delete token
                     // -> set user as verified
                     if (!$error)
                     {
                         $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `email_verified` = 1 WHERE `id` = ?");
                         $statement->execute([$result["uid"]]);
 
-                        $statement = $GLOBALS["sql"]->prepare("DELETE FROM `email_verification_keys` WHERE `generated` = ?");
+                        $statement = $GLOBALS["sql"]->prepare("DELETE FROM `email_verification_tokens` WHERE `generated` = ?");
                         $statement->execute([$result["generated"]]);
                         $_SESSION["user"]["email_verified"] = true;
 

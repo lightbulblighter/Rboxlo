@@ -1,6 +1,6 @@
-studio/
-rccservice/
-client/
+/studio/
+/rccservice/
+/client/
 website/assets
 
 Rboxlo.code-workspace

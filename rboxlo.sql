@@ -1,5 +1,3 @@
--- Adminer 4.7.6 MySQL dump
-
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
@@ -34,10 +32,10 @@ CREATE TABLE `client_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `email_verification_keys`;
-CREATE TABLE `email_verification_keys` (
+DROP TABLE IF EXISTS `email_verification_tokens`;
+CREATE TABLE `email_verification_tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key` text NOT NULL,
+  `token` text NOT NULL,
   `uid` int(11) NOT NULL,
   `generated` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -91,6 +89,3 @@ CREATE TABLE `users` (
   `ssc` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
--- 2020-04-15 07:09:28

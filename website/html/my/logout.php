@@ -1,5 +1,5 @@
 <?php
-    require_once("/var/www/backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
     session_clear();
 

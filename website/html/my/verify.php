@@ -1,5 +1,5 @@
 <?php 
-	require_once("/var/www/backend/includes.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
 	if (!isset($_SESSION["user"]))
 	{
@@ -44,7 +44,7 @@
 				?>
 
 				var information = {
-					verification_key: $("#token").val(),
+					token: $("#token").val(),
 					recaptcha: grecaptcha.getResponse(),
 					csrf: "<?php echo($_SESSION["csrf"]); ?>"
 				}
@@ -62,6 +62,10 @@
 
 					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
 
+					<?php
+						if (isset($_GET["token"])):
+					?>
+					
 					if (response.success)
 					{
 						setTimeout(function()
@@ -73,6 +77,19 @@
 					{
 						$("#submit").removeAttr("disabled", "disabled")
 					}
+
+					<?php
+						else:
+					?>
+
+					if (response.success)
+					{
+						$("#submit").removeAttr("disabled", "disabled")
+					}
+
+					<?php
+						endif;
+					?>
 				})
 			}
 		</script>
@@ -115,7 +132,7 @@
 					</p>
 
 					<div align="center" class="mb-3">
-						<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+						<div class="g-recaptcha" data-sitekey="<?php echo(G_RECAPTCHA_PUBLIC_KEY); ?>"></div>
 					</div>
 
 					<button class="btn purple-gradient btn-block" onclick="form_verify()" id="submit">Send verification E-Mail</button>
@@ -149,7 +166,7 @@
 					</p>
 
 					<div align="center" class="mb-3">
-						<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+						<div class="g-recaptcha" data-sitekey="<?php echo(G_RECAPTCHA_PUBLIC_KEY); ?>"></div>
 					</div>
 					<input id="token" type="hidden" value="<?php echo($_GET["token"]); ?>">
 					<button class="btn purple-gradient btn-block" onclick="form_verify()" id="submit">Yes, I am 100% sure of it</button>

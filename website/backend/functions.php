@@ -1,4 +1,8 @@
 <?php
+    //***************************************//
+    //********* BEGIN PHP FUNCTIONS *********//
+    //***************************************//
+
     function session_clear()
     {
         session_regenerate_id(true);
@@ -10,22 +14,10 @@
         setcookie(session_name(), "", 0, "/");
     }
 
-    function is_profane($text)
+    function redirect($location)
     {
-        foreach (PROFANITY as $bad_word)
-        {
-            if (strpos($text, $bad_word) !== false)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
-    function filter_profanity($text)
-    {
-        return($text);
+        header("Location: ". $location);
+        exit();
     }
 
     function get_user_ip()
@@ -66,23 +58,15 @@
         return false;
     }
 
-    function get_signature($script)
-    {
-        $key = file_get_contents("/var/www/backend/key.pem");
-        $signature;
-
-        openssl_sign($script, $signature, $key, OPENSSL_ALGO_SHA1);
-
-        return "%%" . $signature . "%%";
-    }
-
-    function redirect($location)
-    {
-        header("Location: ". $location);
-        exit();
-    }
+    //*************************************//
+    //********* END PHP FUNCTIONS *********//
+    //*************************************//
     
-    // str functions
+
+    //******************************************//
+    //********* BEGIN STRING FUNCTIONS *********//
+    //******************************************//
+
     function contains($haystack, $needle)
     {
         return strpos($haystack, $needle) !== false;
@@ -97,12 +81,15 @@
     {
         return (bool)preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string);
     }
+
+    //****************************************//
+    //********* END STRING FUNCTIONS *********//
+    //****************************************//
     
-    // sys-functions
-    function file_build_path(...$segments)
-    {
-        return BASE_PATH . "/" .join(DIRECTORY_SEPARATOR, $segments);
-    }
+
+    //******************************************//
+    //********* BEGIN SYSTEM FUNCTIONS *********//
+    //******************************************//
     
     function get_server_memory_usage()
     {
@@ -120,7 +107,7 @@
         return sys_getloadavg()[0];
     }
 	
-	function get_version()
+	function get_version() // Docker-specific
 	{
 		$version = "";
 		
@@ -138,10 +125,17 @@
 			$version .= "-" .$hash ." (Docker)";
 		}
 		
-		if ($version) {
+        if ($version)
+        {
 			return $version;
-		} else {
+        } 
+        else
+        {
 			return "Unknown";
 		}
-	}
+    }
+    
+    //****************************************//
+    //********* END SYSTEM FUNCTIONS *********//
+    //****************************************//
 ?>

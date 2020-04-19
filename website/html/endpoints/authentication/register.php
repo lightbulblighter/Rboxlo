@@ -1,5 +1,5 @@
 <?php 
-    require_once("/var/www/backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
     
     header("Content-Type: text/plain");
 
@@ -43,7 +43,7 @@
             // Verify recaptcha
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $data = [
-                "secret" => RECAPTCHA_PRIVATE_KEY,
+                "secret" => G_RECAPTCHA_PRIVATE_KEY,
                 "response" => $information["recaptcha"],
                 "remoteip" => get_user_ip()
             ];
@@ -239,7 +239,7 @@
                             if (!$error)
                             {
                                 // hash pw
-                                $password = password_hash($password, PASSWORD_ARGON2I);
+                                $password = password_hash($password, PASSWORD_ARGON2ID);
 
                                 // default wearing thing
                                 $avatar = json_encode([
@@ -303,11 +303,11 @@
                                 $_SESSION["user"]["password"] = ""; // dont keep the hash in session just in case
 
                                 // Copy default thumbnail for this user
-                                copy(file_build_path("html", "renders", "users", "0.png"), file_build_path("html", "renders", "users", $_SESSION["user"]["id"] .".png"));
+                                copy(ROOT . "/renders/users/0.png", ROOT . "/renders/users/" . $_SESSION["user"]["id"] . ".png");
                                 
                                 // Return success
                                 $success = true;
-                                $message = "Welcome to ". BASE_NAME .", ". $username ."! Redirecting you to your dashboard . . .";
+                                $message = "Welcome to ". BASE_NAME .", ". $username ."! Redirecting you to your dashboard...";
                             }
                         }
                     }

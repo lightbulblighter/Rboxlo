@@ -1,5 +1,5 @@
 <?php 
-    require_once("/var/www/backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
     
     header("Content-Type: text/plain");
 
@@ -53,6 +53,7 @@
 
             if ($result)
             {
+                // See if password is old non-crypted password
                 if (!is_base64($result["password"]))
                 {
                     // Update values to be crypted
@@ -68,6 +69,15 @@
 
                 if (password_verify($information["password"], _crypt($result["password"], "decrypt")))
                 {
+                    // See if password needs rehashing (I didn't use insecure hashing like md5 or sha1, this is to convert Argon2i hashes to Argon2id)
+                    // Check commit history if you're skeptical ¯\_(ツ)_/¯
+                    if (password_get_info($result["password"])["algoName"] !== "argon2id")
+                    {
+                        // Update
+                        $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
+                        $statement->execute([password_hash($information["password"], PASSWORD_ARGON2ID), $result["id"]]);
+                    }
+
                     $_SESSION["user"] = $result;
                     $_SESSION["user"]["password"] = "";
 
@@ -76,9 +86,9 @@
                     $_SESSION["user"]["last_ip"] = _crypt($_SESSION["user"]["last_ip"], "decrypt");
                     $_SESSION["user"]["register_ip"] = _crypt($_SESSION["user"]["register_ip"], "decrypt");
 
-                    if (!file_exists(BASE_PATH ."/renders/users/". $_SESSION["user"]["id"] .".png"))
+                    if (!file_exists(ROOT . "/renders/users/" . $_SESSION["user"]["id"] . ".png"))
                     {
-                        copy(BASE_PATH ."/renders/users/0.png", BASE_PATH ."/renders/users/". $_SESSION["user"]["id"] .".png");
+                        copy(ROOT . "/renders/users/0.png", ROOT . "/renders/users/" . $_SESSION["user"]["id"] .".png");
                     }
 
                     $success = true;
