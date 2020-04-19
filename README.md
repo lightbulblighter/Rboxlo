@@ -1,6 +1,36 @@
-# Rboxlo
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield)
+<p align="center">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/FullLogo.png" alt="Logo" width="500">
+</p>
 
+<p align="center">
+<a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
+	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/rboxlo" alt="GitHub commit activity">
+</a>
+
+<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
+	<img src="https://img.shields.io/docker/cloud/build/lightbulblighter/rboxlo" alt="Docker Cloud Build Status">
+</a>
+
+<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
+	<img src="https://img.shields.io/docker/image-size/lightbulblighter/rboxlo" alt="Docker Image Size (latest by date)">
+</a>
+
+<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
+	<img src="https://img.shields.io/docker/pulls/lightbulblighter/rboxlo" alt="Docker Pulls">
+</a>
+
+<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
+	<img src="https://img.shields.io/docker/stars/lightbulblighter/rboxlo" alt="Docker Stars">
+</a>
+
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield">
+	<img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=shield" alt="FOSSA Status">
+</a>
+
+<a href="https://discordapp.com/widget?id=697904229372788807">
+	<img src="https://img.shields.io/discord/697904229372788807?logo=discord" alt="Discord">
+</a>
+</p>
 
 Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rb.ozzt.pw/about/mission.
 
