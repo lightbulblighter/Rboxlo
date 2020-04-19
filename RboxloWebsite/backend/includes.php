@@ -1,5 +1,5 @@
 <?php
-    include_once("/var/www/backend/configuration.php"); // change this for path
+    include_once("/var/www/config/configuration.php"); // change this for path
 	include_once(BASE_PATH ."/backend/functions.php"); // necessary for file_build_path
 	
 	include_once(file_build_path("backend", "main.php"));
