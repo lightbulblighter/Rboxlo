@@ -1,4 +1,6 @@
 # Rboxlo
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield)
+
 
 Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rb.ozzt.pw/about/mission.
 
@@ -12,3 +14,7 @@ If you see a vulnerability, or some other issue that needs to be resolved, pleas
  - Raise a GitHub issue
  - Disclose it to me through the Rboxlo discord
  - E-Mail us (rboxlo6969@gmail.com)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_large)
