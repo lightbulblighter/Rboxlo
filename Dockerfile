@@ -11,11 +11,11 @@ RUN docker-php-ext-install mysqli
 RUN rm -rf /var/www/*
 RUN mkdir /run/nginx
 
-COPY RboxloWebsite/html /var/www/html
-COPY RboxloWebsite/backend /var/www/backend
+COPY website/html /var/www/html
+COPY website/backend /var/www/backend
 COPY packaging/version /var/www/packaging/version
-COPY RboxloWebsite/renders /var/www/bak/renders
-COPY RboxloWebsite/config /var/www/bak/config
+COPY website/renders /var/www/bak/renders
+COPY website/constant /var/www/bak/constant
 
 COPY .git/refs/heads/master /var/www/packaging/hash
 

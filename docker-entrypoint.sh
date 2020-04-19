@@ -12,11 +12,11 @@ if [ ! -e /var/www/renders/users/0.png ]; then
 	cp -r /var/www/bak/renders/users/0.png /var/www/renders/users/0.png
 fi
 
-if [ ! -e /var/www/config/configuration.php ]; then
-	echo "/var/www/config/configuration.php not found, creating..."
-	mkdir -p /var/www/config
-	cp -r /var/www/bak/config/configuration.sample.php /var/www/config/configuration.php
-	echo "Please edit this file with your configuration."
+if [ ! -e /var/www/constant/constanturation.php ]; then
+	echo "/var/www/constant/constanturation.php not found, creating..."
+	mkdir -p /var/www/constant
+	cp -r /var/www/bak/constant/constanturation.sample.php /var/www/constant/constanturation.php
+	echo "Please edit this file with your constanturation."
 	exit 1
 fi
 
