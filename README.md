@@ -4,11 +4,11 @@
 
 <p align="center">
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
-	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/Rboxlo&style=flat-square" alt="GitHub commit activity">
+	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/Rboxlo?style=flat-square" alt="GitHub commit activity">
 </a>
 
 <a href="https://hub.docker.com/r/lightbulblighter/Rboxlo">
-	<img src="https://img.shields.io/docker/image-size/lightbulblighter/Rboxlo&style=flat-square" alt="Docker Image Size (latest by date)">
+	<img src="https://img.shields.io/docker/image-size/lightbulblighter/Rboxlo?style=flat-square" alt="Docker Image Size (latest by date)">
 </a>
 
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield">
@@ -20,7 +20,7 @@
 </a>
 
 <a href="https://discordapp.com/widget?id=697904229372788807">
-	<img src="https://img.shields.io/discord/697904229372788807?logo=discord&style=flat-square" alt="Discord">
+	<img src="https://img.shields.io/discord/697904229372788807?logo=discord?style=flat-square" alt="Discord">
 </a>
 
 
