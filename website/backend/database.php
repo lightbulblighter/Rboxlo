@@ -12,5 +12,6 @@
     catch (exception $e)
     {
         exit("Rboxlo is under maintenance."); // "Check back soon" message is ommitted to indicate that it's a db issue
+		error_log($e);
     }
 ?>
