@@ -2,19 +2,19 @@
 
 # Make sure it exists
 mkdir -p /var/www/assets
+mkdir -p /var/www/renders/users
+mkdir -p /var/www/static
 
 # Fix permissions
 chown -R www-data:www-data /var/www
 
 if [ ! -e /var/www/renders/users/0.png ]; then
 	echo "/var/www/renders/users/0.png not found, creating..."
-	mkdir -p /var/www/renders/users
 	cp -r /var/www/bak/renders/users/0.png /var/www/renders/users/0.png
 fi
 
 if [ ! -e /var/www/static/configuration.php ]; then
 	echo "/var/www/static/configuration.php not found, creating..."
-	mkdir -p /var/www/static
 	cp -r /var/www/bak/static/configuration.sample.php /var/www/static/configuration.php
 	echo "Please edit this file with your configuration."
 	exit 1
@@ -22,8 +22,7 @@ fi
 
 if [ ! -e /var/www/static/key.pem ]; then
 	echo "/var/www/static/key.pem not found, creating..."
-	mkdir -p /var/www/static
-	cp -r /var/www/bak/static/key.sample.php /var/www/static/key.pem
+	cp -r /var/www/bak/static/key.sample.pem /var/www/static/key.pem
 	echo "Please edit this file with your RSA private key."
 	exit 1
 fi
