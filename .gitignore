@@ -7,7 +7,7 @@ Rboxlo.code-workspace
 
 website/backend/configuration.php
 website/html/admin/adminer.php
-website/backend/key.pem
+website/static/key.pem
 
 # Docker
 data/
