@@ -1,6 +1,8 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
+    header("Content-Type: text/plain");
+    
     if (!isset($_GET["apiKey"]) || empty($_GET["apiKey"]))
     {
         exit(json_encode([
