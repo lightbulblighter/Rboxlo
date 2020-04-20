@@ -2,13 +2,13 @@
 /rccservice/
 /client/
 /keys/
-website/assets
 
 Rboxlo.code-workspace
 
 website/backend/configuration.php
 website/html/admin/adminer.php
 website/static/key.pem
+website/static/assets/
 
 custom.conf
 

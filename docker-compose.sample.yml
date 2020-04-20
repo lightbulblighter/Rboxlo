@@ -8,4 +8,3 @@ services:
       - ./data/nginx/logs:/var/log/nginx
       - ./data/site/static:/var/www/static
       - ./data/site/renders:/var/www/renders
-      - ./data/site/assets:/var/www/assets

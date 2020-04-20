@@ -13,26 +13,26 @@
      
     $id = $_GET["id"];
 
-    if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id))
+    if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id))
     {
-        readfile($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id);
+        readfile($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id);
     }
-    else if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id . ".script"))
+    else if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id . ".script"))
     {
         header("Content-Type: text/plain");
         
-        echo(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id . ".script"));
+        echo(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id . ".script"));
     }
-    else if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id . ".corescript"))
+    else if (file_exists($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id . ".corescript"))
     {
         header("Content-Type: text/plain");
         
-        $script = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id . ".corescript");
+        $script = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id . ".corescript");
         $signature = get_signature($script);
 
         echo("--rbxsig%". $signature ."%\n");
         echo("--rbxid%". $id ."%\n");
-        echo(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../assets/" . $id . ".corescript"));
+        echo(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../static/assets/" . $id . ".corescript"));
     }
     else
     {
