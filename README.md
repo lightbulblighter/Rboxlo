@@ -7,7 +7,7 @@
 	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/Rboxlo" alt="GitHub commit activity">
 </a>
 
-<a href="https://hub.docker.com/r/lightbulblighter/Rboxlo">
+<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
 	<img src="https://img.shields.io/docker/image-size/lightbulblighter/rboxlo" alt="Docker Image Size (latest by date)">
 </a>
 
@@ -41,7 +41,6 @@ This site is for educational purposes only.
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_large)
-
 
 ## Fair Use
 
