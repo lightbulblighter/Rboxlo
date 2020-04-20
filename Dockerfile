@@ -15,7 +15,7 @@ COPY website/html /var/www/html
 COPY website/backend /var/www/backend
 COPY packaging/version /var/www/packaging/version
 COPY website/renders /var/www/bak/renders
-COPY website/constant /var/www/bak/constant
+COPY website/static /var/www/bak/static
 
 COPY .git/refs/heads/master /var/www/packaging/hash
 

@@ -12,11 +12,19 @@ if [ ! -e /var/www/renders/users/0.png ]; then
 	cp -r /var/www/bak/renders/users/0.png /var/www/renders/users/0.png
 fi
 
-if [ ! -e /var/www/constant/configuration.php ]; then
-	echo "/var/www/constant/configuration.php not found, creating..."
-	mkdir -p /var/www/constant
-	cp -r /var/www/bak/constant/configuration.sample.php /var/www/constant/configuration.php
+if [ ! -e /var/www/static/configuration.php ]; then
+	echo "/var/www/static/configuration.php not found, creating..."
+	mkdir -p /var/www/static
+	cp -r /var/www/bak/static/configuration.sample.php /var/www/static/configuration.php
 	echo "Please edit this file with your configuration."
+	exit 1
+fi
+
+if [ ! -e /var/www/static/key.pem ]; then
+	echo "/var/www/static/key.pem not found, creating..."
+	mkdir -p /var/www/static
+	cp -r /var/www/bak/static/key.sample.php /var/www/static/key.pem
+	echo "Please edit this file with your RSA private key."
 	exit 1
 fi
 

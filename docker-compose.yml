@@ -6,6 +6,6 @@ services:
       - "80:80"
     volumes:
       - ./data/nginx/logs:/var/log/nginx
-      - ./data/site/constant:/var/www/constant
+      - ./data/site/static:/var/www/static
       - ./data/site/renders:/var/www/renders
       - ./data/site/assets:/var/www/assets
