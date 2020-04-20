@@ -1,15 +1,9 @@
 <?php
-    // ************************************************************
-    // THIS SCRIPT WILL GET INCLUDED BY FRON FACING ASSET ENDPOINTS
-    // DO NOT PUT IT ANYWHERE ELSE, OR STUFF WILL BREAK
-    // THANK YOU
-    // ************************************************************
-
     // ***********************
     // TODO: ASSET PERMISSIONS
     // ***********************
 
-    require_once("/var/www/backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
     if (!isset($_GET["id"]) || strlen($_GET["id"]) <= 0 || !is_int($_GET["id"])) // I use strlen instead of empty because empty returns "false" if it's "falsey", e.g asset id "0"
     {
