@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/FullLogo.png" alt="Logo" width="500">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/2017/full.png" alt="Logo" width="500">
 </p>
 
 <p align="center">
