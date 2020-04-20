@@ -1,0 +1,18 @@
+/studio/
+/rccservice/
+/client/
+/keys/
+website/assets
+
+Rboxlo.code-workspace
+
+website/backend/configuration.php
+website/html/admin/adminer.php
+website/static/key.pem
+
+custom.conf
+
+# Docker
+data/
+docker-compose.yml
+docker-compose-local.yml
