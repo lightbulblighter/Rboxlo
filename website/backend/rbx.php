@@ -1,4 +1,6 @@
-<?php
+<?php   
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
+
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/script.php");
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/soap.php");
 
@@ -28,5 +30,23 @@
         openssl_sign($script, $signature, $key, OPENSSL_ALGO_SHA1);
 
         return "%%" . $signature . "%%";
+    }
+
+    function get_api_key($key)
+    {
+        if (!isset($key) || empty($key) || !ctype_alnum(str_replace("-", "", $key)))
+        {
+            return false;
+        }
+
+        $statement = $GLOBALS["sql"]->prepare("SELECT `version`, `usage` FROM `api_keys` WHERE `key` = ?");
+        $statement->execute([$key]);
+        
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function get_fflags($version, $application)
+    {
+        return file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/$version/$application.json");
     }
 ?>

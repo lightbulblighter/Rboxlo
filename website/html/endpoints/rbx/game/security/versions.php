@@ -3,34 +3,23 @@
 
     header("Content-Type: text/plain");
     
-    if (!isset($_GET["apiKey"]) || empty($_GET["apiKey"]))
+    $key = get_api_key($_GET["apiKey"]);
+
+    if (!$key || $key["usage"] !== "get_security_information")
     {
         exit(json_encode([
             "Message" => "No HTTP resource was found that matches the request URI 'https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ."'."
         ]));
     }
 
-    $key = $_GET["apiKey"];
-
-    $statement = $GLOBALS["sql"]->prepare("SELECT `version` FROM `api_keys` WHERE `key` = ? AND `usage` = ?");
-    $statement->execute([$key, "get_security_versions"]);
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if (!$result)
-    {
-        exit(json_encode([
-            "Message" => "No HTTP resource was found that matches the request URI 'https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ."'."
-        ]));
-    }
-
-    $statement = $GLOBALS["sql"]->prepare("SELECT `details` FROM `client_versions` WHERE `version` = ?");
-    $statement->execute([$result["version"]]);
+    $statement = $GLOBALS["sql"]->prepare("SELECT `hash` FROM `client_versions` WHERE `version` = ?");
+    $statement->execute([$key["version"]]);
     
     $data = [];
 
     foreach ($statement as $result)
     {
-        $data[] = $result["details"];
+        $data[] = $result["hash"];
     }
 
     exit(json_encode([
