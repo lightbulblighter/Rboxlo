@@ -36,6 +36,7 @@
     }
     else
     {
+		error_log("Asset not found: $id")
         header("HTTP/1.0 404 Not Found");
     }
 
