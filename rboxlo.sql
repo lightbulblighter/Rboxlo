@@ -18,7 +18,6 @@ CREATE TABLE `client_hashes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `version` text NOT NULL,
   `hash` text NOT NULL,
-  `type` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

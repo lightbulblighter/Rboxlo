@@ -19,7 +19,7 @@
 
     foreach ($statement as $result)
     {
-        $data[] = $result["hash"];
+        $data[] = $result["details"];
     }
 
     exit(json_encode([
