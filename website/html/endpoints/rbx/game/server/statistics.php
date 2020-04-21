@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
     header("Content-Type: text/plain");
 

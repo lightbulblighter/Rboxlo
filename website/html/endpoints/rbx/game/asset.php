@@ -3,7 +3,7 @@
     // TODO: ASSET PERMISSIONS
     // ***********************
 
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
     if (!isset($_GET["id"]) || strlen($_GET["id"]) <= 0 || !is_int($_GET["id"])) // I use strlen instead of empty because empty returns "false" if it's "falsey", e.g asset id "0"
     {
