@@ -1,0 +1,14 @@
+# Global (default) code owner
+* @lighterlightbulb
+
+# Ownership by directory structure
+.github/ @ozzt
+packaging/ @ozzt
+
+# Ownership of specific files
+docker-compose.sample.yml @ozzt
+docker-entrypoint.sh @ozzt
+Dockerfile @ozzt
+locations.conf @ozzt
+nginx.conf @ozzt
+rboxlo.sql @ozzt
