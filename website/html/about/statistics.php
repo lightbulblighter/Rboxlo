@@ -74,6 +74,8 @@
                         <br><br>
 						Running <b><?php echo(BASE_NAME . " " . get_version()); ?></b>.
 						<br><br>
+						Up for <b><?php echo(get_uptime()); ?></b>
+						<br><br>
                         Get more detailed website performance statistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> Netdata panel</a>.
                     </p>
 
