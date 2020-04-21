@@ -5,7 +5,7 @@
 
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
-    if (!isset($_GET["id"]) || strlen($_GET["id"]) <= 0 || !is_int($_GET["id"])) // I use strlen instead of empty because empty returns "false" if it's "falsey", e.g asset id "0"
+    if (!isset($_GET["id"]) || strlen($_GET["id"]) <= 0 || !is_int((int)$_GET["id"])) // I use strlen instead of empty because empty returns "false" if it's "falsey", e.g asset id "0"
     {
         header("HTTP/1.0 404 Not Found");
         exit();
