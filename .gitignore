@@ -5,10 +5,12 @@
 
 Rboxlo.code-workspace
 
-website/backend/configuration.php
-website/html/admin/adminer.php
+website/static/configuration.php
 website/static/key.pem
 website/static/assets/
+
+website/renders/**
+!website/renders/0.png
 
 custom.conf
 
