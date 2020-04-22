@@ -56,7 +56,7 @@
     //$statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
     //$statement->execute([$_GET["token"]]);
 
-    // Construct joinscript
+    // Construct joinscript (this is a mess)
     $joinscript = json_encode([
         "ClientPort" => rand(0, 65536),
         "MachineAddress" => $token["ip"],
@@ -75,7 +75,7 @@
         "MeasurementUrl" => "",
         "BaseUrl" => "https://www.". BASE_URL ."/",
         "ChatStyle" => $place["chat_style"],
-        "WaitingForCharacterGuid" => com_create_guid(),
+        "WaitingForCharacterGuid" => sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535)),
         "VendorId" => "0",
         "ScreenShotInfo" => "",
         "VideoInfo" => "",
