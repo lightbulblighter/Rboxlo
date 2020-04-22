@@ -99,7 +99,7 @@
     ]);
 
     // Sign joinscript
-    $signature = get_signature($joinscript);
+    $signature = get_signature("");
 
     // Construct full result
     $result = "--rbxsig". $signature; //. "\n". $joinscript;
