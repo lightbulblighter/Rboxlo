@@ -96,7 +96,7 @@
         "UsePortraitMode" => false,
         "FollowUserId" => 0,
         "characterAppearanceId" => 0
-    ]);
+    ], JSON_UNESCAPED_SLASHES);
 
     // Sign joinscript
     $signature = get_signature($joinscript);
