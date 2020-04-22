@@ -1,7 +1,6 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo" height="200">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo">
 </p>
-<hr>
 
 <p align="center">
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
@@ -24,6 +23,8 @@
 	<img src="https://img.shields.io/discord/697904229372788807?logo=discord" alt="Discord">
 </a>
 </p>
+
+<hr>
 
 Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rb.ozzt.pw/about/mission.
 
