@@ -3,6 +3,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+SET NAMES utf8mb4;
+
 DROP TABLE IF EXISTS `api_keys`;
 CREATE TABLE `api_keys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -12,7 +14,6 @@ CREATE TABLE `api_keys` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 DROP TABLE IF EXISTS `client_hashes`;
 CREATE TABLE `client_hashes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -21,7 +22,6 @@ CREATE TABLE `client_hashes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 DROP TABLE IF EXISTS `client_versions`;
 CREATE TABLE `client_versions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -29,7 +29,6 @@ CREATE TABLE `client_versions` (
   `details` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 DROP TABLE IF EXISTS `email_verification_tokens`;
 CREATE TABLE `email_verification_tokens` (
@@ -40,16 +39,12 @@ CREATE TABLE `email_verification_tokens` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-SET NAMES utf8mb4;
-
 DROP TABLE IF EXISTS `friends`;
 CREATE TABLE `friends` (
   `id` int(11) NOT NULL,
   `sender_uid` int(11) NOT NULL,
   `recipient_uid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 
 DROP TABLE IF EXISTS `invite_keys`;
 CREATE TABLE `invite_keys` (
@@ -60,7 +55,6 @@ CREATE TABLE `invite_keys` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,6 +63,29 @@ CREATE TABLE `news` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `games`;
+CREATE TABLE `games` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `full_id` text NOT NULL,
+  `name` text NOT NULL,
+  `creator` int NOT NULL,
+  `created` text NOT NULL,
+  `last_updated` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `places`;
+CREATE TABLE `places` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `game_id` int NOT NULL,
+  `creator` int NOT NULL,
+  `created` int NOT NULL,
+  `last_updated` int NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (

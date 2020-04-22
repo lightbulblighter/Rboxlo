@@ -53,7 +53,7 @@
 					endif;
 				?>
 
-				endpoint("/authentication/email_verify", "POST", information, (response) =>
+				endpoint("/authentication/verification/email", "POST", information, (response) =>
 				{
 					toastr.options = {
 						"closeButton": !response.success,

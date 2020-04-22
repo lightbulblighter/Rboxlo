@@ -52,10 +52,10 @@
             
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $data = [
-                    "secret" => G_RECAPTCHA_PRIVATE_KEY,
-                    "response" => $information["recaptcha"],
-                    "remoteip" => get_user_ip()
-                ];
+                "secret" => G_RECAPTCHA_PRIVATE_KEY,
+                "response" => $information["recaptcha"],
+                "remoteip" => get_user_ip()
+            ];
             
             $options = [
                 "http" => [
