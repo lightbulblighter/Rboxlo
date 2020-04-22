@@ -64,6 +64,7 @@
         "PingUrl" => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
         "PingInterval" => 120,
         "SeleniumTestMode" => false,
+        "UserName" => $user["username"],
         "UserId" => $user["id"],
         "RobloxLocale" => "en_us",
         "GameLocale" => "en_us",
