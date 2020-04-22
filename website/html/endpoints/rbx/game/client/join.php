@@ -10,7 +10,7 @@
 
     $statement = "SELECT * FROM `game_tokens` WHERE `token` = ?";
     $statement->execute([$_GET["token"]]);
-    $token = $statement->fetch($_GET["token"]);
+    $token = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$token)
     {
         exit("No token");
