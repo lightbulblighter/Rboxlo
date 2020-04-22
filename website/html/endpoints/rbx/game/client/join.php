@@ -58,7 +58,7 @@
 
     // Construct joinscript (this is a mess)
     $joinscript = json_encode([
-        "ClientPort" => rand(0, 65536),
+        "ClientPort" => 0, // TODO: This might vary?
         "MachineAddress" => $token["ip"],
         "ServerPort" => $token["port"],
         "PingUrl" => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
@@ -99,10 +99,10 @@
     ]);
 
     // Sign joinscript
-    $signature = get_signature("");
+    $signature = get_signature($joinscript);
 
     // Construct full result
-    $result = "--rbxsig". $signature; //. "\n". $joinscript;
+    $result = "--rbxsig". $signature . "\n". $joinscript;
     
     // Return
     exit($result);
