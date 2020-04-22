@@ -3,11 +3,6 @@
 
     header("Content-Type: text/plain");
 
-    if ($_SERVER["HTTP_USER_AGENT"] !== "Roblox/WinInet")
-    {
-        exit("Not being called from a Roblox client");
-    }
-
     if (!isset($_GET["token"]) || empty($_GET["token"]) || !ctype_alnum($_GET["token"]))
     {
         exit("Invalid token");
@@ -57,7 +52,7 @@
         ["RobloxLocale"] => "en_us",
         ["GameLocale"] => "en_us",
         ["SuperSafeChat"] => (bool)$user["ssc"],
-        ["CharacterAppearance"] => "https://www.". BASE_URL ."/endpoints/rbx/avatar/fetch",
+        ["CharacterAppearance"] => "https://www.". BASE_URL ."/endpoints/rbx/avatar/fetch?userId=". $user["id"] ."&pagal=". time(),
         ["ClientTicket"] => "",
         ["NewClientTicket"] => "",
         ["GameId"] => $game["full_id"],
