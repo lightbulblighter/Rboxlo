@@ -29,7 +29,7 @@
 
         openssl_sign($script, $signature, $key, OPENSSL_ALGO_SHA1);
 
-        return "%%" . base64_encode($signature) . "%%";
+        return "%" . base64_encode($signature) . "%";
     }
 
     function get_api_key($key)
