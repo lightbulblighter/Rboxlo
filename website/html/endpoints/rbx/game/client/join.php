@@ -98,10 +98,10 @@
     ], JSON_UNESCAPED_SLASHES);
 
     // Sign joinscript
-    $signature = get_signature($joinscript);
+    $signature = get_signature("Yo");
 
     // Construct full result
-    $result = "--rbxsig". $signature . "\n". $joinscript;
+    $result = "--rbxsig". $signature . "\nYo";
     
     // Return
     exit($result);
