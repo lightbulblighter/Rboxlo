@@ -53,29 +53,29 @@
     }
 
     // Kill token
-    $statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
-    $statement->execute([$_GET["token"]]);
+    //$statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
+    //$statement->execute([$_GET["token"]]);
 
     // Construct joinscript
     $joinscript = json_encode([
-        ["ClientPort"] => rand(0, 65536),
-        ["MachineAddress"] => $token["ip"],
-        ["ServerPort"] => $token["port"],
-        ["PingUrl"] => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
-        ["PingInterval"] => 120,
-        ["SeleniumTestMode"] => false,
-        ["UserId"] => $user["id"],
-        ["RobloxLocale"] => "en_us",
-        ["GameLocale"] => "en_us",
-        ["SuperSafeChat"] => (bool)$user["ssc"],
-        ["CharacterAppearance"] => "https://www.". BASE_URL ."/endpoints/rbx/avatar/fetch?userId=". $user["id"] ."&pagal=". time(),
-        ["ClientTicket"] => "",
-        ["NewClientTicket"] => "",
-        ["GameId"] => $game["full_id"],
-        ["PlaceId"] => $place["id"],
-        ["MeasurementUrl"] => "",
-        ["BaseUrl"] => "https://www.". BASE_URL ."/",
-        ["ChatStyle"] => $place["chat_style"]
+        "ClientPort" => rand(0, 65536),
+        "MachineAddress" => $token["ip"],
+        "ServerPort" => $token["port"],
+        "PingUrl" => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
+        "PingInterval" => 120,
+        "SeleniumTestMode" => false,
+        "UserId" => $user["id"],
+        "RobloxLocale" => "en_us",
+        "GameLocale" => "en_us",
+        "SuperSafeChat" => (bool)$user["ssc"],
+        "CharacterAppearance" => "https://www.". BASE_URL ."/endpoints/rbx/avatar/fetch?userId=". $user["id"] ."&pagal=". time(),
+        "ClientTicket" => "",
+        "NewClientTicket" => "",
+        "GameId" => $game["full_id"],
+        "PlaceId" => $place["id"],
+        "MeasurementUrl" => "",
+        "BaseUrl" => "https://www.". BASE_URL ."/",
+        "ChatStyle" => $place["chat_style"]
     ]);
 
     // Sign joinscript
