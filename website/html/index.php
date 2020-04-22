@@ -178,7 +178,7 @@
 
 								<div class="pb-3 mb-0" align="center">
 									<div class="mb-1">
-										<div class="g-recaptcha" data-sitekey="<?php echo(RECAPTCHA_PUBLIC_KEY); ?>"></div>
+										<div class="g-recaptcha" data-sitekey="<?php echo(G_RECAPTCHA_PUBLIC_KEY); ?>"></div>
 									</div>
 								</div>
 

@@ -102,7 +102,7 @@
     $signature = get_signature($joinscript);
 
     // Construct full result
-    $result = "--rbxsig". $signature . "\n". $joinscript;
+    $result = "--rbxsig". $signature; //. "\n". $joinscript;
     
     // Return
     exit($result);
