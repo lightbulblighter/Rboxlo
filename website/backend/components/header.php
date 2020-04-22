@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/mdb.min.css">
 <link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/mdb-plugins-gathered.min.css">
-<link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/custom/global.css?v=<?php echo(BASE_VERSION); ?>">
+<link rel="stylesheet" href="https://<?php echo(BASE_URL); ?>/core/html/css/custom/global.css?v=<?php echo(get_version()); ?>">
 <style>
 	@import url("/core/html/css/custom/dark.css") (prefers-color-scheme: dark);
 </style>
