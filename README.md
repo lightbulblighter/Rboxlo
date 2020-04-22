@@ -1,6 +1,7 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/2017/full.png" alt="Logo" width="500">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo" height="200">
 </p>
+<hr>
 
 <p align="center">
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">

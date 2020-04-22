@@ -12,7 +12,7 @@
         ]));
     }
 
-    $statement = $GLOBALS["sql"]->prepare("SELECT `hash` FROM `client_versions` WHERE `version` = ?");
+    $statement = $GLOBALS["sql"]->prepare("SELECT `details` FROM `client_versions` WHERE `version` = ?");
     $statement->execute([$key["version"]]);
     
     $data = [];

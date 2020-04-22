@@ -58,7 +58,7 @@
                 {
                     // Update values to be crypted
                     $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `last_ip` = ?, `register_ip` = ? WHERE `id` = ?");
-                    $statement->execute([_crypt($result["email"]), _crypt($result["password"]), _crypt($result["last_ip"]), _crypt($result["register_ip"])]);
+                    $statement->execute([_crypt($result["email"]), _crypt($result["password"]), _crypt($result["last_ip"]), _crypt($result["register_ip"]), $result["id"]]);
 
                     // Get new values!
                     $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `id` = ?");
