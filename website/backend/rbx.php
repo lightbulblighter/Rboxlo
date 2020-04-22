@@ -24,7 +24,7 @@
 
     function get_signature($script)
     {
-        $key = file_get_contents("/var/www/static/key.pem");
+        $key = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../static/key.pem");
         $signature;
 
         openssl_sign($script, $signature, $key, OPENSSL_ALGO_SHA1);
