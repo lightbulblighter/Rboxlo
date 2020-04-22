@@ -58,7 +58,7 @@
 
     // Construct joinscript (this is a mess)
     $joinscript = json_encode([
-        "ClientPort" => 0, // TODO: This might vary?
+        "ClientPort" => rand(0, 65536),
         "MachineAddress" => $token["ip"],
         "ServerPort" => $token["port"],
         "PingUrl" => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
@@ -77,7 +77,7 @@
         "ChatStyle" => $place["chat_style"],
         "VendorId" => "0",
         "ScreenShotInfo" => "",
-        "VideoInfo" => '<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://rb.ozzt.pw]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>rboxlo, video, free game, online virtual world</media:keywords></media:group></entry>',
+        "VideoInfo" => "",
         "CreatorId" => $place["creator"],
         "CreatorTypeEnum" => "User",
         "MembershipType" => "None",
@@ -85,16 +85,16 @@
         "CookieStoreFirstTimePlayKey" => "rbx_evt_ftp",
         "CookieStoreFiveMinutePlayKey" => "rbx_evt_fmp",
         "CookieStoreEnabled" => true,
-        "IsRobloxPlace" => false,
+        "IsRobloxPlace" => true,
         "GenerateTeleportJoin" => false,
-        "IsUnknownOrUnder13" => true,
-        "SessionId" => "89e81fb5-d1c8-48a9-a127-5d0d6bddaaac|00000000-0000-0000-0000-000000000000|0|207.241.231.247|5|2016-11-27T15:55:58.4473206Z|0|null|null|37.7811|-122.4625|1",
+        "IsUnknownOrUnder13" => false,
+        "SessionId" => "",
         "DataCenterId" => 0,
         "UniverseId" => 0,
         "BrowserTrackerId" => 0,
         "UsePortraitMode" => false,
         "FollowUserId" => 0,
-        "characterAppearanceId" => 0
+        "characterAppearanceId" => $user["id"]
     ], JSON_UNESCAPED_SLASHES);
 
     // Sign joinscript
