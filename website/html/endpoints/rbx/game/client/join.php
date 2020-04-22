@@ -8,7 +8,7 @@
         exit("Invalid token");
     }
 
-    $statement = "SELECT * FROM `game_tokens` WHERE `token` = ?";
+    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `game_tokens` WHERE `token` = ?");
     $statement->execute([$_GET["token"]]);
     $token = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$token)
@@ -16,7 +16,19 @@
         exit("No token");
     }
 
-    $statement = "SELECT * FROM `users` WHERE `id` = ?";
+    // See if token expired
+    $elapsed = time() - $token["generated"];
+    if ($elapsed >= 300) // 300 seconds = 5 minutes, wayy too long
+    {
+        // Kill token
+        $statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
+        $statement->execute([$_GET["token"]]);
+
+        // Exit
+        exit("Token expired");
+    }
+
+    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `id` = ?");
     $statement->execute([$token["user_id"]]);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$user)
@@ -24,7 +36,7 @@
         exit("No user");
     }
 
-    $statement = "SELECT * FROM `games` WHERE `id` = ?";
+    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `games` WHERE `id` = ?");
     $statement->execute([$token["game_id"]]);
     $game = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$game)
@@ -32,13 +44,17 @@
         exit("No game");
     }
 
-    $statement = "SELECT * FROM `places` WHERE `id` = ?";
+    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `places` WHERE `id` = ?");
     $statement->execute([$token["place_id"]]);
     $place = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$place)
     {
         exit("No place");
     }
+
+    // Kill token
+    $statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
+    $statement->execute([$_GET["token"]]);
 
     // Construct joinscript
     $joinscript = json_encode([
