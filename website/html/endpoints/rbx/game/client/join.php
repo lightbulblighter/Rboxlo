@@ -58,7 +58,7 @@
 
     // Construct joinscript (this is a mess)
     $joinscript = json_encode([
-        "ClientPort" => rand(0, 65536),
+        "ClientPort" => 0,
         "MachineAddress" => $token["ip"],
         "ServerPort" => $token["port"],
         "PingUrl" => "https://www.". BASE_URL ."/endpoints/rbx/game/client/ping",
