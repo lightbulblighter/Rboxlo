@@ -1,7 +1,8 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
-    header("Content-Type: text/plain");
+    // set to download
+    header('Content-Disposition: attachment; filename="join.ashx"');
 
     if (!isset($_GET["token"]) || empty($_GET["token"]) || !ctype_alnum($_GET["token"]))
     {
@@ -102,11 +103,4 @@
 
 ?>
 --rbxsig<?php echo($signature); ?>
-<?php
-    echo($joinscript);
-    
-    // set to download
-    header('Content-Disposition: attachment; filename="join.ashx"');
-
-    exit();
-?>
+<?php echo($joinscript); ?>
