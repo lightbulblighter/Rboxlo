@@ -100,8 +100,7 @@
     ], JSON_UNESCAPED_SLASHES);
 
     // Sign joinscript
-    $signature = get_signature($joinscript);
+    $signature = get_signature("\n". $joinscript);
 
 ?>
---rbxsig<?php echo($signature); ?>\r\n
-<?php echo($joinscript); ?>
+<?php printf("--rbxsig". $signature . "\n". $joinscript); ?>
