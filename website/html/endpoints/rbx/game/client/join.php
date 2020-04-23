@@ -102,5 +102,5 @@
     // Sign joinscript
     $signature = get_signature("\n". $joinscript);
 
+    printf("--rbxsig". $signature . "\n". $joinscript);
 ?>
-<?php printf("--rbxsig". $signature . "\n". $joinscript); ?>
