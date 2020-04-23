@@ -112,13 +112,9 @@
     // Encode it!
     $data = json_encode($joinscript, JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
 
-    // This is dumb
-    $data = "
-    ". $data;
-
     // Sign joinscript
     $signature = get_signature($data);
 
     // exit
-    exit("--rbxsig". $signature . $data);
+    exit("--rbxsig". $signature . "\r\n" . $data);
 ?>
