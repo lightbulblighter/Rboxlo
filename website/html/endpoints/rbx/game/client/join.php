@@ -100,5 +100,5 @@
     // Sign joinscript
     $signature = get_signature($joinscript);
 ?>
---rbxsig%<?php echo($signature); ?>%
+--rbxsig<?php echo($signature); ?>
 <?php echo($joinscript); exit(); ?>
