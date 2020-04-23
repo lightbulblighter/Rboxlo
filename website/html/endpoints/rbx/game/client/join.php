@@ -1,8 +1,9 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
-    // set to download
-    header('Content-Disposition: attachment; filename="join.ashx"');
+    // set to download 
+    header("Content-Type: text/plain");
+    header("Content-Disposition: attachment; filename=join.ashx");
 
     if (!isset($_GET["token"]) || empty($_GET["token"]) || !ctype_alnum($_GET["token"]))
     {
