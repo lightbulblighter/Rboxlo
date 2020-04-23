@@ -47,6 +47,6 @@
 
     function get_fflags($version, $application)
     {
-        return file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/$version/$application.json");
+        return file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/$version/fastflags/$application.json");
     }
 ?>
