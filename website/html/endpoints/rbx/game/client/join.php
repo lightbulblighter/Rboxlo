@@ -113,7 +113,7 @@
     $data = json_encode($joinscript, JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
 
     // Sign joinscript
-    $signature = get_signature($data);
+    $signature = get_signature("\r\n" . $data);
 
     // exit
     exit("--rbxsig". $signature . "\r\n" . $data);
