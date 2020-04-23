@@ -98,11 +98,7 @@
     ], JSON_UNESCAPED_SLASHES);
 
     // Sign joinscript
-    $signature = get_signature("\n" . $joinscript);
-
-    // Construct full result
-    $result = "--rbxsig". $signature . "\n" . $joinscript;
-    
-    // Return
-    exit('--rbxsig%ImzWcP4yIuIEhXMz1n69eQbXPVtgeqV7203OFh27Qm0XNMBKSL6SxQqBxeofXn84d6N32O2eIGyixJoPJkly9Yrl9NZdbS28GiRg+Li7EuxqhcuoweNhVP6IQXahMosycdpTlmJpAQdwRd1+m7y8qVKbZYwzDB2k+4DtIXYhE34=%' . "\n" . '{"ClientPort":0,"MachineAddress":"127.0.0.1","ServerPort":53640,"PingUrl":"","PingInterval":120,"UserName":"lightbulblighter","SeleniumTestMode":false,"UserId":0,"SuperSafeChat":false,"CharacterAppearance":"https://api.jkora17.pw/v1.1/avatar-fetch/?placeId=0&userId=0","ClientTicket":"","GameId":"00000000-0000-0000-0000-000000000000","PlaceId":0,"MeasurementUrl":"","WaitingForCharacterGuid":"08d7557b-2843-4a03-82f7-2723e47e2371","BaseUrl":"http://assetgame.jkora17.pw/","ChatStyle":"Classic","VendorId":0,"ScreenShotInfo":"","VideoInfo":"<?xml version=\"1.0\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:yt=\"http://gdata.youtube.com/schemas/2007\"><media:group><media:title type=\"plain\"><![CDATA[ROBLOX Place]]></media:title><media:description type=\"plain\"><![CDATA[ For more games visit http://www.jkora17.pw]]></media:description><media:category scheme=\"http://gdata.youtube.com/schemas/2007/categories.cat\">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>","CreatorId":0,"CreatorTypeEnum":"User","MembershipType":"None","AccountAge":0,"CookieStoreFirstTimePlayKey":"rbx_evt_ftp","CookieStoreFiveMinutePlayKey":"rbx_evt_fmp","CookieStoreEnabled":true,"IsRobloxPlace":false,"GenerateTeleportJoin":false,"IsUnknownOrUnder13":true,"SessionId":"89e81fb5-d1c8-48a9-a127-5d0d6bddaaac|00000000-0000-0000-0000-000000000000|0|207.241.231.247|5|2016-11-27T15:55:58.4473206Z|0|null|null|37.7811|-122.4625|1","DataCenterId":0,"UniverseId":0,"BrowserTrackerId":0,"UsePortraitMode":false,"FollowUserId":0,"characterAppearanceId":0}');
+    $signature = get_signature($joinscript);
 ?>
+--rbxsig%<?php echo($signature); ?>%
+<?php echo($joinscript); exit(); ?>
