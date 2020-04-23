@@ -2,7 +2,7 @@
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx.php");
 
     header("Content-Type: text/plain");
-    
+
     if (!isset($_GET["token"]) || empty($_GET["token"]) || !ctype_alnum($_GET["token"]))
     {
         exit("Invalid token");
@@ -120,5 +120,5 @@
     $signature = get_signature($data);
 
     // exit
-    exit("--rbxsig". $signature . "%". $data);
+    exit("--rbxsig". $signature . $data);
 ?>
