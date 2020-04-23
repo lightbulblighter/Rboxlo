@@ -99,6 +99,14 @@
 
     // Sign joinscript
     $signature = get_signature($joinscript);
+
 ?>
 --rbxsig<?php echo($signature); ?>
-<?php echo($joinscript); exit(); ?>
+<?php
+    echo($joinscript);
+    
+    // set to download
+    header('Content-Disposition: attachment; filename="join.ashx"');
+
+    exit();
+?>
