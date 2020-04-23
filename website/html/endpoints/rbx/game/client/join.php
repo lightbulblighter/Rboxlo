@@ -58,28 +58,38 @@
     //$statement = $GLOBALS["sql"]->prepare("DELETE FROM `game_tokens` WHERE `token` = ?");
     //$statement->execute([$_GET["token"]]);
 
+    // Get exact ISO time (THIS CAN BE DONE BETTER!!!)
+    function milliseconds()
+    {
+        $micro = explode(" ", microtime());
+        return ((int)$micro[1]) * 1000 + ((int)round($micro[0] * 1000));
+    }
+
+    $exact_time = date("Y-d-m") . "T" . date("H:i:s.") . substr(milliseconds(), 0, 7) . "Z";
+
     // Construct joinscript (this is a mess)
-    $joinscript = json_encode([
+    $joinscript = [
         "ClientPort" => 0,
-        "MachineAddress" => $token["ip"],
-        "ServerPort" => $token["port"],
+        "MachineAddress" => $token["ip"] ?? "127.0.0.1",
+        "ServerPort" => $token["port"] ?? 53640,
         "PingUrl" => "",
         "PingInterval" => 120,
         "UserName" => $user["username"],
         "SeleniumTestMode" => false,
-        "UserId" => 0,
+        "UserId" => $user["id"],
         "SuperSafeChat" => false,
         "CharacterAppearance" => "http://api.". BASE_URL ."/v1.1/avatar-fetch/?placeId=". $place["id"] ."&userId=". $user["id"],
         "ClientTicket" => "",
+        "NewClientTicket" => "",
         "GameId" => "00000000-0000-0000-0000-000000000000",
-        "PlaceId" => 0,
+        "PlaceId" => $place["id"],
         "MeasurementUrl" => "",
-        "WaitingForCharacterGuid" => "08d7557b-2843-4a03-82f7-2723e47e2371", //sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535)),
+        "WaitingForCharacterGuid" => "00000000-0000-0000-0000-000000000000",
         "BaseUrl" => "http://assetgame.". BASE_URL ."/",
-        "ChatStyle" => "Classic",
+        "ChatStyle" => $place["chat_style"],
         "VendorId" => "0",
         "ScreenShotInfo" => "",
-        "VideoInfo" => '<?xml version="1.0"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"><media:group><media:title type="plain"><![CDATA[ROBLOX Place]]></media:title><media:description type="plain"><![CDATA[ For more games visit http://www.rb.ozzt.pw]]></media:description><media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>',
+        "VideoInfo" => "",
         "CreatorId" => 0,
         "CreatorTypeEnum" => "User",
         "MembershipType" => "None",
@@ -90,16 +100,27 @@
         "IsRobloxPlace" => false,
         "GenerateTeleportJoin" => false,
         "IsUnknownOrUnder13" => true,
-        "SessionId" => "89e81fb5-d1c8-48a9-a127-5d0d6bddaaac|00000000-0000-0000-0000-000000000000|0|207.241.231.247|5|2016-11-27T15:55:58.4473206Z|0|null|null|37.7811|-122.4625|1",
+        "SessionId" => "00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000|" . $place["id"] . "|". get_user_ip() . "|0|". $exact_time . "|0|null|null|0|0|0",
         "DataCenterId" => 0,
+        "AnalyticsSessionId" => "00000000-0000-0000-0000-000000000000", 
         "UniverseId" => 0,
         "BrowserTrackerId" => 0,
         "UsePortraitMode" => false,
         "FollowUserId" => 0,
-        "characterAppearanceId" => $user["id"]
-    ], JSON_UNESCAPED_SLASHES);
+        "characterAppearanceId" => $user["id"],
+        "CountryCode" => "US"
+    ];
+
+    // Encode it!
+    $data = json_encode($joinscript, JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
+
+    // This is dumb
+    $data = "
+    ". $data;
 
     // Sign joinscript
-    $signature = get_signature("\n". $joinscript);
+    $signature = get_signature($data);
+
+    // exit
+    exit("--rbxsig". $signature . "%". $data);
 ?>
---rbxsig<?php echo("$signature\n$joinscript"); ?>
