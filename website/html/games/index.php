@@ -1,9 +1,9 @@
 <?php 
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
 
-	if (isset($_SESSION["user"]))
+	if (!isset($_SESSION["user"]))
 	{
-		redirect("/my/dashboard");
+		redirect("/login");
 	}
 ?>
 
