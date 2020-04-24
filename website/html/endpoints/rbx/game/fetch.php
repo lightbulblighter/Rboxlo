@@ -1,6 +1,7 @@
 <?php
     exit(json_encode([
-        "success" => false,
-        "message" => "This works!"
+        "success" => true,
+        "message" => "This works!",
+        "payload" => "caca://a"
     ]))
 ?>
