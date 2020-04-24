@@ -82,10 +82,7 @@
 						else:
 					?>
 
-					if (response.success)
-					{
-						$("#submit").removeAttr("disabled", "disabled")
-					}
+					$("#submit").removeAttr("disabled", "disabled")
 
 					<?php
 						endif;

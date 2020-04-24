@@ -20,6 +20,17 @@
         exit();
     }
 
+    function milliseconds()
+    {
+        $micro = explode(" ", microtime());
+        return ((int)$micro[1]) * 1000 + ((int)round($micro[0] * 1000));
+    }
+
+    function get_random_guid()
+    {
+        return sprintf("%04X%04X-%04X-%04X-%04X-%04X%04X%04X", mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
+    }
+
     function get_user_ip()
     {
         if (isset($_SERVER["HTTP_CF_CONNECTING_IP"]))
@@ -101,6 +112,7 @@
     
         return $mem[2] / $mem[1] * 100;
     }
+    
     
     function get_server_cpu_usage()
     {

@@ -91,7 +91,12 @@
             $statement = $sql->prepare("SELECT `email` FROM `users` WHERE `id` = ?");
             $statement->execute([$_SESSION["user"]["id"]]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $user_email_alias = substr($result["email"], 0, strpos($result["email"], "@")); // alias ("john@gmail.com" -> "john")
+            
+            // Decrypt email
+            $email = _crypt($result["email"], "decrypt");
+
+            // Find email alias
+            $user_email_alias = substr($email, 0, strpos($email, "@")); // alias ("john@gmail.com" -> "john")
 
             // Structure the email verification URL
             $verification_url = "https://". BASE_URL ."/my/verify?token=". $token;
