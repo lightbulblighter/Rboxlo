@@ -36,7 +36,7 @@
                         At <?php echo(BASE_NAME); ?>, we expect you to follow a terms of service and a basic set of rules in order to use this website. The terms are as follows:
 
                         <ul>
-                            <li><b>You must be 13 years old or older<b> to use <?php echo(BASE_NAME); ?> or when creating an account.</li>
+                            <li><b>You must be 13 years old or older</b> to use <?php echo(BASE_NAME); ?> or when creating an account.</li>
                             <li><b>Do not spam the website with invalid requests.</b> This is also known as a causing a <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">denial of service attack</a> on a website. Don't.</li>
                             <li><b>Don't create a new account upon moderation.</b> Your ban will eventually expire. This is known as ban evasion.</li>
                             <li><b>No flaming / bullying.</b> If you have an honest critique with someone, there are better ways of expressing your frustrations than yelling at them through text.</li>
