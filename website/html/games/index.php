@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<?php
-			build_header("Login");
+			build_header("Games");
 		?>
 	</head>
 	<body>
@@ -25,6 +25,7 @@
 
         <div class="container">
             <p class="h1" align="center">Very Complete Games Page</p>
+            <p class="h5 font-weight-bold">Click the link to join. You need the game executable in order to play games.</p>
 
             <?php
                 $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `places`");
@@ -41,7 +42,7 @@
             ?>
 		</div>
 
-        <br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><!-- me when I <br> -->
 
 		<?php
 			build_footer();
