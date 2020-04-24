@@ -1,3 +1,8 @@
+function start_game(id)
+{
+    alert("No.")
+}
+
 function endpoint(endpoint, method, form, callback)
 {
     $.ajax({
