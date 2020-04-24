@@ -116,7 +116,7 @@
             $mail->setFrom(EMAIL_USERNAME, BASE_NAME);
             $mail->addReplyTo(EMAIL_USERNAME, BASE_NAME);
 
-            $mail->addAddress($result["email"], $user_email_alias);
+            $mail->addAddress($email, $user_email_alias);
 
             $mail->Subject = BASE_NAME . " Verification for ". $_SESSION["user"]["username"];
 
