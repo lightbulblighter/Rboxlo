@@ -25,7 +25,7 @@
 
         <div class="container">
             <p class="h1" align="center">Very Complete Games Page</p>
-            <p class="h5 font-weight-bold">Click the link to join. You need the game executable in order to play games.</p>
+            <p class="h5 font-weight-light" align="center">Click the link to join. You need the game executable in order to play games.</p>
 
             <?php
                 $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `places`");

@@ -86,9 +86,9 @@
                     $_SESSION["user"]["last_ip"] = _crypt($_SESSION["user"]["last_ip"], "decrypt");
                     $_SESSION["user"]["register_ip"] = _crypt($_SESSION["user"]["register_ip"], "decrypt");
 
-                    if (!file_exists(ROOT . "/renders/users/" . $_SESSION["user"]["id"] . ".png"))
+                    if (!file_exists($_SERVER["DOCUMENT_ROOT"] . "/../renders/users/" . $_SESSION["user"]["id"] . ".png"))
                     {
-                        copy(ROOT . "/renders/users/0.png", ROOT . "/renders/users/" . $_SESSION["user"]["id"] .".png");
+                        copy($_SERVER["DOCUMENT_ROOT"] . "/../renders/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "/../renders/users/" . $_SESSION["user"]["id"] .".png");
                     }
 
                     $success = true;
