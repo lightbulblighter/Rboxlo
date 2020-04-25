@@ -1,16 +1,18 @@
 <?php
     // Session security
     ini_set("session.use_strict_mode", true);
-    ini_set("session.cookie_httponly", true);
-    ini_set("session.cookie_secure", true);
-    ini_set("session.use_cookie", true);
-    ini_set("session.entropy_length", 64);
-    ini_set("session.hash_function", "sha256");
-    ini_set("session.hash_bits_per_character", 5);
     ini_set("session.use_cookies", true);
     ini_set("session.use_only_cookies", true);
-    ini_set("session.entropy_file", "/dev/urandom");
 
+    ini_set("session.cookie_httponly", true);
+    ini_set("session.cookie_secure", true);
+
+    ini_set("session.hash_function", "sha256");
+    ini_set("session.hash_bits_per_character", 5);
+
+    ini_set("session.entropy_file", "/dev/urandom");
+    ini_set("session.entropy_length", 64);
+    
     session_start();
 
     if (!isset($_SESSION["canary"]))
