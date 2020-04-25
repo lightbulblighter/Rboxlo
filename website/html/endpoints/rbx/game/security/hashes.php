@@ -12,14 +12,14 @@
         ]));
     }
 
-    $statement = $GLOBALS["sql"]->prepare("SELECT `hash` FROM `client_hashes` WHERE `version` = ?");
+    $statement = $GLOBALS["sql"]->prepare("SELECT `player_hash` FROM `client_versions` WHERE `year` = ? AND 'latest' = 1");
     $statement->execute([$key["version"]]);
     
     $data = [];
 
     foreach ($statement as $result)
     {
-        $data[] = $result["hash"];
+        $data[] = $result["player_hash"];
     }
 
     exit(json_encode([

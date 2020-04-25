@@ -12,14 +12,14 @@
         ]));
     }
 
-    $statement = $GLOBALS["sql"]->prepare("SELECT `details` FROM `client_versions` WHERE `version` = ?");
+    $statement = $GLOBALS["sql"]->prepare("SELECT `numeric_version` FROM `client_versions` WHERE `year` = ? AND `latest` = 1");
     $statement->execute([$key["version"]]);
     
     $data = [];
 
     foreach ($statement as $result)
     {
-        $data[] = $result["details"];
+        $data[] = $result["numeric_version"];
     }
 
     exit(json_encode([
