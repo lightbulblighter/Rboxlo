@@ -1,5 +1,8 @@
 <?php
-    ini_set("session.use_strict_mode", true); // Session security
+    // Session security
+    ini_set("session.use_strict_mode", true);
+    ini_set("session.cookie_httponly", true);
+    
     date_default_timezone_set(TIMEZONE);
     session_start();
 
