@@ -24,6 +24,8 @@ COPY locations.conf /etc/nginx/snippets/locations.conf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
+RUN ln -s /var/www/renders /var/www/html/renders
+
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 CMD /usr/local/bin/docker-entrypoint.sh
