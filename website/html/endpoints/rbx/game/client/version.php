@@ -3,13 +3,13 @@
 
     header("Content-Type: text/plain");
 
-    $valid_key;
+    $valid_key = "";
 
-    foreach ($_GET as $key)
+    foreach ($_GET as $key => $_)
     {
         if (ctype_digit(substr($key, 4))) // If the $_GET key's letters after the first 4 are integers
         {
-            $valid_key = get_api_key(substr($_GET["guid"], 0, 4)); // Get the api key for it, and trim letters after the first four
+            $valid_key = get_api_key(substr($key, 0, 4)); // Get the api key for it, and trim letters after the first four
         }
     }
 
