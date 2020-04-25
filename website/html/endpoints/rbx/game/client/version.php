@@ -5,6 +5,8 @@
 
     $valid_key = "";
 
+    /* this stupidity is to determine the version */
+
     foreach ($_GET as $key => $_)
     {
         if (ctype_digit(substr($key, 4))) // If the $_GET key's letters after the first 4 are integers
@@ -18,10 +20,12 @@
         exit("Version doesn't exist.");
     }
     
+    /* stupidity ends here */
+    
     // Get latest version
     $statement = $GLOBALS["sql"]->prepare("SELECT `textual_version` FROM `client_versions` WHERE `latest` = 1 AND `year` = ?");
     $statement->execute([$valid_key["version"]]);
 
     // Return
-    exit($statement->fetch(PDO::FETCH_ASSOC)["textual_version"]);
+    exit("version-" . $statement->fetch(PDO::FETCH_ASSOC)["textual_version"]);
 ?>
