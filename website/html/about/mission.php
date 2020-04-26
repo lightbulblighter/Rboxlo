@@ -42,7 +42,7 @@
 							<li>Only users 13+ may play, so as to create a more mature community</li>
 							<li>Allowing games to have blood/gore without them being banned</li>
 							<li>Being open source so people can contribute, fix, solve issues, and develop for <?php echo(BASE_NAME); ?></li>
-							<li>Maintaining 100% transparency in what staff members do (see staff audits <a href="/transparency/">here</a>)</li>
+							<li>Maintaining 100% transparency in what staff members do (see staff audits <a href="/audits/">here</a>)</li>
 						</ul>
 						
 						<?php echo(BASE_NAME); ?> is created with the sense of transparency at it's heart, after many other Roblox private servers did not uphold transparency fully.

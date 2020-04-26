@@ -12,7 +12,7 @@
 
     ini_set("session.entropy_file", "/dev/urandom");
     ini_set("session.entropy_length", 64);
-    
+
     session_start();
 
     if (!isset($_SESSION["canary"]))
