@@ -9,7 +9,8 @@
 			<li class="flex-fill text-center"><a href="/about/copyright" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">Copyright</a></li>
 			<li class="flex-fill text-center"><a href="/about/terms-of-service" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">Terms of Service</a></li>
 			<li class="flex-fill text-center"><a href="/about/statistics" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">Statistics</a></li>
-			<li class="flex-fill text-center"><a href="https://www.github.com/sIydexic/Rboxlo" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">GitHub</a></li>
+			<li class="flex-fill text-center"><a href="https://www.github.com/lighterlightbulb/Rboxlo" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">GitHub</a></li>
+			<li class="flex-fill text-center"><a href="https://discord.gg/W5eCJk9" class="text-white font-weight-light h5 text-fluid nav-item px-3 py-3">Discord</a></li>
 		</ul>
 	</div>
 	<div class="footer-copyright">
