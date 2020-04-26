@@ -69,7 +69,7 @@
 			
             <li class="nav-item avatar dropdown">
 				<a class="nav-link dropdown-toggle waves-effect waves-light user-text" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-headshot" style="background-image: (https://<?php echo(BASE_URL); ?>/renders/users/<?php echo($_SESSION["user"]["id"]); ?>.png)">
+                    <img class="user-headshot mr-1" style="background-image: url(https://<?php echo(BASE_URL); ?>/renders/users/<?php echo($_SESSION["user"]["id"]); ?>.png)">
                     <b><?php echo($_SESSION["user"]["username"]); ?></b>
                 </a>
 				
