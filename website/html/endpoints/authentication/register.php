@@ -281,17 +281,29 @@
                                 ]);
 
                                 $preferences = json_encode([
-                                    "blurb" => ""
+                                    "blurb" => "Hi! I'm new to " . BASE_NAME . "!"
                                 ]);
+
+                                // permissions
+                                $permissions = [
+                                    "communication" => true, // ssc
+                                    "admin" => [
+                                        "moderation" => [
+                                            "onsite" => false,
+                                            "ingame" => false,
+                                        ],
+                                        "panel" => false
+                                    ]
+                                ];
 
                                 // Crypt
                                 $email = _crypt($email);
                                 $ip = _crypt($ip);
-                                $password = _crypt($password); // autistic 2-step cryption: plaintext -> argon -> crypt
+                                $password = _crypt($password); // dumb 2-step cryption: plaintext -> argon -> crypt
 
                                 // Create account
-                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                                $statement->execute([$username, $password, $email, $ip, $ip, 100, time(), $avatar, 0, $preferences, time()]);
+                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`, `permissions`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                $statement->execute([$username, $password, $email, $ip, $ip, 100, time(), $avatar, 0, $preferences, time(), $permissions]);
 
                                 // Get user
                                 $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `username` = ?");
@@ -303,7 +315,7 @@
                                 $_SESSION["user"]["password"] = ""; // dont keep the hash in session just in case
 
                                 // Copy default thumbnail for this user
-                                copy(ROOT . "/renders/users/0.png", ROOT . "/renders/users/" . $_SESSION["user"]["id"] . ".png");
+                                copy($_SERVER["DOCUMENT_ROOT"] . "/../renders/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "/..renders/users/" . $_SESSION["user"]["id"] . ".png");
                                 
                                 // Return success
                                 $success = true;

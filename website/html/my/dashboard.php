@@ -30,7 +30,7 @@
 
 		<div class="container">
 			<div class="card-columns d-flex justify-content-left">
-				<div class="card card-body" style="max-width: 20rem;">
+				<div class="card card-body" style="max-width: 20rem">
 					<h4 class="text-truncate text-center text-fluid">Hello, <b><?php echo($_SESSION["user"]["username"]); ?></b>!</h4>
 					<hr class="mt-0">
 					<img class="img-fluid" src="/renders/users/<?php echo($_SESSION["user"]["id"]); ?>.png" style="width: 300px">
@@ -51,8 +51,17 @@
 					<div class="card card-body">
 						<div class="card-block">
 							<h4 class="card-title">My Feed</h4>
+							<hr>
+
 							<?php
-								// TODO: Feed
+								//// This only fetches from official announcements for now.
+								//$statement = $GLOBALS["sql"]->prepare("SELECT * FROM `feed` WHERE `official` = 1");
+								//$statement->execute();
+								//
+								//foreach ($statement as $result)
+								//{
+								//	// This isn't finished.
+								//}
 							?>
 						</div>
 					</div>

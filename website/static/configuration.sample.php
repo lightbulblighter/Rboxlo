@@ -14,7 +14,7 @@
 
     /* Base Configuration */
     define("BASE_NAME", "Rboxlo");
-    define("BASE_URL", "rb.ozzt.pw");
+    define("BASE_URL", "rboxlo.xyz");
     
     /* Rboxlo Crypt Credentials */
     define("CRYPT_KEY", "");
@@ -34,5 +34,5 @@
     define("PROFANITY", [""]);
     define("INVITE_ONLY", false);
     define("GITHUB_URL", "https://www.github.com/lighterlightbulb/Rboxlo");
-    define("VALID_EMAIL_DOMAINS", ["google.com", "protonmail.ch", "rb.ozzt.pw", "ozzt.pw", "googlemail.com", "gmail.com", "yahoo.com", "yahoomail.com", "protonmail.com", "outlook.com", "hotmail.com", "microsoft.com", "inbox.com", "mail.com", "zoho.com"])
+    define("VALID_EMAIL_DOMAINS", ["google.com", "protonmail.ch", "googlemail.com", "gmail.com", "yahoo.com", "yahoomail.com", "protonmail.com", "outlook.com", "hotmail.com", "microsoft.com", "inbox.com", "mail.com", "zoho.com"])
 ?>
