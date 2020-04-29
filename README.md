@@ -26,9 +26,9 @@
 
 <hr>
 
-Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://rboxlo.xyz/about/mission.
+Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://www.rboxlo.xyz/about/mission.
 
-Pay us a visit at https://rboxlo.xyz/!
+Pay us a visit at https://www.rboxlo.xyz/!
 
 Rboxlo is written in PHP, with the client-side work in JavaScript. This repository ONLY contains the server-side code (meaning, *just* the website.) There are no RCCService executables here. There is no Roblox source code here. There are no Roblox proprietary works located on this repository. We will only publish the work that we ourselves have made (excluding stuff like Roblox source diff-trees.)
 
