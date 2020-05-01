@@ -7,10 +7,6 @@
 	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/Rboxlo" alt="GitHub commit activity">
 </a>
 
-<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
-	<img src="https://img.shields.io/docker/image-size/lightbulblighter/rboxlo" alt="Docker Image Size (latest by date)">
-</a>
-
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield">
 	<img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=shield" alt="FOSSA Status">
 </a>
