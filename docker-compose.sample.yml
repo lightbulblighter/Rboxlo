@@ -1,10 +1,15 @@
 version: "2"
 services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: YOUR_MYSQL_PASSWORD_GOES_HERE_AND_IS_DEFINED_THE_SAME_IN_ENVIRONMENT_DOT_PHP
+    port:
+      - "3306:3306"
   rboxlo:
-    image: lightbulblighter/rboxlo
+    build: ./
     ports:
       - "80:80"
     volumes:
       - ./data/nginx/logs:/var/log/nginx
-      - ./data/site/static:/var/www/static
-      - ./data/site/renders:/var/www/renders
+      - ./data/site/data:/var/www/data

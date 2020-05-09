@@ -1,8 +1,4 @@
 <?php
-    //***************************************//
-    //********* BEGIN PHP FUNCTIONS *********//
-    //***************************************//
-
     function session_clear()
     {
         session_regenerate_id(true);
@@ -16,7 +12,7 @@
 
     function redirect($location)
     {
-        header("Location: ". $location);
+        header("Location: " . $location);
         exit();
     }
 
@@ -52,31 +48,23 @@
 
     function _crypt($string, $mode = "encrypt")
     {
-        $key = hash(CRYPT_HASH_ALGO, CRYPT_KEY);
+        $key = hash(ENVIRONMENT["SECURITY"]["CRYPT"]["HASH"], ENVIRONMENT["SECURITY"]["CRYPT"]["KEY"]);
 
         if ($mode == "encrypt")
         {
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(CRYPT_ENCRYPTION));
-            return base64_encode(openssl_encrypt($string, CRYPT_ENCRYPTION, $key, 0, $iv) .":.:.:". $iv);
+            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"]));
+            return base64_encode(openssl_encrypt($string, ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"], $key, 0, $iv) .":.:.:". $iv);
         }
         else if ($mode == "decrypt")
         {
             list($encrypted_string, $iv) = explode(":.:.:", base64_decode($string));
 
-            return openssl_decrypt($encrypted_string, CRYPT_ENCRYPTION, $key, 0, $iv);
+            return openssl_decrypt($encrypted_string, ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"], $key, 0, $iv);
         }
 
         return false;
     }
 
-    //*************************************//
-    //********* END PHP FUNCTIONS *********//
-    //*************************************//
-    
-
-    //******************************************//
-    //********* BEGIN STRING FUNCTIONS *********//
-    //******************************************//
 
     function contains($haystack, $needle)
     {
@@ -93,15 +81,7 @@
         return (bool)preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $string);
     }
 
-    //****************************************//
-    //********* END STRING FUNCTIONS *********//
-    //****************************************//
-    
 
-    //******************************************//
-    //********* BEGIN SYSTEM FUNCTIONS *********//
-    //******************************************//
-    
     function get_server_memory_usage()
     {
         $free = (string)trim(shell_exec("free"));
@@ -113,10 +93,21 @@
         return $mem[2] / $mem[1] * 100;
     }
     
-    
     function get_server_cpu_usage()
     {
         return sys_getloadavg()[0];
+    }
+
+    function get_server_host()
+    {
+        $host = "http";
+
+        if (isset($_SERVER["HTTPS"]))
+        {
+            $host .= "s";
+        }
+
+        return $host . "://". $_SERVER["HTTP_HOST"];
     }
 	
 	function get_version() // Only hash is Docker-specific
@@ -146,9 +137,9 @@
 		}
     }
 	
-	function get_uptime() // Linux specific
+	function get_uptime() // Unix specific
 	{
-		$str   = @file_get_contents('/proc/uptime');
+		$str   = @file_get_contents("/proc/uptime");
 		$num   = floatval($str);
 		$secs  = fmod($num, 60); $num = intdiv($num, 60);
 		$mins  = $num % 60;      $num = intdiv($num, 60);
@@ -162,8 +153,4 @@
             round($secs)
         );
     }
-    
-    //****************************************//
-    //********* END SYSTEM FUNCTIONS *********//
-    //****************************************//
 ?>

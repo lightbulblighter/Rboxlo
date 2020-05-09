@@ -1,29 +1,19 @@
 #!/bin/bash
 
-# Make sure it exists
-mkdir -p /var/www/assets
-mkdir -p /var/www/renders/users
-mkdir -p /var/www/static
-
 # Fix permissions
 chown -R www-data:www-data /var/www
 
-if [ ! -e /var/www/renders/users/0.png ]; then
-	echo "/var/www/renders/users/0.png not found, creating..."
-	cp -r /var/www/bak/renders/users/0.png /var/www/renders/users/0.png
-fi
-
-if [ ! -e /var/www/static/configuration.php ]; then
-	echo "/var/www/static/configuration.php not found, creating..."
-	cp -r /var/www/bak/static/configuration.sample.php /var/www/static/configuration.php
-	echo "Please edit this file with your configuration."
+if [ ! -e /var/www/data/environment.php ]; then
+	echo "/var/www/data/environment.php not found, creating..."
+	cp -r /var/www/data/environment.sample.php /var/www/data/environment.php
+	echo "Please edit this file with your environment's configuration."
 	exit 1
 fi
 
-if [ ! -e /var/www/static/key.pem ]; then
-	echo "/var/www/static/key.pem not found, creating..."
-	cp -r /var/www/bak/static/key.sample.pem /var/www/static/key.pem
-	echo "Please edit this file with your RSA private key."
+if [ ! -e /var/www/data/key.pem ]; then
+	echo "/var/www/data/key.pem not found, creating..."
+	cp -r /var/www/data/key.sample.pem /var/www/data/key.pem
+	echo "Please edit this file with your base64 encoded RSA private key."
 	exit 1
 fi
 
@@ -61,4 +51,3 @@ while sleep 60; do
     exit 1
   fi
 done
-

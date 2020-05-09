@@ -5,13 +5,18 @@
         // PHP pretends to be an OOP language, but when you actually *try* OOP you see how not OOP-ish it is.
         global $sql;
 
-		$sql = new PDO("mysql:host=". SQL_DB_HOST .";port=". SQL_DB_PORT .";dbname=". SQL_DB_NAME, SQL_DB_USER, SQL_DB_PASS);
+		$sql = new PDO("mysql:host=". ENVIRONMENT["SQL"]["HOST"] .";port=". ENVIRONMENT["SQL"]["PORT"] .";dbname=". ENVIRONMENT["SQL"]["DATABASE"], ENVIRONMENT["SQL"]["USERNAME"], ENVIRONMENT["SQL"]["PASSWORD"]);
 		$sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
 		$sql->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
+    catch (PDOException $error)
+    {
+	    error_log($error);
+        exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: ". $error->errorCode());
+    }
     catch (exception $e)
     {
-	    error_log($e);
-        exit("Rboxlo is under maintenance."); // "Check back soon" message is ommitted to indicate that it's a db issue
+        error_log($error);
+        exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: UNKNOWN_ERR");
     }
 ?>

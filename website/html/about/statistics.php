@@ -24,7 +24,8 @@
 				endpoint("/statistics", "GET", null, (response) =>
 				{
 					$("#cpu").text(response.cpu + "%")
-					$("#ram").text(response.ram + "%")
+					$("#ram").text(response.ram + "%"),
+					$("#uptime").text(response.uptime)
 				})
 			}
 			
@@ -36,10 +37,10 @@
 			update()
         </script>
 
-        <div class="jumbotron card card-image" style="background-image: url(/core/html/img/about_backdrop.png)">
+        <div class="jumbotron card card-image" style="background-image: url(/html/img/backdrops/about.png)">
             <div class="text-white text-center">
                 <div>
-					<img src="/core/html/img/full.png" class="img-fluid" style="width: 600px">
+					<img src="/html/img/logos/2016/full.png" class="img-fluid" style="width: 600px">
 					<br>
 					<h1 class="card-title h1-responsive">Statistics</h1>
                 </div>
@@ -61,7 +62,7 @@
                     <span class="h3">Numbers</span><span> as of <?php echo(date("m/d/Y")); ?></span>
                     
                     <ul class="mt-1">
-                        <li>There are currently <?php echo($users); ?> unique users registered on <?php echo(BASE_NAME); ?>.</li>
+                        <li>There are currently <?php echo($users); ?> unique users registered on <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>.</li>
                     </ul>
 
                     <br>
@@ -72,13 +73,12 @@
                         <br>
                         Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>.
                         <br><br>
-						Running <b><?php echo(BASE_NAME . " " . get_version()); ?></b>.
+						Running <b><?php echo(ENVIRONMENT["PROJECT"]["NAME"] . "-" . get_version()); ?></b>.
 						<br><br>
-						Up for <b><?php $ut = get_uptime(); echo("$ut[0] days, $ut[1] hours, $ut[2] minutes, $ut[3] seconds"); ?>.</b>
+						Up for <b><span id="uptime"><?php $ut = get_uptime(); echo("$ut[0] days, $ut[1] hours, $ut[2] minutes, $ut[3] seconds"); ?>.</span></b>
 						<br><br>
-                        Get more detailed website performance statistics at the <a href="/netdata/">official <?php echo(BASE_NAME); ?> Netdata panel</a>.
+                        Get more detailed website performance statistics at the <a href="/netdata/">official <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> Netdata panel</a>.
                     </p>
-
 				</div>  
             </div>
         </div>

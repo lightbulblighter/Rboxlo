@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark purple accent-4">
     <a class="navbar-brand" href="/">
-		<img src="/core/html/img/full.png" class="img-fluid" style="height: 40px">
+		<img src="/html/img/logos/2016/full.png" class="img-fluid" height="40">
     </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 			
             <li class="nav-item avatar dropdown">
 				<a class="nav-link dropdown-toggle waves-effect waves-light user-text" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-headshot mr-1" style="background-image: url(https://<?php echo(BASE_URL); ?>/renders/users/<?php echo($_SESSION["user"]["id"]); ?>.png)">
+                    <img class="user-headshot mr-1" style="background-image: url(<?php echo(get_server_host()); ?>/html/img/thumbnails/users/<?php echo($_SESSION["user"]["id"]); ?>.png)">
                     <b><?php echo($_SESSION["user"]["username"]); ?></b>
                 </a>
 				

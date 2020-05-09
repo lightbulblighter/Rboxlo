@@ -22,7 +22,6 @@
 		?>
 
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<script type="text/javascript" src="/core/html/js/api.js" async defer></script>
 
 		<script type="text/javascript">
 			function form_register()
@@ -151,14 +150,14 @@
 							</div>
 
 							<?php
-								if (INVITE_ONLY):
+								if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
 							?>
 
 							<div class="md-form mb-4 mt-1">
 								<i class="material-icons prefix grey-text">fingerprint</i>
 								<input type="text" id="invite_key" name="invite_key" class="form-control mb-1" required="required">
 								<label for="invite_key">Invite key</label>
-								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?php echo(BASE_NAME); ?> is currently invite only.</span>
+								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is currently invite only.</span>
 							</div>
 
 							<?php
@@ -167,7 +166,7 @@
 
 							<div class="pb-3 mb-0" align="center">
 								<div class="mb-1">
-									<div class="g-recaptcha" data-sitekey="<?php echo(G_RECAPTCHA_PUBLIC_KEY); ?>"></div>
+									<div class="g-recaptcha" data-sitekey="<?php echo(ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"]); ?>"></div>
 								</div>
 							</div>
 

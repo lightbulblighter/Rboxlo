@@ -1,23 +1,12 @@
-/studio/
-/rccservice/
-/client/
-/keys/
-/pulls/
-/build-history/
-
+workspace/
 Rboxlo.code-workspace
 
-website/static/configuration.php
-website/static/key.pem
-website/static/assets/
-
-website/renders/**
+# Data
+website/data/static/environment.php
+website/data/static/key.pem
 !website/renders/0.png
 
-custom.conf
-
 # Docker
-data/
 docker-compose.yml
 docker-compose-local.yml
 Dockerfile.custom

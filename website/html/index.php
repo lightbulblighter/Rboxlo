@@ -15,10 +15,10 @@
 		<?php
 			build_header("Landing");
 		?>
-		<meta property="og:title" content="<?php echo(BASE_NAME); ?>">
-		<meta property="og:image" content="https://<?php echo(BASE_URL); ?>/core/html/img/backdrop.png"/>
+		<meta property="og:title" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>">
+		<meta property="og:image" content="https://<?php echo(get_server_host()); ?>/html/img/backdrops/default_compressed.png"/>
 		<meta property="og:image:type" content="image/png"/>
-		<meta property="og:description" content="<?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!" />
+		<meta property="og:description" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!" />
 	</head>
 	<body>
 		<?php
@@ -27,7 +27,6 @@
 		?>
 
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<script type="text/javascript" src="/core/html/js/api.js" async defer></script>
 
 		<script type="text/javascript">
 			function form_register()
@@ -39,7 +38,7 @@
 					confirmed_password: $("#confirmed_password").val(),
 					recaptcha: grecaptcha.getResponse(),
 					<?php 
-						if (INVITE_ONLY):
+						if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
 					?>
 					invite_key: $("#invite_key").val(),
 					<?php
@@ -75,7 +74,7 @@
 						$("#confirmed_password").removeAttr("readonly")
 						$("#email").removeAttr("readonly")
 						<?php 
-							if (INVITE_ONLY):
+							if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
 						?>
 						$("#invite_key").removeAttr("readonly")
 						<?php
@@ -106,7 +105,7 @@
 					$("#confirmed_password").attr("readonly", "readonly")
 					$("#email").attr("readonly", "readonly")
 					<?php 
-						if (INVITE_ONLY):
+						if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
 					?>
 					$("#invite_key").attr("readonly", "readonly")
 					<?php
@@ -122,8 +121,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(BASE_NAME); ?>"></img></h1><hr>
-					<h6 style="line-height: 1.5em"><?php echo(BASE_NAME); ?> is a recreation of a very popular online brick building game. Only <?php echo(BASE_NAME); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
+                    <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"></img></h1><hr>
+					<h6 style="line-height: 1.5em"><?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
 					<div class="embed-container"><iframe src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allowfullscreen></iframe></div>
 				</div>
 				<div class="col-md-6">
@@ -162,14 +161,14 @@
 								</div>
 
 								<?php
-									if (INVITE_ONLY):
+									if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
 								?>
 
 								<div class="md-form mb-4 mt-1">
 									<i class="material-icons prefix grey-text">fingerprint</i>
 									<input type="text" id="invite_key" name="invite_key" class="form-control mb-1" required="required">
 									<label for="invite_key">Invite key</label>
-									<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?php echo(BASE_NAME); ?> is currently invite only.</span>
+									<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is currently invite only.</span>
 								</div>
 
 								<?php
@@ -178,7 +177,7 @@
 
 								<div class="pb-3 mb-0" align="center">
 									<div class="mb-1">
-										<div class="g-recaptcha" data-sitekey="<?php echo(G_RECAPTCHA_PUBLIC_KEY); ?>"></div>
+										<div class="g-recaptcha" data-sitekey="<?php echo(ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"]); ?>"></div>
 									</div>
 								</div>
 

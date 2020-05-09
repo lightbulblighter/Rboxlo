@@ -1,14 +1,9 @@
-<p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo">
-</p>
+<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo"></p>
 
 <p align="center">
+
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
 	<img src="https://img.shields.io/github/commit-activity/m/lighterlightbulb/Rboxlo" alt="GitHub commit activity">
-</a>
-
-<a href="https://hub.docker.com/r/lightbulblighter/rboxlo">
-	<img src="https://img.shields.io/docker/image-size/lightbulblighter/rboxlo" alt="Docker Image Size (latest by date)">
 </a>
 
 <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_shield">
@@ -22,29 +17,40 @@
 <a href="https://discordapp.com/widget?id=697904229372788807">
 	<img src="https://img.shields.io/discord/697904229372788807?logo=discord" alt="Discord">
 </a>
+
 </p>
 
-<hr>
+# Overview
 
-Rboxlo is a 99.9% open-source, not-for-profit, 100% transparent Roblox private server. Our aim is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can read more about our mission here: https://www.rboxlo.xyz/about/mission.
+Rboxlo is a 100% open source, 100% transparent, not-for-profit Roblox private server. Our mission is to let users play Roblox without restrictions imposed by Roblox, while maintaining transparency. You can learn more about us and our goals [here](https://www.rboxlo.xyz/about/mission).
 
-Pay us a visit at https://www.rboxlo.xyz/!
+Some distinct features about Rboxlo:
+ - Open source
+ - Roblox years 2007 through 2017
+ - Repository is under UNLICENSE, meaning that anybody can modify and re-distribute the code however they please
+ - All staff actions are [audited](https://www.rboxlo.xyz/audits/), as the lack of transparency is slowly becoming more and more of an issue within the old Roblox community
 
-Rboxlo is written in PHP, with the client-side work in JavaScript. This repository ONLY contains the server-side code (meaning, *just* the website.) There are no RCCService executables here. There is no Roblox source code here. There are no Roblox proprietary works located on this repository. We will only publish the work that we ourselves have made (excluding stuff like Roblox source diff-trees.)
+# Contributing
 
-We love open-source, and we want to show that by us licensing Rboxlo under the UNLICENSE license. Feel free to do anything you want with the code!
+Rboxlo was created with the mission of being as open source as possible, and we would like to uphold that mission by licensing Rboxlo under the Unlicense. The Unlicense allows anyone to modify and distribute the code as they please; so feel free to fork the project! There are no restrictions imposed on you if you do so.
 
-If you see a vulnerability, or some other issue that needs to be resolved, please do at least one of the three:
- - Raise a GitHub issue
- - Disclose it to me through the Rboxlo discord
- - E-Mail us (rboxlo6969@gmail.com)
+If you find any problem(s) in Rboxlo, feel free to submit an issue. This includes stuff like vulnerabilities, or even the most trivial issues (such as typoes.)
 
-This site is for educational purposes only.
+If you know how to fix an issue, feel free to make a pull request for the issue.
 
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flighterlightbulb%2FRboxlo?ref=badge_large)
+If you would like to suggest a feature or change, submit it as an issue as well; it will be given the appropriate tag once we have seen it.
 
-## Fair Use
+This repository is for educational purposes only.
+
+# Regarding Roblox executables
+
+Rboxlo is written in many different languages, such as JavaScript and PHP. We would like to make some things clear about this repository, however:
+ - There are no Roblox proprietary works located here
+ - There are no Roblox executables here, meaning that there are also no Rboxlo downloads here, nor are there RCCService downloads
+
+We will only publish works that we ourselves have made on this repository.
+
+# Fair Use
 
 Copyright Disclaimer under section 107 of the Copyright Act of 1976, allowance is made for “fair use” for purposes such as criticism, comment, news reporting, teaching, scholarship, education and research.
 

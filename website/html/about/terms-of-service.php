@@ -16,10 +16,10 @@
 			build_navigation_bar();
     	?>  
 
-        <div class="jumbotron card card-image" style="background-image: url(/core/html/img/about_backdrop.png)">
+        <div class="jumbotron card card-image" style="background-image: url(/html/img/backdrops/about.png)">
             <div class="text-white text-center">
                 <div>
-					<img src="/core/html/img/full.png" class="img-fluid" style="width: 600px">
+					<img src="/html/img/logos/2016/full.png" class="img-fluid" style="width: 600px">
 					<br>
 					<h1 class="card-title h1-responsive">Terms of Service</h1>
                 </div>
@@ -33,10 +33,10 @@
 				</div>
 				<div class="card-body">
 					<p>
-                        At <?php echo(BASE_NAME); ?>, we expect you to follow a terms of service and a basic set of rules in order to use this website. The terms are as follows:
+                        At <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>, we expect you to follow a terms of service and a basic set of rules in order to use this website. The terms are as follows:
 
                         <ul>
-                            <li><b>You must be 13 years old or older</b> to use <?php echo(BASE_NAME); ?> or when creating an account.</li>
+                            <li><b>You must be 13 years old or older</b> to use <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> or when creating an account.</li>
                             <li><b>Do not spam the website with invalid requests.</b> This is also known as a causing a <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">denial of service attack</a> on a website. Don't.</li>
                             <li><b>Don't create a new account upon moderation.</b> Your ban will eventually expire. This is known as ban evasion.</li>
                             <li><b>No flaming / bullying.</b> If you have an honest critique with someone, there are better ways of expressing your frustrations than yelling at them through text.</li>

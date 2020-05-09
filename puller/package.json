@@ -1,0 +1,8 @@
+{
+  "name": "puller",
+  "version": "1.0.0",
+  "description": "The application that automatically builds and deploys Rboxlo docker image builds.",
+  "main": "app.js",
+  "author": "Rboxlo",
+  "license": "UNLICENSE"
+}

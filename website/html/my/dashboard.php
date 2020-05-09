@@ -33,7 +33,7 @@
 				<div class="card card-body" style="max-width: 20rem">
 					<h4 class="text-truncate text-center text-fluid">Hello, <b><?php echo($_SESSION["user"]["username"]); ?></b>!</h4>
 					<hr class="mt-0">
-					<img class="img-fluid" src="/renders/users/<?php echo($_SESSION["user"]["id"]); ?>.png" style="width: 300px">
+					<img class="img-fluid" src="/html/img/thumbnails/users/<?php echo($_SESSION["user"]["id"]); ?>.png" style="width: 300px">
 				</div>
 
 				<div class="w-100 ml-3">

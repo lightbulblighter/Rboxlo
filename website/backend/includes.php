@@ -1,5 +1,5 @@
 <?php
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/../static/configuration.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/environment.php");
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/functions.php");
 	
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/main.php");
