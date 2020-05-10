@@ -12,4 +12,4 @@ services:
       - "80:80"
     volumes:
       - ./data/nginx/logs:/var/log/nginx
-      - ./data/site/data:/var/www/data
+      - ./data/site:/var/www/data

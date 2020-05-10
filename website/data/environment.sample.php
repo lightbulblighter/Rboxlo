@@ -61,7 +61,7 @@
             "USERNAME" => "root",
             "PASSWORD" => "",
             "DATABASE" => "rboxlo",
-            "HOST"     => "localhost",
+            "HOST"     => "db",
             "PORT"     => "3306"
         ],
 

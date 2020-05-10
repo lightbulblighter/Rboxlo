@@ -13,7 +13,7 @@
     // This is disabled until we can set up an E-Mail server.
     exit(json_encode([
         "success" => false,
-        "message" => "We cannot process your request at this time. Please try again later. E-Mail verificaiton is disabled."
+        "message" => "We cannot process your request at this time. Please try again later. E-Mail verification is disabled."
     ]));
 
     // Defaults to an error
@@ -58,7 +58,7 @@
             
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $data = [
-                "secret" => G_RECAPTCHA_PRIVATE_KEY,
+                "secret" => ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PRIVATE_KEY"],
                 "response" => $information["recaptcha"],
                 "remoteip" => get_user_ip()
             ];

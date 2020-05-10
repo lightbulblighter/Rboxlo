@@ -43,7 +43,7 @@
             // Verify recaptcha
             $url = "https://www.google.com/recaptcha/api/siteverify";
             $data = [
-                "secret" => ENVIRONMENT[""],
+                "secret" => ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PRIVATE_KEY"],
                 "response" => $information["recaptcha"],
                 "remoteip" => get_user_ip()
             ];

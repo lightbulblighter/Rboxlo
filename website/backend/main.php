@@ -29,7 +29,7 @@
     $_SESSION["roblox"] = hash("sha512", strtoupper(bin2hex(random_bytes(585))));
     setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
 
-    date_default_timezone_set(TIMEZONE);
+    date_default_timezone_set(ENVIRONMENT["TIMEZONE"]);
 
     if ($_SESSION["user"]["permissions"]["see_errors"])
     {
