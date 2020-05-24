@@ -81,7 +81,8 @@
             "NAME" => "Rboxlo",
             "CURRENCY" => "Rbux",
             "DISCORD" => "https://discord.gg/W5eCJk9",
-            "INVITE_ONLY" => false
+            "INVITE_ONLY" => false,
+            "DEBUGGING" => true
         ],
 
         "SECURITY" => [
