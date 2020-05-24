@@ -26,7 +26,8 @@
 
         PROJECT["NAME"] => The project's name.
         PROJECT["CURRENCY"] => The project's currency's name.
-        PROJECT["REFERRAL"] => Whether ot not the project is on "invite-only" mode.
+        PROJECT["REFERRAL"] => Whether to not the project is on "invite-only" mode.
+        PROJECT["DEBUGGING"] => Whether to show error messages or not, regardless of user identity.
 
         >>> Security
 

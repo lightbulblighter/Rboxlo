@@ -32,7 +32,7 @@
     date_default_timezone_set(ENVIRONMENT["TIMEZONE"]);
 
     // this code block is a mess LOL
-    if (!PROJECT["DEBUGGING"])
+    if (!ENVIRONMENT["PROJECT"]["DEBUGGING"])
     {
         if (isset($_SESSION["user"]))
         {
