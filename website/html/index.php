@@ -120,7 +120,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/core/html/img/full.png" class="img-fluid" src="/html/img/logos/2016/full.png" width="500" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/></h1><hr/>
+                    <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/></h1><hr/>
 					<h6 style="line-height: 1.5em"><?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
 					<div class="embed-container"><iframe src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allowfullscreen></iframe></div>
 				</div>
