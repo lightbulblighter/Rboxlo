@@ -9,7 +9,7 @@ CREATE TABLE `api_keys` (
   `usage` text NOT NULL,
   `key` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `client_versions`;
@@ -21,7 +21,7 @@ CREATE TABLE `client_versions` (
   `latest` tinyint NOT NULL,
   `released` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `email_verification_keys`;
@@ -31,7 +31,7 @@ CREATE TABLE `email_verification_keys` (
   `uid` int NOT NULL,
   `generated` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `email_verification_tokens`;
@@ -41,7 +41,7 @@ CREATE TABLE `email_verification_tokens` (
   `uid` int NOT NULL,
   `generated` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 SET NAMES utf8mb4;
@@ -51,7 +51,7 @@ CREATE TABLE `friends` (
   `id` int NOT NULL,
   `sender_uid` int NOT NULL,
   `recipient_uid` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `game_counted_statistics`;
 CREATE TABLE `game_counted_statistics` (
@@ -60,7 +60,7 @@ CREATE TABLE `game_counted_statistics` (
   `name` text NOT NULL,
   `count` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `game_tokens`;
 CREATE TABLE `game_tokens` (
@@ -73,7 +73,7 @@ CREATE TABLE `game_tokens` (
   `ip` text NOT NULL,
   `port` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `games`;
@@ -85,7 +85,7 @@ CREATE TABLE `games` (
   `created` int NOT NULL,
   `last_updated` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `invite_keys`;
@@ -95,7 +95,7 @@ CREATE TABLE `invite_keys` (
   `max_uses` int NOT NULL DEFAULT '1',
   `key` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `news`;
@@ -104,7 +104,7 @@ CREATE TABLE `news` (
   `color` tinytext NOT NULL,
   `message` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `places`;
@@ -117,7 +117,7 @@ CREATE TABLE `places` (
   `description` text NOT NULL,
   `chat_style` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 DROP TABLE IF EXISTS `users`;
@@ -137,4 +137,4 @@ CREATE TABLE `users` (
   `rank` tinyint NOT NULL DEFAULT '0',
   `ssc` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

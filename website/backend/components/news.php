@@ -1,5 +1,7 @@
 <?php
-    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `news` ORDER BY `id`");
+    open_database_connection($sql);
+
+    $statement = $sql->prepare("SELECT * FROM `news` ORDER BY `id`");
     $statement->execute();
 
     foreach ($statement as $result):

@@ -1,5 +1,5 @@
 <?php
-    function open_sql_connection(&$database)
+    function open_database_connection(&$database)
     {
         try
         {
@@ -19,7 +19,7 @@
         }
     }
     
-    function close_sql_connection(&$database, &$statement = null)
+    function close_database_connection(&$database, &$statement = null)
     {
         $database = null;
         
