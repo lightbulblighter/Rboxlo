@@ -31,11 +31,18 @@
 
     date_default_timezone_set(ENVIRONMENT["TIMEZONE"]);
 
-    if ($_SESSION["user"]["permissions"]["see_errors"])
+    if (isset($_SESSION["user"]))
     {
-        ini_set("display_errors", 1);
-        ini_set("display_startup_errors", 1);
-        error_reporting(E_ALL);
+        if ($_SESSION["user"]["permissions"]["see_errors"])
+        {
+            ini_set("display_errors", 1);
+            ini_set("display_startup_errors", 1);
+            error_reporting(E_ALL);
+        }
+        else
+        {
+            error_reporting(0);
+        }
     }
     else
     {

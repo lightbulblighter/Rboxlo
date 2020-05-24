@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark purple accent-4">
     <a class="navbar-brand" href="/">
-		<img src="/html/img/logos/2016/full.png" class="img-fluid" height="40">
+		<img src="/html/img/logos/2016/full.png" class="img-fluid" width="150">
     </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
