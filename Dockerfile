@@ -13,15 +13,16 @@ RUN mkdir /run/nginx
 
 COPY website/html /var/www/html
 COPY website/backend /var/www/backend
-COPY packaging/version /var/www/packaging/version
 COPY website/data /var/www/data
 
+COPY packaging/version /var/www/packaging/version
 COPY .git/refs/heads/master /var/www/packaging/hash
 
 COPY php.ini /usr/local/etc/php
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY locations.conf /etc/nginx/snippets/locations.conf
+COPY domains.conf /etc/nginx/snippets/domains.conf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

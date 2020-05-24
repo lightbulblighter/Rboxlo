@@ -1,0 +1,36 @@
+﻿<Window x:Class="RboxloLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RboxloLauncher"
+        mc:Ignorable="d"
+        Title="Rboxlo" Height="140" Width="360" ResizeMode="NoResize">
+    <Grid Background="White" Height="106" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="354">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Canvas HorizontalAlignment="Left" Margin="0,67,0,0" Width="354" Background="#FFDFDFDF" Grid.RowSpan="2" Height="39" VerticalAlignment="Top">
+            <Button Content="Cancel" Canvas.Left="267" Width="75" Click="CancelButtonClick" Canvas.Top="10"/>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Margin="0,66,0,8" Width="354" RenderTransformOrigin="0.5,0.5" Background="#FFF0F0F0">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+        </Canvas>
+        <ProgressBar x:Name="StatusProgressBar" HorizontalAlignment="Left" Height="15" Margin="62,38,0,0" VerticalAlignment="Top" Width="280" IsIndeterminate="True"/>
+        <Label x:Name="StatusText" Content="Downloading Rboxlo..." HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" Margin="57,8,0,0" VerticalAlignment="Top" Width="285" Foreground="#FF003399" FontSize="15" Height="30"/>
+        <Image x:Name="StatusImage" Margin="0,14,299,22" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="Fant" Width="38">
+            <Image.Source>
+                <BitmapImage x:Name="StatusBitmapImage" DecodePixelWidth="300" UriSource="/Resources/icon.png" />
+            </Image.Source>
+        </Image>
+        <Label Content="107 of 152.3 MiB" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"  Margin="223,21,0,36" FontSize="7" Width="123" Foreground="#FF9E9D9D"/>
+    </Grid>
+</Window>

@@ -69,7 +69,11 @@
             "ANALYTICS_TAG" => "",
             "RECAPTCHA" => [
                 "PUBLIC_KEY" => "",
-                "PRIVATE_KEY" => ""
+                "PRIVATE_KEY" => "",
+                "BADGE_HIDE" => false,
+                "BADGE_POSITION" => "bottomright",
+                "TIMEOUT" => 5,
+                "DEBUG" => false
             ]
         ],
 

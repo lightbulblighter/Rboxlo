@@ -40,31 +40,6 @@
 
         if (!$error)
         {
-            // Verify recaptcha
-            $url = "https://www.google.com/recaptcha/api/siteverify";
-            $data = [
-                "secret" => ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PRIVATE_KEY"],
-                "response" => $information["recaptcha"],
-                "remoteip" => get_user_ip()
-            ];
-
-            $options = [
-                "http" => [
-                    "header"  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    "method"  => "POST",
-                    "content" => http_build_query($data)
-                ]
-            ];
-
-            $context = stream_context_create($options);
-            $result = json_decode(file_get_contents($url, false, $context), true);
-
-            if (!$result["success"])
-            {
-                $message = "You failed to solve the captcha challenge.";
-                $error = false;
-            }
-
             if (!$error)
             {
                 // Password, username, and E-mail simple validation
@@ -101,7 +76,7 @@
                 // E-Mail validation
                 if (strlen($email) == 0 || empty($email) && !$error)
                 {
-                    $message = "In order to create an account on ". BASE_NAME .", you must enter an E-Mail.";
+                    $message = "In order to create an account on ". ENVIRONMENT["PROJECT"]["NAME"] .", you must enter an E-Mail.";
                     $error = true;
                 }
 
@@ -116,7 +91,7 @@
 
                 $domain_name = substr(strrchr($email, "@"), 1);
 
-                if (!in_array($domain_name, VALID_EMAIL_DOMAINS))
+                if (!in_array($domain_name, ENVIRONMENT["VALID_EMAIL_DOMAINS"]))
                 {
                     $message = "Please register using a known E-Mail provider.";
                     $error = true;
@@ -192,11 +167,11 @@
                             }
 
                             // invite
-                            if (INVITE_ONLY && !$error)
+                            if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"] && !$error)
                             {
                                 if (empty($information["invite_key"]) || !isset($information["invite_key"]))
                                 {
-                                    $message = "You need an invite key to register on ". BASE_NAME .".";
+                                    $message = "You need an invite key to register on ". ENVIRONMENT["PROJECT"]["NAME"] .".";
                                     $error = true;
                                 }
 
@@ -239,7 +214,7 @@
                             if (!$error)
                             {
                                 // hash pw
-                                $password = password_hash($password, PASSWORD_ARGON2ID);
+                                $password = password_hash($password, ENVIRONMENT["SECURITY"]["PASSWORD"]);
 
                                 // default wearing thing
                                 $avatar = json_encode([
@@ -281,7 +256,7 @@
                                 ]);
 
                                 $preferences = json_encode([
-                                    "blurb" => "Hi! I'm new to " . BASE_NAME . "!"
+                                    "blurb" => "Hi! I'm new to " . ENVIRONMENT["PROJECT"]["NAME"] . "."
                                 ]);
 
                                 // permissions
@@ -317,7 +292,7 @@
                                 $_SESSION["user"]["password"] = ""; // dont keep the hash in session just in case
 
                                 // Copy default thumbnail for this user
-                                copy($_SERVER["DOCUMENT_ROOT"] . "/../renders/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "/..renders/users/" . $_SESSION["user"]["id"] . ".png");
+                                copy($_SERVER["DOCUMENT_ROOT"] . "/../data/thumbnails/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "" . $_SESSION["user"]["id"] . ".png");
                                 
                                 // Return success
                                 $success = true;

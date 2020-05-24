@@ -4,12 +4,12 @@ services:
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: YOUR_MYSQL_PASSWORD_GOES_HERE_AND_IS_DEFINED_THE_SAME_IN_ENVIRONMENT_DOT_PHP
-    port:
+    ports:
       - "3306:3306"
   rboxlo:
     build: ./
     ports:
       - "80:80"
     volumes:
-      - ./data/nginx/logs:/var/log/nginx
-      - ./data/site:/var/www/data
+      - ./environment/nginx/logs:/var/log/nginx
+      - ./environment/site:/var/www/data

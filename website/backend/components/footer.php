@@ -19,9 +19,3 @@
 		</div>
 	</div>
 </footer>
-
-<?php
-	// Close database connection
-	$statement = null;
-	$GLOBALS["sql"] = null;
-?>

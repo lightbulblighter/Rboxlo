@@ -1,22 +1,31 @@
 <?php
-    try
+    function open_sql_connection(&$database)
     {
-        // Why can't I just pass variables between php scripts? Why do I need to declare a global variable?
-        // PHP pretends to be an OOP language, but when you actually *try* OOP you see how not OOP-ish it is.
-        global $sql;
-
-		$sql = new PDO("mysql:host=". ENVIRONMENT["SQL"]["HOST"] .";port=". ENVIRONMENT["SQL"]["PORT"] .";dbname=". ENVIRONMENT["SQL"]["DATABASE"], ENVIRONMENT["SQL"]["USERNAME"], ENVIRONMENT["SQL"]["PASSWORD"]);
-		$sql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-		$sql->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-	}
-    catch (PDOException $error)
-    {
-	    error_log($error);
-        exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: ". $error->errorCode());
+        try
+        {
+            $database = new PDO("mysql:host=". ENVIRONMENT["SQL"]["HOST"] .";port=". ENVIRONMENT["SQL"]["PORT"] .";dbname=". ENVIRONMENT["SQL"]["DATABASE"], ENVIRONMENT["SQL"]["USERNAME"], ENVIRONMENT["SQL"]["PASSWORD"]);
+            $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+            $database->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        }
+        catch (PDOException $error)
+        {
+            error_log($error);
+            exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: ". $error->errorCode());
+        }
+        catch (exception $error)
+        {
+            error_log($error);
+            exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: UNKNOWN_ERR");
+        }
     }
-    catch (exception $e)
+    
+    function close_sql_connection(&$database, &$statement = null)
     {
-        error_log($error);
-        exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error code: UNKNOWN_ERR");
+        $database = null;
+        
+        if ($statement)
+        {
+            $statement = null;
+        }
     }
 ?>

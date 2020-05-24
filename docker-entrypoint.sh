@@ -3,18 +3,19 @@
 # Fix permissions
 chown -R www-data:www-data /var/www
 
+# Verify that some files exist, and have contents
 if [ ! -e /var/www/data/environment.php ]; then
-	echo "/var/www/data/environment.php not found, creating..."
-	cp -r /var/www/data/environment.sample.php /var/www/data/environment.php
-	echo "Please edit this file with your environment's configuration."
-	exit 1
+  echo "/var/www/data/environment.php not found, creating..."
+  cp -r /var/www/data/environment.sample.php /var/www/data/environment.php
+  echo "Please edit this file with your environment's configuration."
+  exit 1
 fi
 
 if [ ! -e /var/www/data/key.pem ]; then
-	echo "/var/www/data/key.pem not found, creating..."
-	cp -r /var/www/data/key.sample.pem /var/www/data/key.pem
-	echo "Please edit this file with your base64 encoded RSA private key."
-	exit 1
+  echo "/var/www/data/key.pem not found, creating..."
+  cp -r /var/www/data/key.sample.pem /var/www/data/key.pem
+  echo "Please edit this file with your base64 encoded RSA private key."
+  exit 1
 fi
 
 # Start the first process

@@ -15,18 +15,17 @@
 		<?php
 			build_header("Landing");
 		?>
-		<meta property="og:title" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>">
+		<meta property="og:title" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/>
 		<meta property="og:image" content="https://<?php echo(get_server_host()); ?>/html/img/backdrops/default_compressed.png"/>
 		<meta property="og:image:type" content="image/png"/>
-		<meta property="og:description" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!" />
+		<meta property="og:description" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!"/>
 	</head>
 	<body>
 		<?php
 			build_js();
 			build_navigation_bar();
+			render_captcha();
 		?>
-
-		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 		<script type="text/javascript">
 			function form_register()
@@ -121,7 +120,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"></img></h1><hr>
+                    <h1><img src="/core/html/img/full.png" class="img-fluid" style="width: 500px" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/></h1><hr/>
 					<h6 style="line-height: 1.5em"><?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
 					<div class="embed-container"><iframe src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allowfullscreen></iframe></div>
 				</div>
@@ -174,12 +173,6 @@
 								<?php
 									endif;
 								?>
-
-								<div class="pb-3 mb-0" align="center">
-									<div class="mb-1">
-										<div class="g-recaptcha" data-sitekey="<?php echo(ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"]); ?>"></div>
-									</div>
-								</div>
 
 								<div class="form-check">
 									<input type="checkbox" class="form-check-input" id="13confirm" required="required">

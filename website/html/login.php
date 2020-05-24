@@ -45,7 +45,7 @@
 					{
 						setTimeout(function()
 						{
-							location.replace("/my/dashboard")
+							window.history.back() // if called from studio or etc, we need to go back
 						}, 2000)
 					}
 					else
