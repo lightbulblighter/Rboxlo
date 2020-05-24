@@ -1,6 +1,6 @@
 <footer class="page-footer center-on-small-only stylish-color-dark">
 	<div class="container pt-1 pb-4">
-		<img src="<?php echo(get_server_host()); ?>/html/img/logos/2016/icon.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" style="width: 400px">
+		<img src="<?php echo(get_server_host()); ?>/html/img/logos/2016/full.png" align="center" class="mx-auto d-block mb-3 mt-2 img-fluid" width="200">
 		<hr class="border-light-grey">
 
 		<ul class="nb-ul list-group list-group-horizontal nav">

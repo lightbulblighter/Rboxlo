@@ -22,4 +22,4 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo(get_server_host()); ?>/html/css/mdb.min.css">
 <link rel="stylesheet" href="<?php echo(get_server_host()); ?>/html/css/mdb-plugins-gathered.min.css">
-<link rel="stylesheet" href="<?php echo(get_server_host()); ?>/html/css/custom/site.min.css">
+<link rel="stylesheet" href="<?php echo(get_server_host()); ?>/html/css/site.min.css">
