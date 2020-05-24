@@ -24,7 +24,7 @@
 		<?php
 			build_js();
 			build_navigation_bar();
-			render_captcha();
+			echo(render_captcha());
 		?>
 
 		<script type="text/javascript">
