@@ -47,8 +47,11 @@ $(function()
     $("#register-form").on("submit", function(e) {
         $(".register-checkbox").attr("disabled", "disabled")
         $(".register-input").attr("readonly, readonly")
+        $(".register-input").attr("disabled", "disabled")
 
         e.preventDefault()
+
+        grecaptcha.execute()
         form_register()
     })
 })

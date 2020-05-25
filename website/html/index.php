@@ -28,7 +28,6 @@
 
 		<script type="text/javascript" src="<?php echo(get_server_host()); ?>/html/js/register.min.js" async defer></script>
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
-		<script type="text/javascript">grecaptcha.execute()</script>
 
 		<div class="container clear-top wrapper">
 			<div class="row">
