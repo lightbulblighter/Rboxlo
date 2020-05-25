@@ -30,7 +30,7 @@
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 		<script type="text/javascript">grecaptcha.execute()</script>
 
-		<div class="container">
+		<div class="container clear-top wrapper">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/></h1><hr/>
