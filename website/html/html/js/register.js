@@ -27,8 +27,8 @@ function form_register()
         }
         else
         {
-            $("#checkbox").removeAttr("disabled", "disabled")
-            $("#input").removeAttr("readonly, readonly")
+            $(".register-checkbox").removeAttr("disabled", "disabled")
+            $(".register-input").removeAttr("readonly, readonly")
         }
     })
 }
@@ -45,8 +45,8 @@ $('form input:not([type="submit"])').keypress(function (e)
 $(function()
 {
     $("#register-form").on("submit", function(e) {
-        $("#checkbox").attr("disabled", "disabled")
-        $("#input").attr("readonly, readonly")
+        $(".register-checkbox").attr("disabled", "disabled")
+        $(".register-input").attr("readonly, readonly")
 
         e.preventDefault()
         form_register()
