@@ -3,6 +3,8 @@
     
     header("Content-Type: text/plain");
 
+    open_database_connection($sql);
+    
     // Defaults to an error
     $success = false;
     $message = "An unexpected error occurred.";
@@ -47,7 +49,7 @@
 
         if (!$error)
         {
-            $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE username = ? OR email = ?");
+            $statement = $sql->prepare("SELECT * FROM `users` WHERE username = ? OR email = ?");
             $statement->execute([$information["username"], $information["username"]]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -57,11 +59,11 @@
                 if (!is_base64($result["password"]))
                 {
                     // Update values to be crypted
-                    $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `last_ip` = ?, `register_ip` = ? WHERE `id` = ?");
+                    $statement = $sql->prepare("UPDATE `users` SET `email` = ?, `password` = ?, `last_ip` = ?, `register_ip` = ? WHERE `id` = ?");
                     $statement->execute([_crypt($result["email"]), _crypt($result["password"]), _crypt($result["last_ip"]), _crypt($result["register_ip"]), $result["id"]]);
 
                     // Get new values!
-                    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `id` = ?");
+                    $statement = $sql->prepare("SELECT * FROM `users` WHERE `id` = ?");
                     $statement->execute([$result["id"]]);
 
                     $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -74,7 +76,7 @@
                     if (password_get_info(_crypt($result["password"], "decrypt"))["algoName"] !== "argon2id")
                     {
                         // Update
-                        $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
+                        $statement = $sql->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
                         $statement->execute([_crypt(password_hash($information["password"], PASSWORD_ARGON2ID)), $result["id"]]);
                     }
 

@@ -10,6 +10,8 @@
 
     header("Content-Type: text/plain");
 
+    open_database_connection($sql);
+
     // This is disabled until we can set up an E-Mail server.
     exit(json_encode([
         "success" => false,
@@ -157,7 +159,7 @@
             // funny db stuff
             if (!$error)
             {
-                $statement = $GLOBALS["sql"]->prepare("SELECT `generated`, `uid` FROM `email_verification_tokens` WHERE `token` = ?");
+                $statement = $sql->prepare("SELECT `generated`, `uid` FROM `email_verification_tokens` WHERE `token` = ?");
                 $statement->execute([$information["token"]]);
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -181,10 +183,10 @@
                     // -> set user as verified
                     if (!$error)
                     {
-                        $statement = $GLOBALS["sql"]->prepare("UPDATE `users` SET `email_verified` = 1 WHERE `id` = ?");
+                        $statement = $sql->prepare("UPDATE `users` SET `email_verified` = 1 WHERE `id` = ?");
                         $statement->execute([$result["uid"]]);
 
-                        $statement = $GLOBALS["sql"]->prepare("DELETE FROM `email_verification_tokens` WHERE `generated` = ?");
+                        $statement = $sql->prepare("DELETE FROM `email_verification_tokens` WHERE `generated` = ?");
                         $statement->execute([$result["generated"]]);
                         $_SESSION["user"]["email_verified"] = true;
 

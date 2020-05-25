@@ -156,25 +156,12 @@
 
     function console_log($string)
     {
-        return "console.log({$string});";
+        echo("<script type=\"text/javascript\">console.log(". $string . ");</script>");
     }
 
-    // Hacky implementation of https://github.com/albertcht/invisible-recaptcha, without the fluff
     function send_verify_request_captcha(array $query = [])
     {
-        $url = "https://www.google.com/recaptcha/api/siteverify";
 
-        $options = [
-            "http" => [
-                "header"  => "Content-type: application/x-www-form-urlencoded\r\n",
-                "method"  => "POST",
-                "content" => http_build_query($query)
-            ]
-        ];
-        
-        $context = stream_context_create($options);
-
-        return json_decode(file_get_contents($url, false, $context), true);
     }
     
     function verify_response_captcha($response, $ip)
@@ -184,88 +171,24 @@
             return false;
         }
 
-        $response = send_verify_request_captcha([
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+
+        $query = [ 
             "secret" => ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PRIVATE_KEY"],
             "remoteip" => $ip,
             "response" => $response
-        ]);
-
-        return isset($response["success"]) && $response["success"] === true;
-    }
-
-    function render_polyfill_captcha()
-    {
-        return "<script src=\"https://cdn.polyfill.io/v2/polyfill.min.js\"></script>" . PHP_EOL;
-    }
-
-    function render_html_captcha()
-    {
-        $html = "<div id=\"_g-recaptcha\"></div>" . PHP_EOL;
-        if (ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["BADGE_HIDE"])
-        {
-            $html .= "<style>.grecaptcha-badge{display:none;!important}</style>" . PHP_EOL;
-        }
-
-        $html .= "<div class=\"g-recaptcha\" data-sitekey=\"" . ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"] ."\"";
-        $html .= "data-size=\"invisible\" data-callback=\"_submitForm\" data-badge=\"" . ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["BADGE_POSITION"] . "\"></div>";
-        return $html;
-    }
-
-    function render_debug_captcha()
-    {
-        $elements = [
-            "_submitForm",
-            "_captchaForm",
-            "_captchaSubmit"
         ];
 
-        $html = "";
+        $options = [
+            "http" => [
+                "header"  => "Content-type: application/x-www-form-urlencoded\r\n",
+                "method"  => "POST",
+                "content" => http_build_query($query)
+            ]
+        ];
+        $context = stream_context_create($options);
+        $google_response = json_decode(file_get_contents($url, false, $context), true);
 
-        foreach ($elements as $element)
-        {
-            $html .= console_log("\"Checking element binding of " . $element . "...\"");
-            $html .= console_log($element . "!==undefined");
-        }
-
-        return $html;
-    }
-
-    function render_footer_js_captcha()
-    {
-        // TODO: Possible multilingual support? api.js?hl=lang. perhaps add it when site translations are available
-
-        $html = "<script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>" . PHP_EOL;
-        $html .= "<script>var _submitForm,_captchaForm,_captchaSubmit,_execute=true;</script>";
-        $html .= "<script>window.addEventListener('load', _loadCaptcha);" . PHP_EOL;
-
-        $html .= "function _loadCaptcha(){";
-        if (ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["BADGE_HIDE"])
-        {
-            $html .= "document.querySelector(\".grecaptcha-badge\").style = \"display:none;!important\"" . PHP_EOL;
-        }
-
-        $html .= "_captchaForm=document.querySelector(\"#_g-recaptcha\").closest(\"form\");";
-        $html .= "_captchaSubmit=_captchaForm.querySelector(\"[type=submit]\");";
-        $html .= "_submitForm=function(){if(typeof _submitEvent===\"function\"){_submitEvent();";
-        $html .= "grecaptcha.reset();}else{_captchaForm.submit();}};";
-        $html .= "_captchaForm.addEventListener(\"submit\",";
-        $html .= "function(e){e.preventDefault();if(typeof _beforeSubmit===\"function\"){";
-        $html .= "_execute=_beforeSubmit(e);}if(_execute){grecaptcha.execute();}});";
-        if (ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["DEBUG"])
-        {
-            $html .= render_debug_captcha();
-        }
-        $html .= "}</script>" . PHP_EOL;
-
-        return $html;
-    }
-    
-    function render_captcha()
-    {
-        $html = render_polyfill_captcha();
-        $html .= render_html_captcha();
-        $html .= render_footer_js_captcha();
-
-        return $html;
+        return isset($google_response["success"]) && $google_response["success"] === true;
     }
 ?>

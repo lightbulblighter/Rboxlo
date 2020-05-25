@@ -12,8 +12,9 @@
 ?>
 
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="csrf-token" content="<?php echo($_SESSION["csrf"]); ?>">
 <title><?php echo($title); ?></title>
 <link rel="shortcut icon" type="image/png" href="<?php echo(get_server_host()); ?>/html/img/logos/2016/icon.png">
 

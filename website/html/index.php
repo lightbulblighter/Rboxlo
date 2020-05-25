@@ -16,7 +16,7 @@
 			build_header("Landing");
 		?>
 		<meta property="og:title" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/>
-		<meta property="og:image" content="https://<?php echo(get_server_host()); ?>/html/img/backdrops/default_compressed.png"/>
+		<meta property="og:image" content="<?php echo(get_server_host()); ?>/html/img/backdrops/default_compressed.png"/>
 		<meta property="og:image:type" content="image/png"/>
 		<meta property="og:description" content="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a recreation of a very popular online brick building game. Only <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!"/>
 	</head>
@@ -24,98 +24,11 @@
 		<?php
 			build_js();
 			build_navigation_bar();
-			echo(render_captcha());
 		?>
 
-		<script type="text/javascript">
-			function form_register()
-			{
-				var information = {
-					username: $("#username").val(),
-					password: $("#password").val(),
-					email: $("#email").val(),
-					confirmed_password: $("#confirmed_password").val(),
-					recaptcha: grecaptcha.getResponse(),
-					<?php 
-						if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
-					?>
-					invite_key: $("#invite_key").val(),
-					<?php
-						endif;
-					?>
-					csrf: "<?php echo($_SESSION["csrf"]); ?>"
-				}
-
-				endpoint("/authentication/register", "POST", information, (response) =>
-				{
-					toastr.options = {
-						"closeButton": !response.success,
-						"timeOut": response.success ? 2000 : 5000
-					}
-
-					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
-
-					if (response.success)
-					{
-						setTimeout(function()
-						{
-							location.replace("/my/dashboard")
-						}, 2000)
-					}
-					else
-					{
-						$("#submit").removeAttr("disabled", "disabled")
-						$("#13confirm").removeAttr("disabled", "disabled")
-						$("#read_documents").removeAttr("disabled", "disabled")
-
-						$("#username").removeAttr("readonly")
-						$("#password").removeAttr("readonly")
-						$("#confirmed_password").removeAttr("readonly")
-						$("#email").removeAttr("readonly")
-						<?php 
-							if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
-						?>
-						$("#invite_key").removeAttr("readonly")
-						<?php
-							endif;
-						?>
-					}
-				})
-			}
-
-			$('form input:not([type="submit"])').keypress(function (e)
-			{
-				if (e.keyCode == 13)
-				{
-					e.preventDefault()
-					return false
-				}
-			})
-
-			$(function()
-			{
-				$("#register-form").on("submit", function(e) {
-					$("#submit").attr("disabled", "disabled")
-					$("#13confirm").attr("disabled", "disabled")
-					$("#read_documents").attr("disabled", "disabled")
-
-					$("#username").attr("readonly", "readonly")
-					$("#password").attr("readonly", "readonly")
-					$("#confirmed_password").attr("readonly", "readonly")
-					$("#email").attr("readonly", "readonly")
-					<?php 
-						if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
-					?>
-					$("#invite_key").attr("readonly", "readonly")
-					<?php
-						endif;
-					?>
-
-					e.preventDefault()
-					form_register()
-				})
-			})
-		</script>
+		<script type="text/javascript" src="<?php echo(get_server_host()); ?>/html/js/register.min.js" async defer></script>
+		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+		<script type="text/javascript">grecaptcha.execute()</script>
 
 		<div class="container">
 			<div class="row">
@@ -174,6 +87,8 @@
 									endif;
 								?>
 
+								<div class="g-recaptcha" data-sitekey="<?php echo(ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"]); ?>" data-size="invisible"></div>
+								
 								<div class="form-check">
 									<input type="checkbox" class="form-check-input" id="13confirm" required="required">
 									<label class="form-check-label" for="13confirm">I am 13 years old or older</label>

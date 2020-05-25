@@ -3,6 +3,8 @@
     
     header("Content-Type: text/plain");
 
+    open_database_connection($sql);
+
     // Defaults to an error
     $success = false;
     $message = "An unexpected error occurred.";
@@ -131,7 +133,7 @@
                 // Validate stuff using DB such as if the username is taken, the E-mail is already taken, >3 accounts per IP, etc.
                 if (!$error)
                 {
-                    $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `username` = ?");
+                    $statement = $sql->prepare("SELECT * FROM `users` WHERE `username` = ?");
                     $statement->execute([$username]);
                     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -143,7 +145,7 @@
 
                     if (!$error)
                     {
-                        $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `email` = ?");
+                        $statement = $sql->prepare("SELECT * FROM `users` WHERE `email` = ?");
                         $statement->execute([$email]);
                         $result = $statement->fetch(PDO::FETCH_ASSOC);
         
@@ -157,7 +159,7 @@
                         {
                             $ip = get_user_ip();
 
-                            $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `register_ip` = ? OR `last_ip` = ?");
+                            $statement = $sql->prepare("SELECT * FROM `users` WHERE `register_ip` = ? OR `last_ip` = ?");
                             $statement->execute([$username]);
 
                             if ($statement->rowCount() > 3)
@@ -183,7 +185,7 @@
                                 
                                 if (!$error)
                                 {
-                                    $statement = $GLOBALS["sql"]->prepare("SELECT `uses`, `max_uses` FROM `invite_keys` WHERE `key` = ?");
+                                    $statement = $sql->prepare("SELECT `uses`, `max_uses` FROM `invite_keys` WHERE `key` = ?");
                                     $statement->execute([$information["invite_key"]]);
                                     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -204,7 +206,7 @@
                                         if (!$error)
                                         {
                                             // Mark key as used
-                                            $statement = $GLOBALS["sql"]->prepare("UPDATE `invite_keys` SET `uses` = `uses` + 1 WHERE `key` = ?");
+                                            $statement = $sql->prepare("UPDATE `invite_keys` SET `uses` = `uses` + 1 WHERE `key` = ?");
                                             $statement->execute([$information["invite_key"]]);
                                         }
                                     }
@@ -279,11 +281,11 @@
                                 $password = _crypt($password); // dumb 2-step cryption: plaintext -> argon -> crypt
 
                                 // Create account
-                                $statement = $GLOBALS["sql"]->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`, `permissions`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                $statement = $sql->prepare("INSERT INTO `users` (`username`, `password`, `email`, `register_ip`, `last_ip`, `money`, `joindate`, `avatar`, `email_verified`, `preferences`, `last_reward`, `permissions`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 $statement->execute([$username, $password, $email, $ip, $ip, 100, time(), $avatar, 0, $preferences, time(), $permissions]);
 
                                 // Get user
-                                $statement = $GLOBALS["sql"]->prepare("SELECT * FROM `users` WHERE `username` = ?");
+                                $statement = $sql->prepare("SELECT * FROM `users` WHERE `username` = ?");
                                 $statement->execute([$username]);
                                 $result = $statement->fetch(PDO::FETCH_ASSOC);
 
