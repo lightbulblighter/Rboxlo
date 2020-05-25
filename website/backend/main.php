@@ -26,8 +26,22 @@
     }
 
     // .ROBLOSECURITY is tied to the session, but does not have session "logged in" details
-    $_SESSION["roblox"] = hash("sha512", strtoupper(bin2hex(random_bytes(585))));
-    setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
+    $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(585)));
+    if (!isset($_COOKIE[".ROBLOSECURITY"]))
+    {
+        setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
+        $_COOKIE["ROBLOSECURITY"] = $_SESION["roblox"];
+    }
+    else
+    {
+        if ($_SESSION["roblox"] !== $_COOKIE["ROBLOSECURITY"])
+        {
+            // regen
+            $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(585)));
+            setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
+            $_COOKIE["ROBLOSECURITY"] = $_SESSION["roblox"];
+        }
+    }
 
     date_default_timezone_set(ENVIRONMENT["TIMEZONE"]);
 
