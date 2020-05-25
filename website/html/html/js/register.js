@@ -1,5 +1,7 @@
 function form_register()
 {
+    grecaptcha.execute()
+
     var information = {
         username: $("#username").val(),
         password: $("#password").val(),
@@ -50,8 +52,6 @@ $(function()
         $(".register-input").attr("disabled", "disabled")
 
         e.preventDefault()
-
-        grecaptcha.execute()
         form_register()
     })
 })
