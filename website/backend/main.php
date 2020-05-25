@@ -30,7 +30,7 @@
     if (!isset($_COOKIE[".ROBLOSECURITY"]))
     {
         setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
-        $_COOKIE["ROBLOSECURITY"] = $_SESION["roblox"];
+        $_COOKIE["ROBLOSECURITY"] = $_SESSION["roblox"];
     }
     else
     {
