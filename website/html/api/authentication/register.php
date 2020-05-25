@@ -267,7 +267,7 @@
                                     "admin" => [
                                         "moderation" => [
                                             "onsite" => false,
-                                            "ingame" => false,
+                                            "ingame" => false
                                         ],
                                         "panel" => false,
                                         "deploy_versions" => false,
