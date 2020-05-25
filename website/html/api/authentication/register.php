@@ -262,7 +262,7 @@
                                 ]);
 
                                 // permissions
-                                $permissions = [
+                                $permissions = json_encode([
                                     "communication" => true, // ssc
                                     "admin" => [
                                         "moderation" => [
@@ -273,7 +273,7 @@
                                         "deploy_versions" => false,
                                         "see_errors" => false
                                     ]
-                                ];
+                                ]);
 
                                 // Crypt
                                 $email = _crypt($email);
@@ -294,11 +294,11 @@
                                 $_SESSION["user"]["password"] = ""; // dont keep the hash in session just in case
 
                                 // Copy default thumbnail for this user
-                                copy($_SERVER["DOCUMENT_ROOT"] . "/../data/thumbnails/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "" . $_SESSION["user"]["id"] . ".png");
+                                copy($_SERVER["DOCUMENT_ROOT"] . "/../data/thumbnails/users/0.png", $_SERVER["DOCUMENT_ROOT"] . "/../data/thumbnails/users/" . $_SESSION["user"]["id"] . ".png");
                                 
                                 // Return success
                                 $success = true;
-                                $message = "Welcome to ". BASE_NAME .", ". $username ."! Redirecting you to your dashboard...";
+                                $message = "Welcome to ". ENVIRONMENT["PROJECT"]["NAME"] .", ". $username ."! Redirecting you to your dashboard...";
                             }
                         }
                     }
