@@ -80,6 +80,14 @@ footer.page-footer a {
 	background-size: 88px 88px;
 }
 
+/* sticky footer */
+#footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+}
+
 /* embedresponsively */
 .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
