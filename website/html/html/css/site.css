@@ -80,12 +80,11 @@ footer.page-footer a {
 	background-size: 88px 88px;
 }
 
-/* sticky footer */
-#footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	width: 100%;
+.sticky-footer {
+	position: fixed !important;
+	left: 0px !important;
+	bottom: 0px !important;
+	width: 100% !important; /* I love !important! */
 }
 
 /* embedresponsively */
