@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo"></p>
+<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/banner.png" alt="Logo"></p>
 
 <p align="center">
 
