@@ -21,15 +21,15 @@
                 <h3 class="font-weight-bold">It looks like you're new here!</h3>
 
                 <p class="text-justify">
-                    Before playing on Rboxlo, you should know that Rboxlo is a fan-made revival of Roblox, created using publicly available downloads and information made freely available to the general public.
+                    Before playing on <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>, you should know that <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is a fan-made revival of Roblox, created using publicly available downloads and information made freely available to the general public.
                 </p>
                 
                 <p class="text-justify">
-                    By accessing the Rboxlo website, you certify that you understand that Rboxlo is not affiliated with Roblox Corporation and you hereby release Roblox Corporation, as well as any employees or agents of Roblox Corporation, from any and all liability, corporate, or personal loss caused to you or others by the use of Rboxlo.
+                    By accessing the <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> website, you certify that you understand that <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is not affiliated with Roblox Corporation and you hereby release Roblox Corporation, as well as any employees or agents of Roblox Corporation, from any and all liability, corporate, or personal loss caused to you or others by the use of <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>.
                 </p>
                 
                 <p class="text-justify">
-                    You also understand that Rboxlo is dedicated to the public domain, and that Rboxlo is an entirely free game, funded out of pocket by its staff members. This game contains no subscriptions, advertisements, donations, or any other forms of revenue.
+                    You also understand that <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is dedicated to the public domain, and that <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?> is an entirely free game, funded out of pocket by its staff members. This game contains no subscriptions, advertisements, donations, or any other forms of revenue.
                 </p>
             </div>
 
