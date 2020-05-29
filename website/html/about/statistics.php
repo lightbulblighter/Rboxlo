@@ -1,5 +1,6 @@
 <?php 
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
+	open_database_connection($sql);
 ?>
 
 <!DOCTYPE HTML>
@@ -84,6 +85,7 @@
         </div>
 
 		<?php
+			close_database_connection($sql, $statement);
 			build_footer();
 		?>
 	</body>
