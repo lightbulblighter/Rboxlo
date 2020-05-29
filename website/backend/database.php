@@ -1,6 +1,8 @@
 <?php
     function open_database_connection(&$database)
     {
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/sql.environment.php"); // Only load in sql credentials if attempting to create a connection
+        
         try
         {
             $database = new PDO("mysql:host=". ENVIRONMENT["SQL"]["HOST"] .";port=". ENVIRONMENT["SQL"]["PORT"] .";dbname=". ENVIRONMENT["SQL"]["DATABASE"], ENVIRONMENT["SQL"]["USERNAME"], ENVIRONMENT["SQL"]["PASSWORD"]);

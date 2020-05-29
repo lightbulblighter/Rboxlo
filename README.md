@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/cool_backdrop.png" alt="Logo"></p>
+<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/banner.png" alt="Logo"></p>
 
 <p align="center">
 
@@ -30,9 +30,20 @@ Some distinct features about Rboxlo:
  - Repository is under UNLICENSE, meaning that anybody can modify and re-distribute the code however they please
  - All staff actions are [audited](https://www.rboxlo.xyz/audits/), as the lack of transparency is slowly becoming more and more of an issue within the old Roblox community
 
-# Contributing
+# Copyright
 
-Rboxlo was created with the mission of being as open source as possible, and we would like to uphold that mission by licensing Rboxlo under the Unlicense. The Unlicense allows anyone to modify and distribute the code as they please; so feel free to fork the project! There are no restrictions imposed on you if you do so.
+## License
+In our `LICENSE` file, we define Rboxlo as software dedicated and released into the public domain, and we waive any copyright from the project's source files. Our license file is based off of the [Unlicense.](https://unlicense.org/)
+
+## Roblox Copyrighted Content
+No Roblox copyrighted works can be found on here (besides parodies of the official Roblox logo, past or present), meaning you cannot find any Roblox game executables here. On our official website, all Roblox executables hosted there are based off of files made available by Roblox Corporation to the general public, and were not obtained illegally. All contribution made here was not made with the motive of monetary gain; it was simply to make a better Roblox. Should Roblox send us a DMCA, or a Cease and Desist, we will remove the offending items in particular. If they say to take down the website, the website will be taken down. If we have to delete this repository, we shall take this repository down.
+
+This project is for educational purposes only.
+
+## Copyrighted Content Onsite
+Rboxlo's infrastructure relies heavily on user content creation, and we understand that some times users may not fully understand copyright laws. That is why we ask that any person(s) finding copyrighted material onsite should submit an E-Mail to copyright@rboxlo.xyz containing a URL for the offending material in particular and we will remove it as soon as possible, with moderation taken on user.
+
+# Contributing
 
 If you find any problem(s) in Rboxlo, feel free to submit an issue. This includes stuff like vulnerabilities, or even the most trivial issues (such as typoes.)
 
@@ -40,15 +51,15 @@ If you know how to fix an issue, feel free to make a pull request for the issue.
 
 If you would like to suggest a feature or change, submit it as an issue as well; it will be given the appropriate tag once we have seen it.
 
-This repository is for educational purposes only.
+We ask that all pull request authors add this paragraph to the end of their contribution's details so as to retain Rboxlo as 100% public domain software.
 
-# Regarding Roblox executables
-
-Rboxlo is written in many different languages, such as JavaScript and PHP. We would like to make some things clear about this repository, however:
- - There are no Roblox proprietary works located here
- - There are no Roblox executables here, meaning that there are also no Rboxlo downloads here, nor are there RCCService downloads
-
-We will only publish works that we ourselves have made on this repository.
+```
+I dedicate any and all copyright interest in this software to the
+public domain. I make this dedication for the benefit of the public at
+large and to the detriment of my heirs and successors. I intend this
+dedication to be an overt act of relinquishment in perpetuity of all
+present and future rights to this software under copyright law.
+```
 
 # Fair Use
 

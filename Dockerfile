@@ -20,9 +20,11 @@ COPY .git/refs/heads/master /var/www/packaging/hash
 
 COPY php.ini /usr/local/etc/php
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY locations.conf /etc/nginx/snippets/locations.conf
-COPY domains.conf /etc/nginx/snippets/domains.conf
+COPY website/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY website/nginx/locations.conf /etc/nginx/snippets/locations.conf
+COPY website/nginx/domains.conf /etc/nginx/snippets/domains.conf
+COPY website/nginx/blog.conf /etc/nginx/snippets/blog.conf
+COPY website/nginx/git.conf /etc/nginx/snippets/git.conf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

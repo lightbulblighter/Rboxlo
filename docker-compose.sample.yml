@@ -3,7 +3,7 @@ services:
   db:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: YOUR_MYSQL_PASSWORD_GOES_HERE_AND_IS_DEFINED_THE_SAME_IN_ENVIRONMENT_DOT_PHP
+      MYSQL_ROOT_PASSWORD:
     ports:
       - "3306:3306"
   rboxlo:

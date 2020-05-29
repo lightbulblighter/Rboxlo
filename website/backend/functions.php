@@ -107,10 +107,10 @@
             $host .= "s";
         }
 
-        return $host . "://". $_SERVER["HTTP_HOST"];
+        return $host . "://". $_SERVER["HTTP_HOST"]; // it is not guranteed www is in the host
     }
 	
-	function get_version() // Only hash is Docker-specific
+	function get_version()
 	{
 		$version = "";
 		
@@ -124,7 +124,7 @@
 		
 		if ($hash) 
 		{
-			$version .= "-" .$hash ." (Docker)";
+			$version .= "-" .$hash ." (Docker)"; // Only hash is Docker-specific
 		}
 		
         if ($version)

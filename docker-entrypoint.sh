@@ -11,6 +11,13 @@ if [ ! -e /var/www/data/environment.php ]; then
   exit 1
 fi
 
+if [ ! -e /var/www/data/sql.environment.php ]; then
+  echo "/var/www/data/sql.environment.php not found, creating..."
+  cp -r /var/www/data/sql.environment.sample.php /var/www/data/sql.environment.php
+  echo "Please edit this file with your SQL database information."
+  exit 1
+fi
+
 if [ ! -e /var/www/data/key.pem ]; then
   echo "/var/www/data/key.pem not found, creating..."
   cp -r /var/www/data/key.sample.pem /var/www/data/key.pem

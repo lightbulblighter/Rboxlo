@@ -307,6 +307,7 @@
         }
     }
 
+    close_database_connection($sql, $statement);
     exit(json_encode([
         "success" => $success,
         "message" => $message

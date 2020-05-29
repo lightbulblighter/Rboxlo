@@ -2,15 +2,7 @@
     /* 
         This is the project's environment file. Configure this for your environment.
         The details below should provide a thorough explanation on how to configure your environment to run Rboxlo.
-
-        >>>> Database
-
-        SQL["USERNAME"] => The username for the user that has *full* read/write access to the project's database.
-        SQL["PASSWORD"] => The password for the database's user.
-        SQL["DATABASE"] => The database's name.
-        SQL["HOSTNAME"] => The IP address where the database is hosted.
-        SQL["PORT"] => The port of the IP in which the database is hosted.
-
+        
         >>> Google
 
         =========================>
@@ -57,15 +49,6 @@
     */
     
     define("ENVIRONMENT", [ 
-
-        "SQL" => [
-            "USERNAME" => "root",
-            "PASSWORD" => "",
-            "DATABASE" => "rboxlo",
-            "HOST"     => "db",
-            "PORT"     => "3306"
-        ],
-
         "GOOGLE" => [
             "ANALYTICS_TAG" => "",
             "RECAPTCHA" => [
