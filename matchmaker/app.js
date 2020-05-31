@@ -2,7 +2,6 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mogarn = require("morgan");
 const mysql = require("mysql2");
 const config = require("./config.json");
 
@@ -16,10 +15,14 @@ var connection = mysql.createPool({
 })
 
 // Init express
-var app = exprexx.createServer()
+var app = express.createServer()
 app.use(bodyParser.json())
 
 // Matchmaker route
 app.post("/arrange", (req, res) => {
     // TODO
 })
+
+// Finish
+app.listen(config.port);
+console.log(`Rboxlo matchmaker listening on port ${config.port}`);
