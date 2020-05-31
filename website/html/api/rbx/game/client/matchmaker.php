@@ -39,9 +39,6 @@
     $game = $statement->fetch(PDO::FETCH_ASSOC);
     $game_rowcount = $games->rowCount();
 
-    close_database_connection($sql, $statement); // We're done with database stuff here, lets close it early
-                                                 // so that the matchmaker doesn't potentially error.
-
     if ($games_rowcount <= 0)
     {
         exit(json_encode([
@@ -86,6 +83,9 @@
             "payload" => $payload
         ]));
     }
+
+    close_database_connection($sql, $statement); // We're done with database stuff here, lets close it early
+                                                 // so that the matchmaker doesn't potentially error.
 
     if ($pass)
     {
