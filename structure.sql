@@ -70,9 +70,9 @@ CREATE TABLE `friends` (
 
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
-  `full_id` text NOT NULL,
+  `place_id` text NOT NULL,
+  `guid` text NOT NULL,
   `name` text NOT NULL,
-  `creator` int(11) NOT NULL,
   `created` int(11) NOT NULL,
   `last_updated` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

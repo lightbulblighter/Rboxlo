@@ -80,7 +80,7 @@
         "SuperSafeChat" => false,
         "CharacterAppearance" => "http://api.". BASE_URL ."/v1.1/avatar-fetch/?placeId=". $place["id"] ."&userId=". $user["id"],
         "ClientTicket" => "",
-        "GameId" => $game["full_id"],
+        "GameId" => $game["guid"],
         "PlaceId" => $place["id"],
         "MeasurementUrl" => "", // No telemetry here :)
         "WaitingForCharacterGuid" => get_random_guid(),
@@ -99,9 +99,9 @@
         "IsRobloxPlace" => false,
         "GenerateTeleportJoin" => false,
         "IsUnknownOrUnder13" => false, // You have to be 13+ to sign up...
-        "SessionId" => $session_id . "|" . $game["full_id"] . "|" . $place["id"] . "|". get_user_ip() . "|0|". $exact_time . "|0|null|null|0|0|0",
+        "SessionId" => $session_id . "|" . $game["guid"] . "|" . $place["id"] . "|". get_user_ip() . "|0|". $exact_time . "|0|null|null|0|0|0",
         "DataCenterId" => 0,
-        "UniverseId" => 0,
+        "UniverseId" => $place["id"],
         "BrowserTrackerId" => 0,
         "UsePortraitMode" => false,
         "FollowUserId" => 0,
