@@ -119,7 +119,7 @@
         ];
 
         $context = stream_context_create($options);
-        $result = file_get_contents(ENVIRONMENT["GAMESERVER"]["MATCHMAKER"], false, $context);
+        $result = file_get_contents(ENVIRONMENT["GAMESERVER"]["MATCHMAKER"] . "/arrange", false, $context);
 
         // Parse matchmaker result
         try
