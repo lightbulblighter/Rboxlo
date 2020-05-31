@@ -17,69 +17,10 @@
 	</head>
 	<body>
 		<?php
-			build_js();
 			build_navigation_bar();
 		?>
-
-		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-		<script type="text/javascript">
-			function form_login()
-			{
-				var information = {
-					username: $("#username").val(),
-					password: $("#password").val(),
-					csrf: "<?php echo($_SESSION["csrf"]); ?>"
-				}
-
-				endpoint("/authentication/login", "POST", information, (response) =>
-				{
-					toastr.options = {
-						"closeButton": !response.success,
-						"timeOut": response.success ? 2000 : 5000
-					}
-
-					toastr[response.success ? "success" : "error"](response.message, response.success ? "Success!" : "An error occurred.")
-
-					if (response.success)
-					{
-						setTimeout(function()
-						{
-							window.history.back() // if called from studio or etc, we need to go back
-						}, 2000)
-					}
-					else
-					{
-						$("#submit").removeAttr("disabled", "disabled")
-
-						$("#username").removeAttr("readonly")
-						$("#password").removeAttr("readonly")
-					}
-				})
-			}
-
-			$('form input:not([type="submit"])').keypress(function (e)
-			{
-				if (e.keyCode == 13)
-				{
-					e.preventDefault()
-					return false
-				}
-			})
-
-			$(function()
-			{
-				$("#login-form").on("submit", function(e) {
-					$("#submit").attr("disabled", "disabled")
-					
-					$("#username").attr("readonly", "readonly")
-					$("#password").attr("readonly", "readonly")
-
-					e.preventDefault()
-					form_login()
-				})
-			})
-		</script>
+		
+		<script type="text/javascript" src="<?php echo(get_server_host()); ?>/html/js/login.min.js" async defer></script>
 
         <div class="container clear-top wrapper">
 			<div class="row flex-center">

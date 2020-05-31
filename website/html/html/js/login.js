@@ -3,13 +3,10 @@ function form_register()
     var information = {
         username: $("#username").val(),
         password: $("#password").val(),
-        email: $("#email").val(),
-        confirmed_password: $("#confirmed_password").val(),
-        recaptcha: grecaptcha.getResponse(),
         csrf: $("meta[name='csrf-token']").attr("content")
     }
 
-    endpoint("/authentication/register", "POST", information, (response) =>
+    endpoint("/authentication/login", "POST", information, (response) =>
     {
         toastr.options = {
             "closeButton": !response.success,
@@ -22,12 +19,11 @@ function form_register()
         {
             setTimeout(function()
             {
-                location.replace("/my/dashboard")
+                window.history.back()
             }, 2000)
         }
         else
         {
-            $(".register-checkbox").removeAttr("disabled", "disabled")
             $(".register-input").removeAttr("readonly, readonly")
             $(".register-input").removeAttr("disabled", "disabled")
         }
@@ -46,12 +42,10 @@ $('form input:not([type="submit"])').keypress(function (e)
 $(function()
 {
     $("#register-form").on("submit", function(e) {
-        $(".register-checkbox").attr("disabled", "disabled")
         $(".register-input").attr("readonly, readonly")
         $(".register-input").attr("disabled", "disabled")
 
         e.preventDefault()
-        grecaptcha.execute()
         form_register()
     })
 })

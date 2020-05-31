@@ -80,17 +80,6 @@ footer.page-footer a {
 	background-size: 88px 88px;
 }
 
-.sticky-footer {
-	position: relative;
-	margin-top: -195px; /* negative value of footer height */
-	clear:both;
-	padding-top: 20px;
-}
-.wrapper {
-	min-height: 100%;
-	overflow: auto;
-	padding-bottom: 300px;
-}
 html, body {
 	height: 100%;
 }

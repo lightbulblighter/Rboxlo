@@ -22,14 +22,13 @@
 	</head>
 	<body>
 		<?php
-			build_js();
 			build_navigation_bar();
 		?>
 
 		<script type="text/javascript" src="<?php echo(get_server_host()); ?>/html/js/register.min.js" async defer></script>
 		<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-		<div class="container clear-top wrapper">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>"/></h1><hr/>

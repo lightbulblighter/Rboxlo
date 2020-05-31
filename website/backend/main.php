@@ -43,8 +43,6 @@
         }
     }
 
-    date_default_timezone_set(ENVIRONMENT["TIMEZONE"]);
-
     // this code block is a mess LOL
     if (!ENVIRONMENT["PROJECT"]["DEBUGGING"])
     {

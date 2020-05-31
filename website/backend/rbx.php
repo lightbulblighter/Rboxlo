@@ -49,7 +49,25 @@
         return file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../backend/rbx/$version/fastflags/$application.json");
     }
 
-    function create_job($ip, $id, $information)
+    function create_job_id()
+    {
+        // b5ae2fef-8c2b-4c2d-8e35-350404af5c49
+        // \______/-\__/-\__/-\__/-\__________/
+        //  8        4    4    4    12
+
+        // This function could be cleaned up a bit using for loops, but it looks neater
+        // this way.
+        
+        $id = bin2hex(random_bytes(4)) . "-";
+        $id .= bin2hex(random_bytes(2)) . "-";
+        $id .= bin2hex(random_bytes(2)) . "-";
+        $id .= bin2hex(random_bytes(2)) . "-";
+        $id .= bin2hex(random_bytes(6));
+
+        return $id;
+    }
+
+    function open_job($ip, $id, $information)
     {
         soap_send_envelope($ip, "OpenJob", soap_get_envelope("OpenJob", [
             [

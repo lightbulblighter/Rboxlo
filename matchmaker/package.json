@@ -1,0 +1,17 @@
+{
+    "name": "rboxlo-matchmaker",
+    "version": "1.0.0",
+    "description": "The matchmaker for arranging and connecting to Rboxlo gameservers.",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "lightbulblighter",
+    "private": false,
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "morgan": "^1.10.0",
+        "mysql2": "^2.1.0"
+    }
+}

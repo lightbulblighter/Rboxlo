@@ -158,11 +158,6 @@
     {
         echo("<script type=\"text/javascript\">console.log(". $string . ");</script>");
     }
-
-    function send_verify_request_captcha(array $query = [])
-    {
-
-    }
     
     function verify_response_captcha($response, $ip)
     {

@@ -1,3 +1,3 @@
-[submodule "website/backend/PHPMailer"]
-	path = website/backend/PHPMailer
+[submodule "website/backend/modules/PHPMailer"]
+	path = website/backend/modules/PHPMailer
 	url = https://github.com/PHPMailer/PHPMailer

@@ -7,9 +7,8 @@
     }
 </script>
 
-<div class="modal-backdrop fade show"></div>
-<div class="modal fade show" style="display: block" id="consentModal" tabindex="-1" role="dialog" aria-labelledby="consentLabel" aria-hidden="false" aria-modal="true">
-	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+<div class="modal fade" id="consentModal" tabindex="-1" role="dialog" aria-labelledby="consentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 			    <div class="modal-title mx-auto">
@@ -45,4 +44,8 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+    $("#consentModal").modal("show");
+</script>
 <!-- Consent form end -->

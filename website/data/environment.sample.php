@@ -42,9 +42,13 @@
 
         This will usually be set up as a Yandere mailserver.
 
+        >>> Gameserver
+
+        GAMESERVER["IPS"] => An array containing valid IP addresses for gameservers.
+        GAMESERVER["MATCHMAKER"] => The IP address for the matchmaker.
+        
         >>> Miscallaneous
 
-        TIMEZONE => A string indicating the timezone that the server is being hosted in.
         VALID_EMAIL_DOMAINS => An array containing the valid E-Mail domains that a user can sign up with (for example, with john@gmail.com, @gmail.com is the E-Mail domain)
     */
     
@@ -86,7 +90,14 @@
             "FULL_NAME" => "lightbulblighter/Rboxlo"
         ],
 
-        "TIMEZONE" => "America/Chicago",
+        "GAMESERVER" => [
+            "IPS" => [
+                "127.0.0.1",
+                "localhost"
+            ],
+            "MATCHMAKER" => "127.0.0.1:3000"
+        ],
+
         "VALID_EMAIL_DOMAINS" => ["rboxlo.xyz", "google.com", "protonmail.ch", "googlemail.com", "gmail.com", "yahoo.com", "yahoomail.com", "protonmail.com", "outlook.com", "hotmail.com", "microsoft.com", "inbox.com", "mail.com", "zoho.com"]
     ]);
 ?>

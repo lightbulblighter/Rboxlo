@@ -1,4 +1,4 @@
-<footer class="page-footer center-on-small-only stylish-color-dark sticky-footer">
+<footer class="page-footer center-on-small-only stylish-color-dark">
 	<div class="container pt-0 pb-4">
 		<img src="<?php echo(get_server_host()); ?>/html/img/logos/2016/full.png" align="center" class="mx-auto d-block mb-3 mt-0 img-fluid" width="200">
 		<hr class="border-light-grey">
@@ -19,3 +19,42 @@
 		</div>
 	</div>
 </footer>
+
+<?php
+	build_js();
+?>
+
+<!-- Begin consent documents -->
+<!-- Begin cookie consent -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+window.cookieconsent.initialise({
+	"palette": {
+		"popup": {
+			"background": "#ffffff",
+			"text": "#212529"
+		}
+    },
+
+    "button": {
+    	"background": "#6f42c1",
+    	"text": "#ffffff"
+    },
+
+	"content": {
+		"href": "https://www.cookiepolicygenerator.com/live.php?token=Fdqho7wVRjAStnQAVbUsdIiT8UmsTOzR"
+	},
+
+	"theme": "classic",
+	"position": "bottom-right",
+});
+</script>
+<!-- End cookie consent -->
+
+<?php
+    if (!isset($_COOKIE["consent"]) || empty($_COOKIE["consent"]) || $_COOKIE["consent"] != "true" || $_COOKIE["consent"] != true)
+    {
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/components/consent.php");
+    }
+?>
+<!-- End consent documents -->
