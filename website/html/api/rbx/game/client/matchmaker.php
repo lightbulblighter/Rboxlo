@@ -50,7 +50,7 @@
     $game = $statement->fetch(PDO::FETCH_ASSOC);
     $game_rowcount = $statement->rowCount();
     
-    if ($games_rowcount <= 0)
+    if ($game_rowcount <= 0)
     {
         exit(json_encode([
             "success" => false,
@@ -63,7 +63,7 @@
     $place = $statement->fetch(PDO::FETCH_ASSOC);
     $place_rowcount = $statement->rowCount();
 
-    if ($games_rowcount <= 0)
+    if ($place_rowcount <= 0)
     {
         exit(json_encode([
             "success" => false,
