@@ -150,5 +150,11 @@
         $job = $statement->fetch(PDO::FETCH_ASSOC);
 
         match($place, $job);
+
+        // Close again. lol
+        close_database_connection($sql, $statement);
     }  
+
+    // Just in case!
+    close_database_connection($sql, $statement);
 ?>
