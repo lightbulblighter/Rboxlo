@@ -1,5 +1,5 @@
 <?php 
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/html.php");
 ?>
 
 <!DOCTYPE HTML>

@@ -7,7 +7,6 @@
     function build_navigation_bar()
     {
         require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/components/navigation_bar.php");
-        require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/components/news.php");
     }
 
     function build_header($page_name = "")
