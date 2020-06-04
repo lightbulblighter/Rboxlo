@@ -30,7 +30,7 @@
 				<div class="col-md-6 text-center text-md-left mb-5">
                     <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?= ENVIRONMENT["PROJECT"]["NAME"] ?>"/></h1><hr/>
 					<h6 style="line-height: 1.5em"><?= ENVIRONMENT["PROJECT"]["NAME"] ?> is a recreation of a very popular online brick building game. Only <?= ENVIRONMENT["PROJECT"]["NAME"] ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
-					<div class="embed-container"><iframe src="https://www.youtube.com/embed/Q8hp2IkI2es" frameborder="0" allowfullscreen></iframe></div>
+					<div class="embed-container"><iframe src="https://www.youtube.com/embed/_bVD9y-flOA" frameborder="0" allowfullscreen></iframe></div>
 				</div>
 				<div class="col-md-6">
 					<div class="card">
