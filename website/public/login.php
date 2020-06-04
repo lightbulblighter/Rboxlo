@@ -20,7 +20,7 @@
 			build_navigation_bar();
 		?>
 
-        <div class="container clear-top wrapper">
+        <div class="container">
 			<div class="row flex-center">
 				<div class="card" style="width: 40rem">
 					<div class="card-header purple accent-3 white-text">
