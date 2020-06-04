@@ -9,7 +9,6 @@ docker-entrypoint.custom.sh
 
 # Node.js
 # Logs
-logs
 *.log
 npm-debug.log*
 yarn-debug.log*

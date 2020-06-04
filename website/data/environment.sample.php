@@ -10,7 +10,8 @@
         ==> Make sure that the reCAPTCHA keys are Invisible reCAPTCHA v2 keys.
         =========================>
 
-        GOOGLE["ANALYTICS_TAG"] => The Google Analytics tag for this website. Leave it blank if you don't want analytics.
+        GOOGLE["ANALYTICS"]["ENABLED"] => Whether to use Google Analytics or not.
+        GOOGLE["ANALYTICS"]["TAG"] => The Google Analytics tag for this website. Leave it blank if you don't want analytics.
         GOOGLE["RECAPTCHA"]["PUBLIC_KEY"] => (AKA SITE KEY) The reCAPTCHA public key. This can be obtained from the reCAPTCHA admin console.
         GOOGLE["RECAPTCHA"]["PRIVATE_KEY"] => (AKA SECRET KEY) The reCAPTCHA private key. This can be obtained from the reCAPTCHA admin console.
 
@@ -26,7 +27,8 @@
         SECURITY["CRYPT"]["KEY"] => The private cryption key that will be used to protect user details.
                                     ** DO NOT LET THIS LEAK . ** If you make this information public, should your database get compromised, the protection becomes useless.
         SECURITY["CRPYT"]["HASH"] => The default hashing algorithm for user information encryption. The default is sha512. Do not change it.
-        SECURITY["PASSWORD"] => The password hashing algorithm. Default is Argon2id
+        SECURITY["PASSWORD"]["MACHINE"] => The password hashing algorithm, in PHP/machine readable format. Refer to https://www.php.net/manual/en/function.password-hash.php
+        SECURITY["PASSWORD"]["HUMAN"] => The password hashing algorithm, in human readable format. Refer to https://www.php.net/manual/en/function.password-get-info.php
         SECURITY["SIGNATURES"] => *** DO NOT CHANGE THIS. *** This reads from key.pem which is in the same folder as this file. Change the contents within that file to a base64 encoded private key.
         
         >>> Repository
@@ -35,12 +37,14 @@
         REPOSITORY["NAME"] => The name of the repository. <repository_name>
         REPOSITORY["FULL_NAME"] => The full name of the repository. <owner>/<repository/name>
 
-        >>> Official E-Mail Account Credentials
+        >>> E-Mail Verification
 
         EMAIL["ADDRESS"] => The E-Mail address of the official account that sends verification messages.
         EMAIL["PASSWORD"] => The password for said E-Mail address.
+        EMAIL["SERVER"]["ADDRESS"] => The address for the E-Mail SMTP server.
+        EMAIL["SERVER"]["PORT"] => The port for the E-Mail SMTP server.
 
-        This will usually be set up as a Yandere mailserver.
+        Rboxlo is built to use a Yandex mailserver, so usually that will work best.
 
         >>> Gameserver
 
@@ -54,7 +58,10 @@
     
     define("ENVIRONMENT", [ 
         "GOOGLE" => [
-            "ANALYTICS_TAG" => "",
+            "ANALYTICS" => [
+                "ENABLED" => false,
+                "TAG" => ""
+            ],
             "RECAPTCHA" => [
                 "PUBLIC_KEY" => "",
                 "PRIVATE_KEY" => ""
@@ -64,7 +71,7 @@
         "PROJECT" => [
             "NAME" => "Rboxlo",
             "CURRENCY" => "Rbux",
-            "DISCORD" => "https://discord.gg/W5eCJk9",
+            "DISCORD" => "",
             "INVITE_ONLY" => false,
             "DEBUGGING" => true
         ],
@@ -75,13 +82,20 @@
                 "ENCRYPTION" => "aes-256-cbc",
                 "KEY" => ""
             ],
-            "PASSWORD" => PASSWORD_ARGON2ID,
+            "PASSWORD" => [
+                "MACHINE" => PASSWORD_ARGON2ID,
+                "HUMAN" => "argon2id"
+            ],
             "SIGNATURES" => file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/key.pem")
         ],
 
         "EMAIL" => [
             "ADDRESS" => "",
-            "PASSWORD" => ""
+            "PASSWORD" => "",
+            "SERVER" => [
+                "ADDRESS" => "",
+                "PORT" => 587
+            ]
         ],
 
         "REPOSITORY" => [

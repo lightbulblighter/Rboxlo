@@ -11,8 +11,8 @@ RUN docker-php-ext-install mysqli
 RUN rm -rf /var/www/*
 RUN mkdir /run/nginx
 
-COPY website/html /var/www/html
-COPY website/backend /var/www/backend
+COPY website/public /var/www/html
+COPY website/application /var/www/application
 COPY website/data /var/www/data
 
 COPY packaging/version /var/www/packaging/version
@@ -23,8 +23,8 @@ COPY webiste/php.ini /usr/local/etc/php
 COPY website/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY website/nginx/locations.conf /etc/nginx/snippets/locations.conf
 COPY website/nginx/domains.conf /etc/nginx/snippets/domains.conf
-COPY website/nginx/blog.conf /etc/nginx/snippets/blog.conf
-COPY website/nginx/git.conf /etc/nginx/snippets/git.conf
+COPY website/nginx/listeners.conf /etc/nginx/snippets/listeners.conf
+COPY website/nginx/custom.conf /etc/nginx/snippets/custom.conf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

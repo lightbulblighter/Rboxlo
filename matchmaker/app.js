@@ -1,8 +1,8 @@
 // Rboxlo Matchmaker
 
-const express = require("express");
-const mysql = require("mysql2");
-const config = require("./config.json");
+const express = require("express")
+const mysql = require("mysql2")
+const config = require("./config.json")
 
 // Connect to database
 var connection = mysql.createPool({
@@ -19,19 +19,19 @@ app.use(express.json())
 
 // Utils
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 // Matchmaker
-app.post("/arrange", (req, res) => {
+app.post("/arrange", async function(req, res) {
     if (isNaN(req.body.id)) { 
         return res.json({"success": false, "reason": "Invalid game ID."})
     }
 
-    let counter = 0;
+    let counter = 0
 
     async function check(id) {
-        counter += 1;
+        counter += 1
 
         if (counter >= 5) {
             return res.json({"success": false, "reason": "Server failed to start."})
@@ -42,8 +42,8 @@ app.post("/arrange", (req, res) => {
         if (job.length) {
             return res.json({"success": true, "id": job[0].name})
         } else {
-            sleep(2000);
-            check(id);
+            await sleep(2000)
+            check(id)
         }
     }
 
@@ -51,5 +51,5 @@ app.post("/arrange", (req, res) => {
 })
 
 // Finish
-app.listen(config.port);
-console.log(`Rboxlo matchmaker listening on port ${config.port}`);
+app.listen(config.port)
+console.log(`Rboxlo matchmaker listening on port ${config.port}`)
