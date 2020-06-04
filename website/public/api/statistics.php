@@ -1,6 +1,8 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
 
+    header("Content-Type: text/plain");
+    
     exit(json_encode([
         "time" => time(),
         "cpu" => round(get_server_cpu_usage()),

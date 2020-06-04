@@ -1,6 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
     open_database_connection($sql);
+    header("Content-Type: text/plain");
 
     // The job of the matchmaker is to validate a few key components, and then pass this on to the matchmaker
     // which runs on port 3000. I could not find a non-nonsensical method of asynchronous matchmaking in PHP,

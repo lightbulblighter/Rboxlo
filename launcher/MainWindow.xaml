@@ -25,12 +25,12 @@
             </Canvas.RenderTransform>
         </Canvas>
         <ProgressBar x:Name="StatusProgressBar" HorizontalAlignment="Left" Height="15" Margin="62,38,0,0" VerticalAlignment="Top" Width="280" IsIndeterminate="True"/>
-        <Label x:Name="StatusText" Content="Downloading Rboxlo..." HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" Margin="57,8,0,0" VerticalAlignment="Top" Width="285" Foreground="#FF003399" FontSize="15" Height="30"/>
+        <Label x:Name="StatusText" Content="Initializing Rboxlo..." HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" Margin="57,8,0,0" VerticalAlignment="Top" Width="285" Foreground="#FF003399" FontSize="15" Height="30"/>
         <Image x:Name="StatusImage" Margin="0,14,299,22" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="Fant" Width="38">
             <Image.Source>
                 <BitmapImage x:Name="StatusBitmapImage" DecodePixelWidth="300" UriSource="/Resources/icon.png" />
             </Image.Source>
         </Image>
-        <Label Content="107 of 152.3 MiB" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"  Margin="223,21,0,36" FontSize="7" Width="123" Foreground="#FF9E9D9D"/>
+        <Label Name="DownloadSize"  Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"  Margin="223,21,0,36" FontSize="7" Width="123" Foreground="#FF9E9D9D"/>
     </Grid>
 </Window>

@@ -29,6 +29,7 @@ COPY website/nginx/custom.conf /etc/nginx/snippets/custom.conf
 COPY docker-entrypoint.sh /usr/local/bin/
 
 RUN ln -s /var/www/data/thumbnails /var/www/html/html/img/thumbnails
+RUN ln -s /var/www/data/setup /var/www/html/api/setup/files
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
