@@ -6,7 +6,7 @@
 <script type="text/javascript" src="<?= get_server_host() ?>/html/js/mdb-plugins-gathered.min.js"></script>
 <script type="text/javascript" src="<?= get_server_host() ?>/html/js/site.min.js"></script>
 <?php
-    if (ENIVRONMENT["GOOGLE"]["ANALYTICS"]["ENABLED"]):
+    if (ENVIRONMENT["GOOGLE"]["ANALYTICS"]["ENABLED"]):
 ?>
 <script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=<?= ENVIRONMENT["GOOGLE"]["ANALYTICS_TAG"] ?>"></script>
 <script type="text/javascript">
