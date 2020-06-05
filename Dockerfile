@@ -15,6 +15,10 @@ COPY website/public /var/www/html
 COPY website/application /var/www/application
 COPY website/data /var/www/data
 
+COPY website/public/* /var/www/html
+COPY website/application/* /var/www/application
+COPY website/data/* /var/www/data
+
 COPY packaging/version /var/www/packaging/version
 COPY .git/refs/heads/master /var/www/packaging/hash
 
