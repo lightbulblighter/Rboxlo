@@ -18,7 +18,7 @@ COPY website/data /var/www/data
 COPY packaging/version /var/www/packaging/version
 COPY .git/refs/heads/master /var/www/packaging/hash
 
-COPY webiste/php.ini /usr/local/etc/php
+COPY website/php.ini /usr/local/etc/php
 
 COPY website/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY website/nginx/locations.conf /etc/nginx/snippets/locations.conf
