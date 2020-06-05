@@ -1,5 +1,5 @@
 <?php
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     // I hate databases.
     $files = array_merge(glob($_SERVER["DOCUMENT_ROOT"] . "/../data/setup/launcher/*"));

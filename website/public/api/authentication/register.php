@@ -1,6 +1,6 @@
 <?php 
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
     open_database_connection($sql);
 
     // Defaults to an error
@@ -214,7 +214,7 @@
                             if (!$error)
                             {
                                 // hash pw
-                                $password = password_hash($password, ENVIRONMENT["SECURITY"]["PASSWORD"]);
+                                $password = password_hash($password, PASSWORD_ARGON2ID);
 
                                 // default wearing thing
                                 $avatar = json_encode([

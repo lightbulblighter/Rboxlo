@@ -32,6 +32,7 @@
         $script = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/assets/" . $id . ".corescript/". $version);
         $signature = get_signature($script);
 
+        // TODO: Before 2014(?), clients didn't have --rbxsig nor --rbxid. We need to fix this.
         echo("--rbxsig%". $signature ."%\n");
         echo("--rbxid%". $id ."%\n");
         echo(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/assets/" . $id . ".corescript/". $version));

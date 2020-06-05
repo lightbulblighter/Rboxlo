@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/rbx.php");
 
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     $version = "2017";
     

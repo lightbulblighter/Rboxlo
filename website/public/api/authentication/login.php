@@ -1,6 +1,6 @@
 <?php 
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
     open_database_connection($sql);
     
     // Defaults to an error
@@ -71,11 +71,11 @@
                 {
                     // See if password needs rehashing (I didn't use insecure hashing like md5 or sha1, this is to convert Argon2i hashes to Argon2id)
                     // Check commit history if you're skeptical ¯\_(ツ)_/¯
-                    if (password_get_info(_crypt($result["password"], "decrypt"))["algoName"] !== ENVIRONMENT["SECURITY"]["PASSWORD"]["HUMAN"])
+                    if (password_get_info(_crypt($result["password"], "decrypt"))["algoName"] !== "argon2id")
                     {
                         // Update
                         $statement = $sql->prepare("UPDATE `users` SET `password` = ? WHERE `id` = ?");
-                        $statement->execute([_crypt(password_hash($information["password"], ENVIRONMENT["SECURITY"]["PASSWORD"]["MACHINE"])), $result["id"]]);
+                        $statement->execute([_crypt(password_hash($information["password"], PASSWORD_ARGON2ID)), $result["id"]]);
                     }
 
                     $_SESSION["user"] = $result;

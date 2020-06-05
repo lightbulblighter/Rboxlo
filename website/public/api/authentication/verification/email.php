@@ -8,7 +8,7 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
 
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
     open_database_connection($sql);
 
     // Defaults to an error

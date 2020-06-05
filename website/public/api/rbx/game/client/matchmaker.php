@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../backend/includes.php");
     open_database_connection($sql);
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     // The job of the matchmaker is to validate a few key components, and then pass this on to the matchmaker
     // which runs on port 3000. I could not find a non-nonsensical method of asynchronous matchmaking in PHP,
@@ -34,6 +34,14 @@
         ]));
     }
 
+    if (!$_SESSION["user"]["email_verified"])
+    {
+        exit(jsonencode([
+            "success" => false,
+            "message" => "You need to verify your E-Mail address before you can play games."
+        ]));
+    }
+
     if (!is_int($_GET["id"]))
     {
         exit(json_encode([
@@ -45,6 +53,7 @@
     $pass = false; // Whether we should pass it to the matchmaker or not.
                    // If this is set to true, it will be passed and a result
                    // will be returned by the matchmaker.
+
     $game_id = filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT);
 
     $statement = $sql->prepare("SELECT * FROM `games` WHERE `id` = ? AND `deleted` = 0");

@@ -1,5 +1,5 @@
 <?php
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     // no moderation here :D
 

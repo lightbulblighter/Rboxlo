@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/rbx.php");
     open_database_connection($sql);
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     if (!isset($_GET["userId"]) || strlen($_GET["userId"]) <= 0 || !is_int((int)$_GET["userId"]))
     {

@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/rbx.php");
 
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
 
     // unlike other Settings/QuietGet endpoints, this *will* check if there is an apiKey
     // if there isn't, it errors

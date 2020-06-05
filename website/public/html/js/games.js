@@ -1,4 +1,4 @@
-function join(id, name) {
+function join(id) {
     Swal.fire({
         title: "Waiting for server...",
         allowOutsideClick: () => !Swal.isLoading(),

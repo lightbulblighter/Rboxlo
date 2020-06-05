@@ -1,6 +1,6 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/rbx.php");
-    header("Content-Type: text/plain");
+    header("Content-Type: application/json");
     
     $key = get_api_key($_GET["apiKey"]);
 
