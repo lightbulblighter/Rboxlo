@@ -38,7 +38,7 @@
                 {
                     $statement = $sql->prepare("SELECT `username` FROM `users` WHERE `id` = ?");
                     $statement->execute([$place["creator"]]);
-                    $user = $statement->fetch(PDO::FETCH_ASSOC);
+                    $user = $statement->fetch(PDO::FETCH_ASSOC);//a
 
                     echo("<a onclick='join(". $place["id"] .")'>". $place["name"] ." by ". $user["username"] ."</a>");
 				}
