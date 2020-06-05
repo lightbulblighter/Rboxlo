@@ -40,7 +40,7 @@
                     $statement->execute([$place["creator"]]);
                     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-                    echo("<a onclick='start_game(". $place["id"] .")'>". $place["name"] ." by ". $user["username"] ."</a>");
+                    echo("<a onclick='join(". $place["id"] .")'>". $place["name"] ." by ". $user["username"] ."</a>");
 				}
 				
 				close_database_connection($sql, $statement);
