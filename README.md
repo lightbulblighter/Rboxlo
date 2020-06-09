@@ -1,5 +1,9 @@
-<p align="center"><img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/banner.png" alt="Logo"></p>
-
+<p align="center">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/slideshow.gif" alt="Logo">
+<br>
+<i>a better Roblox revival, for the public </i>
+</p>
+<br>
 <p align="center">
 
 <a href="https://github.com/lighterlightbulb/Rboxlo/commits/master">
@@ -27,7 +31,7 @@ Rboxlo is a 100% open source, 100% transparent, not-for-profit Roblox private se
 Some distinct features about Rboxlo:
  - Open source
  - Roblox years 2007 through 2017
- - Repository is under UNLICENSE, meaning that anybody can modify and re-distribute the code however they please
+ - The source code is dedicated to the public domain, with all waiver of copyright, meaning that anybody can do what they please with the Rboxlo framework.
  - All staff actions are [audited](https://www.rboxlo.xyz/audits/), as the lack of transparency is slowly becoming more and more of an issue within the old Roblox community
 
 # Copyright
