@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/slideshow.gif" alt="Logo">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/slideshow.gif" alt="Logo" width="600">
 <br>
 <i>a better Roblox revival, for the public </i>
 </p>
