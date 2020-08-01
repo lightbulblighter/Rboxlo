@@ -17,10 +17,6 @@
 	<img src="https://img.shields.io/github/license/lighterlightbulb/Rboxlo" alt="GitHub License">
 </a>
 
-<a href="https://discordapp.com/widget?id=697904229372788807">
-	<img src="https://img.shields.io/discord/697904229372788807?logo=discord" alt="Discord">
-</a>
-
 </p>
 
 # Overview
