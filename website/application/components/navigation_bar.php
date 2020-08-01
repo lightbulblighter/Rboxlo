@@ -23,14 +23,14 @@
 				<a class="nav-link" href="/catalog/"><i class="material-icons">shopping_cart</i><span>Catalog</span></a>
             </li>
 
-            <?php if ($_SESSION["user"]["permissions"]["admin"]["panel"]): ?>
+            <?php if ($_SESSION["user"]["permissions"]["admin"]["see_panel"]): ?>
             
             <li class="nav-item">
 				<a class="nav-link" href="/admin/"><i class="material-icons">build</i><span>Admin</span></a>
             </li>
             
             <?php endif; ?>
-
+            
             <?php else: ?>
 
             <li class="nav-item">
@@ -38,6 +38,11 @@
             </li>
 
             <?php endif; ?>
+            
+            <?php
+                // so m any if statements call me yanderedev
+                if (!PROJECT["PRIVATE"]["LOCKDOWN"]):
+            ?>
 
             <li class="nav-item">
 				<a class="nav-link" href="/forums/"><i class="material-icons">forum</i><span>Forums</span></a>
@@ -46,17 +51,22 @@
 			<li class="nav-item">
 				<a class="nav-link" href="/blog/"><i class="material-icons">message</i><span>Blog</span></a>
             </li>
+
+            <?php
+                endif;
+            ?>
 		</ul>
 
 		<?php if (isset($_SESSION["user"])): ?>
 
 		<ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="Rbux">
+            <li class="nav-item mr-1" data-toggle="tooltip" data-placement="top" title="<?= PROJECT["CURRENCY"] ?>">
                <a href="/my/money" class="nav-link">
                     <i class="material-icons">attach_money</i>
                     
                     <?php
                         // get money
+                        // Ryelow COOL
                         open_database_connection($sql);
 
                         $statement = $sql->prepare("SELECT `money` FROM `users` WHERE `id` = ?");
@@ -66,15 +76,15 @@
                         close_database_connection($sql, $statement);
                     ?>
 
-                    <span class="money-text"><?php echo($money); ?></span>
+                    <span class="money-text"><?= $money ?></span>
                 </a>
             </li>
             
 			
             <li class="nav-item avatar dropdown">
 				<a class="nav-link dropdown-toggle waves-effect waves-light user-text" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-headshot mr-1" style="background-image: url(<?php echo(get_server_host()); ?>/html/img/thumbnails/users/<?php echo($_SESSION["user"]["id"]); ?>.png)">
-                    <b><?php echo($_SESSION["user"]["username"]); ?></b>
+                    <img class="user-headshot mr-1" style="background-image: url(<?= get_server_host() ?>/html/img/thumbnails/users/<?= $_SESSION["user"]["id"] ?>.png)">
+                    <b><?= $_SESSION["user"]["username"] ?></b>
                 </a>
 				
                 <div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-5">
@@ -94,11 +104,19 @@
         <?php else: ?>
         
         <ul class="navbar-nav ml-auto">
+            <?php
+                if (PROJECT["PRIVATE"]["IMPLICATION"]):
+            ?>
+
 			<li class="nav-item">
 				<a class="nav-link" href="/register">
 					<span>Sign Up</span>
 				</a>
-			</li>
+            </li>
+            
+            <?php
+                endif;
+            ?>
             
             <li class="nav-item">
 				<a class="nav-link" href="/login">
@@ -114,7 +132,7 @@
 <?php if (isset($_SESSION["user"]) && !$_SESSION["user"]["email_verified"]): ?>
 
 <div class="news text-center pt-2 pb-2 news-red">
-    Hey <b><?php echo($_SESSION["user"]["username"]); ?></b>, in order to access some features on <?php echo(ENVIRONMENT["PROJECT"]["NAME"]); ?>, you need to <a href="<?php echo(get_server_host()); ?>/my/verify" class="font-weight-bold" style="color: #41bbf4">verify your E-Mail address!</a>
+    Hey <b><?= $_SESSION["user"]["username"] ?></b>, in order to access some features on <?= PROJECT["NAME"] ?>, you need to <a href="<?= get_server_host() ?>/my/verify" class="font-weight-bold" style="color: #41bbf4">verify your E-Mail address!</a>
 </div>
 
 <?php endif; ?>

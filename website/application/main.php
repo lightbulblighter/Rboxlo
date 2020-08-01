@@ -1,6 +1,14 @@
 <?php
+    if (PROJECT["PRIVATE"]["LOCKDOWN"])
+    {
+        if (!isset($_SESSION["user"]))
+        {
+            redirect("/login");
+        }
+    }
+
     // The cookie's name is random so that there is no "PHPSESSID" stealer
-    session_name(strtolower(ENVIRONMENT["PROJECT"]["NAME"]) . "_session");
+    session_name(strtolower(PROJECT["NAME"]) . "_session");
 
     session_start();
 
@@ -26,10 +34,15 @@
     }
 
     // .ROBLOSECURITY is tied to the session, but does not have session "logged in" details
-    $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(585)));
+    // ROBLOSECURITY is also required for some Roblox client related stuffs
+    if (!isset($_SESION["roblox"]) || empty($_SESSION["roblox"]))
+    {
+        $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(1170)));
+    }
+    
     if (!isset($_COOKIE[".ROBLOSECURITY"]))
     {
-        setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
+        setcookie(".ROBLOSECURITY", $_SESSION["roblox"], ["secure" => true, "httponly" => true, "samesite" => "Lax"]);
         $_COOKIE["ROBLOSECURITY"] = $_SESSION["roblox"];
     }
     else
@@ -37,14 +50,13 @@
         if ($_SESSION["roblox"] !== $_COOKIE["ROBLOSECURITY"])
         {
             // regen
-            $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(585)));
-            setcookie(".ROBLOSECURITY", $_SESSION["roblox"]);
+            $_SESSION["roblox"] = strtoupper(bin2hex(random_bytes(1170)));
+            setcookie(".ROBLOSECURITY", $_SESSION["roblox"], ["secure" => true, "httponly" => true, "samesite" => "Lax"]);
             $_COOKIE["ROBLOSECURITY"] = $_SESSION["roblox"];
         }
     }
 
-    // this code block is a mess LOL
-    if (!ENVIRONMENT["PROJECT"]["DEBUGGING"])
+    if (!PROJECT["DEBUGGING"])
     {
         if (isset($_SESSION["user"]))
         {

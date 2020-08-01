@@ -1,5 +1,6 @@
 <?php 
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/html.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
+	http_response_code(404);
 ?>
 
 <!DOCTYPE HTML>

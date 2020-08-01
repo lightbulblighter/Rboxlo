@@ -36,6 +36,7 @@ function join(id) {
                         })
                     }
                 })
+            // .then((result)
         }
     })
 }

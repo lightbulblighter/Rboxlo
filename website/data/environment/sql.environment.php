@@ -11,9 +11,9 @@
 
     define("SQL", [
         "USERNAME" => "root",
-        "PASSWORD" => "",
+        "PASSWORD" => "sample",
         "DATABASE" => "rboxlo",
-        "HOST"     => "db",
+        "HOST"     => "database",
         "PORT"     => "3306"
     ]);
 ?>

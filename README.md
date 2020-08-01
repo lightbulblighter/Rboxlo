@@ -1,7 +1,6 @@
 <p align="center">
 <img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/slideshow.gif" alt="Logo" width="600">
 <br>
-<i>a better Roblox revival, for the public </i>
 </p>
 <br>
 <p align="center">
@@ -64,6 +63,42 @@ large and to the detriment of my heirs and successors. I intend this
 dedication to be an overt act of relinquishment in perpetuity of all
 present and future rights to this software under copyright law.
 ```
+
+# How to set up
+
+You will need the following to build and run Rboxlo:
+- Visual Studio 2019
+- Docker
+- Git
+- Some sort of text editor
+
+Clone the repository using git to a folders with this command:
+
+```
+git clone https://github.com/lighterlightbulb/Rboxlo
+```
+
+Website setup:
+1. Copy `docker-compose.sample.yml` to a file named `docker-compose.yml`, and change the following:
+   - Set `MYSQL_PASSWORD` to your preferred MySQL password
+   - Set `MYSQL_ROOT_PASSWORD` to the same MySQL password as before
+   - If you so wish, change `MYSQL_DATABASE` to your custom database name
+2. Go to `/website/nginx/domains.conf` and replace `rboxlo.xyz` with your domain. You have to add each domain as a subdomain on your hosting provider.
+3. Open each file in `/website/data/environment/` and edit them. Everything is documented, so this should be a breeze. Make sure the MySQL account credentials are the same ones you set in the `docker-compose.yml` file.
+4. Go to the `matchmaker` folder and duplicate `config.sample.json` to a file named `config.json`. You will need to change the MySQL credentials to be the same as done before.
+5. Close your editor, navigate to the root Rboxlo folder, and run `docker-compose up --build --force-recreate --remove-orphans`.
+6. You have Docker set up, but the website doesn't work yet! That's okay. There should be a new folder named `container` and in it is a folder named `site`. Go to the `data` folder inside `site` and copy all the files from `/website/data/` and put it in there. 
+7. Hopefully, everything works server-side.
+
+Gameplay setup:
+1. Open up `Rboxlo.sln` in Visual Studio, and change some stuff in the files such as:
+   - Logos
+   - Project name
+   - Authorization tokens (Same as you set in the website!!)
+   - Etc.
+2. Some projects inside the solution require their packages to be installed in order for them to compile. Run NuGet Package Manager to download all the packages.
+3. Build Solution
+4. To deploy gameserver versions and client versions, please use the website deployer for assistance. The deployment process is fairly easy. There are no game executables here, so you will need to patch the clients themselves.
 
 # Fair Use
 

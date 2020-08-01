@@ -20,37 +20,38 @@
 			build_navigation_bar();
 		?>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-        <script type="text/javascript" src="<?= get_server_host() ?>/html/js/games.min.js"></script>
-
         <div class="container">
-            <p class="h1" align="center">Very Complete Games Page</p>
-            <p class="h5 font-weight-light" align="center">Click the link to join. You need the game executable in order to play games.</p>
-            <br>
-            
-            <?php
-				open_database_connection($sql);
-
-                $statement = $sql->prepare("SELECT * FROM `places`");
-                $statement->execute();
-
-                foreach ($statement as $place)
-                {
-                    $statement = $sql->prepare("SELECT `username` FROM `users` WHERE `id` = ?");
-                    $statement->execute([$place["creator"]]);
-                    $user = $statement->fetch(PDO::FETCH_ASSOC);//a
-
-                    echo("<a onclick='join(". $place["id"] .")'>". $place["name"] ." by ". $user["username"] ."</a>");
-				}
+			<ul class="nav nav-tabs nav-justified md-tabs purple accent-3" id="gamesTab" role="tablist">
+				<li class="nav-item waves-effect waves-light">
+					<a class="nav-link active" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="true">Places</a>
+				</li>
 				
-				close_database_connection($sql, $statement);
-            ?>
-		</div>
+				<li class="nav-item waves-effect waves-light">
+					<a class="nav-link" id="servers-tab" data-toggle="tab" href="#servers" role="tab" aria-controls="servers" aria-selected="false">Servers</a>
+				</li>
+			</ul>
+			
+			<div class="tab-content card pt-5" id="gamesTabContent">
+				<div class="tab-pane fade show active" id="places" role="tabpanel" aria-labelledby="places-tab">
+					<div class="md-form input-group m-0">
+						<input type="text" class="form-control" placeholder="Search places" aria-label="Search places" aria-describedby="places-search" value="">
+						<div class="input-group-append">
+							<button class="btn btn-md btn-purple purple accent-3 m-0 px-3" type="button" id="places-search">Search</button>
+						</div>
+					</div>
+				</div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><!-- me when I <br> -->
+
+				<div class="tab-pane fade" id="servers" role="tabpanel" aria-labelledby="servers-tab">
+					<p>Servers!</p>
+				</div>
+			</div>
+		</div>
 
 		<?php
 			build_footer();
 		?>
+
+		<script type="text/javascript" src="<?= get_server_host() ?>/html/js/games.min.js" async defer></script>
 	</body>
 </html>

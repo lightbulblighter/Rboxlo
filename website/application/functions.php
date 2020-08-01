@@ -16,6 +16,12 @@
         exit();
     }
 
+    function include_page($page)
+    {
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../public$page");
+        exit();
+    }
+
     function milliseconds()
     {
         $micro = explode(" ", microtime());
@@ -48,18 +54,20 @@
 
     function _crypt($string, $mode = "encrypt")
     {
-        $key = hash(ENVIRONMENT["SECURITY"]["CRYPT"]["HASH"], ENVIRONMENT["SECURITY"]["CRYPT"]["KEY"]);
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/environment/security.environment.php");
+
+        $key = hash(SECURITY["CRYPT"]["HASHING"], SECURITY["CRYPT"]["KEY"]);
 
         if ($mode == "encrypt")
         {
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"]));
-            return base64_encode(openssl_encrypt($string, ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"], $key, 0, $iv) .":.:.:". $iv);
+            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(SECURITY["CRYPT"]["ENCRYPTION"]));
+            return base64_encode(openssl_encrypt($string, SECURITY["CRYPT"]["ENCRYPTION"], $key, 0, $iv) .":.:.:". $iv);
         }
         else if ($mode == "decrypt")
         {
             list($encrypted_string, $iv) = explode(":.:.:", base64_decode($string));
 
-            return openssl_decrypt($encrypted_string, ENVIRONMENT["SECURITY"]["CRYPT"]["ENCRYPTION"], $key, 0, $iv);
+            return openssl_decrypt($encrypted_string, SECURITY["CRYPT"]["ENCRYPTION"], $key, 0, $iv);
         }
 
         return false;
@@ -144,12 +152,12 @@
 		$hours = $num % 24;      $num = intdiv($num, 24);
 		$days  = $num;
 		
-        return array(
+        return [
             $days,
             $hours,
             $mins,
             round($secs)
-        );
+        ];
     }
 
     function console_log($string)
@@ -167,7 +175,7 @@
         $url = "https://www.google.com/recaptcha/api/siteverify";
 
         $query = [ 
-            "secret" => ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PRIVATE_KEY"],
+            "secret" => GOOGLE["RECAPTCHA"]["PRIVATE_KEY"],
             "remoteip" => get_user_ip(),
             "response" => $response
         ];

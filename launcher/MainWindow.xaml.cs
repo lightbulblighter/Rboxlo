@@ -63,7 +63,7 @@ namespace RboxloLauncher
             bool succeeded = false;
             StatusText.Content = "Connecting to Rboxlo...";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            
+
             // Attempt connection
             try
             {

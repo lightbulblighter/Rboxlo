@@ -1,5 +1,6 @@
 <?php 
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/environment/email.environment.php");
 
 	if (!isset($_SESSION["user"]))
 	{
@@ -97,7 +98,7 @@
 					<span class="white-text">Verify E-Mail</span>
 				</div>
 				<div class="card-body">
-					<p>You are already verified on <?= ENVIRONMENT["PROJECT"]["NAME"] ?>!</p>
+					<p>Your E-Mail address is already verified on <?= PROJECT["NAME"] ?>!</p>
 				</div>  
 			</div>
 			
@@ -110,7 +111,7 @@
 					<span class="white-text">Verify E-Mail</span>
 				</div>
 				<div class="card-body">
-					<p>In order to access some features on <?= ENVIRONMENT["PROJECT"]["NAME"] ?>, you need to verify your E-Mail address first. Some of those features include:</p>
+					<p>In order to access some features on <?= PROJECT["NAME"] ?>, you need to verify your E-Mail address first. Some of those features include:</p>
 					<ul>
 						<li>Playing or creating <a href="/games">Games</a></li>
 						<li>Shopping on the <a href="/catalog/">Catalog</a></li>
@@ -119,16 +120,16 @@
 					</ul>
 					
 					<p>
-						Essentially, you literally cannot do anything on <?= ENVIRONMENT["PROJECT"]["NAME"] ?> without verifying your E-Mail address.
+						Essentially, you literally cannot do anything on <?= PROJECT["NAME"] ?> without verifying your E-Mail address.
 						<br><br>
-						Fortunately for you, we at <?= ENVIRONMENT["PROJECT"]["NAME"] ?> have made the process of verifying your E-Mail address very simple. Just click that big purple button below, solve the captcha, and it'll send you a verification message to the E-Mail address you signed up with. Simply click on the link sent in that E-Mail, and you're done!
+						Fortunately for you, we at <?= PROJECT["NAME"] ?> have made the process of verifying your E-Mail address very simple. Just click that big purple button below, solve the captcha, and it'll send you a verification message to the E-Mail address you signed up with. Simply click on the link sent in that E-Mail, and you're done!
 						<br><br>
-						If you can't find the E-Mail in your main inbox, search for <?= ENVIRONMENT["EMAIL"]["ADDRESS"] ?> in all inboxes or check your spam folder for incoming messages from <?= ENVIRONMENT["PROJECT"]["NAME"] ?>. If neither of those work, just re-send the E-Mail by clicking the purple button again.
+						If you can't find the E-Mail in your main inbox, search for <?= EMAIL["ADDRESS"] ?> in all inboxes or check your spam folder for incoming messages from <?= ENVIRONMENT["PROJECT"]["NAME"] ?>. If neither of those work, just re-send the E-Mail by clicking the purple button again.
 					</p>
 
 					<br>
 
-					<div class="g-recaptcha" data-sitekey="<?= ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
+					<div class="g-recaptcha" data-sitekey="<?= GOOGLE["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
 					<button class="btn purple-gradient btn-block" onclick="submitVerify()" id="submit">Send verification E-Mail</button>
 				</div>  
 			</div>
@@ -156,10 +157,10 @@
 				</div>
 				<div class="card-body">
 					<p>
-						Are you sure you want to verify your account, <?= $_SESSION["user"]["username"] ?>, with the E-Mail <code><?= $_SESSION["user"]["email"] ?></code> on <?= ENVIRONMENT["PROJECT"]["NAME"] ?>?
+						Are you sure you want to verify your account, <?= $_SESSION["user"]["username"] ?>, with the E-Mail <code><?= $_SESSION["user"]["email"] ?></code> on <?= PROJECT["NAME"] ?>?
 					</p>
 
-					<div class="g-recaptcha" data-sitekey="<?= ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
+					<div class="g-recaptcha" data-sitekey="<?= GOOGLE["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
 					<input id="token" type="hidden" value="<?= $_GET["token"] ?>">
 					<button class="btn purple-gradient btn-block" onclick="submitVerify()" id="submit">Yes, I am 100% sure of it</button>
 				</div>  

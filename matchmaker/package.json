@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "The matchmaker for arranging and connecting to Rboxlo gameservers.",
     "main": "app.js",
+    "repository": "https://www.github.com/lighterlightbulb/Rboxlo",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

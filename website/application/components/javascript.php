@@ -5,15 +5,16 @@
 <script type="text/javascript" src="<?= get_server_host() ?>/html/js/mdb.min.js"></script>
 <script type="text/javascript" src="<?= get_server_host() ?>/html/js/mdb-plugins-gathered.min.js"></script>
 <script type="text/javascript" src="<?= get_server_host() ?>/html/js/site.min.js"></script>
+
 <?php
-    if (ENVIRONMENT["GOOGLE"]["ANALYTICS"]["ENABLED"]):
+    if (GOOGLE["ANALYTICS"]["ENABLED"]):
 ?>
-<script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=<?= ENVIRONMENT["GOOGLE"]["ANALYTICS_TAG"] ?>"></script>
+<script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=<?= GOOGLE["ANALYTICS_TAG"] ?>"></script>
 <script type="text/javascript">
     window.dataLayer = window.dataLayer || []
     function gtag(){dataLayer.push(arguments)}
     gtag("js", new Date())
-    gtag("config", "<?= ENVIRONMENT["GOOGLE"]["ANALYTICS"]["TAG"] ?>")
+    gtag("config", "<?= GOOGLE["ANALYTICS"]["TAG"] ?>")
 </script>
 <?php
     endif;

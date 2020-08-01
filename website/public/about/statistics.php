@@ -2,7 +2,7 @@
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
 	open_database_connection($sql);
 
-	$uptime = get_uptime();
+	$ut = get_uptime();
 ?>
 
 <!DOCTYPE HTML>
@@ -51,7 +51,7 @@
 		<div class="container">
 			<div class="card">
                 <?php
-                    $statement = $GLOBALS["sql"]->prepare("SELECT COUNT(*) FROM `users`");
+                    $statement = $sql->prepare("SELECT COUNT(*) FROM `users`");
                     $statement->execute();
 					$users = $statement->fetchColumn();
 					
@@ -65,7 +65,7 @@
                     <span class="h3">Numbers</span><span> as of <?= date("m/d/Y") ?></span>
                     
                     <ul class="mt-1">
-                        <li>There are currently <?= $users ?> unique users registered on <?= ENVIRONMENT["PROJECT"]["NAME"] ?>.</li>
+                        <li>There are currently <?= $users ?> unique users registered on <?= PROJECT["NAME"] ?>.</li>
                     </ul>
 
                     <br>
@@ -76,7 +76,7 @@
                         <br>
                         Currently, the RAM usage on the website is at approximately <span id="ram">0%</span>.
                         <br><br>
-						Running <b><?= ENVIRONMENT["PROJECT"]["NAME"] . "-" . get_version() ?></b>.
+						Running <b><?= PROJECT["NAME"] . "-" . get_version() ?></b>.
 						<br><br>
 						Up for <b><span id="uptime"><?= "$ut[0] days, $ut[1] hours, $ut[2] minutes, $ut[3] seconds" ?>.</span></b>
                     </p>

@@ -33,19 +33,19 @@
 				</div>
 				<div class="card-body">
 					<p>
-						<?= ENVIRONMENT["PROJECT"]["NAME"] ?> is a 100% transparent, 100% open source Roblox private server. We want to recreate the fun of playing Roblox from all client versions 2007 through 2017
-						without imposing restrictions on developers, users, or anybody who wants to play <?= ENVIRONMENT["PROJECT"]["NAME"] ?>.
+						<?= PROJECT["NAME"] ?> is a 100% transparent, 100% open source Roblox private server. We want to recreate the fun of playing Roblox from all client versions 2007 through 2017
+						without imposing restrictions on developers, users, or anybody who wishes to play <?= PROJECT["NAME"] ?>.
 						<br><br>
 						We accomplish this in several ways:
 						<ul>
 							<li>No profanity filter</li>
 							<li>Only users 13+ may play, so as to create a more mature community</li>
 							<li>Allowing games to have blood/gore without them being banned</li>
-							<li>Being open source so people can contribute, fix, solve issues, and develop for <?= ENVIRONMENT["PROJECT"]["NAME"] ?></li>
+							<li>Being open source so people can contribute, fix, solve issues, and develop for <?= PROJECT["NAME"] ?></li>
 							<li>Maintaining 100% transparency in what staff members do (see staff audits <a href="/audits/">here</a>)</li>
 						</ul>
 						
-						<?= ENVIRONMENT["PROJECT"]["NAME"] ?> is created with the sense of transparency at it's heart, after many other Roblox private servers did not uphold transparency fully.
+						<?= PROJECT["NAME"] ?> is created with the sense of transparency at it's heart, after many other Roblox private servers did not uphold transparency fully.
 					</p>
 				</div>  
 			</div>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="card-body">
 					<p>
-						Our goal is to be as transparent and open source as possible and not creating any doubt in newcomers or users of <?= ENVIRONMENT["PROJECT"]["NAME"] ?>.
+						Our goal is to be as transparent and open source as possible and not creating any doubt in newcomers or users of <?= PROJECT["NAME"] ?>.
 						<br><br>
 						Most Roblox private servers opt to be closed-source, and very opaque so they can admin abuse and treat the community very poorly; and, as we have seen with those private servers, the community manifests
 						into a savage beast that requires a huge staff team (sometimes more than 20 people!) to tame without getting hurt.
@@ -76,7 +76,7 @@
 				</div>
 				<div class="card-body">
 					<p>
-						<?= ENVIRONMENT["PROJECT"]["NAME"] ?> is created by a team of young, aspiring developers of whose contributions you can see on the <a href="<?= ENVIRONMENT["REPOSITORY"]["URL"] ?>/graphs/contributors">GitHub contributors page</a>.
+						<?= PROJECT["NAME"] ?> is created by a team of young, aspiring developers of whose contributions you can see on the <a href="<?= REPOSITORY["URL"] ?>/graphs/contributors">GitHub contributors page</a>.
 						<br><br>
 						You can contribute too! Create a pull request, solve an issue, or add a new feature; these are the beauties of being open source.
 					</p>

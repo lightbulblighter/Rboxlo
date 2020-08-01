@@ -1,4 +1,5 @@
 workspace/
+container/
 Rboxlo.code-workspace
 assets/logos/gif
 
@@ -485,3 +486,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+renderserver/RENDERPLLACE.rbxl

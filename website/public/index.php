@@ -15,10 +15,10 @@
 		<?php
 			build_header("Landing");
 		?>
-		<meta property="og:title" content="<?= ENVIRONMENT["PROJECT"]["NAME"] ?>">
+		<meta property="og:title" content="<?= PROJECT["NAME"] ?>">
 		<meta property="og:image" content="<?= get_server_host() ?>/html/img/backdrops/default_compressed.png">
 		<meta property="og:image:type" content="image/png">
-		<meta property="og:description" content="<?= ENVIRONMENT["PROJECT"]["NAME"] ?> is a recreation of a very popular online brick building game. Only <?= ENVIRONMENT["PROJECT"]["NAME"] ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!">
+		<meta property="og:description" content="<?= PROJECT["NAME"] ?> is a recreation of a very popular online brick building game. Only <?= PROJECT["NAME"] ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!">
 	</head>
 	<body>
 		<?php
@@ -26,12 +26,17 @@
 		?>
 
 		<div class="container">
-			<div class="row">
+			<div class="row<?php if (!PROJECT["PRIVATE"]["IMPLICATION"]): ?> flex-center<?php endif; ?>">
 				<div class="col-md-6 text-center text-md-left mb-5">
-                    <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?= ENVIRONMENT["PROJECT"]["NAME"] ?>"></h1><hr>
-					<h6 style="line-height: 1.5em"><?= ENVIRONMENT["PROJECT"]["NAME"] ?> is a recreation of a very popular online brick building game. Only <?= ENVIRONMENT["PROJECT"]["NAME"] ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
+                    <h1><img src="/html/img/logos/2016/full.png" class="img-fluid" width="500" alt="<?= PROJECT["NAME"] ?>"></h1><hr>
+					<h6 style="line-height: 1.5em"><?= PROJECT["NAME"] ?> is a recreation of a very popular online brick building game. Only <?= PROJECT["NAME"] ?> allows you to relive childhood memories, create amazing games, and have fun all at the same time.</h6><br>
 					<div class="embed-container"><iframe src="https://www.youtube.com/embed/Q8hp2IkI2es" frameborder="0" allowfullscreen></iframe></div>
 				</div>
+
+				<?php
+					if (PROJECT["PRIVATE"]["IMPLICATION"]):
+				?>
+
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-header purple accent-3 white-text">
@@ -68,21 +73,21 @@
 								</div>
 
 								<?php
-									if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
+									if (PROJECT["PRIVATE"]["INVITE_ONLY"]):
 								?>
 
 								<div class="md-form mb-4 mt-1">
 									<i class="material-icons prefix grey-text">fingerprint</i>
 									<input type="text" id="invite_key" name="invite_key" class="register-input form-control mb-1" required="required">
 									<label for="invite_key">Invite key</label>
-									<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?= ENVIRONMENT["PROJECT"]["NAME"] ?> is currently invite only.</span>
+									<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?= PROJECT["NAME"] ?> is currently invite only.</span>
 								</div>
 
 								<?php
 									endif;
 								?>
 
-								<div class="g-recaptcha" data-sitekey="<?= ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
+								<div class="g-recaptcha" data-sitekey="<?= GOOGLE["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
 								
 								<div class="form-check">
 									<input type="checkbox" class="register-checkbox form-check-input" id="13confirm" required="required">
@@ -107,6 +112,10 @@
 						</div>
 					</div>
 				</div>
+
+				<?php
+					endif;
+				?>
 			</div>
 		</div>
 	</div>

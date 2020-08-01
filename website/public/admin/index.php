@@ -6,10 +6,9 @@
 	    redirect("/login");
     }
     
-    if ($_SESSION["user"]["rank"] <= 0)
+    if ($_SESSION["user"]["permissions"]["admin"]["see_panel"])
     {
-        require_once($_SERVER["DOCUMENT_ROOT"] . "/../public/error/403.php");
-        exit();
+        include_page("/error/403.php"); // Forbidden
     }
 ?>
 

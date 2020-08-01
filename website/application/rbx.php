@@ -23,10 +23,10 @@
 
     function get_signature($script)
     {
-        $key = file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../static/key.pem");
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/environment/security.environment.php");
         $signature;
 
-        openssl_sign($script, $signature, $key, OPENSSL_ALGO_SHA1);
+        openssl_sign($script, $signature, SECURITY["KEY"], OPENSSL_ALGO_SHA1);
 
         return base64_encode($signature);
     }

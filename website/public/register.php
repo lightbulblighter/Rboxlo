@@ -1,6 +1,11 @@
 <?php 
 	require_once($_SERVER["DOCUMENT_ROOT"] . "/../application/includes.php");
 	
+	if (!PROJECT["PRIVATE"]["IMPLICATION"])
+	{
+		include_page("/error/404.php");
+	}
+
 	// If the user is logged in, redirect them to their dashboard from the landing page
 	if (isset($_SESSION["user"]))
 	{
@@ -58,21 +63,21 @@
 							</div>
 
 							<?php
-								if (ENVIRONMENT["PROJECT"]["INVITE_ONLY"]):
+								if (PROJECT["PRIVATE"]["INVITE_ONLY"]):
 							?>
 
 							<div class="md-form mb-4 mt-1">
 								<i class="material-icons prefix grey-text">fingerprint</i>
 								<input type="text" id="invite_key" name="invite_key" class="register-input form-control mb-1" required="required">
 								<label for="invite_key">Invite key</label>
-								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?= ENVIRONMENT["PROJECT"]["NAME"] ?> is currently invite only.</span>
+								<span class="font-small grey-text mb-1" style="margin-left: 2.5rem"><?= PROJECT["NAME"] ?> is currently invite only.</span>
 							</div>
 
 							<?php
 								endif;
 							?>
 
-							<div class="g-recaptcha" data-sitekey="<?= ENVIRONMENT["GOOGLE"]["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
+							<div class="g-recaptcha" data-sitekey="<?= GOOGLE["RECAPTCHA"]["PUBLIC_KEY"] ?>" data-size="invisible"></div>
 									
 							<div class="form-check">
 								<input type="checkbox" class="register-checkbox form-check-input" id="13confirm" required="required">

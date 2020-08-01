@@ -46,7 +46,7 @@
 							<br>
 						
 							<div class="text-center mb-3 mt-0 pt-0">
-								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light" name="submit">Login</button>
+								<button type="submit" id="submit" class="btn purple-gradient accent-1 btn-block btn-rounded z-depth-1a waves-effect waves-light login-input" name="submit">Login</button>
 							</div>
 						</form>
                     </div>

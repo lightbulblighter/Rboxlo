@@ -1,5 +1,7 @@
 workspace/
+container/
 Rboxlo.code-workspace
+assets/logos/gif
 
 # Docker
 docker-compose.yml

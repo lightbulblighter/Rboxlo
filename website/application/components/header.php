@@ -3,11 +3,11 @@
 	
 	if (!empty($page_name))
 	{
-		$title = $page_name ." | ". ENVIRONMENT["PROJECT"]["NAME"];
+		$title = $page_name ." | ". PROJECT["NAME"];
 	}
 	else
 	{
-		$title = ENVIRONMENT["PROJECT"]["NAME"];
+		$title = PROJECT["NAME"];
 	}
 ?>
 

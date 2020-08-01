@@ -42,7 +42,7 @@
 							<div class="md-form input-group m-0">
 								<input type="text" class="form-control" placeholder="What are you up to?" aria-label="What are you up to?" aria-describedby="share" value="">
 								<div class="input-group-append">
-									<button class="btn btn-md btn-purple m-0 px-3" type="button" id="share">Share</button>
+									<button class="btn btn-md btn-purple purple accent-3 m-0 px-3" type="button" id="share">Share</button>
 								</div>
 							</div>
 						</div>

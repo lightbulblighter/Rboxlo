@@ -1,9 +1,9 @@
 {
     "database": {
-        "host": "db",
+        "host": "database",
         "port": 3306,
         "user": "root",
-        "password": "",
+        "password": "sample",
         "name": "rboxlo"
     },
     "port": 3000

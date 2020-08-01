@@ -1,7 +1,7 @@
 <?php
     function open_database_connection(&$database)
     {
-        require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/sql.environment.php"); // Only load in sql credentials if attempting to create a connection
+        require_once($_SERVER["DOCUMENT_ROOT"] . "/../data/environment/sql.environment.php");
         
         try
         {
@@ -12,12 +12,12 @@
         catch (PDOException $error)
         {
             error_log($error);
-            exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error: ". $error->getMessage());
+            exit(PROJECT["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error: ". $error->getMessage());
         }
-        catch (exception $error)
+        catch (Exception $error)
         {
             error_log($error);
-            exit(ENVIRONMENT["PROJECT"]["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>Error: UNKNOWN_ERR");
+            exit(PROJECT["NAME"] . " is currently experiencing technical difficulties. Please try again later.<br>An unknown error occurred.");
         }
     }
     
