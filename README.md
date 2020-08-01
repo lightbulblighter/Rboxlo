@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/assets/logos/slideshow.gif" alt="Logo" width="600">
+<img src="https://github.com/lighterlightbulb/Rboxlo/raw/master/logos/slideshow.gif" alt="Logo" width="600">
 <br>
 </p>
 <br>
@@ -15,10 +15,6 @@
 
 <a href="https://github.com/lighterlightbulb/Rboxlo/blob/master/LICENSE">
 	<img src="https://img.shields.io/github/license/lighterlightbulb/Rboxlo" alt="GitHub License">
-</a>
-
-<a href="https://discordapp.com/widget?id=697904229372788807">
-	<img src="https://img.shields.io/discord/697904229372788807?logo=discord" alt="Discord">
 </a>
 
 </p>
