@@ -1,0 +1,35 @@
+# Begin Rboxlo
+127.0.0.1 www.rboxlo.loc
+127.0.0.1 abuse.rboxlo.loc
+127.0.0.1 accountsettings.rboxlo.loc
+127.0.0.1 ads.rboxlo.loc
+127.0.0.1 api.rboxlo.loc
+127.0.0.1 assetdelivery.rboxlo.loc
+127.0.0.1 assetgame.rboxlo.loc
+127.0.0.1 auth.rboxlo.loc
+127.0.0.1 avatar.rboxlo.loc
+127.0.0.1 badges.rboxlo.loc
+127.0.0.1 billing.rboxlo.loc
+127.0.0.1 catalog.rboxlo.loc
+127.0.0.1 chat.rboxlo.loc
+127.0.0.1 clientsettings.api.rboxlo.loc
+127.0.0.1 data.rboxlo.loc
+127.0.0.1 develop.rboxlo.loc
+127.0.0.1 followings.rboxlo.loc
+127.0.0.1 friends.rboxlo.loc
+127.0.0.1 gameinternationalization.rboxlo.loc
+127.0.0.1 gamejoin.rboxlo.loc
+127.0.0.1 gamepersistence.rboxlo.loc
+127.0.0.1 games.rboxlo.loc
+127.0.0.1 groups.rboxlo.loc
+127.0.0.1 inventory.rboxlo.loc
+127.0.0.1 locale.rboxlo.loc
+127.0.0.1 notifications.rboxlo.loc
+127.0.0.1 points.rboxlo.loc
+127.0.0.1 presence.rboxlo.loc
+127.0.0.1 publish.rboxlo.loc
+127.0.0.1 textfilter.rboxlo.loc
+127.0.0.1 thumbnails.rboxlo.loc
+127.0.0.1 translations.rboxlo.loc
+127.0.0.1 versioncompatibility.api
+# End Rboxlo
