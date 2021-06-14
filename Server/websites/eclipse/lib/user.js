@@ -2,7 +2,7 @@ var exports = module.exports = {}
 
 const compare = require("safe-compare")
 const crypto = require("crypto")
-const fetch = require("whatwg-fetch")
+const fetch = require("node-fetch")
 const fs = require("fs")
 const httpBuildQuery = require("http-build-query")
 const moment = require("moment")
