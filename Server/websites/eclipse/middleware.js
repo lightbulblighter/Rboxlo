@@ -7,7 +7,6 @@ const user = require(path.join(__dirname, "lib", "user"))
 
 async function middleware(req, res) {
     req.rboxlo = {}
-    req.session.rboxlo = {}
     req.session.rboxlo.bust = moment().unix() // resets contents each page req
 
     //
@@ -54,10 +53,11 @@ async function middleware(req, res) {
         let verified = await user.verifyLongTermSession(req.cookies.remember_me)
 
         if (verified !== false) {
+            // login to user
             let info = await user.getNecessarySessionInfoForUser(verified)
             req.session.rboxlo.user = info
         } else {
-            // crumbs of a cookie, sweep it up
+            // crumbs of a cookie, sweep it up and get rid of it
             res.clearCookie("remember_me")
         }
     }
