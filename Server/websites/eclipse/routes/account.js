@@ -24,12 +24,12 @@ async function createAccount (req, res) {
         }
     }
 
-    if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha") || req.body["g-recaptcha"].length == 0)) {
+    if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
         objects.form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
     }
 
     if (!objects.form.hasOwnProperty("captcha")) {
-        if (!user.verifyCaptcha(req.body["g-recaptcha"])) {
+        if (!user.verifyCaptcha(req.body["g-recaptcha-response"])) {
             objects.form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
         }
     }
@@ -80,12 +80,12 @@ async function authenticate (req, res) {
     }
     
     if (await user.needsAuthenticationChallenge(req.rboxlo.ip)) {
-        if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha") || req.body["g-recaptcha"].length == 0)) {
+        if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
             objects.form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
         }
 
         if (!objects.form.hasOwnProperty("captcha")) {
-            if (!user.verifyCaptcha(req.body["g-recaptcha"])) {
+            if (!user.verifyCaptcha(req.body["g-recaptcha-response"])) {
                 objects.form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
             }
         }
