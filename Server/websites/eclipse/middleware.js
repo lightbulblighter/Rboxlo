@@ -7,6 +7,11 @@ const user = require(path.join(__dirname, "lib", "user"))
 
 async function middleware(req, res) {
     req.rboxlo = {}
+
+    if (!req.session.hasOwnProperty("rboxlo")) {
+        req.session.rboxlo = {}
+    }
+    
     req.session.rboxlo.bust = moment().unix() // resets contents each page req
 
     //
