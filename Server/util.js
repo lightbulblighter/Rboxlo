@@ -76,20 +76,3 @@ exports.filterEmail = (address, stripSubAddress = true) => {
 
     return address
 }
-
-// These two functions purposefully undocumented (used in .then-s while performing a 'fetch')
-
-exports.fetchNet = (response) => {
-    if (response.status >= 200 && response.status < 300) {
-        return response
-    } else {
-        let error = new Error(response.statusText)
-        error.response = response
-
-        throw error
-    }
-}
-
-exports.parseFetchJson = (response) => {
-    return response.json()
-}

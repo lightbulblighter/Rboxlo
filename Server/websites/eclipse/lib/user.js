@@ -775,7 +775,7 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
  * 
  * @returns {boolean} If the Google API confirmed it 
  */
-exports.verifyCaptcha = (ip, response) => {
+exports.verifyCaptcha = async (ip, response) => {
     let url = "https://www.google.com/recaptcha/api/siteverify"
     let query = {
         secret: global.rboxlo.env.GOOGLE_RECAPTCHA_PRIVATE_KEY,
@@ -783,18 +783,19 @@ exports.verifyCaptcha = (ip, response) => {
         response: response
     }
 
-    fetch(url, {
+    var success = false
+
+    await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         body: httpBuildQuery(query)
     })
-    .then(util.fetchNet)
-    .then(util.parseFetchJSON)
-    .then((data) => {
-        return (data.success === true)
-    })
+    .then(res => res.json())
+    .then(json => { success = (json.success === true) })
+
+    return success
 }
 
 // TODO for these two functions (authenticated, loggedOut)

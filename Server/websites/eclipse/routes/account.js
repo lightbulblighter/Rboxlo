@@ -29,7 +29,7 @@ async function createAccount (req, res) {
     }
 
     if (!objects.form.hasOwnProperty("captcha")) {
-        if (!user.verifyCaptcha(req.body["g-recaptcha-response"])) {
+        if (!(await user.verifyCaptcha(req.rboxlo.ip, req.body["g-recaptcha-response"]))) {
             objects.form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
         }
     }
