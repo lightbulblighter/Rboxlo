@@ -23,10 +23,12 @@ This guide assumes you have the following applications installed. If you do not 
 
 We have finished building the Rboxlo Server.
 
-## Troubleshooting
+## Tips & Troubleshooting
 - Rboxlo is set up with `rboxlo.loc` everywhere as its default domain. If you are not able to access `rboxlo.loc` locally, copy and paste [this](https://raw.githubusercontent.com/lightbulblighter/Rboxlo/trunk/Setup/hosts) into [your hosts file.](https://www.whatsmydns.net/hosts-file.html) **You do not need to do this if you are in a production environment (i.e. on a datacenter/server.)**
 - If the captcha is not working, make sure that you have input the public and site key for **Google's Checkbox reCaptcha v2.**
 - Some items that aren't really self-explanatory are `ENCRYPTION_KEY` and `CIPHERSWEET_KEY`. `ENCRYPTION_KEY` is the key used to encrypt user data and is really just a passphrase used as a key, so you can just enter any string and it'll work. The situation for ciphersweet is different though; you'll need a 32-byte hex encoded key for that. In simpler terms, create a passphrase (or 'password' if that term is more familiar for you) that is 32 characters long and enter it into a hex encoder like [this](https://www.convertstring.com/EncodeDecode/HexEncode). That's your new ciphersweet key.
+- `ENCRYPTION_KEY` can be anything that is 32 characters long. `SERVER_SESSION_SECRET` and `SERVER_COOKIE_SECRET` can be anything.
+- Make sure to make `MAIL_PASSWORD` and `DB_PASSWORD` very long and secure passwords. These passwords will most likely not be used by you personally and only by the server, so memorability is not necessary.
 - If you are in a debugging environment, please set `PRODUCTION` in the environment file to `false`. **If you are in a production environment, make sure to set `PRODUCTION` in the environment file to `true`.**
 - If you have any other issue not listed here, please do not hesitate to file an issue on the GitHub [here](https://github.com/lightbulblighter/Rboxlo/issues/new).
 

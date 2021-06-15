@@ -18,7 +18,10 @@ app.locals.rboxlo = {
     version: util.getVersion(),
     domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}${global.rboxlo.env.SERVER_DOMAIN}`,
     dsr: (global.rboxlo.env.PRODUCTION ? ".min" : ""), // "Debug Static Resource"
-    captchaKey: global.rboxlo.env.GOOGLE_RECAPTCHA_PUBLIC_KEY
+    captcha: {
+        enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
+        siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
+    }
 }
 
 // Set up view engine

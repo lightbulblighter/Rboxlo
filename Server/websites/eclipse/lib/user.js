@@ -382,6 +382,10 @@ async function createLoginAttempt (threshold, userAgent, ip) {
  * @returns {boolean} If they need a challenge
  */
 exports.needsAuthenticationChallenge = async (ip) => {
+    if (!global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
+        return false
+    }
+
     let result = await sql.run("SELECT `id`, `amount`, `threshold`, `created_timestamp` FROM `login_attempts` WHERE `ip` = ?", ip)
     
     if (result.length == 0) {
@@ -776,6 +780,10 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
  * @returns {boolean} If the Google API confirmed it 
  */
 exports.verifyCaptcha = async (ip, response) => {
+    if (!global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
+        return true
+    }
+    
     let url = "https://www.google.com/recaptcha/api/siteverify"
     let query = {
         secret: global.rboxlo.env.GOOGLE_RECAPTCHA_PRIVATE_KEY,

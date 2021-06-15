@@ -46,11 +46,13 @@
                         {{/if}}
                     </div>
                     <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
-                    <div class="g-recaptcha{{#if objects.form.captcha}} mb-1{{/if}}" data-sitekey="{{ rboxlo.captchaKey }}"></div>
-                    {{#if objects.form.captcha}}
-                        <span class="error-text">{{ objects.form.captcha.message }}</span><br>
-                    {{else}}
-                        <br>
+                    {{#if rboxlo.captcha.enabled}}
+                        <div class="g-recaptcha{{#if objects.form.captcha}} mb-1{{/if}}" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
+                        {{#if objects.form.captcha}}
+                            <span class="error-text">{{ objects.form.captcha.message }}</span><br>
+                        {{else}}
+                            <br>
+                        {{/if}}
                     {{/if}}
                     <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo{{#if objects.form.captcha}} mt-1{{/if}}">Sign up</button>
                 </form>
@@ -60,6 +62,8 @@
     {{/content}}
 
     {{#content "scripts" mode="append"}}
-        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+        {{#if rboxlo.captcha.enabled}}
+            <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+        {{/if}}
     {{/content}}
 {{/layout}}
