@@ -222,6 +222,25 @@ function generateDefaultSignInHistory (ip, userAgent, stringified = true) {
 }
 
 /**
+ * Appends to a user's sign in history with a given user agent and IP address
+ *
+ * @param {string} userId ID of the user who's history is being signed into
+ * @param {string} ip User's IP address
+ * @param {string} userAgent User's agent
+ */
+async function appendToSignInHistory(userId, ip, userAgent) {
+    let history = (await sql.run("SELECT `sign_in_history` FROM `users` WHERE `id` = ?", userId))[0]
+    history = kryptshun.decrypt(history)
+
+    history[moment().unix()] = { "ip": ip, "userAgent": userAgent }
+    
+    history = JSON.stringify(history)
+    history = kryptshun.encrypt(history)
+
+    await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", hisory, userId)
+}
+
+/**
  * Generates a default last ping history
  * 
  * @param {boolean} stringified Whether to return array as JSON-encoded or not (default: true)
@@ -539,7 +558,7 @@ exports.updateLastPing = async (application, userId) => {
  * 
  * @returns {array} Returns "success" meaning valid authenticated and a array "targets" if there was an error
  */
-exports.authenticate = (information, ip, userAgent, antiRobot = false, rememberMe = false, setLastPing = true, stipendWillUpdate = true, stackStipends = false, allowEmailSignIn = false, signInHistoryAppend = false) => {
+exports.authenticate = (information, ip, userAgent, antiRobot = false, rememberMe = false, setLastPing = true, stipendWillUpdate = true, stackStipends = false, allowEmailSignIn = false, signInHistoryAppend = true) => {
     return new Promise(async (resolve, reject) => {
         let response = {"success": false, targets: {}}
 
@@ -584,6 +603,8 @@ exports.authenticate = (information, ip, userAgent, antiRobot = false, rememberM
                             let longTermSession = await exports.createLongTermSession(ip, userAgent, user.id, true)
                             out.longTermSession = longTermSession
                         }
+                        
+                        if (signInHistoryAppend) await appendToSignInHistory(user.id, ip, userAgent)
                         if (setLastPing) await exports.updateLastPing("website", user.id)
                         if (stipendWillUpdate) await updateStipend(user.id, stackStipends)
 
