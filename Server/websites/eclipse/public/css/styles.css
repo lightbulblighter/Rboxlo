@@ -8,6 +8,11 @@
 .rboxlo-color-muted { background-color: #dd98ff !important }
 .error-text { color: #ff3e3e }
 
+.btn-primary-rboxlo { 
+	border-color: #b72bff !important;
+	background-color: #c75aff !important;
+}
+
 .inherit-color { color: inherit !important }
 .vertical-align-middle { vertical-align: middle !important }
 
