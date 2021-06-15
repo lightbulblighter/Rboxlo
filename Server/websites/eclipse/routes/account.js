@@ -19,9 +19,9 @@ async function createAccount (req, res) {
             "username": { invalid: false },
             "email": { invalid: false },
             "password1": { invalid: false },
-            "password2": { invalid: false },
-            "csrf": req.csrfToken()
-        }
+            "password2": { invalid: false }
+        },
+        "csrf": req.csrfToken()
     }
 
     if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
@@ -75,8 +75,8 @@ async function authenticate (req, res) {
         "form": {
             "username": { invalid: false },
             "password": { invalid: false },
-            "csrf": req.csrfToken()
-        }
+        },
+        "csrf": req.csrfToken()
     }
     
     if (await user.needsAuthenticationChallenge(req.rboxlo.ip)) {
