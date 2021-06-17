@@ -72,7 +72,8 @@ async function middleware(req, res) {
     if (req.session.rboxlo.user && !res.locals.session) {
         res.locals.session = {
             id: req.session.rboxlo.user.id,
-            username: req.session.rboxlo.user.username
+            username: req.session.rboxlo.user.username,
+            permissions: req.session.rboxlo.user.permissions
         }
     }
 }

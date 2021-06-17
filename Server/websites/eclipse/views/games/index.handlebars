@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between mt-3">
             <h2>Games</h2>
             <div class="d-flex align-items-center">
-                {{#if objects.canCreateGames}}
+                {{#if session.permissions.places.creation}}
                     <a href="{{ rboxlo.domain }}/games/new">
                         <button class="btn btn-primary btn-primary-rboxlo">
                             <i class="fas fa-plus"></i> New Game
