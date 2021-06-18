@@ -3,6 +3,10 @@
         <div class="d-flex justify-content-between mt-3">
             <h2>Games</h2>
             <div class="d-flex align-items-center">
+                <button class="btn btn-primary btn-primary-rboxlo disabled me-2" disabled="disabled">
+                    <i class="fas fa-plus"></i> New Server
+                </button>
+
                 {{#if session.permissions.places.creation}}
                     <a href="{{ rboxlo.domain }}/games/places/new">
                         <button class="btn btn-primary btn-primary-rboxlo">
@@ -10,7 +14,7 @@
                         </button>
                     </a>
                 {{else}}
-                    <button class="btn btn-primary btn-primary-rboxlo disabled" disabled>
+                    <button class="btn btn-primary btn-primary-rboxlo disabled" disabled="disabled">
                         <i class="fas fa-plus"></i> New Place
                     </button>
                 {{/if}}

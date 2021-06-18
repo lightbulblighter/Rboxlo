@@ -9,7 +9,7 @@ router.get("/new", user.authenticated, (req, res) => {
         return res.send(403)
     }
 
-    res.render("games/places/new", { title: "New Game"})
+    res.render("games/places/new", { title: "New Place"})
 })
 
 module.exports = router

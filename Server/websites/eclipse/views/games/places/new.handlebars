@@ -1,5 +1,109 @@
 {{#> layout}}
     {{#content "body"}}
-        <h2 class="mt-3">New Place</h2>
+        <h2 class="mt-3 mb-3">New Place</h2>
+
+        <div class="card card-body">
+            <form method="post" id="place-form">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input id="name" type="text" class="form-control" required="required" name="name"> 
+                </div>
+
+                <div class="d-flex mb-1">
+                    <div class="flex-fill">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="description" style="resize:none" rows="6" maxlength="1000" placeholder="Describe your new place..."></textarea>
+                    </div>
+                    
+                    <div class="flex-item ms-4 p-2">
+                        <div class="mb-2">
+                            <p class="mb-1">Who can access this game?</p>
+                            <select aria-label="Choose who can access this game" class="form-select form-select-sm" required="required">
+                                <option value="1" selected="">Everyone</option>
+                                <option value="2">My friends</option>
+                                <option value="3">Only me</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <p class="mb-1">Max players</p>
+                            <input type="number" name="max-players" id="max-players" class="form-control form-control-sm" required="required">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Choose place file (under 50mb)</label>
+                            <input type="file" class="form-control form-control-sm" name="file" id="file" required="required">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Allowed gears</label>
+                    <div class="card card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-melee">Melee</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-melee" name="gear-melee">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-powerup">Power ups</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-powerup" name="gear-powerup">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-ranged">Ranged</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-ranged" name="gear-ranged">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-navigation">Navigation</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-navigation" name="gear-navigation">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-explosive">Explosives</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-explosive" name="gear-explosive">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-musical">Musical</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-musical" name="gear-musical">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-social">Social</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-social" name="gear-social">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-transport">Transport</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-transport" name="gear-transport">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="gear-building">Building</label>
+                                    <input type="checkbox" class="form-check-input" id="gear-building" name="gear-building">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo">Create place</a>
+                    <a href="{{ rboxlo.domain }}/games/" class="text-decoration-none pe-2">Go back</a>
+                </div>
+            </form>
+        </div>
     {{/content}}
 {{/layout}}
