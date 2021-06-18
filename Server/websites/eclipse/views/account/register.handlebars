@@ -34,7 +34,7 @@
                             <div class="invalid-feedback">{{ objects.form.password1.message }}</div>
                         {{else}}
                             {{#unless objects.form.password1}}
-                                <small id="password1-info" class="form-text text-muted">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>.</small>
+                                <small id="password1-info" class="form-text text-muted">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2" tabindex="-1">Argon2</a>.</small>
                             {{/unless}}
                         {{/if}}
                     </div>
