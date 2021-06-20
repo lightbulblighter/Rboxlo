@@ -19,7 +19,6 @@ services:
     hostname: "database"
     command: "--init-file /usr/local/bin/structure.sql"
     environment:
-      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
