@@ -62,7 +62,9 @@
                         <div class="mb-2">
                             <label for="application" class="form-label">Application</label>
                             <select name="application" class="form-select form-select-sm" required="required">
-                                <option value="amet">Amet</option>
+                                {{#each objects.versions}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
                             </select>
                         </div>
                         
