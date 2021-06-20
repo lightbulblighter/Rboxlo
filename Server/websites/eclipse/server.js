@@ -56,7 +56,7 @@ app.use(require(path.join(__dirname, "middleware")).obj)
 app.use((err, req, res, next) => {
     if (err.code !== "EBADCSRFTOKEN") return next(err)
 
-    res.sendStatus(403)
+    return res.sendStatus(403)
     // provide no further context
 })
 

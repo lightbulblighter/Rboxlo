@@ -1,7 +1,7 @@
 var router = require("express").Router()
 
-const path = require("path")
 const csurf = require("csurf")
+const path = require("path")
 
 const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
 
@@ -37,8 +37,7 @@ async function createAccount (req, res) {
 
         if (objects.form.hasOwnProperty("captcha")) {
             objects.form = {
-                "captcha": objects.form.captcha,
-                "csrf": objects.form.csrf
+                "captcha": objects.form.captcha
             }
 
             return res.render("account/register", { "title": "Register", "objects": objects })

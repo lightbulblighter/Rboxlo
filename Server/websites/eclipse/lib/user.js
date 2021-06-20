@@ -515,7 +515,7 @@ exports.formatLongTermSession = (session) => {
  */
 exports.getNecessarySessionInfoForUser = async (userId) => {
     let result = await sql.run(
-        "SELECT `id`, `username`, `joindate_timestamp`, `last_stipend_timestamp`, `last_ping`, `permissions`, `preferences`, `avatar`, `email_verified`, `is_banned`, `current_ban_article`, `money` FROM `users` WHERE `id` = ?",
+        "SELECT `id`, `username`, `created_timestamp`, `last_stipend_timestamp`, `last_ping`, `permissions`, `preferences`, `avatar`, `email_verified`, `is_banned`, `current_ban_article`, `money` FROM `users` WHERE `id` = ?",
         userId
     )
     let user = result[0]
@@ -634,7 +634,7 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
 
         // 1: Password, username, and E-Mail simple validation
         {
-            if (!response.targets.hasOwnProperty("username") && (!information.hasOwnProperty("username") || information.username.length == 0)) {
+            if (!response.targets.hasOwnProperty("username") && (!information.hasOwnProperty("username"))) {
                 response.targets.username = "Please choose a username."
             }
     
@@ -773,7 +773,7 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
                 
                 // Insert row for this user
                 await sql.run(
-                    "INSERT INTO `users` (`username`, `password_hash`, `email_ciphertext`, `email_blind_index`, `joindate_timestamp`, `last_stipend_timestamp`, `last_ping`, `permissions`, `preferences`, `avatar`, `sign_in_history`, `register_ip_blind_index`, `2fa_secret`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO `users` (`username`, `password_hash`, `email_ciphertext`, `email_blind_index`, `created_timestamp`, `last_stipend_timestamp`, `last_ping`, `permissions`, `preferences`, `avatar`, `sign_in_history`, `register_ip_blind_index`, `2fa_secret`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     [information.username, password, emailCiphertext, emailBlind, joindate, last_stipend_timestamp, lastPing, permissions, preferences, avatar, signInHistory, ipBlind, ""]
                 )
     

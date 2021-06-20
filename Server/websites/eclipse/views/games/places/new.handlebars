@@ -6,32 +6,68 @@
             <form method="post" id="place-form">
                 <div class="mb-3">
                     <label class="form-label" for="name">Name</label>
-                    <input id="name" type="text" class="form-control" required="required" name="name"> 
+                    <input id="name" type="text" class="form-control" required="required" name="name" placeholder="Up to 30 characters"> 
                 </div>
 
                 <div class="d-flex mb-1">
                     <div class="flex-fill">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" style="resize:none" rows="6" maxlength="1000" placeholder="Describe your new place..."></textarea>
+                        <textarea class="form-control" name="description" id="description" style="resize:none" rows="15" maxlength="2000" placeholder="Up to 2000 characters; optional"></textarea>
                     </div>
                     
                     <div class="flex-item ms-4 p-2">
                         <div class="mb-2">
-                            <p class="mb-1">Who can access this game?</p>
-                            <select aria-label="Choose who can access this game" class="form-select form-select-sm" required="required">
-                                <option value="1" selected="">Everyone</option>
-                                <option value="2">My friends</option>
-                                <option value="3">Only me</option>
+                            <label for="privacy" class="form-label">Who can access this game?</label>
+                            <select name="privacy" class="form-select form-select-sm" required="required">
+                                <option value="0">Everyone</option>
+                                <option value="1">My friends</option>
+                                <option value="2">Only me</option>
                             </select>
                         </div>
 
                         <div class="mb-2">
-                            <p class="mb-1">Max players</p>
-                            <input type="number" name="max-players" id="max-players" class="form-control form-control-sm" required="required" min="1" max="100">
+                            <label for="chat-style" class="form-label">Chat style</label>
+                            <select name="chat-style"class="form-select form-select-sm" required="required">
+                                <option value="0">Classic</option>
+                                <option value="1">Bubbles</option>
+                                <option value="2">Both</option>
+                            </select>
                         </div>
 
+                        <div class="mb-2">
+                            <label for="genre" class="form-label">Genre</label>
+                            <select name="genre" class="form-select form-select-sm" required="required">
+                                <option value="0">All</option>
+                                <option value="1">Town and City</option>
+                                <option value="2">Fantasy</option>
+                                <option value="3">Sci-Fi</option>
+                                <option value="4">Ninja</option>
+                                <option value="5">Scary</option>
+                                <option value="6">Pirate</option>
+                                <option value="7">Adventure</option>
+                                <option value="8">Sports</option>
+                                <option value="9">Funny</option>
+                                <option value="10">Wild West</option>
+                                <option value="11">War</option>
+                                <option value="12">Skate Park</option>
+                                <option value="13">Tutorial</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="max-players" class="form-label">Max players</label>
+                            <input type="number" name="max-players" id="max-players" class="form-control form-control-sm" required="required" min="1" max="100" placeholder="Up to 100 players">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="application" class="form-label">Application</label>
+                            <select name="application" class="form-select form-select-sm" required="required">
+                                <option value="amet">Amet</option>
+                            </select>
+                        </div>
+                        
                         <div class="mb-3">
-                            <label for="file" class="form-label">Choose place file (under 50mb)</label>
+                            <label for="file" class="form-label">Choose place file (maximum {{ objects.max }})</label>
                             <input type="file" class="form-control form-control-sm" name="file" id="file" required="required">
                         </div>
                     </div>
@@ -98,12 +134,36 @@
                         </div>
                     </div>
                 </div>
+                
+                <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
 
-                <div class="d-flex justify-content-between align-items-center">
+                {{#if rboxlo.captcha.enabled}}
+                    <div class="g-recaptcha{{#if objects.form.captcha}} mb-1{{/if}}" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
+                    {{#if objects.form.captcha}}
+                        <span class="error-text">{{ objects.form.captcha.message }}</span><br>
+                    {{else}}
+                        <br>
+                    {{/if}}
+                {{/if}}
+
+                <div class="mb-3 mt-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="true" id="copying" name="copying">
+                        <label class="form-check-label" for="copying">Allow copying</label>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center{{#if rboxlo.captcha.enabled}} mt-1{{/if}}">
                     <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo">Create place</button>
                     <a href="{{ rboxlo.domain }}/games/" class="text-decoration-none pe-2">Go back</a>
                 </div>
             </form>
         </div>
+    {{/content}}
+
+    {{#content "scripts" mode="append"}}
+        {{#if rboxlo.captcha.enabled}}
+            <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+        {{/if}}
     {{/content}}
 {{/layout}}
