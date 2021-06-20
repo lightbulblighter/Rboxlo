@@ -6,6 +6,8 @@ const cookieSession = require("cookie-session")
 const cookieParser = require("cookie-parser")
 const bp = require("body-parser")
 const rateLimit = require("express-rate-limit")
+const cors = require("cors")
+const fileUpload = require("express-fileupload")
 
 const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
@@ -42,6 +44,12 @@ app.use(cookieSession({
     name: `${global.rboxlo.env.NAME}_session`,
     keys: [global.rboxlo.env.SERVER_SESSION_SECRET],
     maxAge: (6 * 60 * 60 * 1000) // 6 hours
+}))
+
+// Files
+app.use(cors())
+app.use(fileUpload({
+    createParentPath: true
 }))
 
 // Parse requests

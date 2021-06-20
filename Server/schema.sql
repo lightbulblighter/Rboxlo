@@ -122,6 +122,16 @@ CREATE TABLE IF NOT EXISTS `places` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `place_versions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uploader_user_id` int(11) NOT NULL,
+  `version` int(11) NOT NULL,
+  `sha512` text NOT NULL,
+  `place_id` int(11) NOT NULL,
+  `created_timestamp` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `servers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creator_id` int(11) NOT NULL,

@@ -45,7 +45,7 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
             "chat-style": { invalid: false },
             "genre": { invalid: false },
             "max-players": { invalid: false },
-            "file": { invalid: false }
+            "place": { invalid: false }
         },
         "csrf": req.csrfToken(),
         "max": maxPlaceSize,
@@ -73,8 +73,23 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
         }
     }
     
+    if (!req.files || !req.files.hasOwnProperty("place")) {
+        objects.form.place.invalid = true
+        objects.form.place.message = "Please provide a place file."
+
+        return res.render("games/places/new", { title: "New Place", "objects": objects })
+    }
+
+    if (req.files.place.size > games.MAX_PLACE_SIZE) {
+        objects.form.place.invalid = true
+        objects.form.place.message = `Place file is too large (maximum is ${maxPlaceSize}.)`
+
+        return res.render("games/places/new", { title: "New Place", "objects": objects })
+    }
+
     games.createGameAndPlace(req.session.rboxlo.user.id, req.body).then(async (response) => {
         if (response.success === true) {
+            await games.uploadPlaceFile(req.session.rboxlo.user.id, response.place.id, req.files.place)
             return res.redirect(`/games/places/view?id=${response.place.id}`)
         }
 

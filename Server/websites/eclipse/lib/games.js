@@ -1,10 +1,12 @@
 var exports = module.exports = {}
 
 const bytes = require("bytes")
+const fs = require("fs")
 const moment = require("moment")
 const path = require("path")
 const uuid = require("uuid")
 const xss = require("xss")
+const { pathToSHA512 } = require("file-to-sha512")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const sql = require(path.join(global.rboxlo.root, "sql"))
@@ -15,8 +17,6 @@ const sql = require(path.join(global.rboxlo.root, "sql"))
 const MAX_PLACE_SIZE = bytes("100MB")
 exports.MAX_PLACE_SIZE = MAX_PLACE_SIZE
 
-//TODO: MAX PLACE SIZE ADDING
-//TODO: PLACE FILE SUPPORT
 //TODO: RETURN <P> INTO FORM LABELS
 /**
  * Creates allowed gears JSON string
@@ -237,4 +237,49 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
         
         return resolve(response)
     })
+}
+
+/**
+ * Uploads a place file to specified place
+ * 
+ * @param {number} userID User who uploading this
+ * @param {number} placeID place ID
+ * @param {} file Place file
+ * 
+ * @returns {boolean} Returns false if the file is too large, true otherwise
+ */
+exports.uploadPlaceFile = async (userID, placeID, file) => {
+    // File operations
+    let name = `temp${Math.random() * (999999 - 100000) + 100000}`
+    let tempPath = path.join(global.rboxlo.root, "temp", name)
+    let destinationPath = path.join(global.rboxlo.root, "assets", "places", placeID)
+
+    file.mv(tempPath)
+
+    if (fs.statSync(tempPath).size > MAX_PLACE_SIZE) {
+        return false
+    }
+
+    let hash = await pathToSHA512(tempPath)
+    let newVersion = fs.existsSync(destinationPath)
+    let currentVersion = 1
+
+    if (newVersion) {
+        currentVersion = Math.max(fs.readdirSync(destinationPath)) + 1
+    }
+
+    if (!newVersion) {
+        fs.mkdirSync(destinationPath)
+    }
+
+    fs.mkdirSync(path.join(destinationPath, currentVersion))
+    fs.renameSync(tempPath, path.join(destinationPath, currentVersion, hash))
+
+    // Make an entry in the database
+    await sql.run(
+        "INSERT INTO `place_versions` (`uploader_user_id`, `version`, `sha512`, `place_id`, `created_timestamp`) VALUES (?, ?, ?, ?, ?)",
+        [userID, currentVersion, hash, placeID, moment().unix()]
+    )
+
+    return true
 }
