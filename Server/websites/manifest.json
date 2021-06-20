@@ -37,5 +37,11 @@
             "translations",
             "versioncompatibility.api"
         ]
+    },
+    "tootsie": {
+        "entrypoint": "/websites/tootsie/server.js",
+        "domains": [
+            "tootsie"
+        ]
     }
 }
