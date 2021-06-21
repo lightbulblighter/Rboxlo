@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `place_versions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uploader_user_id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `sha512` text NOT NULL,
+  `sha256` text NOT NULL,
   `place_id` int(11) NOT NULL,
   `created_timestamp` int(11) NOT NULL,
   PRIMARY KEY (`id`)

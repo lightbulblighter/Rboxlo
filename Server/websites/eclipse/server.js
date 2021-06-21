@@ -46,16 +46,18 @@ app.use(cookieSession({
     maxAge: (6 * 60 * 60 * 1000) // 6 hours
 }))
 
-// Files
-app.use(cors())
-app.use(fileUpload({
-    createParentPath: true
-}))
-
 // Parse requests
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 app.use(cookieParser({ secret: global.rboxlo.env.SERVER_COOKIE_SECRET }))
+
+// Files
+app.use(cors())
+
+app.use(fileUpload({
+    safeFileNames: true,
+    preserveExtension: true
+}))
 
 // Use our Rboxlo middleware
 app.use(require(path.join(__dirname, "middleware")).obj)

@@ -3,40 +3,52 @@
         <h2 class="mt-3 mb-3">New Place</h2>
 
         <div class="card card-body">
-            <form method="post" id="place-form">
+            <form method="post" enctype="multipart/form-data" id="place-form">
                 <div class="mb-3">
                     <label class="form-label" for="name">Name</label>
-                    <input id="name" type="text" class="form-control" required="required" name="name" placeholder="Up to 30 characters"> 
+                    <input id="name" type="text" class="form-control{{#if objects.form.name}} is-{{#if objects.form.name.invalid}}in{{/if}}valid{{/if}}" required="required" name="name" placeholder="Up to 30 characters">
+                    {{#if objects.form.name.invalid}}
+                        <div class="invalid-feedback">{{ objects.form.name.message }}</div>
+                    {{/if}}
                 </div>
 
                 <div class="d-flex mb-1">
                     <div class="flex-fill">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" style="resize:none" rows="15" maxlength="2000" placeholder="Up to 2000 characters; optional"></textarea>
+                        <textarea class="form-control{{#if objects.form.description}} is-{{#if objects.form.description.invalid}}in{{/if}}valid{{/if}}" name="description" id="description" style="resize:none" rows="15" maxlength="2000" placeholder="Up to 2000 characters; optional"></textarea>
+                        {{#if objects.form.description.invalid}}
+                            <div class="invalid-feedback">{{ objects.form.description.message }}</div>
+                        {{/if}}
                     </div>
                     
                     <div class="flex-item ms-4 p-2">
                         <div class="mb-2">
                             <label for="privacy" class="form-label">Who can access this game?</label>
-                            <select name="privacy" class="form-select form-select-sm" required="required">
+                            <select name="privacy" class="form-select form-select-sm{{#if objects.form.privacy}} is-{{#if objects.form.privacy.invalid}}in{{/if}}valid{{/if}}" required="required">
                                 <option value="0">Everyone</option>
                                 <option value="1">My friends</option>
                                 <option value="2">Only me</option>
                             </select>
+                            {{#if objects.form.privacy.invalid}}
+                                <div class="invalid-feedback">{{ objects.form.privacy.message }}</div>
+                            {{/if}}
                         </div>
 
                         <div class="mb-2">
-                            <label for="chat-style" class="form-label">Chat style</label>
-                            <select name="chat-style"class="form-select form-select-sm" required="required">
+                            <label for="chat_style" class="form-label">Chat style</label>
+                            <select name="chat_style" class="form-select form-select-sm{{#if objects.form.chat_style}} is-{{#if objects.form.chat_style.invalid}}in{{/if}}valid{{/if}}" required="required">
                                 <option value="0">Classic</option>
                                 <option value="1">Bubbles</option>
                                 <option value="2">Both</option>
                             </select>
+                            {{#if objects.form.chat_style.invalid}}
+                                <div class="invalid-feedback">{{ objects.form.chat_style.message }}</div>
+                            {{/if}}
                         </div>
 
                         <div class="mb-2">
                             <label for="genre" class="form-label">Genre</label>
-                            <select name="genre" class="form-select form-select-sm" required="required">
+                            <select name="genre" class="form-select form-select-sm{{#if objects.form.genre}} is-{{#if objects.form.genre.invalid}}in{{/if}}valid{{/if}}" required="required">
                                 <option value="0">All</option>
                                 <option value="1">Town and City</option>
                                 <option value="2">Fantasy</option>
@@ -52,25 +64,38 @@
                                 <option value="12">Skate Park</option>
                                 <option value="13">Tutorial</option>
                             </select>
+                            {{#if objects.form.genre.invalid}}
+                                <div class="invalid-feedback">{{ objects.form.genre.message }}</div>
+                            {{/if}}
                         </div>
 
                         <div class="mb-2">
-                            <label for="max-players" class="form-label">Max players</label>
-                            <input type="number" name="max-players" id="max-players" class="form-control form-control-sm" required="required" min="1" max="100" placeholder="Up to 100 players">
+                            <label for="max_players" class="form-label">Max players</label>
+                            <input type="number" name="max_players" id="max_players" class="form-control form-control-sm{{#if objects.form.max_players}} is-{{#if objects.form.max_players.invalid}}in{{/if}}valid{{/if}}" required="required" min="1" max="100" placeholder="Up to 100 players">
+                            {{#if objects.form.[max_players].invalid}}
+                                <div class="invalid-feedback">{{ objects.form.max_players.message }}</div>
+                            {{/if}}
                         </div>
 
                         <div class="mb-2">
                             <label for="application" class="form-label">Application</label>
-                            <select name="application" class="form-select form-select-sm" required="required">
+                            <select name="application" class="form-select form-select-sm{{#if objects.form.application}} is-{{#if objects.form.application.invalid}}in{{/if}}valid{{/if}}" required="required">
                                 {{#each objects.versions}}
                                     <option value="{{this}}">{{this}}</option>
                                 {{/each}}
+                                <option value="debug">debug</option>
                             </select>
+                            {{#if objects.form.application.invalid}}
+                                <div class="invalid-feedback">{{ objects.form.application.message }}</div>
+                            {{/if}}
                         </div>
                         
                         <div class="mb-3">
                             <label for="place" class="form-label">Choose place file (maximum {{ objects.max }})</label>
-                            <input type="place" class="form-control form-control-sm" name="place" id="place" required="required">
+                            <input type="file" class="form-control form-control-sm{{#if objects.form.place}} is-{{#if objects.form.place.invalid}}in{{/if}}valid{{/if}}" name="place" id="place" required="required">
+                            {{#if objects.form.place.invalid}}
+                                <div class="invalid-feedback">{{ objects.form.place.message }}</div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>

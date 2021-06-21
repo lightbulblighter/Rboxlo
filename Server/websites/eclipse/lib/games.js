@@ -6,7 +6,7 @@ const moment = require("moment")
 const path = require("path")
 const uuid = require("uuid")
 const xss = require("xss")
-const { pathToSHA512 } = require("file-to-sha512")
+const sha256File = require("sha256-file")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const sql = require(path.join(global.rboxlo.root, "sql"))
@@ -17,7 +17,6 @@ const sql = require(path.join(global.rboxlo.root, "sql"))
 const MAX_PLACE_SIZE = bytes("100MB")
 exports.MAX_PLACE_SIZE = MAX_PLACE_SIZE
 
-//TODO: RETURN <P> INTO FORM LABELS
 /**
  * Creates allowed gears JSON string
  * 
@@ -182,32 +181,32 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
                     response.targets.privacy = "Invalid privacy filter."
                 }
     
-                if (!response.targets.hasOwnProperty("chat-style") && (!information.hasOwnProperty("chat-style") || information["chat-style"].length == 0)) {
-                    response.targets["chat-style"] = "You must set a chat style for your place."
+                if (!response.targets.hasOwnProperty("chat_style") && (!information.hasOwnProperty("chat_style") || information["chat_style"].length == 0)) {
+                    response.targets["chat_style"] = "You must set a chat style for your place."
                 }
     
-                if (!response.targets.hasOwnProperty("chat-style") && (information["chat-style"] > 3 || information["chat-style"] < 1)) {
-                    response.targets["chat-style"] = "Invalid chat style."
+                if (!response.targets.hasOwnProperty("chat_style") || (information["chat_style"] > 2 || information["chat_style"] < 0)) {
+                    response.targets["chat_style"] = "Invalid chat style."
                 }
     
                 if (!response.targets.hasOwnProperty("genre") && (!information.hasOwnProperty("genre") || information.genre.length == 0)) {
                     response.targets.genre = "You must choose a genre for your place."
                 }
     
-                if (!response.targets.hasOwnProperty("genre") && (information.genre > 16 || information.genre < 1)) {
+                if (!response.targets.hasOwnProperty("genre") || (information.genre > 13 || information.genre < 0)) {
                     response.targets.genre = "Invalid genre."
                 }
     
-                if (!response.targets.hasOwnProperty("max-players") && (!information.hasOwnProperty("max-players") || information["max-players"].length == 0)) {
-                    response.targets["max-players"] = "You must set a max players amount for your place."
+                if (!response.targets.hasOwnProperty("max_players") && (!information.hasOwnProperty("max_players") || information["max_players"].length == 0)) {
+                    response.targets["max_players"] = "You must set a max players amount for your place."
                 }
     
-                if (!response.targets.hasOwnProperty("max-players") && (information["max-players"] < 1)) {
-                    response.targets["max-players"] = "The maximum players amount must be over zero."
+                if (!response.targets.hasOwnProperty("max_players") && (information["max_players"] < 1)) {
+                    response.targets["max_players"] = "The maximum players amount must be over zero."
                 }
     
-                if (!response.targets.hasOwnProperty("max-players") && (information["max-players"] > 100)) {
-                    response.targets["max-players"] = "The maximum amount of players you can have in a place is 100."
+                if (!response.targets.hasOwnProperty("max_players") && (information["max_players"] > 100)) {
+                    response.targets["max_players"] = "The maximum amount of players you can have in a place is 100."
                 }
     
                 if (!response.targets.hasOwnProperty("application") && (!information.application || information.application.length == 0)) {
@@ -222,14 +221,14 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
                     response.targets.description = "Description must be under 2000 characters."
                 }
             }
-    
+            
             if (response.targets.length > 0) {
                 return resolve(response)
             }
         }
 
         let game = (await exports.createGame(userID, 0, information.name, information.application, information.privacy))
-        let place = (await exports.createPlace(game.id, information.name, information.description, information.genre, information["max-players"], information.copying, createAllowedGearsJSON(information), information["chat-style"], true))
+        let place = (await exports.createPlace(game.id, information.name, information.description, information.genre, information["max_players"], information.copying, createAllowedGearsJSON(information), information["chat_style"], true))
 
         response.game = game
         response.place = place
@@ -250,17 +249,17 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
  */
 exports.uploadPlaceFile = async (userID, placeID, file) => {
     // File operations
-    let name = `temp${Math.random() * (999999 - 100000) + 100000}`
-    let tempPath = path.join(global.rboxlo.root, "temp", name)
-    let destinationPath = path.join(global.rboxlo.root, "assets", "places", placeID)
+    let name = `temp${Math.floor(Math.random() * (999999 - 100000) + 100000)}`
+    let tempPath = path.join(global.rboxlo.root, "data", "temp", name)
+    let destinationPath = path.join(global.rboxlo.root, "data", "assets", "places", placeID.toString())
 
-    file.mv(tempPath)
-
+    await file.mv(tempPath)
+    
     if (fs.statSync(tempPath).size > MAX_PLACE_SIZE) {
         return false
     }
 
-    let hash = await pathToSHA512(tempPath)
+    let hash = await sha256File(tempPath)
     let newVersion = fs.existsSync(destinationPath)
     let currentVersion = 1
 
@@ -272,12 +271,12 @@ exports.uploadPlaceFile = async (userID, placeID, file) => {
         fs.mkdirSync(destinationPath)
     }
 
-    fs.mkdirSync(path.join(destinationPath, currentVersion))
-    fs.renameSync(tempPath, path.join(destinationPath, currentVersion, hash))
+    fs.mkdirSync(path.join(destinationPath, currentVersion.toString()))
+    fs.renameSync(tempPath, path.join(destinationPath, currentVersion.toString(), hash))
 
     // Make an entry in the database
     await sql.run(
-        "INSERT INTO `place_versions` (`uploader_user_id`, `version`, `sha512`, `place_id`, `created_timestamp`) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO `place_versions` (`uploader_user_id`, `version`, `sha256`, `place_id`, `created_timestamp`) VALUES (?, ?, ?, ?, ?)",
         [userID, currentVersion, hash, placeID, moment().unix()]
     )
 

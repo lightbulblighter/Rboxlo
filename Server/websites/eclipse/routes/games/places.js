@@ -12,11 +12,11 @@ var csrf = csurf({ cookie: true })
 var maxPlaceSize = bytes(games.MAX_PLACE_SIZE, { decimalPlaces: 0 })
 
 // Applications fetched on startup
-// Do this 20 seconds late to wait for database to startup
+// Do this 1 minute late to wait for database to startup
 var applications = []
 setTimeout(async () => {
     applications = application.fetchAll()
-}, 20000)
+}, 60000)
 
 router.get("/new", user.authenticated, csrf, (req, res) => {
     if (!req.session.rboxlo.user.permissions.places.creation) {
@@ -41,10 +41,12 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
     let objects = {
         "form": {
             "name": { invalid: false },
+            "description": { invalid: false },
             "privacy": { invalid: false },
-            "chat-style": { invalid: false },
+            "chat_style": { invalid: false },
             "genre": { invalid: false },
-            "max-players": { invalid: false },
+            "max_players": { invalid: false },
+            "application": { invalid: false },
             "place": { invalid: false }
         },
         "csrf": req.csrfToken(),
@@ -72,7 +74,7 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
             return res.render("games/places/new", { title: "New Place", "objects": objects })
         }
     }
-    
+
     if (!req.files || !req.files.hasOwnProperty("place")) {
         objects.form.place.invalid = true
         objects.form.place.message = "Please provide a place file."
