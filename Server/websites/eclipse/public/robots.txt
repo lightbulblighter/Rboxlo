@@ -1,0 +1,4 @@
+Disallow: /account
+Disallow: /account/register
+Disallow: /account/login
+Disallow: /games
