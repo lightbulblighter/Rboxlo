@@ -7,7 +7,6 @@ const layouts = require("handlebars-layouts")
 const path = require("path")
 const rateLimit = require("express-rate-limit")
 
-const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
 
 let app = express()
@@ -25,7 +24,7 @@ app.locals.rboxlo = {
 }
 
 // Set up view engine
-let hbs = exphbs.create({ helpers: hbh })
+let hbs = exphbs.create()
 
 hbs.handlebars.registerHelper(layouts(hbs.handlebars))
 hbs.handlebars.registerPartial("partials/layout", "{{prefix}}")
