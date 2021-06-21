@@ -31,8 +31,6 @@ We have finished building the Rboxlo Server.
 - Make sure to make `MAIL_PASSWORD` and `DB_PASSWORD` very long and secure passwords. These passwords will most likely not be used by you personally and only by the server, so memorability is not necessary.
 - If you are in a debugging environment, please set `PRODUCTION` in the environment file to `false`. **If you are in a production environment, make sure to set `PRODUCTION` in the environment file to `true`.**
 - If you have any other issue not listed here, please do not hesitate to file an issue on the GitHub [here](https://github.com/lightbulblighter/Rboxlo/issues/new).
-
-## Tips
 - For secret keys, you should probably just use a random text generator as the key, as you are not able to access the data. Secret keys are not passwords, and in most cases you will never be using them.
 - Be generous! Give your users a nice stipend. The stipend should be balanced with how you are pricing official items on the Rboxlo Catalog. By default, users receieve 25 Rbux daily.
 - The timezone (`TZ`) in the environment file is in accordance with the [TZ database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Use the specific city you are hosting Rboxlo in as your timezone.
