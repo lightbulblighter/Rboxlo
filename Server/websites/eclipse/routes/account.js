@@ -132,9 +132,9 @@ async function authenticate (req, res) {
         if (req.session.rboxlo.hasOwnProperty("redirect")) {
             delete req.session.rboxlo.redirect
         }
-    })
 
-    res.render("account/login", { "title": "Login", "objects": objects })
+        res.render("account/login", { "title": "Login", "objects": objects })
+    })
 }
 
 router.post("/register", user.loggedOut, csrf, createAccount)

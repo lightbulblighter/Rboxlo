@@ -92,16 +92,17 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
     games.createGameAndPlace(req.session.rboxlo.user.id, req.body).then(async (response) => {
         if (response.success === true) {
             await games.uploadPlaceFile(req.session.rboxlo.user.id, response.place.id, req.files.place)
-            return res.redirect(`/games/places/view?id=${response.place.id}`)
+            res.redirect(`/games/places/view?id=${response.place.id}`)
+            return
         }
 
         for (const [target, value] of Object.entries(response.targets)) {
             objects.form[target].invalid = true
             objects.form[target].message = value
         }
-    })
 
-    res.render("games/places/new", { title: "New Place", "objects": objects })
+        res.render("games/places/new", { title: "New Place", "objects": objects })
+    })
 })
 
 module.exports = router
