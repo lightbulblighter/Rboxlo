@@ -237,7 +237,7 @@ async function appendToSignInHistory(userId, ip, userAgent) {
     history = JSON.stringify(history)
     history = kryptshun.encrypt(history)
 
-    await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", hisory, userId)
+    await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", history, userId)
 }
 
 /**
