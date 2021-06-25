@@ -1,0 +1,15 @@
+{{#> layout}}
+    {{#content "body"}}
+        <form method="post">
+            <h1 class="h3 mb-4 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <label for="password">Password</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">{{ rboxlo.name }}:Tootsie</p>
+        </form>
+    {{/content}}
+{{/layout}}

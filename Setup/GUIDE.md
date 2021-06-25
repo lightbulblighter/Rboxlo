@@ -23,14 +23,17 @@ This guide assumes you have the following applications installed. If you do not 
 
 We have finished building the Rboxlo Server.
 
-## Tips & Troubleshooting
+## Troubleshooting
 - Rboxlo is set up with `rboxlo.loc` everywhere as its default domain. If you are not able to access `rboxlo.loc` locally, copy and paste [this](https://raw.githubusercontent.com/lightbulblighter/Rboxlo/trunk/Setup/hosts) into [your hosts file.](https://www.whatsmydns.net/hosts-file.html) **You do not need to do this if you are in a production environment (i.e. on a datacenter/server.)**
 - If the captcha is not working, make sure that you have input the public and site key for **Google's Checkbox reCaptcha v2.**
-- Some items that aren't really self-explanatory are `ENCRYPTION_KEY` and `CIPHERSWEET_KEY`. `ENCRYPTION_KEY` is the key used to encrypt user data and is really just a passphrase used as a key, so you can just enter any string and it'll work. The situation for ciphersweet is different though; you'll need a 32-byte hex encoded key for that. In simpler terms, create a passphrase (or 'password' if that term is more familiar for you) that is 32 characters long and enter it into a hex encoder like [this](https://www.convertstring.com/EncodeDecode/HexEncode). That's your new ciphersweet key.
 - `ENCRYPTION_KEY` can be anything that is 32 characters long. `SERVER_SESSION_SECRET` and `SERVER_COOKIE_SECRET` can be anything.
-- Make sure to make `MAIL_PASSWORD` and `DB_PASSWORD` very long and secure passwords. These passwords will most likely not be used by you personally and only by the server, so memorability is not necessary.
 - If you are in a debugging environment, please set `PRODUCTION` in the environment file to `false`. **If you are in a production environment, make sure to set `PRODUCTION` in the environment file to `true`.**
 - If you have any other issue not listed here, please do not hesitate to file an issue on the GitHub [here](https://github.com/lightbulblighter/Rboxlo/issues/new).
+
+## Tips
+- Some items that aren't really self-explanatory are `ENCRYPTION_KEY` and `CIPHERSWEET_KEY`. `ENCRYPTION_KEY` is the key used to encrypt user data and is really just a passphrase used as a key, so you can just enter any string and it'll work. The situation for ciphersweet is different though; you'll need a 32-byte hex encoded key for that. In simpler terms, create a passphrase (or 'password' if that term is more familiar for you) that is 32 characters long and enter it into a hex encoder like [this](https://www.convertstring.com/EncodeDecode/HexEncode). That's your new ciphersweet key.
+- Make sure to make `MAIL_PASSWORD` and `DB_PASSWORD` very long and secure passwords. These passwords will most likely not be used by you personally and only by the server, so memorability is not necessary.
 - For secret keys, you should probably just use a random text generator as the key, as you are not able to access the data. Secret keys are not passwords, and in most cases you will never be using them.
 - Be generous! Give your users a nice stipend. The stipend should be balanced with how you are pricing official items on the Rboxlo Catalog. By default, users receieve 25 Rbux daily.
 - The timezone (`TZ`) in the environment file is in accordance with the [TZ database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Use the specific city you are hosting Rboxlo in as your timezone.
+- `TOOTSIE_PASSWORD` is going to be the SHA256 hash of the password you'll be using to access `tootsie.your.domain`. Tootsie gives you full control, so make this a long and secure password. You'll have to generate a SHA256 hash of it before putting it in your environment file.

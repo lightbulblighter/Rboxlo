@@ -1,16 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         {{#block "head"}}
             <meta charset="utf-8">
             <meta http-equiv="content-language" content="en">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="x-ua-compatible" content="ie-edge">
-            <title>{{ title }} - Tootsie:{{ rboxlo.name }}</title>
+            <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.2/css/pro.min.css" integrity="sha384-YcCKdDtB8pm5kXHLIsK/IylYvILXYq4WZw3ujnqH74M2/IK0nPsD9bo/wXBV0SQ9" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ rboxlo.domain }}/css/styles{{ rboxlo.dsr }}.css">
+            <title>{{ title }} - {{ rboxlo.name }}</title>
         {{/block}}
     </head>
     <body>
-        {{#block "body"}}
+        <div class="container-fluid">
+            <div class="card card-body w-100 py-2 my-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Tootsie:{{ rboxlo.name }}</span>
+                    <span class="text-muted"><a href="/logout">Log out</a></span>
+                </div>
+            </div>
+
+            <a href="{{ rboxlo.domain }}/" class="text-decoration-none ps-3">Dashboard</a>
+
+            <div class="card w-25 mt-3">
+                <div class="card-header">
+                    Games
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item pb-1"><b>Places</b></li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item py-1 bw-0" laid="games.place.delete"><a href="{{ rboxlo.domain }}/games/place/delete" class="text-decoration-none">Delete place</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.modify"><a href="{{ rboxlo.domain }}/games/place/modify" class="text-decoration-none">Modify place details</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.modify-thumbnails"><a href="{{ rboxlo.domain }}/games/place/modify-thumbnails" class="text-decoration-none">Modify place thumbnails</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.moderate"><a href="{{ rboxlo.domain }}/games/place/moderate" class="text-decoration-none">Moderate place</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.moderate-thumbnails"><a href="{{ rboxlo.domain }}/games/place/moderate-thumbnails" class="text-decoration-none">Moderate place thumbnails</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.file-upload"><a href="{{ rboxlo.domain }}/games/place/file-upload" class="text-decoration-none">Override place file with custom uploaded one</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.version-history"><a href="{{ rboxlo.domain }}/games/place/version-history" class="text-decoration-none">View place version history</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.details"><a href="{{ rboxlo.domain }}/games/place/details" class="text-decoration-none">View place details</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.marketplace"><a href="{{ rboxlo.domain }}/games/place/marketplace" class="text-decoration-none">Manage place marketplace</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.badges"><a href="{{ rboxlo.domain }}/games/place/badges" class="text-decoration-none">Manage place badges</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.place.jobs"><a href="{{ rboxlo.domain }}/games/place/jobs" class="text-decoration-none">Manage place jobs</a></li>
+                    </ul>
+
+                    <li class="list-group-item pb-1"><b>Games</b></li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item py-1 bw-0" laid="games.game.delete"><a href="{{ rboxlo.domain }}/games/game/delete" class="text-decoration-none">Delete game</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.game.modify"><a href="{{ rboxlo.domain }}/games/game/modify" class="text-decoration-none">Modify game details</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.game.jobs"><a href="{{ rboxlo.domain }}/games/game/jobs" class="text-decoration-none">Manage game jobs</a></li>
+                    </ul>
+
+                    <li class="list-group-item pb-1"><b>Applications</b></li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item py-1 bw-0" laid="games.application.new"><a href="{{ rboxlo.domain }}/games/application/new" class="text-decoration-none">Create new application</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.application.modify"><a href="{{ rboxlo.domain }}/games/application/modify" class="text-decoration-none">Modify application</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.application.instance-finder"><a href="{{ rboxlo.domain }}/games/application/instance-finder" class="text-decoration-none">Find instances with application</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.application.delete"><a href="{{ rboxlo.domain }}/games/application/delete" class="text-decoration-none">Delete application</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.application.jobs"><a href="{{ rboxlo.domain }}/games/application/jobs" class="text-decoration-none">Manage jobs with application</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.application.deployment"><a href="{{ rboxlo.domain }}/games/application/deployment" class="text-decoration-none">Deploy application software</a></li>
+                    </ul>
+
+                    <li class="list-group-item pb-1"><b>Instances</b></li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item py-1 bw-0" laid="games.instance.register"><a href="{{ rboxlo.domain }}/games/instance/register" class="text-decoration-none">Register machine as instance</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.instance.modify"><a href="{{ rboxlo.domain }}/games/instance/modify" class="text-decoration-none">Modify instance</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.instance.jobs"><a href="{{ rboxlo.domain }}/games/instance/jobs" class="text-decoration-none">Manage jobs with instance</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.instance.delete"><a href="{{ rboxlo.domain }}/games/instance/delete" class="text-decoration-none">Delete instance</a></li>
+                        <li class="list-group-item py-1 bw-0" laid="games.instance.search"><a href="{{ rboxlo.domain }}/games/instance/search" class="text-decoration-none">Search instance</a></li>
+                    </ul>
+                </ul>
+            </div>
+
+            {{#block "body"}}
+            {{/block}}
+        </div>
+
+        {{#block "scripts"}}
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="{{ rboxlo.domain }}/js/app{{ rboxlo.dsr }}.js"></script>
+            <script type="text/javascript">window.rboxlo.laid="{{{ laid }}}";</script>
         {{/block}}
     </body>
 </html>

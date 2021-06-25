@@ -15,7 +15,7 @@ let app = express()
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
     version: util.getVersion(),
-    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}${global.rboxlo.env.SERVER_DOMAIN}`,
+    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}tootsie.${global.rboxlo.env.SERVER_DOMAIN}`,
     dsr: (global.rboxlo.env.PRODUCTION ? ".min" : ""), // "Debug Static Resource"
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
