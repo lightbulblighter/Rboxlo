@@ -8,6 +8,7 @@ const path = require("path")
 const rateLimit = require("express-rate-limit")
 
 const util = require(path.join(global.rboxlo.root, "util"))
+const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
 
 let app = express()
 
@@ -15,7 +16,7 @@ let app = express()
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
     version: util.getVersion(),
-    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}tootsie.${global.rboxlo.env.SERVER_DOMAIN}`,
+    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}${manifest.tootsie.domain}.${global.rboxlo.env.SERVER_DOMAIN}`,
     dsr: (global.rboxlo.env.PRODUCTION ? ".min" : ""), // "Debug Static Resource"
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,

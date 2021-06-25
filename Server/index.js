@@ -57,8 +57,18 @@ if (!global.rboxlo.env.PRODUCTION) process.env.DEBUG = "express:*"
 
 // Autoload websites
 for (const [name, website] of Object.entries(manifest)) {
-    for (let i = 0; i < website.domains.length; i++) {
-        let domain = (website.domains[i] === magic ? "" : website.domains[i].toLowerCase())
+    let domains = []
+
+    if (Array.isArray(website.domain)) {
+        for (let i = 0; i < website.domain.length; i++) {
+            domains.push(website.domain[i] === magic ? "" : website.domain[i].toLowerCase())
+        }
+    } else {
+        domains.push(website.domain === magic ? "" : website.domain.toLowerCase())
+    }
+    
+    for (let i = 0; i < domains.length; i++) {
+        let domain = domains[i]
 
         if (hosting.includes(domain)) {
             throw `Duplicate vhost was found for website "${name}", vhost was "${domain}"`

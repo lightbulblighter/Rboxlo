@@ -1,7 +1,7 @@
 {
     "eclipse": {
         "entrypoint": "/websites/eclipse/server.js",
-        "domains": [
+        "domain": [
             "INDEX",
             "www",
             "abuse",
@@ -40,8 +40,6 @@
     },
     "tootsie": {
         "entrypoint": "/websites/tootsie/server.js",
-        "domains": [
-            "tootsie"
-        ]
+        "domain": "tootsie"
     }
 }
