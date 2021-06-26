@@ -11,7 +11,8 @@ const util = require(path.join(global.rboxlo.root, "util"))
 const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
 
 let app = express()
-let subdomain = (manifest.tootsie.domain == "INDEX" ? `${manifest.tootsie.domain}.` : "")
+let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
+
 // Expose some non-sensitive variables to the view engine
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
