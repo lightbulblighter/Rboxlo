@@ -21,58 +21,62 @@
                 </div>
             </div>
 
-            <a href="{{ rboxlo.domain }}/" class="text-decoration-none ps-3">Dashboard</a>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{{ rboxlo.domain }}/" class="text-decoration-none ps-3">Dashboard</a>
+                    
+                    <div class="card mt-3">
+                        <div class="card-header bg-dark bg-gradient text-white">
+                            Games
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item pb-1"><b>Places</b></li>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item py-1 bw-0" laid="games.place.delete"><a href="{{ rboxlo.domain }}/games/place/delete" class="text-decoration-none">Delete place</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.modify"><a href="{{ rboxlo.domain }}/games/place/modify" class="text-decoration-none">Modify place details</a></li>                                <li class="list-group-item py-1 bw-0" laid="games.place.moderate"><a href="{{ rboxlo.domain }}/games/place/moderate" class="text-decoration-none">Moderate place</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.file-upload"><a href="{{ rboxlo.domain }}/games/place/file-upload" class="text-decoration-none">Override place file with custom uploaded one</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.version-history"><a href="{{ rboxlo.domain }}/games/place/version-history" class="text-decoration-none">View place version history</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.view"><a href="{{ rboxlo.domain }}/games/place/view" class="text-decoration-none">View place details</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.marketplace"><a href="{{ rboxlo.domain }}/games/place/marketplace" class="text-decoration-none">Manage place marketplace</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.badges"><a href="{{ rboxlo.domain }}/games/place/badges" class="text-decoration-none">Manage place badges</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.place.jobs"><a href="{{ rboxlo.domain }}/games/place/jobs" class="text-decoration-none">Manage place jobs</a></li>
+                            </ul>
 
-            <div class="card mw-15 mt-3">
-                <div class="card-header">
-                    Games
+                            <li class="list-group-item pb-1"><b>Games</b></li>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item py-1 bw-0" laid="games.game.delete"><a href="{{ rboxlo.domain }}/games/game/delete" class="text-decoration-none">Delete game</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.game.modify"><a href="{{ rboxlo.domain }}/games/game/modify" class="text-decoration-none">Modify game details</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.game.jobs"><a href="{{ rboxlo.domain }}/games/game/jobs" class="text-decoration-none">Manage game jobs</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.game.view"><a href="{{ rboxlo.domain }}/games/game/view" class="text-decoration-none">View game details</a></li>
+                            </ul>
+
+                            <li class="list-group-item pb-1"><b>Applications</b></li>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item py-1 bw-0" laid="games.application.new"><a href="{{ rboxlo.domain }}/games/application/new" class="text-decoration-none">Create new application</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.application.modify"><a href="{{ rboxlo.domain }}/games/application/modify" class="text-decoration-none">Modify application</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.application.instance-finder"><a href="{{ rboxlo.domain }}/games/application/instance-finder" class="text-decoration-none">Find instances with application</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.application.delete"><a href="{{ rboxlo.domain }}/games/application/delete" class="text-decoration-none">Delete application</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.application.jobs"><a href="{{ rboxlo.domain }}/games/application/jobs" class="text-decoration-none">Manage jobs with application</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.application.deployment"><a href="{{ rboxlo.domain }}/games/application/deployment" class="text-decoration-none">Deploy application software</a></li>
+                            </ul>
+
+                            <li class="list-group-item pb-1"><b>Instances</b></li>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item py-1 bw-0" laid="games.instance.register"><a href="{{ rboxlo.domain }}/games/instance/register" class="text-decoration-none">Register machine as instance</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.instance.modify"><a href="{{ rboxlo.domain }}/games/instance/modify" class="text-decoration-none">Modify instance</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.instance.jobs"><a href="{{ rboxlo.domain }}/games/instance/jobs" class="text-decoration-none">Manage jobs with instance</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.instance.delete"><a href="{{ rboxlo.domain }}/games/instance/delete" class="text-decoration-none">Delete instance</a></li>
+                                <li class="list-group-item py-1 bw-0" laid="games.instance.search"><a href="{{ rboxlo.domain }}/games/instance/search" class="text-decoration-none">Search for an instance</a></li>
+                            </ul>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item pb-1"><b>Places</b></li>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1 bw-0" laid="games.place.delete"><a href="{{ rboxlo.domain }}/games/place/delete" class="text-decoration-none">Delete place</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.modify"><a href="{{ rboxlo.domain }}/games/place/modify" class="text-decoration-none">Modify place details</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.modify-thumbnails"><a href="{{ rboxlo.domain }}/games/place/modify-thumbnails" class="text-decoration-none">Modify place thumbnails</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.moderate"><a href="{{ rboxlo.domain }}/games/place/moderate" class="text-decoration-none">Moderate place</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.moderate-thumbnails"><a href="{{ rboxlo.domain }}/games/place/moderate-thumbnails" class="text-decoration-none">Moderate place thumbnails</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.file-upload"><a href="{{ rboxlo.domain }}/games/place/file-upload" class="text-decoration-none">Override place file with custom uploaded one</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.version-history"><a href="{{ rboxlo.domain }}/games/place/version-history" class="text-decoration-none">View place version history</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.details"><a href="{{ rboxlo.domain }}/games/place/details" class="text-decoration-none">View place details</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.marketplace"><a href="{{ rboxlo.domain }}/games/place/marketplace" class="text-decoration-none">Manage place marketplace</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.badges"><a href="{{ rboxlo.domain }}/games/place/badges" class="text-decoration-none">Manage place badges</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.place.jobs"><a href="{{ rboxlo.domain }}/games/place/jobs" class="text-decoration-none">Manage place jobs</a></li>
-                    </ul>
 
-                    <li class="list-group-item pb-1"><b>Games</b></li>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1 bw-0" laid="games.game.delete"><a href="{{ rboxlo.domain }}/games/game/delete" class="text-decoration-none">Delete game</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.game.modify"><a href="{{ rboxlo.domain }}/games/game/modify" class="text-decoration-none">Modify game details</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.game.jobs"><a href="{{ rboxlo.domain }}/games/game/jobs" class="text-decoration-none">Manage game jobs</a></li>
-                    </ul>
-
-                    <li class="list-group-item pb-1"><b>Applications</b></li>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1 bw-0" laid="games.application.new"><a href="{{ rboxlo.domain }}/games/application/new" class="text-decoration-none">Create new application</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.application.modify"><a href="{{ rboxlo.domain }}/games/application/modify" class="text-decoration-none">Modify application</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.application.instance-finder"><a href="{{ rboxlo.domain }}/games/application/instance-finder" class="text-decoration-none">Find instances with application</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.application.delete"><a href="{{ rboxlo.domain }}/games/application/delete" class="text-decoration-none">Delete application</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.application.jobs"><a href="{{ rboxlo.domain }}/games/application/jobs" class="text-decoration-none">Manage jobs with application</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.application.deployment"><a href="{{ rboxlo.domain }}/games/application/deployment" class="text-decoration-none">Deploy application software</a></li>
-                    </ul>
-
-                    <li class="list-group-item pb-1"><b>Instances</b></li>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1 bw-0" laid="games.instance.register"><a href="{{ rboxlo.domain }}/games/instance/register" class="text-decoration-none">Register machine as instance</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.instance.modify"><a href="{{ rboxlo.domain }}/games/instance/modify" class="text-decoration-none">Modify instance</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.instance.jobs"><a href="{{ rboxlo.domain }}/games/instance/jobs" class="text-decoration-none">Manage jobs with instance</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.instance.delete"><a href="{{ rboxlo.domain }}/games/instance/delete" class="text-decoration-none">Delete instance</a></li>
-                        <li class="list-group-item py-1 bw-0" laid="games.instance.search"><a href="{{ rboxlo.domain }}/games/instance/search" class="text-decoration-none">Search instance</a></li>
-                    </ul>
-                </ul>
+                <div class="col-md">
+                    {{#block "body"}}
+                    {{/block}}
+                </div>
             </div>
-
-            {{#block "body"}}
-            {{/block}}
         </div>
 
         {{#block "scripts"}}
@@ -80,5 +84,7 @@
             <script type="text/javascript" src="{{ rboxlo.domain }}/js/app{{ rboxlo.dsr }}.js"></script>
             <script type="text/javascript">window.rboxlo.laid="{{{ laid }}}";</script>
         {{/block}}
+
+        <br>
     </body>
 </html>
