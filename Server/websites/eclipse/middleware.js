@@ -26,7 +26,7 @@ async function middleware(req, res) {
     //    to retain the fact that it powers private servers.
     //
     if (global.rboxlo.env.SERVER_X_POWERED_BY) {
-        let poweredBy = [ 82, 98, 111, 120, 108, 111, 47 ] // Literal "Rboxlo/"
+        let poweredBy = [ 82, 98, 111, 120, 108, 111 ] // Literal "Rboxlo"
         
         res.setHeader("X-Powered-By", `${String.fromCharCode.apply(null, poweredBy)}/${util.getVersion().semver}`)
     }
