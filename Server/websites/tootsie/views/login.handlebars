@@ -8,6 +8,7 @@
                 <label for="password">Password</label>
             </div>
 
+            <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
             <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Sign in</button>
             <p class="mt-5 mb-3 text-muted">{{ rboxlo.name }}:Tootsie</p>
         </form>

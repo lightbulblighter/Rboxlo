@@ -6,6 +6,7 @@ const exphbs = require("express-handlebars")
 const layouts = require("handlebars-layouts")
 const path = require("path")
 const rateLimit = require("express-rate-limit")
+const csurf = require("csurf")
 
 const util = require(path.join(global.rboxlo.root, "util"))
 const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
@@ -51,6 +52,7 @@ app.use(cookieParser({ secret: global.rboxlo.env.SERVER_COOKIE_SECRET }))
 app.use(require(path.join(__dirname, "middleware")).obj)
 
 // CSRF protection
+app.use(csurf({ cookie: true }))
 app.use((err, req, res, next) => {
     if (err.code !== "EBADCSRFTOKEN") return next(err)
 

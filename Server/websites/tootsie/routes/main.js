@@ -14,7 +14,7 @@ router.get("/", user.authenticated, (req, res) => {
 })
 
 router.get("/login", (req, res) => {
-    res.render("login", { layout: "form", title: "Login" })
+    res.render("login", { layout: "form", title: "Login", objects: { csrf: req.csrfToken() } })
 })
 
 router.post("/login", (req, res) => {
@@ -28,7 +28,7 @@ router.post("/login", (req, res) => {
         }
     }
 
-    res.render("login", { layout: "form", title: "Login" })
+    res.render("login", { layout: "form", title: "Login", objects: { csrf: req.csrfToken() } })
 })
 
 module.exports = router
