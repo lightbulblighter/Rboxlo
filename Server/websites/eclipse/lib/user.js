@@ -852,3 +852,14 @@ exports.loggedOut = (req, res, next) => {
 
     res.redirect("/my/dashboard")
 }
+
+/**
+ * Checks if a user exists
+ * 
+ * @param {number} userID ID of user to verify
+ * @returns {boolean} If user exists
+ */
+exports.exists = async (userID) => {
+    let result = (await sql.run("SELECT 1 FROM `users` WHERE `id` = ?", userID))
+    return result.length > 0
+}

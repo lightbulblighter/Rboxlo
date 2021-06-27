@@ -2,6 +2,7 @@ const moment = require("moment")
 
 const path = require("path")
 
+const session = require(path.join(__dirname, "lib", "session"))
 const util = require(path.join(global.rboxlo.root, "util"))
 const user = require(path.join(__dirname, "lib", "user"))
 
@@ -48,8 +49,7 @@ async function middleware(req, res) {
     } else {
         if (req.session.rboxlo.ip !== req.rboxlo.ip) {
             // Clear the session if different IP
-            req.session.rboxlo = {}
-            req.session.rboxlo.ip = req.rboxlo.ip
+            session.clear(req)
         }
     }
     
@@ -64,6 +64,13 @@ async function middleware(req, res) {
         } else {
             // crumbs of a cookie, sweep it up and get rid of it
             res.clearCookie("remember_me")
+        }
+    }
+
+    // kill session if user does not exist
+    if (req.session.rboxlo.hasOwnProperty("user")) {
+        if (!(await user.exists(req.session.rboxlo.user.id))) {
+            session.clear(req)
         }
     }
 
