@@ -1,6 +1,5 @@
 var router = require("express").Router()
 
-const csurf = require("csurf")
 const bytes = require("bytes")
 const path = require("path")
 
@@ -9,7 +8,6 @@ const games = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib"
 const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
 const sql = require(path.join(global.rboxlo.root, "sql"))
 
-var csrf = csurf({ cookie: true })
 var maxPlaceSize = bytes(games.MAX_PLACE_SIZE, { decimalPlaces: 0 })
 
 // Applications fetched on startup
@@ -19,7 +17,7 @@ setTimeout(async () => {
     applications = application.fetchAll()
 }, 60000)
 
-router.get("/new", user.authenticated, csrf, (req, res) => {
+router.get("/new", user.authenticated, (req, res) => {
     if (!req.session.rboxlo.user.permissions.places.creation) {
         return res.sendStatus(403)
     }
@@ -34,7 +32,7 @@ router.get("/new", user.authenticated, csrf, (req, res) => {
     })
 })
 
-router.post("/new", user.authenticated, csrf, async (req, res) => {
+router.post("/new", user.authenticated, async (req, res) => {
     if (!req.session.rboxlo.user.permissions.places.creation) {
         return res.sendStatus(403)
     }

@@ -1,11 +1,8 @@
 var router = require("express").Router()
 
-const csurf = require("csurf")
 const path = require("path")
 
 const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
-
-var csrf = csurf({ cookie: true })
 
 /**
  * Handles an account/create submission
@@ -137,14 +134,14 @@ async function authenticate (req, res) {
     })
 }
 
-router.post("/register", user.loggedOut, csrf, createAccount)
-router.post("/login", user.loggedOut, csrf, authenticate)
+router.post("/register", user.loggedOut, createAccount)
+router.post("/login", user.loggedOut, authenticate)
 
-router.get("/register", user.loggedOut, csrf, (req, res) => {
+router.get("/register", user.loggedOut, (req, res) => {
     res.render("account/register", { "title": "Register", "objects": { csrf: req.csrfToken() } })
 })
 
-router.get("/login", user.loggedOut, csrf, async (req, res) => {
+router.get("/login", user.loggedOut, async (req, res) => {
     let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
     res.render("account/login", { "title": "Login", "objects": { "csrf": req.csrfToken(), "challenge": challenge } })
 })

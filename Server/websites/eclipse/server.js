@@ -8,6 +8,7 @@ const bp = require("body-parser")
 const rateLimit = require("express-rate-limit")
 const cors = require("cors")
 const fileUpload = require("express-fileupload")
+const csurf = require("csurf")
 
 const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
@@ -63,6 +64,7 @@ app.use(fileUpload({
 app.use(require(path.join(__dirname, "middleware")).obj)
 
 // CSRF protection
+app.use(csurf({ cookie: true }))
 app.use((err, req, res, next) => {
     if (err.code !== "EBADCSRFTOKEN") return next(err)
 
