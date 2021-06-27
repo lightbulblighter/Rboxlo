@@ -7,6 +7,7 @@ const path = require("path")
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const games = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "games"))
 const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
+const sql = require(path.join(global.rboxlo.root, "sql"))
 
 var csrf = csurf({ cookie: true })
 var maxPlaceSize = bytes(games.MAX_PLACE_SIZE, { decimalPlaces: 0 })
@@ -103,6 +104,47 @@ router.post("/new", user.authenticated, csrf, async (req, res) => {
 
         res.render("games/places/new", { title: "New Place", "objects": objects })
     })
+})
+
+router.get("/json", user.authenticated, async (req, res) => {
+    let limit = 25
+    let pageNumber = 1
+
+    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page)) {
+        pageNumber = req.query.page
+    }
+
+    let startFrom = (pageNumber - 1) * limit
+
+    let result = []
+    let places = (await sql.run(`SELECT \`id\`, \`game_id\`, \`game_uuid\`, \`uuid\`, \`name\`, \`is_start_place\`, \`visits\` FROM \`places\` LIMIT ${startFrom}, ${limit}`,))
+
+    // sift through places to get:
+    // a. assign currently playing to each place
+    // b. sort places by currently playing
+    // c. normalize column names and create a games array for each place
+    for (i = 0; i < places.length; i++) { 
+        let place = places[i]
+        
+        result.push({
+            id: place.id,
+            uuid: place.uuid,
+            name: place.name,
+            isStartPlace: (place.is_start_place == 0 ? false : true),
+            visits: place.visits,
+            activePlayers: await (games.getActivePlayersByPlaceID(place.id)),
+            game: {
+                id: place.game_id,
+                uuid: place.game_uuid
+            }
+        })
+    }
+
+    // sort
+    result.sort((a, b) => { (a.activePlayers > b.activePlayers) ? 1: -1 })
+
+    // return
+    res.json(result)
 })
 
 module.exports = router

@@ -114,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `places` (
   `is_start_place` int(11) NOT NULL,
   `created_timestamp` int(11) NOT NULL,
   `last_updated` int(11) NOT NULL,
+  `fee` int(11) NOT NULL DEFAULT 0,
   `private_servers_enabled` int(11) NOT NULL DEFAULT 0,
   `private_servers_fee` int(11) NOT NULL DEFAULT 0,
   `visits` int(11) NOT NULL DEFAULT 0,

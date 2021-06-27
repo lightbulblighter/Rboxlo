@@ -282,3 +282,13 @@ exports.uploadPlaceFile = async (userID, placeID, file) => {
 
     return true
 }
+
+/**
+ * Returns number of players active on a place
+ * 
+ * @param {number} placeID Place ID
+ * @returns Number of active players
+ */
+exports.getActivePlayersByPlaceID = async (placeID) => {
+    return 0
+}
