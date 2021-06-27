@@ -1,9 +1,8 @@
 var router = require("express").Router()
 
-const compare = require("safe-compare")
-const crypto = require("crypto")
 const path = require("path")
 
+const kryptshun = require(path.join(global.rboxlo.root, "kryptshun"))
 const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
 
 // LAID: Link Active ID
@@ -17,12 +16,9 @@ router.get("/login", (req, res) => {
     res.render("login", { layout: "form", title: "Login", objects: { csrf: req.csrfToken() } })
 })
 
-router.post("/login", (req, res) => {
-    // TODO: This is super insecure and dumb way to lock down the most crucial part of the site
-    // Migrate this to argon2 real soon, this is only sha256 to make it more simple
+router.post("/login", async (req, res) => {
     if (req.body.hasOwnProperty("password") && req.body.password.length > 0) {
-        let hash = crypto.createHash("sha256").update(req.body.password).digest("hex")
-        if (compare(global.rboxlo.env.TOOTSIE_PASSWORD, hash)) {
+        if (await kryptshun.passwordVerify(global.rboxlo.env.TOOTSIE_PASSWORD, req.body.password)) {
             req.session.rboxlo.user = { in: true }
             return res.redirect("/")
         }
