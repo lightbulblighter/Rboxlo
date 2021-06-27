@@ -68,7 +68,7 @@ async function middleware(req, res) {
     }
 
     // kill session if user does not exist
-    if (req.session.rboxlo.hasOwnProperty("user")) {
+    if (req.session.rboxlo.hasOwnProperty("user") && req.session.rboxlo.user.length > 0) {
         if (!(await user.exists(req.session.rboxlo.user.id))) {
             session.clear(req)
         }

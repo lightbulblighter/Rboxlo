@@ -264,7 +264,7 @@ exports.uploadPlaceFile = async (userID, placeID, file) => {
     let currentVersion = 1
 
     if (newVersion) {
-        currentVersion = Math.max(fs.readdirSync(destinationPath)) + 1
+        currentVersion = Math.max.apply(null, fs.readdirSync(destinationPath)) + 1
     }
 
     if (!newVersion) {
