@@ -104,7 +104,7 @@ router.post("/new", user.authenticated, async (req, res) => {
     })
 })
 
-router.get("/json", user.authenticated, async (req, res) => {
+router.get("/json", async (req, res) => {
     let limit = 25
     let pageNumber = 1
 

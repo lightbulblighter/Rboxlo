@@ -4,7 +4,7 @@ const path = require("path")
 
 const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
 
-router.get("/", user.authenticated, (req, res) => {
+router.get("/", (req, res) => {
     res.render("games/index", { title: "Games" })
 })
 
