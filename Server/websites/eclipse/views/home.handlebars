@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-header">Create an account</div>
                     <div class="card-body">
-                        <form id="register-form" method="post" action="/account/create">
+                        <form id="register-form" method="post" action="/account/register">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input id="username" name="username" aria-describedby="username-info" type="text" class="form-control" required="required">
@@ -35,7 +35,7 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input id="password1" name="password1" aria-describedby="password1-info" type="password" class="form-control" required="required">
-                                <small id="password1-info" class="form-text text-muted">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>.</small>
+                                <small id="password1-info" class="form-text text-muted">Passwords are hashed via <a href="https://en.wikipedia.org/wiki/Argon2" tabindex="-1">Argon2</a>.</small>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Confirm Password</label>
