@@ -14,7 +14,7 @@ document.onreadystatechange = function() {
             if (elements[i].getAttribute("href") == path) {
                 elements[i].classList.add("active");
                 elements[i].setAttribute("href", "#");
-                elements[i].addAttribute("aria-current", "page");
+                elements[i].setAttribute("aria-current", "page");
             }
         }
     }
