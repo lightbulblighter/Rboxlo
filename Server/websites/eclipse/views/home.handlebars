@@ -42,12 +42,24 @@
                                 <input id="password2" name="password2" aria-describedby="password2-info" type="password" class="form-control" required="required">
                             </div>
                             <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
-                            <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo">Sign up</button>
+                            {{#if rboxlo.captcha.enabled}}
+                                <div class="g-recaptcha" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
+                                {{#if objects.form.captcha}}
+                                    <span class="error-text">{{ objects.form.captcha.message }}</span><br>
+                                {{/if}}
+                            {{/if}}
+                            <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo mt-3">Sign up</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <br><br>
+    {{/content}}
+
+    {{#content "scripts" mode="append"}}
+        {{#if rboxlo.captcha.enabled}}
+            <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+        {{/if}}
     {{/content}}
 {{/layout}}
