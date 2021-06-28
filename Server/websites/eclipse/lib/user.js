@@ -230,14 +230,14 @@ function generateDefaultSignInHistory (ip, userAgent, stringified = true) {
  */
 async function appendToSignInHistory(userId, ip, userAgent) {
     let history = (await sql.run("SELECT `sign_in_history` FROM `users` WHERE `id` = ?", userId))[0]
-    history = kryptshun.decrypt(history)
+    history = kryptshun.decrypt(history.sign_in_history)
 
     history[moment().unix()] = { "ip": ip, "userAgent": userAgent }
     
     history = JSON.stringify(history)
     history = kryptshun.encrypt(history)
 
-    await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", history, userId)
+    await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", [history, userId])
 }
 
 /**

@@ -130,6 +130,10 @@ async function authenticate (req, res) {
             delete req.session.rboxlo.redirect
         }
 
+        if (response.targets.hasOwnProperty("username") && response.targets.username == "Invalid username or password.") {
+            delete objects.form.password
+        }
+        
         res.render("account/login", { "title": "Login", "objects": objects })
     })
 }
