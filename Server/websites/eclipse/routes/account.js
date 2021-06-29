@@ -11,6 +11,10 @@ const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib",
  * @param {array} res Result body
  */
 async function createAccount (req, res) {
+    if (!global.rboxlo.env.PRIVACY_REGISTRATION) {
+        return res.sendStatus(403)
+    }
+
     let objects = {
         "form": {
             "username": { invalid: false },
@@ -142,6 +146,10 @@ router.post("/register", user.loggedOut, createAccount)
 router.post("/login", user.loggedOut, authenticate)
 
 router.get("/register", user.loggedOut, (req, res) => {
+    if (!global.rboxlo.env.PRIVACY_REGISTRATION) {
+        return res.statusCode(403)
+    }
+    
     res.render("account/register", { "title": "Register", "objects": { csrf: req.csrfToken() } })
 })
 

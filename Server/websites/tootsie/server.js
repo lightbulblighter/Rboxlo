@@ -23,6 +23,13 @@ app.locals.rboxlo = {
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
         siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
+    },
+    privacy: {
+        lockdown: global.rboxlo.env.PRIVACY_LOCKDOWN,
+        registration: global.rboxlo.env.PRIVACY_REGISTRATION,
+        referral: global.rboxlo.env.PRIVACY_REFERRAL,
+        inviteOnly: global.rboxlo.env.PRIVACY_INVITE_ONLY,
+        closed: global.rboxlo.env.PRIVACY_CLOSED
     }
 }
 

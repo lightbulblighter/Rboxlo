@@ -8,7 +8,7 @@
     
     {{#content "body"}}
         <br><br>
-        <div class="row flex-center">
+        <div class="row{{#unless rboxlo.privacy.registration }} justify-content-center{{/unless}}">
             <div class="col-md-6 mb-5">
                 <h1 class="text-center"><img src="{{ rboxlo.domain }}/img/brand/large.png" class="img-fluid" width="500" alt="{{ rboxlo.name }}"></h1><hr>
                 <p class="text-start">
@@ -16,6 +16,8 @@
                 </p>
                 <div class="embed-container"><iframe src="https://www.youtube.com/embed/LTnMKjXEnMY" frameborder="0" allowfullscreen></iframe></div>
             </div>
+
+            {{#if rboxlo.privacy.registration}}
 
             <div class="col-md-5 offset-1">
                 <div class="card">
@@ -53,6 +55,8 @@
                     </div>
                 </div>
             </div>
+
+            {{/if}}
         </div>
         <br><br>
     {{/content}}

@@ -52,9 +52,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ rboxlo.domain }}/account/login">Login</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ rboxlo.domain }}/account/register">Register</a>
-                                    </li>
+                                    {{#if rboxlo.privacy.registration}}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ rboxlo.domain }}/account/register">Register</a>
+                                        </li>
+                                    {{/if}}
                                 {{else}}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ rboxlo.domain }}/account/logout">Logout</a>
