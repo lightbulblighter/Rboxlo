@@ -14,6 +14,14 @@ const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.jso
 let app = express()
 let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
 
+app.use((err, req, res, next) => {
+    if (!global.rboxlo.env.PRIVACY_CLOSED) {
+        next()
+    }
+
+    return res.send("closed")
+})
+
 // Expose some non-sensitive variables to the view engine
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
