@@ -1,6 +1,7 @@
 var exports = module.exports = {}
 
 const argon2 = require("argon2")
+const { argon2id } = require("argon2")
 const { StringProvider, CipherSweet, BlindIndex, EncryptedField } = require("ciphersweet-js")
 const crypto = require("crypto")
 
@@ -72,7 +73,7 @@ exports.blind = async (text) => {
  * @returns {string} Password hash
  */
 exports.passwordHash = async (password) => {
-    let hash = await argon2.hash(password)
+    let hash = await argon2.hash(password, { type: argon2.argon2id })
 
     return hash
 }
@@ -86,7 +87,7 @@ exports.passwordHash = async (password) => {
  * @returns {boolean} If the verification was successful
  */
 exports.passwordVerify = async (hash, cleartext) => {
-    let result = await argon2.verify(hash, cleartext)
+    let result = await argon2.verify(hash, cleartext, { type: argon2.argon2id })
 
     return result
 }
