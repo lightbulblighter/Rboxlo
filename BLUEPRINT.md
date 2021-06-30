@@ -35,6 +35,10 @@ Tree-view of Rboxlo application
             - Deploy clients
             - View of Arbiters running and all servers
             - Can manually speak to Ok*r*a
+        - Separated from Eclipse for utility and stability (if Eclipse goes down, Tootsie does not)
+        - Small and sweet
+    - Bush
+        - Basically same thing as Tootsie but moderation and not master panel
         - Moderation panel
             - Linked with user accounts, but you need the E-Mail rather than the username, and two-factor authentication is required
             - Moderation of users, forums
@@ -42,8 +46,6 @@ Tree-view of Rboxlo application
             - Customer support E-Mail access, CANNOT send bulk E-Mails (rate-limits are very strict for this)
                 - ONLY way to access customer support E-Mail is through Tootsie
             - Everything here is logged, and logs go to the master panel
-        - Separated from Eclipse for utility and stability (if Eclipse goes down, Tootsie does not)
-        - Small and sweet
     - Okra
         - Not an Express website
         - Is the middleman for Arbiter communication
