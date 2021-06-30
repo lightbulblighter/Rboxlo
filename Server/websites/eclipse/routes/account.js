@@ -73,12 +73,15 @@ async function createAccount (req, res) {
  * @param {array} res Result body
  */
 async function authenticate (req, res) {
+    let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
+
     let objects = {
         "form": {
             "username": { invalid: false },
             "password": { invalid: false },
         },
-        "csrf": req.csrfToken()
+        "csrf": req.csrfToken(),
+        "challenge": challenge
     }
     
     if (global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
