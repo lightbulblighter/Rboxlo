@@ -14,14 +14,6 @@ const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.jso
 let app = express()
 let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
 
-app.use((err, req, res, next) => {
-    if (!global.rboxlo.env.PRIVACY_CLOSED) {
-        next()
-    }
-
-    return res.send("closed")
-})
-
 // Expose some non-sensitive variables to the view engine
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
@@ -31,13 +23,6 @@ app.locals.rboxlo = {
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
         siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
-    },
-    privacy: {
-        lockdown: global.rboxlo.env.PRIVACY_LOCKDOWN,
-        registration: global.rboxlo.env.PRIVACY_REGISTRATION,
-        referral: global.rboxlo.env.PRIVACY_REFERRAL,
-        inviteOnly: global.rboxlo.env.PRIVACY_INVITE_ONLY,
-        closed: global.rboxlo.env.PRIVACY_CLOSED
     }
 }
 

@@ -36,4 +36,4 @@ We have finished building the Rboxlo Server.
 - For secret keys, you should probably just use a random text generator as the key, as you are not able to access the data. Secret keys are not passwords, and in most cases you will never be using them.
 - Be generous! Give your users a nice stipend. The stipend should be balanced with how you are pricing official items on the Rboxlo Catalog. By default, users receieve 25 Rbux daily.
 - The timezone (`TZ`) in the environment file is in accordance with the [TZ database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Use the specific city you are hosting Rboxlo in as your timezone.
-- `TOOTSIE_PASSWORD` is going to be the Argon2 hash of the password you'll be using to access `tootsie.your.domain`. Tootsie gives you full control, so make this a long and secure password. You'll have to generate a Argon2 hash of it before putting it in your environment file.
+- `TOOTSIE_PASSWORD` is going to be the the password you'll be using to access `tootsie.your.domain`. Tootsie gives you full control, so make this a long and secure password.
