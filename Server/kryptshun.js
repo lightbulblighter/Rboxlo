@@ -1,7 +1,6 @@
 var exports = module.exports = {}
 
 const argon2 = require("argon2")
-const { argon2id } = require("argon2")
 const { StringProvider, CipherSweet, BlindIndex, EncryptedField } = require("ciphersweet-js")
 const crypto = require("crypto")
 
