@@ -8,6 +8,7 @@ const path = require("path")
 const rateLimit = require("express-rate-limit")
 const csurf = require("csurf")
 
+const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
 const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
 
@@ -27,7 +28,7 @@ app.locals.rboxlo = {
 }
 
 // Set up view engine
-let hbs = exphbs.create()
+let hbs = exphbs.create({ helpers: hbh })
 
 hbs.handlebars.registerHelper(layouts(hbs.handlebars))
 hbs.handlebars.registerPartial("partials/layout", "{{prefix}}")

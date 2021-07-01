@@ -1,5 +1,80 @@
 {{#> layout}}
     {{#content "body"}}
-        <h1>Modify Application</h1>
+        <h1 class="mb-3">Modify Application</h1>
+
+        {{#if objects.apps}}
+            <div class="d-flex justify-content-between mb-3">
+                <h3>Pick an application</h3>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-repeat"></i> Refresh
+                </button>
+            </div>
+            
+            {{#if objects.apps.length}}
+                <table class="table table-striped table-hover" id="data">
+                    <thead class="table-light"><tr>
+                        <th style="width: 2%"></th>
+                        <th scope="col" class="text-center">ID</th>
+                        <th scope="col">UUID</th>
+                        <th scope="col">Latest Deployed Version UUID</th>
+                        <th scope="col">Internal Name</th>
+                        <th scope="col">Display Name</th>
+                        <th scope="col">Last Updated</th>
+                        <th scope="col">Time Created</th>
+                    </tr></thead>
+                    <tbody>
+                        {{#each objects.apps}}
+                            <tr>
+                                <th class="align-middle" scope="row" style="width: 2%">
+                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}">
+                                        <button class="btn btn-secondary btn-sm" type="button">
+                                            <i class="fas fa-pencil"></i>
+                                        </button>
+                                    </a>
+                                </th>
+                                <th class="text-center">{{ this.id }}</th>
+                                <td>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <code id="uuid">{{ this.uuid }}</code>
+                                        <button class="btn btn-secondary btn-sm" onclick="copyUUID()"><i class="fas fa-clipboard"></i></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <code id="lastVersionUUID">{{ this.uuid }}</code>
+                                        <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()"><i class="fas fa-clipboard"></i></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <code id="internalName">{{ this.uuid }}</code>
+                                        <button class="btn btn-secondary btn-sm" onclick="copyInternalName()"><i class="fas fa-clipboard"></i></button>
+                                    </div>
+                                </td>
+                                <td class="align-middle">{{ this.display_name }}</th>
+                                <td class="align-middle">{{ unix2timestamp this.last_updated_timestamp }}</td>
+                                <td class="align-middle">{{ unix2timestamp this.created_timestamp }}</th>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="d-flex align-items-center justify-content-center h-50">
+                    <div class="text-center">
+                        <img src="{{ rboxlo.domain }}/img/blob-tired.png" class="error-image">
+                        <h3>No applications found</h3>
+                        <span>Why don't you <a href="{{ rboxlo.domain }}/games/application/new">make one?</a></a></span>
+                    </div>
+                </div>
+            {{/if}}
+        {{else}}
+            <h3 class="mb-3">Viewing application "{{ app.display_name }}"</h3>
+            <div class="card">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        {{/if}}
     {{/content}}
 {{/layout}}

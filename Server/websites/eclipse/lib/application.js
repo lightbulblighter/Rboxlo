@@ -9,14 +9,14 @@ const sql = require(path.join(global.rboxlo.root, "sql"))
 /**
  * Checks if a given application exists
  * 
- * @param {string} name Application name
+ * @param {string} name Application name or ID
  * @returns {boolean} If the application exists
  */
-exports.exists = async (name) => {
+exports.exists = async (input) => {
     // DEBUG
-    if (name == "debug") return true
+    if (input == "debug") return true
     
-    let result = (await sql.run("SELECT 1 FROM `applications` WHERE `name` = ?", name))
+    let result = (await sql.run("SELECT 1 FROM `applications` WHERE `name` = ? OR `id` = ?", [input, input]))
 
     return !(result.length == 0)
 }
@@ -44,10 +44,25 @@ exports.create = async (internalName, displayName) => {
     let time = moment().unix()
 
     await sql.run(
-        "INSERT INTO `applications` (`uuid`, `created_timestamp`, `internal_name`, `display_name`) VALUES (?, ?, ?, ?)",
-        [appUUID, time, internalName, displayName]
+        "INSERT INTO `applications` (`uuid`, `last_deployed_version_uuid`, `created_timestamp`, `last_updated_timestamp`, `internal_name`, `display_name`) VALUES (?, ?, ?, ?)",
+        [appUUID, "", time, time, internalName, displayName]
     )
 
     let result = (await sql.run("SELECT `id` FROM `applications` WHERE `uuid` = ?", appUUID))
     return result[0].id
+}
+
+/**
+ * Gets application info by ID
+ * 
+ * @param {number} id app id
+ * @returns {array|boolean} result if exists, false if not
+ */
+exports.getInfo = async (id) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+    
+    let result = await sql.run("SELECT * FROM `applications` WHERE `id` = ?", id)
+    return result[0]
 }

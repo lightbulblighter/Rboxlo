@@ -21,8 +21,14 @@ router.get("/jobs", user.authenticated, (req, res) => {
     res.render("games/application/jobs", { title: "Manage Jobs with Application", laid: "games.application.jobs" })
 })
 
-router.get("/modify", user.authenticated, (req, res) => {
-    res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify" })
+router.get("/modify", user.authenticated, async (req, res) => {
+    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page) && validator.isInt(req.query.id)) {
+        let id = parseInt(req.query.id)
+        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { app: (await application.getInfo(id)) } })
+    } else {
+        let applications = await application.fetchAll()
+        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { apps: applications } })
+    }
 })
 
 router.post("/new", user.authenticated, async (req, res) => {

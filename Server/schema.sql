@@ -95,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `applications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` text NOT NULL,
   `created_timestamp` int(11) NOT NULL,
+  `last_updated_timestamp` int(11) NOT NULL,
+  `last_deployed_version_uuid` text NOT NULL,
   `internal_name` text NOT NULL,
   `display_name` text NOT NULL,
   PRIMARY KEY (`id`)

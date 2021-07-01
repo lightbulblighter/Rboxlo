@@ -17,3 +17,17 @@ document.onreadystatechange = function() {
         }
     }
 }
+
+// Copying
+// TODO finis hthis when iawkeu p its 3am
+function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+        return;
+    }
+
+    navigator.clipboard.writeText(text);
+}
+
+function copyUUID() { }
+function copyLastVersionUUID() { }
+function copyInternalName() { }
