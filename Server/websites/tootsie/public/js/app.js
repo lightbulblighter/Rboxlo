@@ -20,13 +20,48 @@ document.onreadystatechange = function() {
 
 // Copying
 function copyTextToClipboard(text) {
-    if (!navigator.clipboard) {
-        return;
-    }
+    if (!navigator.clipboard || !window.isSecureContext) {
+        let area = document.createElement("textarea");
 
-    navigator.clipboard.writeText(text);
+        area.style.position = "fixed";
+        area.style.top = 0;
+        area.style.left = 0;
+
+        area.style.width = "2em";
+        area.style.height = "2em";
+
+        area.style.padding = 0;
+
+        area.style.border = "none";
+        area.style.outline = "none";
+        area.style.boxShadow = "none";
+
+        area.style.background = "transparent";
+
+        area.value = text;
+
+        document.body.appendChild(area);
+        area.focus();
+        area.select();
+        
+        try {
+            document.execCommand("copy");
+        } catch (e) { }
+
+        document.body.removeChild(area);
+    } else {
+        navigator.clipboard.writeText(text);
+    }
 }
 
-function copyUUID() { copyTextToClipboard(document.getElementById("uuid").textContent); }
-function copyLastVersionUUID() { copyTextToClipboard(document.getElementById("lastVersionUUID").textContent); }
-function copyInternalName() { copyTextToClipboard(document.getElementById("internalName").textContent); }
+function copyUUID() {
+    copyTextToClipboard(document.getElementById("uuid").textContent);
+}
+
+function copyLastVersionUUID() {
+    copyTextToClipboard(document.getElementById("lastVersionUUID").textContent);
+}
+
+function copyInternalName() {
+    copyTextToClipboard(document.getElementById("internalName").textContent);
+}
