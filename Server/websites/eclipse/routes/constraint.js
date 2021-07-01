@@ -18,7 +18,6 @@ router.get("/constraint", user.loggedOut, async (req, res) => {
 })
 
 router.post("/constraint", user.loggedOut, async (req, res) => {
-    console.log("A")
     let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
     let output = {
         layout: "constraint",
