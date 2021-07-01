@@ -1,0 +1,40 @@
+{{#> layout}}
+    {{#content "body"}}
+		<div class="logo">
+			<img src="{{ rboxlo.domain }}/img/brand/large.png" width="400">
+		</div>
+		
+		<div class="sign-in">
+			<h2>Sign In</h2>
+			<form action="/constraint" method="post">
+				<div class="field">
+					<label for="username">Username</label>
+					<img src="{{ rboxlo.domain }}/img/constraint/user.png" class="icon">
+					<input name="username" type="text" required>
+				</div>
+				
+				<div class="field">
+					<label for="password">Password</label>
+					<img src="{{ rboxlo.domain }}/img/constraint/key.png" class="icon">
+					<input name="password" type="text" required>
+				</div>
+
+				<div class="checkbox">
+					<input name="rememberMe" type="checkbox" value="true">
+					<label for="rememberMe">Remember me</label>
+				</div>
+				
+				<input type="hidden" value="{{ objects.csrf }}" name="csrf">
+
+				<div class="submit">
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+
+            {{#if objects.response}}
+				<br>
+			    <div class="error-message">{{ objects.response }}</div>
+            {{/if}}
+		</div>
+    {{/content}}
+{{/layout}}

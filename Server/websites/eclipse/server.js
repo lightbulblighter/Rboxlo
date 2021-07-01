@@ -24,7 +24,21 @@ app.locals.rboxlo = {
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
         siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
+    },
+    privacy: {
+        lockdown: global.rboxlo.env.PRIVATE_LOCKDOWN,
+        registration: global.rboxlo.env.PRIVATE_REGISTRATION,
+        referral: global.rboxlo.env.PRIVATE_REFERRAL,
+        inviteOnly: global.rboxlo.env.PRIVATE_INVITE_ONLY,
+        closed: global.rboxlo.env.PRIVATE_CLOSED
     }
+}
+
+// Closed or not?
+if (global.rboxlo.env.PRIVATE_CLOSED) {
+    app.use((req, res, next) => {
+        return res.send("closed")
+    })
 }
 
 // Set up view engine
@@ -68,7 +82,9 @@ app.use(csurf({ cookie: true }))
 app.use((err, req, res, next) => {
     if (err.code !== "EBADCSRFTOKEN") return next(err)
 
+    console.log("bad csrf")
     return res.sendStatus(403)
+    
     // provide no further context
 })
 
@@ -79,10 +95,23 @@ app.use(rateLimit({
     max: 100 // 100 requests per 10 minutes
 }))
 
-// Routes
-app.use(require(path.join(__dirname, "routes")))
-
 // Static resources (CSS, JavaScript, images, etc.)
 app.use(express.static(path.join(__dirname, "public")))
+
+// Constraint
+if (global.rboxlo.env.PRIVATE_LOCKDOWN) {
+    app.use(require(path.join(__dirname, "routes", "constraint")))
+    app.use((req, res, next) => {
+        if (req.session.hasOwnProperty("user")) {
+            return next()
+        } else {
+            req.session.rboxlo.redirect = `${req.protocol}://${req.get("host")}${req.originalUrl}`
+            return res.redirect("/constraint")
+        }
+    })
+}
+
+// Routes
+app.use(require(path.join(__dirname, "routes")))
 
 module.exports.app = app
