@@ -42,12 +42,12 @@
 /* Sticky footer */
 main > .container { padding-top: 60px }
 
-/* Games */
-.games-filter-card {
-	max-height: 44.5vh;
-	width: 32%;
+/* Dashboard */
+.user-thumbnail-dashboard {
+	max-width: 300px;
 }
 
+/* Games */
 .games-place-img {
 	max-width: 150px;
 	max-height: 150px;

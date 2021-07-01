@@ -1,6 +1,6 @@
 {{#> layout}}
     {{#content "body"}}
-        <div class="d-flex justify-content-between mt-3 mb-3">
+        <div class="d-flex justify-content-between my-3">
             <h2>Games</h2>
 
             {{#if session}}
@@ -43,15 +43,15 @@
             </div>
 
             <div class="card-body">
-                <div class="d-flex justify-content-left mt-2">
-                    <div class="card card-body games-filter-card">
+                <div class="row mt-2 justify-content-center px-3">
+                    <div class="card card-body mb-3 col-lg-1 me-2" style="height:0%;">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search places" id="search-field">
-                            <button type="button" id="search-button" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control form-control-sm" placeholder="Search places" id="search-field">
+                            <button type="button" id="search-button" class="btn btn-sm btn-secondary"><i class="fas fa-search"></i></button>
                         </div>
 
-                        <div class="d-flex justify-content-end mb-2">
-                            <small class="form-text text-muted mt-0"><a href="#" class="text-decoration-none" id="advanced-modal">(advanced)</a></small>
+                        <div>
+                            <small class="form-text text-muted mt-0 float-end"><a href="#" class="text-decoration-none" id="advanced-modal">(advanced)</a></small>
                         </div>
                         
                         <br>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     
-                    <div class="row w-100 mx-3 justify-content-center">
+                    <div class="row col-lg-10">
                         <div class="col-md-auto mb-3 px-2" id="places-content">
                             <!--
                             <div class="card card-body px-2 py-2">
