@@ -44,7 +44,7 @@ exports.create = async (internalName, displayName) => {
     let time = moment().unix()
 
     await sql.run(
-        "INSERT INTO `applications` (`uuid`, `last_deployed_version_uuid`, `created_timestamp`, `last_updated_timestamp`, `internal_name`, `display_name`) VALUES (?, ?, ?, ?)",
+        "INSERT INTO `applications` (`uuid`, `last_deployed_version_uuid`, `created_timestamp`, `last_updated_timestamp`, `internal_name`, `display_name`) VALUES (?, ?, ?, ?, ?, ?)",
         [appUUID, "", time, time, internalName, displayName]
     )
 
