@@ -109,7 +109,7 @@ router.get("/json", async (req, res) => {
     let limit = 25
     let pageNumber = 1
 
-    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page) && validator.isInt(req.query.id)) {
+    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page) && validator.isInt(req.query.page)) {
         pageNumber = parseInt(req.query.page)
     }
 
