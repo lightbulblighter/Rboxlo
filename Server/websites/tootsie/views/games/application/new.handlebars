@@ -1,5 +1,35 @@
 {{#> layout}}
     {{#content "body"}}
-        <h1>New Application</h1>
+        <h1 class="mb-3">New Application</h1>
+        {{#if objects.response}}
+            {{#if objects.response.success}}
+                <div class="alert alert-success" role="alert">
+                    Your application has successfully been created! <a href="{{ rboxlo.domain }}/games/application/modify?id={{ objects.response.id }}">Click here to view it</a>
+                </div>
+            {{else}}
+                <div class="alert alert-danger" role="alert">
+                    {{ objects.response.message }}
+                </div>
+            {{/if}}
+        {{/if}}
+        <div class="card">
+            <div class="card-header">Details</div>
+            <div class="card-body">
+                <form method="post" action="/games/application/new">
+                    <div class="form-group mb-3">
+                        <label for="internalName" class="form-label">Internal name</label>
+                        <input class="form-control" type="text" name="internalName">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="displayName" class="form-label">Display name</label>
+                        <input class="form-control" type="text" name="displayName">
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
     {{/content}}
 {{/layout}}

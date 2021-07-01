@@ -1,6 +1,8 @@
 var exports = module.exports = {}
 
+const moment = require("moment")
 const path = require("path")
+const uuid = require("uuid")
 
 const sql = require(path.join(global.rboxlo.root, "sql"))
 
@@ -28,4 +30,24 @@ exports.fetchAll = async () => {
     let result = (await sql.run("SELECT * FROM `applications`"))
 
     return result
+}
+
+/**
+ * Creates an application
+ * 
+ * @param {string} internalName Application internal name
+ * @param {string} displayName Application display name
+ * @returns {number} id of new application
+ */
+exports.create = async (internalName, displayName) => {
+    let appUUID = uuid.v4()
+    let time = moment().unix()
+
+    await sql.run(
+        "INSERT INTO `applications` (`uuid`, `created_timestamp`, `internal_name`, `display_name`) VALUES (?, ?, ?, ?)",
+        [appUUID, time, internalName, displayName]
+    )
+
+    let result = (await sql.run("SELECT `id` FROM `applications` WHERE `uuid` = ?", appUUID))
+    return result[0].id
 }
