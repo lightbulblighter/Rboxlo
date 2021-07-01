@@ -2,6 +2,7 @@ var router = require("express").Router()
 
 const bytes = require("bytes")
 const path = require("path")
+const validator = require("validator")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const games = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "games"))
@@ -108,8 +109,8 @@ router.get("/json", async (req, res) => {
     let limit = 25
     let pageNumber = 1
 
-    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page)) {
-        pageNumber = req.query.page
+    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page) && validator.isInt(req.query.id)) {
+        pageNumber = parseInt(req.query.page)
     }
 
     let startFrom = (pageNumber - 1) * limit
