@@ -102,6 +102,16 @@ CREATE TABLE IF NOT EXISTS `applications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `versions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` text NOT NULL,
+  `application_id` int(11) NOT NULL,
+  `created_timestamp` int(11) NOT NULL,
+  `manifest` text NOT NULL,
+  `total_bytes` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `places` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `game_id` int(11) NOT NULL,

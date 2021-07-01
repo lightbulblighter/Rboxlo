@@ -1,8 +1,9 @@
 window.rboxlo = [];
 
-// Active link in sidebar
+// Document init
 document.onreadystatechange = function() {
     if (document.readyState == "interactive") {
+        // Active links
         let elements = document.querySelectorAll("[laid]");
 
         for (let i = 0; i < elements.length; i++) {
@@ -15,6 +16,17 @@ document.onreadystatechange = function() {
                 link.classList.add("text-white");
             }
         }
+
+        // Popovers
+        $('[data-toggle="popover"]').popover({
+            placement: "bottom"
+        });
+
+        $('[data-toggle="popover"]').click(() => {
+            setTimeout(function () {
+                $(".popover").fadeOut("slow");
+            }, 1000);
+        });
     }
 }
 

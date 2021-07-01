@@ -4,7 +4,7 @@
 
         {{#if objects.apps}}
             <div class="d-flex justify-content-between mb-3">
-                <h3>Pick an application</h3>
+                <h3>Choose an application</h3>
 
                 <div class="d-flex align-items-center">
                     <a href="/games/application/new">
@@ -22,8 +22,9 @@
             {{#if objects.apps.length}}
                 <table class="table table-striped table-hover table-bordered" id="data">
                     <thead class="table-light"><tr>
-                        <th scope="col" style="max-width: 4%"></th>
-                        <th scope="col" style="max-width: 4%"></th>
+                        <th scope="col" class="table-button"></th>
+                        <th scope="col" class="table-button"></th>
+                        <th scope="col" class="table-button"></th>
                         <th scope="col" class="text-center">ID</th>
                         <th scope="col">UUID</th>
                         <th scope="col">Latest Deployed Version UUID</th>
@@ -34,24 +35,31 @@
                     </tr></thead>
                     <tbody>
                         {{#each objects.apps}}
-                            <tr>
-                                <th class="align-middle text-center" scope="row" style="max-width: 4%">
-                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}" class="me-1">
+                            <tr data-rboxlo-application-id="{{ this.id }}">
+                                <th class="align-middle text-center table-button" scope="row">
+                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}" class="">
                                         <button class="btn btn-primary btn-sm" type="button">
                                             <i class="fas fa-pencil"></i>
                                         </button>
                                     </a>
                                 </th>
-                                <th class="align-middle text-center" style="max-width: 4%">
+                                <th class="align-middle text-center table-button">
                                     <button class="btn btn-danger btn-sm" type="button">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                </th>
+                                <th class="align-middle text-center table-button">
+                                    <a href="{{ rboxlo.domain }}/games/application/deployment?id={{ this.id }}">
+                                        <button class="btn btn-warning text-light">
+                                            <i class="fas fa-computer-classic"></i>
+                                        </button>
+                                    </a>
                                 </th>
                                 <th class="align-middle text-center">{{ this.id }}</th>
                                 <td class="align-middle">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <code id="uuid">{{ this.uuid }}</code>
-                                        <button class="btn btn-secondary btn-sm" onclick="copyUUID()"><i class="fas fa-clipboard"></i></button>
+                                        <button class="btn btn-secondary btn-sm" onclick="copyUUID()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
                                     </div>
                                 </td>
                                 <td class="align-middle">
@@ -60,19 +68,19 @@
                                     {{else}}
                                         <div class="d-flex justify-content-between align-items-center">
                                             <code id="lastVersionUUID">{{ this.last_deployed_version_uuid }}</code>
-                                            <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()"><i class="fas fa-clipboard"></i></button>
+                                            <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
                                         </div>
                                     {{/unless}}
                                 </td>
                                 <td class="align-middle">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <code id="internalName">{{ this.internal_name }}</code>
-                                        <button class="btn btn-secondary btn-sm" onclick="copyInternalName()"><i class="fas fa-clipboard"></i></button>
+                                        <button class="btn btn-secondary btn-sm" onclick="copyInternalName()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
                                     </div>
                                 </td>
-                                <td class="align-middle">{{ this.display_name }}</th>
+                                <td class="align-middle">{{ this.display_name }}</td>
                                 <td class="align-middle">{{ unix2timestamp this.last_updated_timestamp }}</td>
-                                <td class="align-middle">{{ unix2timestamp this.created_timestamp }}</th>
+                                <td class="align-middle">{{ unix2timestamp this.created_timestamp }}</td>
                             </tr>
                         {{/each}}
                     </tbody>
@@ -87,11 +95,33 @@
                 </div>
             {{/if}}
         {{else}}
-            <h3 class="mb-3">Viewing application "{{ objects.app.display_name }}" <small>(<code>{{ objects.app.internal_name }}</code>)</small></h3>
-            <div class="card">
-                <div class="card-header">Details</div>
+            <h3 class="mb-2">Viewing application "{{ objects.app.display_name }}"</h3>
+            <a href="/games/application/modify" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
+            <div class="card mt-2">
                 <div class="card-body">
-
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <b>ID:</b> <code>{{ objects.app.id }}</code><br>
+                            <b>Display name:</b> <code id="displayName">{{ objects.app.display_name }}</code> <a href="#" onclick="editDisplayName()"><small>(edit)</small></a><br>
+                            <b>Internal name:</b> <code id="internalName">{{ objects.app.internal_name }}</code> <a href="#" onclick="editInternalName()"><small>(edit)</small></a>
+                            <br><br>
+                            <b>UUID:</b> <code id="uuid">{{ objects.app.uuid }}</code> <a href="#" onclick="regenUUID()"><small>(regen)</small></a><br>
+                            <b>Last Deployed Version UUID:</b> {{#if objects.app.last_deployed_version_uuid.length}}<code>{{ objects.app.last_deployed_version_uuid }}</code>{{else}}<i>none</i>{{/if}}
+                            <br><br>
+                            <b>Time Created:</b> {{ unix2timestamp objects.app.created_timestamp }}<br>
+                            <b>Last Updated:</b> {{ unix2timestamp objects.app.last_updated_timestamp }}
+                            <br><br>
+                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete this application</button>
+                        </div>
+                        <div class="col-lg">
+                            <div class="card">
+                                <div class="card-header">Version history</div>
+                                <div class="card-body">
+                                    No software has ever been deployed to this application before
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         {{/if}}
