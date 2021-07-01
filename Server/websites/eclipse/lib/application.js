@@ -25,7 +25,7 @@ exports.exists = async (name) => {
  * @returns {array} Application names
  */
 exports.fetchAll = async () => {
-    let result = (await sql.run("SELECT `name` FROM `applications`"))
+    let result = (await sql.run("SELECT * FROM `applications`"))
 
     return result
 }

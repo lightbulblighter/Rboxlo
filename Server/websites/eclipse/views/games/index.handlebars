@@ -1,6 +1,6 @@
 {{#> layout}}
     {{#content "body"}}
-        <div class="d-flex justify-content-between mt-3">
+        <div class="d-flex justify-content-between mt-3 mb-3">
             <h2>Games</h2>
 
             {{#if session}}
@@ -21,9 +21,84 @@
                         </button>
                     {{/if}}
                 </div>
+
+                <a href="{{ rboxlo.domain }}/games/download">
+                    <button class="btn btn-success">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </a>
+            {{/if}}
+        </div>
+
+        <div class="card mb-3" style="min-height: 80vh">
+            <div class="card-header">
+                <ul class="card-header-tabs nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#" id="placec-page">Places</a>
+                    </li>
+                    <li disabled="" class="nav-item disabled">
+                        <a href="#" class="nav-link disabled" id="servers-page">Servers</a>
+                    </li>
+                </ul>
             </div>
-        {{/if}}
-        
-        <br>
+
+            <div class="card-body">
+                <div class="d-flex justify-content-left mt-2">
+                    <div class="card card-body games-filter-card">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search places" id="search-field">
+                            <button type="button" id="search-button" class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                        </div>
+
+                        <div class="d-flex justify-content-end mb-2">
+                            <small class="form-text text-muted mt-0"><a href="#" class="text-decoration-none" id="advanced-modal">(advanced)</a></small>
+                        </div>
+                        
+                        <br>
+                        
+                        <div class="card">
+                            <div class="card-header px-2 py-1">
+                                <small>Applications</small>
+                            </div>
+                            
+                            <div class="card-body px-2 py-1">
+                                <div class="form-check form-control-sm mb-0 py-0">
+                                    <input type="checkbox" value="" id="view-all" name="view-all" class="form-check-input" checked="true">
+                                    <label class="form-check-label" for="view-all">All</label>
+                                </div>
+                                {{#each objects.versions}}
+                                    <div class="form-check form-control-sm mb-0 py-0">
+                                        <input type="checkbox" value="" id="{{ this.internal_name }}" name="{{ this.internal_name }}" class="form-check-input">
+                                        <label class="form-check-label" for="{{ this.internal_name }}">{{ this.display_name }}</label>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row w-100 mx-3 justify-content-center">
+                        <div class="col-md-auto mb-3 px-2" id="places-content">
+                            <!--
+                            <div class="card card-body px-2 py-2">
+                                <div class="text-center">
+                                    <h5 class="mb-0">Crossroads</h5>
+                                    <small>by <a href="/user?id=1" class="text-decoration-none">Carrot</a></small>
+                                    <hr class="my-2">
+                                    <img src="https://cdn.discordapp.com/attachments/857352047119564809/859861185708949504/unknown.png" class="mb-2 rounded games-place-img">
+                                    <br>
+                                    <span class="text-secondary text-center"><i class="fas fa-users"></i> <small>0 playing</small></span>
+                                    <br>
+                                    <div class="d-flex justify-content-between mt-1 px-1">
+                                        <span><small class="text-success"><i class="fas fa-thumbs-up"></i> 100%</small></span>
+                                        <span><small class="text-danger"><i class="fas fa-thumbs-down"></i> 0%</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/content}}
 {{/layout}}

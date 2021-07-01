@@ -81,9 +81,8 @@
                             <label for="application" class="form-label">Application</label>
                             <select name="application" class="form-select form-select-sm{{#if objects.form.application}} is-{{#if objects.form.application.invalid}}in{{/if}}valid{{/if}}" required="required">
                                 {{#each objects.versions}}
-                                    <option value="{{this}}">{{this}}</option>
+                                    <option value="{{ this.internal_name }}">{{ this.display_name }}</option>
                                 {{/each}}
-                                <option value="debug">debug</option>
                             </select>
                             {{#if objects.form.application.invalid}}
                                 <div class="invalid-feedback">{{ objects.form.application.message }}</div>
