@@ -19,7 +19,6 @@ document.onreadystatechange = function() {
 }
 
 // Copying
-// TODO finis hthis when iawkeu p its 3am
 function copyTextToClipboard(text) {
     if (!navigator.clipboard) {
         return;
@@ -28,6 +27,6 @@ function copyTextToClipboard(text) {
     navigator.clipboard.writeText(text);
 }
 
-function copyUUID() { }
-function copyLastVersionUUID() { }
-function copyInternalName() { }
+function copyUUID() { copyTextToClipboard(document.getElementById("uuid").textContent); }
+function copyLastVersionUUID() { copyTextToClipboard(document.getElementById("lastVersionUUID").textContent); }
+function copyInternalName() { copyTextToClipboard(document.getElementById("internalName").textContent); }

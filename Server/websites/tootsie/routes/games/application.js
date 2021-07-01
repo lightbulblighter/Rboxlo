@@ -1,6 +1,7 @@
 var router = require("express").Router()
 
 const path = require("path")
+const validator = require("validator")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
@@ -22,9 +23,19 @@ router.get("/jobs", user.authenticated, (req, res) => {
 })
 
 router.get("/modify", user.authenticated, async (req, res) => {
-    if (req.query.hasOwnProperty("page") && !isNaN(req.query.page) && validator.isInt(req.query.id)) {
-        let id = parseInt(req.query.id)
-        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { app: (await application.getInfo(id)) } })
+    if (req.query.hasOwnProperty("id")) {
+        if (!isNaN(req.query.id) && validator.isInt(req.query.id)) {
+            let id = parseInt(req.query.id)
+
+            if (!application.exists(id)) {
+                return res.redirect("/games/application/modify")
+            }
+
+            let app = (await application.getInfo(id))
+            res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { "app": app } })
+        } else {
+            return res.redirect("/games/application/modify")
+        }
     } else {
         let applications = await application.fetchAll()
         res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { apps: applications } })

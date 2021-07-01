@@ -9,14 +9,14 @@ const sql = require(path.join(global.rboxlo.root, "sql"))
 /**
  * Checks if a given application exists
  * 
- * @param {string} name Application name or ID
+ * @param {string} name Application internal name or ID
  * @returns {boolean} If the application exists
  */
 exports.exists = async (input) => {
     // DEBUG
     if (input == "debug") return true
     
-    let result = (await sql.run("SELECT 1 FROM `applications` WHERE `name` = ? OR `id` = ?", [input, input]))
+    let result = (await sql.run("SELECT 1 FROM `applications` WHERE `internal_name` = ? OR `id` = ?", [input, input]))
 
     return !(result.length == 0)
 }

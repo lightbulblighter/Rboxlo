@@ -5,15 +5,25 @@
         {{#if objects.apps}}
             <div class="d-flex justify-content-between mb-3">
                 <h3>Pick an application</h3>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-repeat"></i> Refresh
-                </button>
+
+                <div class="d-flex align-items-center">
+                    <a href="/games/application/new">
+                        <button class="btn btn-primary me-2">
+                            <i class="fas fa-plus"></i> New Application
+                        </button>
+                    </a>
+
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-repeat"></i> Refresh
+                    </button>
+                </div>
             </div>
             
             {{#if objects.apps.length}}
-                <table class="table table-striped table-hover" id="data">
+                <table class="table table-striped table-hover table-bordered" id="data">
                     <thead class="table-light"><tr>
-                        <th style="width: 2%"></th>
+                        <th scope="col" style="max-width: 4%"></th>
+                        <th scope="col" style="max-width: 4%"></th>
                         <th scope="col" class="text-center">ID</th>
                         <th scope="col">UUID</th>
                         <th scope="col">Latest Deployed Version UUID</th>
@@ -25,29 +35,38 @@
                     <tbody>
                         {{#each objects.apps}}
                             <tr>
-                                <th class="align-middle" scope="row" style="width: 2%">
-                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}">
-                                        <button class="btn btn-secondary btn-sm" type="button">
+                                <th class="align-middle text-center" scope="row" style="max-width: 4%">
+                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}" class="me-1">
+                                        <button class="btn btn-primary btn-sm" type="button">
                                             <i class="fas fa-pencil"></i>
                                         </button>
                                     </a>
                                 </th>
-                                <th class="text-center">{{ this.id }}</th>
-                                <td>
+                                <th class="align-middle text-center" style="max-width: 4%">
+                                    <button class="btn btn-danger btn-sm" type="button">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </th>
+                                <th class="align-middle text-center">{{ this.id }}</th>
+                                <td class="align-middle">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <code id="uuid">{{ this.uuid }}</code>
                                         <button class="btn btn-secondary btn-sm" onclick="copyUUID()"><i class="fas fa-clipboard"></i></button>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <code id="lastVersionUUID">{{ this.uuid }}</code>
-                                        <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()"><i class="fas fa-clipboard"></i></button>
-                                    </div>
+                                <td class="align-middle">
+                                    {{#unless this.last_deployed_version_uuid.length}}
+                                        <i>none</i>
+                                    {{else}}
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <code id="lastVersionUUID">{{ this.last_deployed_version_uuid }}</code>
+                                            <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()"><i class="fas fa-clipboard"></i></button>
+                                        </div>
+                                    {{/unless}}
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <code id="internalName">{{ this.uuid }}</code>
+                                        <code id="internalName">{{ this.internal_name }}</code>
                                         <button class="btn btn-secondary btn-sm" onclick="copyInternalName()"><i class="fas fa-clipboard"></i></button>
                                     </div>
                                 </td>
@@ -68,7 +87,7 @@
                 </div>
             {{/if}}
         {{else}}
-            <h3 class="mb-3">Viewing application "{{ app.display_name }}"</h3>
+            <h3 class="mb-3">Viewing application "{{ objects.app.display_name }}" <small>(<code>{{ objects.app.internal_name }}</code>)</small></h3>
             <div class="card">
                 <div class="card-header">Details</div>
                 <div class="card-body">
