@@ -17,12 +17,12 @@ $(document).ready(() => {
 })
 
 // Copying
-function copy(element) {
-    let text = $(`#${element}`).text()
+function copy(id) {
+    let text = $(`#${id}`).text()
 
     if (!navigator.clipboard || !window.isSecureContext) {
         let area = $("<textarea>", {
-            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent;"
+            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent"
         })
 
         area.append(text)
@@ -45,10 +45,12 @@ function copy(element) {
 }
 
 // Modify Application
-function fetchApplicationDataModify() {
-    $("#data").addClass("d-none")
-    $("#data-loading").removeClass("d-none")
-
+function fetchApplicationDataModify(firstTime = false) {
+    if (!firstTime) {
+        $("#data").addClass("d-none")
+        $("#data-loading").removeClass("d-none")
+    }
+    
     let body = $("#data-body")
     body.html("")
 
@@ -59,7 +61,7 @@ function fetchApplicationDataModify() {
                 $("#data-loading").addClass("d-none")
                 $("#data-empty").removeClass("d-none")
             } else {
-                $(data).each((i, app) => {
+                $(data).each((_, app) => {
                     let container = $("<tr>", { "data-rboxlo-application-id": app.id })
                     
                     let edit = $("<td>", {
@@ -119,7 +121,12 @@ function fetchApplicationDataModify() {
                             $("<button>", { class: "btn btn-secondary btn-sm", onclick: `copy('data-lastVersionUUID-${app.id}')` }).append($("<i>", { class: "fas fa-clipboard" }))
                         ]))
                     } else {
-                        lastVersionUUID.append($("<i>").append("none"))
+                        lastVersionUUID.append($("<div>", {
+                            class: "d-flex justify-content-between align-items-center"
+                        }).append([
+                            $("<i>", { class: "text-muted" }).append("none"),
+                            $("<button>", { class: "btn btn-secondary btn-sm", disabled: "" }).append($("<i>", { class: "fas fa-clipboard" }))
+                        ]))
                     }
 
                     let internalName = $("<td>", {
@@ -155,4 +162,37 @@ function fetchApplicationDataModify() {
                 }, 200)
             }
         })
+}
+
+function regenUUIDModify() {
+    let spinner = $("#spinner-uuid")
+    spinner.removeClass("d-none")
+    
+    let id = $('meta[name="rboxlo-application-id"]').attr("content")
+    let csrf = $('meta[name="rboxlo-csrf"]').attr("content")
+
+    fetch(`${window.rboxlo.domain}/games/application/regen-uuid?id=${id}`, {
+        method: "POST",
+        body: new URLSearchParams({
+            "_csrf": csrf
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            let update = $("#modification-update")
+
+            spinner.addClass("d-none")
+            update.removeClass("d-none")
+            update.removeAttr("style")
+            update.text("Successfully regenerated application UUID!")
+
+            $("#uuid").text(data.newUUID)
+            $("#lastUpdated").text(unix2timestamp(moment().unix()))
+
+            setTimeout(() => {
+                update.fadeOut("slow")
+            }, 2250)
+        }
+    })
 }

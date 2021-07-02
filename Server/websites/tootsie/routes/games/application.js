@@ -2,6 +2,7 @@ var router = require("express").Router()
 
 const path = require("path")
 const validator = require("validator")
+const uuid = require("uuid")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
@@ -32,7 +33,7 @@ router.get("/modify", user.authenticated, async (req, res) => {
             }
 
             let app = (await application.getInfo(id))
-            res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { "application": app } })
+            res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { "application": app, csrf: req.csrfToken() } })
         } else {
             return res.redirect("/games/application/modify")
         }
@@ -64,6 +65,27 @@ router.get("/new", user.authenticated, (req, res) => {
 router.get("/json", user.authenticated, async (req, res) => {
     let applications = (await application.fetchAll())
     return res.json(applications)
+})
+
+router.post("/regen-uuid", user.authenticated, async (req, res) => {
+    if (req.query.hasOwnProperty("id") && !isNaN(req.query.id) && validator.isInt(req.query.id)) {
+        let id = parseInt(req.query.id)
+        if (await application.exists(id)) {
+            let oldUUID = (await application.getInfo(id)).uuid
+            let newUUID = uuid.v4()
+
+            await application.updateUUID(id, newUUID)
+            await application.setLastUpdated(id)
+
+            return res.json({
+                success: true,
+                "oldUUID": oldUUID,
+                "newUUID": newUUID
+            })
+        }
+    }
+
+    return res.json({ success: false })
 })
 
 module.exports = router

@@ -66,3 +66,34 @@ exports.getInfo = async (id) => {
     let result = await sql.run("SELECT * FROM `applications` WHERE `id` = ?", id)
     return result[0]
 }
+
+/**
+ * Updates an applications UUID
+ * 
+ * @param {number} id ID of the application
+ * @param {string} newUUID new UUID
+ * 
+ * @returns {undefined|boolean} false if app doesn't exist
+ */
+exports.updateUUID = async (id, newUUID) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+
+    await sql.run("UPDATE `applications` SET `uuid` = ? WHERE `id` = ?", [newUUID, id])
+}
+
+/**
+ * Updates an applications last updated timestamp
+ * 
+ * @param {number} id ID of the application
+ * 
+ * @returns {boolean} false if app doesn't exist
+ */
+exports.setLastUpdated = async (id) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+
+    await sql.run("UPDATE `applications` SET `last_updated_timestamp` = ? WHERE `id` = ?", [moment().unix(), id])
+}
