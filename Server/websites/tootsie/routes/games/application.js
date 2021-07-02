@@ -3,6 +3,7 @@ var router = require("express").Router()
 const path = require("path")
 const validator = require("validator")
 const uuid = require("uuid")
+const xss = require("xss")
 
 const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
 const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
@@ -68,8 +69,8 @@ router.get("/json", user.authenticated, async (req, res) => {
 })
 
 router.post("/regen-uuid", user.authenticated, async (req, res) => {
-    if (req.query.hasOwnProperty("id") && !isNaN(req.query.id) && validator.isInt(req.query.id)) {
-        let id = parseInt(req.query.id)
+    if (req.body.hasOwnProperty("id") && !isNaN(req.body.id) && validator.isInt(req.body.id)) {
+        let id = parseInt(req.body.id)
         if (await application.exists(id)) {
             let oldUUID = (await application.getInfo(id)).uuid
             let newUUID = uuid.v4()
@@ -81,6 +82,40 @@ router.post("/regen-uuid", user.authenticated, async (req, res) => {
                 success: true,
                 "oldUUID": oldUUID,
                 "newUUID": newUUID
+            })
+        }
+    }
+
+    return res.json({ success: false })
+})
+
+router.post("/update-display-name", user.authenticated, async (req, res) => {
+    if (req.body.hasOwnProperty("id") && !isNaN(req.body.id) && validator.isInt(req.body.id) && req.body.hasOwnProperty("name") && req.body.name.length > 0) {
+        let id = parseInt(req.body.id)
+        if (await application.exists(id)) {
+            await application.updateDisplayName(id, req.body.name)
+            await application.setLastUpdated(id)
+            
+            return res.json({
+                success: true,
+                newName: xss(req.body.name)
+            })
+        }
+    }
+
+    return res.json({ success: false })
+})
+
+router.post("/update-internal-name", user.authenticated, async (req, res) => {
+    if (req.body.hasOwnProperty("id") && !isNaN(req.body.id) && validator.isInt(req.body.id) && req.body.hasOwnProperty("name") && req.body.name.length > 0) {
+        let id = parseInt(req.body.id)
+        if (await application.exists(id)) {
+            await application.updateInternalName(id, req.body.name)
+            await application.setLastUpdated(id)
+            
+            return res.json({
+                success: true,
+                newName: xss(req.body.name)
             })
         }
     }

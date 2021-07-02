@@ -89,9 +89,10 @@ function fetchApplicationDataModify(firstTime = false) {
                     let deploy = $("<td>", {
                         class: "align-middle text-center table-button",
                         scope: "row"
-                    }).append($("<button>", {
+                    }).append($("<a>", {
                         class: "btn btn-success btn-sm text-white",
-                        type: "button"
+                        type: "button",
+                        href: `${window.rboxlo.domain}/games/application/deployment?id=${app.id}`
                     }).append($("<i>", {
                         class: "fas fa-upload"
                     })))
@@ -171,28 +172,195 @@ function regenUUIDModify() {
     let id = $('meta[name="rboxlo-application-id"]').attr("content")
     let csrf = $('meta[name="rboxlo-csrf"]').attr("content")
 
-    fetch(`${window.rboxlo.domain}/games/application/regen-uuid?id=${id}`, {
+    fetch(`${window.rboxlo.domain}/games/application/regen-uuid`, {
         method: "POST",
         body: new URLSearchParams({
+            "id": id,
             "_csrf": csrf
         })
     })
     .then(res => res.json())
     .then(data => {
+        spinner.addClass("d-none")
+
         if (data.success) {
             let update = $("#modification-update")
 
-            spinner.addClass("d-none")
+            if (update.hasClass("alert-danger")) {
+                update.removeClass("alert-danger")
+                update.addClass("alert-success")
+            }
+
+            update.text("Successfully regenerated application UUID!")
             update.removeClass("d-none")
             update.removeAttr("style")
-            update.text("Successfully regenerated application UUID!")
 
             $("#uuid").text(data.newUUID)
             $("#lastUpdated").text(unix2timestamp(moment().unix()))
+        } else {
+            if (update.hasClass("alert-success")) {
+                update.removeClass("alert-success")
+                update.addClass("alert-danger")
+            }
+            
+            update.text("Unknown error occurred")
+            update.removeClass("d-none")
+            update.removeAttr("style")
+        }
+
+        setTimeout(() => {
+            update.fadeOut("slow")
+        }, 3250)
+    })
+}
+
+function saveEditDisplayNameChanges() {
+    let spinner = $("#spinner-editDisplayNameChanges")
+    let modal = $("#editDisplayNameModal")
+    let modalText = $("#displayNameModalText")
+    let error = $("#internalNameModalError")
+    let parentText = $("#displayName")
+    let parentAlert = $("#modification-update")
+
+    if (!error.hasClass("d-none")) {
+        error.addClass("d-none")
+    }
+
+    spinner.removeClass("d-none")
+
+    let id = $('meta[name="rboxlo-application-id"]').attr("content")
+    let csrf = $('meta[name="rboxlo-csrf"]').attr("content")
+    let input = $("#editDisplayNameInput")
+
+    if ((input.val()).length == 0) {
+        if (error.hasClass("alert-success")) {
+            error.removeClass("alert-success")
+            error.addClass("alert-danger")
+        }
+
+        error.text("The new display name must not be empty.")
+        error.removeClass("d-none")
+
+        return
+    }
+
+    fetch(`${window.rboxlo.domain}/games/application/update-display-name`, {
+        method: "POST",
+        body: new URLSearchParams({
+            "id": id,
+            "_csrf": csrf,
+            "name": input.val()
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        spinner.addClass("d-none")
+
+        if (data.success) {
+            if (parentAlert.hasClass("alert-danger")) {
+                parentAlert.removeClass("alert-danger")
+                parentAlert.addClass("alert-success")
+            }
+
+            parentAlert.text("Successfully updated display name!")
+            parentAlert.removeClass("d-none")
+            parentAlert.removeAttr("")
+
+            input.val("")
+
+            modalText.text(data.newName)
+            parentText.text(data.newName)
+            $("#displayNameHeader").text(data.newName)
+            $("#lastUpdated").text(unix2timestamp(moment().unix()))
 
             setTimeout(() => {
-                update.fadeOut("slow")
-            }, 2250)
+                parentAlert.fadeOut("slow")
+            }, 3250)
+
+            modal.modal("toggle")
+        } else {
+            if (error.hasClass("alert-success")) {
+                error.removeClass("alert-success")
+                error.addClass("alert-danger")
+            }
+
+            error.text("Unknown error occurred")
+            error.removeClass("d-none")
+        }
+    })
+}
+
+function saveEditInternalNameChanges() {
+    let spinner = $("#spinner-editInternalNameChanges")
+    let modal = $("#editInternalNameModal")
+    let modalText = $("#internalNameModalText")
+    let error = $("#internalNameModalError")
+    let parentText = $("#internalName")
+    let parentAlert = $("#modification-update")
+
+    if (!error.hasClass("d-none")) {
+        error.addClass("d-none")
+    }
+
+    spinner.removeClass("d-none")
+
+    let id = $('meta[name="rboxlo-application-id"]').attr("content")
+    let csrf = $('meta[name="rboxlo-csrf"]').attr("content")
+    let input = $("#editInternalNameInput")
+
+    if ((input.val()).length == 0) {
+        if (error.hasClass("alert-success")) {
+            error.removeClass("alert-success")
+            error.addClass("alert-danger")
+        }
+
+        error.text("The new internal name must not be empty.")
+        error.removeClass("d-none")
+
+        return
+    }
+
+    fetch(`${window.rboxlo.domain}/games/application/update-internal-name`, {
+        method: "POST",
+        body: new URLSearchParams({
+            "id": id,
+            "_csrf": csrf,
+            "name": input.val()
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        spinner.addClass("d-none")
+
+        if (data.success) {
+            if (parentAlert.hasClass("alert-danger")) {
+                parentAlert.removeClass("alert-danger")
+                parentAlert.addClass("alert-success")
+            }
+
+            parentAlert.text("Successfully updated internal name!")
+            parentAlert.removeClass("d-none")
+            parentAlert.removeAttr("")
+
+            input.val("")
+
+            modalText.text(data.newName)
+            parentText.text(data.newName)
+            $("#lastUpdated").text(unix2timestamp(moment().unix()))
+
+            setTimeout(() => {
+                parentAlert.fadeOut("slow")
+            }, 3250)
+
+            modal.modal("toggle")
+        } else {
+            if (error.hasClass("alert-success")) {
+                error.removeClass("alert-success")
+                error.addClass("alert-danger")
+            }
+
+            error.text("Unknown error occurred")
+            error.removeClass("d-none")
         }
     })
 }

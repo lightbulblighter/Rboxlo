@@ -97,3 +97,35 @@ exports.setLastUpdated = async (id) => {
 
     await sql.run("UPDATE `applications` SET `last_updated_timestamp` = ? WHERE `id` = ?", [moment().unix(), id])
 }
+
+/**
+ * Updates an applications internal name
+ * 
+ * @param {number} id ID of the application
+ * @param {string} name new itnernal name
+ * 
+ * @returns {boolean} false if app doesn't exist
+ */
+exports.updateInternalName = async (id, name) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+    
+    await sql.run("UPDATE `applications` SET `internal_name` = ? WHERE `id` = ?", [name, id])
+}
+
+/**
+ * Updates an applications internal name
+ * 
+ * @param {number} id ID of the application
+ * @param {string} name new display name
+ * 
+ * @returns {boolean} false if app doesn't exist
+ */
+ exports.updateDisplayName = async (id, name) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+    
+    await sql.run("UPDATE `applications` SET `display_name` = ? WHERE `id` = ?", [name, id])
+}

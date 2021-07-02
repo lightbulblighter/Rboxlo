@@ -43,7 +43,7 @@
             </table>
             
             <div class="d-flex align-items-center justify-content-center h-50" id="data-loading">
-                <div class="spinner-border spinner-lg" role="status">
+                <div class="text-secondary spinner-border spinner-border-lg" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
@@ -56,19 +56,19 @@
                 </div>
             </div>
         {{else}}
-            <h3 class="mb-2">Viewing application "{{ objects.application.display_name }}"</h3>
+            <h3 class="mb-2">Viewing application "<span id="displayNameHeader">{{ xss objects.application.display_name }}</span>"</h3>
             <a href="/games/application/modify" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
             <div class="alert alert-success d-none mt-2" id="modification-update"></div>
             <div class="card mt-2">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <b>ID:</b> <code>{{ objects.application.id }}</code><br>
-                            <b>Display name:</b> <code id="displayName">{{ objects.application.display_name }}</code> <a href="#" onclick="editDisplayName()"><small>(edit)</small></a><br>
-                            <b>Internal name:</b> <code id="internalName">{{ objects.application.internal_name }}</code> <a href="#" onclick="editInternalName()"><small>(edit)</small></a>
+                            <b>ID:</b> <code>{{ xss objects.application.id }}</code><br>
+                            <b>Display name:</b> <code id="displayName">{{ xss objects.application.display_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editDisplayNameModal"><small>(edit)</small></a><br>
+                            <b>Internal name:</b> <code id="internalName">{{ xss objects.application.internal_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editInternalNameModal"><small>(edit)</small></a>
                             <br><br>
-                            <b>UUID:</b> <code id="uuid">{{ objects.application.uuid }}</code> <a href="#" onclick="regenUUIDModify()"><small>(regen)</small></a> <div class="spinner-border spinner-xsm d-none" role="status" id="spinner-uuid"><span class="sr-only">Regenerating UUID...</span></div><br>
-                            <b>Last Deployed Version UUID:</b> {{#if objects.application.last_deployed_version_uuid.length}}<code>{{ objects.application.last_deployed_version_uuid }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
+                            <b>UUID:</b> <code id="uuid">{{ xss objects.application.uuid }}</code> <a href="#" onclick="regenUUIDModify()"><small>(regen)</small></a> <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-uuid"><span class="sr-only">Regenerating UUID...</span></div><br>
+                            <b>Last Deployed Version UUID:</b> {{#if objects.application.last_deployed_version_uuid.length}}<code>{{ xss objects.application.last_deployed_version_uuid }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
                             <br><br>
                             <b>Time Created:</b> <span id="created">{{ unix2timestamp objects.application.created_timestamp }}</span><br>
                             <b>Last Updated:</b> <span id="lastUpdated">{{ unix2timestamp objects.application.last_updated_timestamp }}</span>
@@ -82,6 +82,58 @@
                                     No software has ever been deployed to this application before
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editDisplayNameModal" tabindex="-1" role="dialog" aria-labelledby="editDisplayNameModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 title="modal-title">Edit Display Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger py-2 d-none" id="internalNameModalError"></div>
+                            <span>Current display name: <code id="displayNameModalText">{{ xss objects.application.display_name }}</code></span>
+                            <div class="form-group mt-1">
+                                <label for="editDisplayNameInput" class="form-label">New internal name:</label>
+                                <input type="text" class="form-control" id="editDisplayNameInput" placeholder="Enter new display name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEditDisplayNameChanges()">
+                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-editDisplayName"><span class="sr-only">Saving changes...</span></div>
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editInternalNameModal" tabindex="-1" aria-labelledby="editInternalNameModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 title="modal-title">Edit Internal Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger py-2 d-none" id="internalNameModalError"></div>
+                            <span>Current internal name: <code id="internalNameModalText">{{ xss objects.application.internal_name }}</code></span>
+                            <div class="form-group mt-1">
+                                <label for="editInternalNameInput" class="form-label">New internal name:</label>
+                                <input type="text" class="form-control" id="editInternalNameInput" placeholder="Enter new internal name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveEditInternalNameChanges()">
+                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-editInternalName"><span class="sr-only">Saving changes...</span></div>
+                                Save changes
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -24,10 +24,6 @@ router.get("/marketplace", user.authenticated, (req, res) => {
     res.render("games/place/marketplace", { title: "Manage Place Marketplace", laid: "games.place.marketplace" })
 })
 
-router.get("/moderate", user.authenticated, (req, res) => {
-    res.render("games/place/moderate", { title: "Moderate Place", laid: "games.place.moderate" })
-})
-
 router.get("/modify", user.authenticated, (req, res) => {
     res.render("games/place/modify", { title: "Modify Place", laid: "games.place.modify" })
 })
