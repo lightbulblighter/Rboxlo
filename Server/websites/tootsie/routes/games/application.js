@@ -32,13 +32,12 @@ router.get("/modify", user.authenticated, async (req, res) => {
             }
 
             let app = (await application.getInfo(id))
-            res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { "app": app } })
+            res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { "application": app } })
         } else {
             return res.redirect("/games/application/modify")
         }
     } else {
-        let applications = await application.fetchAll()
-        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { apps: applications } })
+        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { choosing: true } })
     }
 })
 
@@ -60,6 +59,11 @@ router.post("/new", user.authenticated, async (req, res) => {
 
 router.get("/new", user.authenticated, (req, res) => {
     res.render("games/application/new", { title: "New Application", laid: "games.application.new", objects: { csrf: req.csrfToken() } })
+})
+
+router.get("/json", user.authenticated, async (req, res) => {
+    let applications = (await application.fetchAll())
+    return res.json(applications)
 })
 
 module.exports = router

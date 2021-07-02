@@ -2,7 +2,7 @@
     {{#content "body"}}
         <h1 class="mb-3">Modify Application</h1>
 
-        {{#if objects.apps}}
+        {{#if objects.choosing}}
             <div class="d-flex justify-content-between mb-3">
                 <h3>Choose an application</h3>
 
@@ -13,103 +13,57 @@
                         </button>
                     </a>
 
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-repeat"></i> Refresh
+                    <button class="btn btn-secondary" onclick="fetchApplicationDataModify()">
+                        <i class="fas fa-sync"></i> Refresh
                     </button>
                 </div>
             </div>
+
+            <table class="table table-striped table-hover table-bordered" id="data">
+                <thead class="table-light"><tr>
+                    <th scope="col" class="table-button"></th>
+                    <th scope="col" class="table-button"></th>
+                    <th scope="col" class="table-button"></th>
+                    <th scope="col" class="align-middle text-center">ID</th>
+                    <th scope="col" class="align-middle">UUID</th>
+                    <th scope="col" class="align-middle">Latest Deployed Version UUID</th>
+                    <th scope="col" class="align-middle">Internal Name</th>
+                    <th scope="col" class="align-middle">Display Name</th>
+                    <th scope="col" class="align-middle">Last Updated</th>
+                    <th scope="col" class="align-middle">Time Created</th>
+                </tr></thead>
+                <tbody id="data-body"></tbody>
+            </table>
             
-            {{#if objects.apps.length}}
-                <table class="table table-striped table-hover table-bordered" id="data">
-                    <thead class="table-light"><tr>
-                        <th scope="col" class="table-button"></th>
-                        <th scope="col" class="table-button"></th>
-                        <th scope="col" class="table-button"></th>
-                        <th scope="col" class="text-center">ID</th>
-                        <th scope="col">UUID</th>
-                        <th scope="col">Latest Deployed Version UUID</th>
-                        <th scope="col">Internal Name</th>
-                        <th scope="col">Display Name</th>
-                        <th scope="col">Last Updated</th>
-                        <th scope="col">Time Created</th>
-                    </tr></thead>
-                    <tbody>
-                        {{#each objects.apps}}
-                            <tr data-rboxlo-application-id="{{ this.id }}">
-                                <th class="align-middle text-center table-button" scope="row">
-                                    <a href="{{ rboxlo.domain }}/games/application/modify?id={{ this.id }}" class="">
-                                        <button class="btn btn-primary btn-sm" type="button">
-                                            <i class="fas fa-pencil"></i>
-                                        </button>
-                                    </a>
-                                </th>
-                                <th class="align-middle text-center table-button">
-                                    <button class="btn btn-danger btn-sm" type="button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </th>
-                                <th class="align-middle text-center table-button">
-                                    <a href="{{ rboxlo.domain }}/games/application/deployment?id={{ this.id }}">
-                                        <button class="btn btn-warning text-light">
-                                            <i class="fas fa-computer-classic"></i>
-                                        </button>
-                                    </a>
-                                </th>
-                                <th class="align-middle text-center">{{ this.id }}</th>
-                                <td class="align-middle">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <code id="uuid">{{ this.uuid }}</code>
-                                        <button class="btn btn-secondary btn-sm" onclick="copyUUID()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    {{#unless this.last_deployed_version_uuid.length}}
-                                        <i>none</i>
-                                    {{else}}
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <code id="lastVersionUUID">{{ this.last_deployed_version_uuid }}</code>
-                                            <button class="btn btn-secondary btn-sm" onclick="copyLastVersionUUID()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
-                                        </div>
-                                    {{/unless}}
-                                </td>
-                                <td class="align-middle">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <code id="internalName">{{ this.internal_name }}</code>
-                                        <button class="btn btn-secondary btn-sm" onclick="copyInternalName()" data-toggle="popover" data-content="Copied to clipboard"><i class="fas fa-clipboard"></i></button>
-                                    </div>
-                                </td>
-                                <td class="align-middle">{{ this.display_name }}</td>
-                                <td class="align-middle">{{ unix2timestamp this.last_updated_timestamp }}</td>
-                                <td class="align-middle">{{ unix2timestamp this.created_timestamp }}</td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            {{else}}
-                <div class="d-flex align-items-center justify-content-center h-50">
-                    <div class="text-center">
-                        <img src="{{ rboxlo.domain }}/img/blob-tired.png" class="error-image">
-                        <h3>No applications found</h3>
-                        <span>Why don't you <a href="{{ rboxlo.domain }}/games/application/new">make one?</a></a></span>
-                    </div>
+            <div class="d-flex align-items-center justify-content-center h-25 d-none" id="data-loading">
+                <div class="spinner-border spinner-lg" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
-            {{/if}}
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
+                <div class="text-center">
+                    <img src="{{ rboxlo.domain }}/img/blob-tired.png" class="error-image">
+                    <h3>No applications found</h3>
+                    <span>Why don't you <a href="{{ rboxlo.domain }}/games/application/new">make one?</a></a></span>
+                </div>
+            </div>
         {{else}}
-            <h3 class="mb-2">Viewing application "{{ objects.app.display_name }}"</h3>
+            <h3 class="mb-2">Viewing application "{{ objects.application.display_name }}"</h3>
             <a href="/games/application/modify" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
             <div class="card mt-2">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <b>ID:</b> <code>{{ objects.app.id }}</code><br>
-                            <b>Display name:</b> <code id="displayName">{{ objects.app.display_name }}</code> <a href="#" onclick="editDisplayName()"><small>(edit)</small></a><br>
-                            <b>Internal name:</b> <code id="internalName">{{ objects.app.internal_name }}</code> <a href="#" onclick="editInternalName()"><small>(edit)</small></a>
+                            <b>ID:</b> <code>{{ objects.application.id }}</code><br>
+                            <b>Display name:</b> <code id="displayName">{{ objects.application.display_name }}</code> <a href="#" onclick="editDisplayName()"><small>(edit)</small></a><br>
+                            <b>Internal name:</b> <code id="internalName">{{ objects.application.internal_name }}</code> <a href="#" onclick="editInternalName()"><small>(edit)</small></a>
                             <br><br>
-                            <b>UUID:</b> <code id="uuid">{{ objects.app.uuid }}</code> <a href="#" onclick="regenUUID()"><small>(regen)</small></a><br>
-                            <b>Last Deployed Version UUID:</b> {{#if objects.app.last_deployed_version_uuid.length}}<code>{{ objects.app.last_deployed_version_uuid }}</code>{{else}}<i>none</i>{{/if}}
+                            <b>UUID:</b> <code id="uuid">{{ objects.application.uuid }}</code> <a href="#" onclick="regenUUID()"><small>(regen)</small></a><br>
+                            <b>Last Deployed Version UUID:</b> {{#if objects.application.last_deployed_version_uuid.length}}<code>{{ objects.application.last_deployed_version_uuid }}</code>{{else}}<i>none</i>{{/if}}
                             <br><br>
-                            <b>Time Created:</b> {{ unix2timestamp objects.app.created_timestamp }}<br>
-                            <b>Last Updated:</b> {{ unix2timestamp objects.app.last_updated_timestamp }}
+                            <b>Time Created:</b> {{ unix2timestamp objects.application.created_timestamp }}<br>
+                            <b>Last Updated:</b> {{ unix2timestamp objects.application.last_updated_timestamp }}
                             <br><br>
                             <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete this application</button>
                         </div>
@@ -125,5 +79,9 @@
                 </div>
             </div>
         {{/if}}
+    {{/content}}
+
+    {{#content "scripts" mode="append"}}
+        <script>$(document).ready(() => { fetchApplicationDataModify() })</script>
     {{/content}}
 {{/layout}}
