@@ -1,5 +1,6 @@
 const express = require("express")
 const exphbs = require("express-handlebars")
+const minifier = require("express-minify-html-2")
 const layouts = require("handlebars-layouts")
 const path = require("path")
 const cookieSession = require("cookie-session")
@@ -93,6 +94,20 @@ app.use((err, req, res, next) => {
 app.use(rateLimit({
     windowMs: (10 * 60 * 1000), // 10 minutes
     max: 100 // 100 requests per 10 minutes
+}))
+
+// Minify rendering
+app.use(minifier({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
 }))
 
 // Static resources (CSS, JavaScript, images, etc.)

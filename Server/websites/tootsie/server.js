@@ -3,6 +3,7 @@ const cookieSession = require("cookie-session")
 const cookieParser = require("cookie-parser")
 const express = require("express")
 const exphbs = require("express-handlebars")
+const minifier = require("express-minify-html-2")
 const layouts = require("handlebars-layouts")
 const path = require("path")
 const rateLimit = require("express-rate-limit")
@@ -71,6 +72,20 @@ app.use(rateLimit({
 // Routes
 app.use(require(path.join(__dirname, "routes")))
 
+// Minify rendering
+app.use(minifier({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: true,
+        minifyJS: true
+    }
+}))
+ 
 // Static resources (CSS, JavaScript, images, etc.)
 app.use(express.static(path.join(__dirname, "public")))
 
