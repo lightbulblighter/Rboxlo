@@ -1,5 +1,28 @@
 {{#> layout}}
     {{#content "body"}}
-        <h1>Deploy Application Software</h1>
+        <h1 class="mb-3">Deploy Software</h1>
+        <ul id="tabination" class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#application">Application</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#launcher">Launcher</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#arbiter">Arbiter</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade py-2 show active" id="application">
+                <h3>Deploy software to an application</h3>
+            </div>
+            <div class="tab-pane fade py-2" id="launcher">
+                <h3>Deploy a new launcher</h3>
+            </div>
+            <div class="tab-pane fade py-2" id="arbiter">
+                <h3>Deploy a new arbiter</h3>
+            </div>
+        </div>
     {{/content}}
 {{/layout}}

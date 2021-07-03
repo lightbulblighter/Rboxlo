@@ -14,6 +14,13 @@ $(document).ready(() => {
             link.find("a").addClass("text-white")
         }
     })
+
+    if ($("#tabination").length) {
+        $("#tabination a").click(function(e){
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    }
 })
 
 // Copying
@@ -22,7 +29,7 @@ function copy(id) {
 
     if (!navigator.clipboard || !window.isSecureContext) {
         let area = $("<textarea>", {
-            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent"
+            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent; display: none;"
         })
 
         area.append(text)
