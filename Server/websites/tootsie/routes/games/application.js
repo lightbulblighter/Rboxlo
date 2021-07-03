@@ -4,17 +4,10 @@ const path = require("path")
 const validator = require("validator")
 const uuid = require("uuid")
 const xss = require("xss")
+const bytes = require("bytes")
 
 const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
 const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
-
-router.get("/delete", user.authenticated, (req, res) => {
-    res.render("games/application/delete", { title: "Delete Application", laid: "games.application.delete", objects: { csrf: req.csrfToken() } })
-})
-
-router.get("/deployment", user.authenticated, (req, res) => {
-    res.render("games/application/deployment", { title: "Deploy Application Software", laid: "games.application.deployment" })
-})
 
 router.get("/instance-finder", user.authenticated, (req, res) => {
     res.render("games/application/instance-finder", { title: "Find Instances with Application", laid: "games.application.instance-finder" })
@@ -22,6 +15,45 @@ router.get("/instance-finder", user.authenticated, (req, res) => {
 
 router.get("/jobs", user.authenticated, (req, res) => {
     res.render("games/application/jobs", { title: "Manage Jobs with Application", laid: "games.application.jobs" })
+})
+
+router.get("/delete", user.authenticated, (req, res) => {
+    res.render("games/application/delete", { title: "Delete Application", laid: "games.application.delete", objects: { csrf: req.csrfToken() } })
+})
+
+router.get("/deployment", user.authenticated, async (req, res) => {
+    if (req.query.hasOwnProperty("id")) {
+        if (!isNaN(req.query.id) && validator.isInt(req.query.id)) {
+            let id = parseInt(req.query.id)
+            if (!application.exists(id)) {
+                return res.redirect("/games/application/deployment")
+            }
+
+            let app = await application.getInfo(id)
+            res.render("games/application/deployment", {
+                title: "Deploy Application Software",
+                laid: "games.application.deployment",
+                chose: true,
+                objects: {
+                    maxLauncherSize: bytes(application.MAX_LAUNCHER_SIZE, { decimalPlaces: 0 }),
+                    maxApplicationSize: bytes(application.MAX_APPLICATION_SIZE, { decimalPlaces: 0 }),
+                    maxArbiterSize: bytes(application.MAX_ARBITER_SIZE, { decimalPlaces: 0 }),
+                    "app": app
+                }
+            })
+        }
+    }
+
+    res.render("games/application/deployment", {
+        title: "Deploy Application Software",
+        laid: "games.application.deployment",
+        chose: false,
+        objects: {
+            maxLauncherSize: bytes(application.MAX_LAUNCHER_SIZE, { decimalPlaces: 0 }),
+            maxApplicationSize: bytes(application.MAX_APPLICATION_SIZE, { decimalPlaces: 0 }),
+            maxArbiterSize: bytes(application.MAX_ARBITER_SIZE, { decimalPlaces: 0 })
+        }
+    })
 })
 
 router.get("/modify", user.authenticated, async (req, res) => {

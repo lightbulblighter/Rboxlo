@@ -74,7 +74,7 @@
                             <b>Time Created:</b> <span id="created">{{ unix2timestamp objects.application.created_timestamp }}</span><br>
                             <b>Last Updated:</b> <span id="lastUpdated">{{ unix2timestamp objects.application.last_updated_timestamp }}</span>
                             <br><br>
-                            <b class="text-danger">This application doesn't have any software deployed to it yet.</b> That means that this application isn't usable or downloadable until you software is deployed to it. You can deploy software by clicking <a href="{{ rboxlo.domain }}/games/application/deployment?appID={{ objects.application.id }}">here</a>.
+                            <b class="text-danger">This application doesn't have any software deployed to it yet.</b> That means that this application isn't usable or downloadable until you software is deployed to it. You can deploy software by clicking <a href="{{ rboxlo.domain }}/games/application/deployment?id={{ objects.application.id }}">here</a>.
                             <br><br>
                             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteApplicationModal"><i class="fas fa-times"></i> Delete this application</button>
                         </div>
@@ -163,6 +163,6 @@
     {{/content}}
 
     {{#content "scripts" mode="append"}}
-        <script>$(document).ready(()=>{fetchApplicationDataModify(true)});function refreshData(){fetchApplicationDataModify();}</script>
+        <script type="text/javascript">$(document).ready(()=>{fetchApplicationDataModify(true)});function refreshData(){fetchApplicationDataModify();}</script>
     {{/content}}
 {{/layout}}

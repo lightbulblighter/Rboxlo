@@ -1,28 +1,95 @@
 {{#> layout}}
     {{#content "body"}}
         <h1 class="mb-3">Deploy Software</h1>
-        <ul id="tabination" class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#application">Application</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#launcher">Launcher</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#arbiter">Arbiter</a>
-            </li>
-        </ul>
 
-        <div class="tab-content">
-            <div class="tab-pane fade py-2 show active" id="application">
-                <h3>Deploy software to an application</h3>
+        {{#if objects.chose}}
+            <h3 class="mb-3">Deploying to application "{{ xss objects.app.display_name }}</h3>
+            <div class="card card-body">
+                <b>NOTE:</b> Make sure to triple-check the contents of the ZIP file before deploying<br>
+                <div class="mb-3">
+                    <label for="place" class="form-label">Choose application ZIP (max {{ objects.maxApplicationSize }})</label>
+                    <input name="application" type="file" class="form-control" id="applicationFile">
+                    <div class="form-text">Don't know what belongs in an application ZIP? Click <a href="#">here</a> for more info</div>
+                </div>
+                <button class="btn btn-primary" role="button" onclick="deployApplication()">Deploy</button>
             </div>
-            <div class="tab-pane fade py-2" id="launcher">
-                <h3>Deploy a new launcher</h3>
+        {{else}}
+            <ul id="tabination" class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#application">Application</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#launcher">Launcher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#arbiter">Arbiter</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade py-2 show active" id="application">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h3>Choose an application to deploy to</h3>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-secondary" onclick="fetchApplicationDataDeploy()">
+                                <i class="fas fa-sync"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-hover table-bordered d-none" id="data">
+                        <thead class="table-light"><tr>
+                            <th scope="col" class="align-middle text-center">ID</th>
+                            <th scope="col" class="align-middle">UUID</th>
+                            <th scope="col" class="align-middle">Latest Deployed Version UUID</th>
+                            <th scope="col" class="align-middle">Internal Name</th>
+                            <th scope="col" class="align-middle">Display Name</th>
+                            <th scope="col" class="align-middle">Last Updated</th>
+                            <th scope="col" class="align-middle">Time Created</th>
+                        </tr></thead>
+                        <tbody id="data-body"></tbody>
+                    </table>
+
+                    <div class="d-flex align-items-center justify-content-center h-50" id="data-loading">
+                        <div class="text-secondary spinner-border spinner-border-lg" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
+                        <div class="text-center">
+                            <img src="{{ rboxlo.domain }}/img/blobs/tired.png" class="error-image">
+                            <h3>No applications found</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade py-2" id="launcher">
+                    <h3 class="mb-3">Deploy a new launcher</h3>
+                    <div class="card card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="launcher">Choose launcher EXE (max {{ objects.maxLauncherSize }})</label>
+                            <input type="file" name="launcher" class="form-control" id="launcherFile">
+                        </div>
+                        <button class="btn btn-primary" role="button" onclick="deployLauncher()">Deploy</button>
+                    </div>
+                </div>
+                <div class="tab-pane fade py-2" id="arbiter">
+                    <h3 class="mb-3">Deploy a new arbiter</h3>
+                    <div class="card card-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="place">Choose arbiter EXE (max {{ objects.maxArbiterSize }})</label>
+                            <input type="file" name="arbiter" class="form-control" id="arbiterFile">
+                        </div>
+                        <button class="btn btn-primary" role="button" onclick="deployArbiter()">Deploy</button>
+                    </div>
+                </div>
             </div>
-            <div class="tab-pane fade py-2" id="arbiter">
-                <h3>Deploy a new arbiter</h3>
-            </div>
-        </div>
+        {{/if}}
     {{/content}}
+
+    {{#unless objects.chose}}
+        {{#content "scripts" mode="append"}}
+            <script type="text/javascript">$(document).ready(()=>{fetchApplicationDataDeploy(true)});</script>
+        {{/content}}
+    {{/unless}}
 {{/layout}}

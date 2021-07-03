@@ -1,10 +1,29 @@
 var exports = module.exports = {}
 
+const bytes = require("bytes")
 const moment = require("moment")
 const path = require("path")
 const uuid = require("uuid")
 
 const sql = require(path.join(global.rboxlo.root, "sql"))
+
+/**
+ * Maximum application file size, in bytes
+ */
+const MAX_PLACE_SIZE = bytes("100MB")
+exports.MAX_PLACE_SIZE = MAX_PLACE_SIZE
+
+/**
+ * Maximum launcher file size, in bytes
+ */
+const MAX_LAUNCHER_SIZE = bytes("25MB")
+exports.MAX_LAUNCHER_SIZE = MAX_LAUNCHER_SIZE
+
+/**
+ * Maximum arbiter file size, in bytes
+ */
+const MAX_ARBITER_SIZE = bytes("25MB")
+exports.MAX_ARBITER_SIZE = MAX_ARBITER_SIZE
 
 /**
  * Checks if a given application exists

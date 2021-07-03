@@ -1,10 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////            Document init        ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 window.rboxlo = []
 
-function unix2timestamp(unix) {
-    return moment.unix(unix).format("L @ h:mm A")
-}
-
-// Document init
 $(document).ready(() => {
     let links = $("[laid]")
     links.each((_, link) => {
@@ -23,7 +22,14 @@ $(document).ready(() => {
     }
 })
 
-// Copying
+function unix2timestamp(unix) {
+    return moment.unix(unix).format("L @ h:mm A")
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////            Clipboard         ///////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 function copy(id) {
     let text = $(`#${id}`).text()
 
@@ -51,7 +57,10 @@ function copy(id) {
     }
 }
 
-// Modify Application
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////          Modify application     ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 function fetchApplicationDataModify(firstTime = false) {
     if (!firstTime) {
         $("#data").addClass("d-none")
@@ -378,7 +387,10 @@ function saveEditInternalNameChanges() {
     })
 }
 
-// Delete Application
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////            Delete Application         //////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 function deleteApplication() {
     let removeFromList = (window.rboxlo.hasOwnProperty("currentlyDeleting"))
     let csrf = $('meta[name="rboxlo-csrf"]').attr("content")
@@ -484,4 +496,73 @@ function fetchApplicationDataDelete(firstTime = false) {
 function deleteListClicked(id) {
     window.rboxlo.currentlyDeleting = id
     $("#deleteApplicationModal").modal("show")
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////            Deploy Application        ///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+function redirectToDeployment(id) {
+    window.location.href = `${window.rboxlo.domain}/games/application/deployment?id=${id}`
+}
+
+function fetchApplicationDataDeploy(firstTime = false) {
+    if (!firstTime) {
+        $("#data").addClass("d-none")
+        $("#data-loading").removeClass("d-none")
+    }
+    
+    let body = $("#data-body")
+    body.html("")
+
+    if (!($("#data-empty").hasClass("d-none"))) {
+        $("#data-empty").addClass("d-none")
+    }
+
+    fetch(`${window.rboxlo.domain}/games/application/json`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length == 0) {
+                $("#data-loading").addClass("d-none")
+                $("#data-empty").removeClass("d-none")
+            } else {
+                $(data).each((_, app) => {
+                    let container = $("<tr>", {
+                        "data-rboxlo-application-id": app.id,
+                        onclick: `redirectToDeployment(${app.id})`,
+                        style: "cursor: pointer"
+                    })
+
+                    let id = $("<td>", { class: "align-middle text-center" }).append(app.id)
+                    let uuid = $("<td>", { class: "align-middle" }).append($("<code>").append(app.uuid))
+                    let lastVersionUUID = $("<td>", { class: "align-middle" })
+
+                    if (app.last_deployed_version_uuid.length > 0) {
+                        lastVersionUUID.append($("<code>").append(app.last_deployed_version_uuid))
+                    } else {
+                        lastVersionUUID.append($("<i>", { class: "text-muted" }).append("none"))
+                    }
+
+                    let internalName = $("<td>", { class: "align-middle" }).append($("<code>").append(app.internal_name))
+                    let displayName = $("<td>", { class: "align-middle"}).append(app.display_name)
+                    let lastUpdatedTimestamp = $("<td>", { class: "align-middle" }).append(unix2timestamp(app.last_updated_timestamp))
+                    let createdTimestamp = $("<td>", { class: "align-middle" }).append(unix2timestamp(app.created_timestamp))
+                    
+                    container.append(id)
+                    container.append(uuid)
+                    container.append(lastVersionUUID)
+                    container.append(internalName)
+                    container.append(displayName)
+                    container.append(lastUpdatedTimestamp)
+                    container.append(createdTimestamp)
+
+                    body.append(container)
+                })
+
+                setTimeout(() => {
+                    $("#data-loading").addClass("d-none")
+                    $("#data").removeClass("d-none")
+                }, 200)
+            }
+        })
 }
