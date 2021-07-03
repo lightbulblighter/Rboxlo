@@ -112,6 +112,26 @@ CREATE TABLE IF NOT EXISTS `versions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `launchers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` text NOT NULL,
+  `created_timestamp` int(11) NOT NULL,
+  `sha256` text NOT NULL,
+  `asset_link` text NOT NULL,
+  `total_bytes` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `arbiters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` text NOT NULL,
+  `created_timestamp` int(11) NOT NULL,
+  `sha256` text NOT NULL,
+  `asset_link` text NOT NULL,
+  `total_bytes` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS `places` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `game_id` int(11) NOT NULL,
