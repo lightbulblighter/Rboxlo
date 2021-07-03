@@ -14,6 +14,8 @@ const csurf = require("csurf")
 const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
 
+const error = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "error"))
+
 let app = express()
 
 // Expose some non-sensitive variables to the view engine
@@ -128,5 +130,10 @@ if (global.rboxlo.env.PRIVATE_LOCKDOWN) {
 
 // Routes
 app.use(require(path.join(__dirname, "routes")))
+
+// Error pages
+// These are LAST
+app.get("*", error.empty)
+app.use(error.catcher)
 
 module.exports.app = app

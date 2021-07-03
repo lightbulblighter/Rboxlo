@@ -13,6 +13,8 @@ const hbh = require(path.join(__dirname, "helpers"))
 const util = require(path.join(global.rboxlo.root, "util"))
 const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
 
+const error = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "error"))
+
 let app = express()
 let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
 
@@ -88,5 +90,10 @@ app.use(minifier({
  
 // Static resources (CSS, JavaScript, images, etc.)
 app.use(express.static(path.join(__dirname, "public")))
+
+// Error pages
+// These are LAST
+app.get("*", error.empty)
+app.use(error.catcher)
 
 module.exports.app = app
