@@ -76,12 +76,17 @@ async function middleware(req, res) {
 
     // Non-sensitive session details for view engine
     // FYI: Session NEVER gets changed besides at registration and sign-in, so we only do this once (or at least try to-- these are set once per request)
-    if (req.session.rboxlo.user && !res.locals.session) {
+    if (req.session.rboxlo.hasOwnProperty("user") && !res.locals.hasOwnProperty("session")) {
         res.locals.session = {
             id: req.session.rboxlo.user.id,
             username: req.session.rboxlo.user.username,
             permissions: req.session.rboxlo.user.permissions
         }
+    }
+
+    // Remove locals if no session
+    if (res.locals.hasOwnProperty("session") && !req.session.rboxlo.hasOwnProperty("user")) {
+        delete res.locals.session
     }
 }
 
