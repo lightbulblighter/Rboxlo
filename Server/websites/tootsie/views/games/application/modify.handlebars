@@ -1,10 +1,10 @@
 {{#> layout}}
-    {{#unless objects.choosing}}
-        {{#content "head" mode="append"}}
-            <meta name="rboxlo-csrf" content="{{ objects.csrf }}">
+    {{#content "head" mode="append"}}
+        <meta name="rboxlo-csrf" content="{{ objects.csrf }}">
+        {{#unless objects.choosing}}
             <meta name="rboxlo-application-id" content="{{ objects.application.id }}">
-        {{/content}}
-    {{/unless}}
+        {{/unless}}
+    {{/content}}
 
     {{#content "body"}}
         <h1 class="mb-3">Modify Application</h1>
@@ -12,7 +12,6 @@
         {{#if objects.choosing}}
             <div class="d-flex justify-content-between mb-3">
                 <h3>Choose an application</h3>
-
                 <div class="d-flex align-items-center">
                     <a href="/games/application/new">
                         <button class="btn btn-primary me-2">
@@ -26,6 +25,8 @@
                 </div>
             </div>
 
+            <div class="alert alert-success d-none mt-2" id="modification-update"></div>
+            
             <table class="table table-striped table-hover table-bordered d-none" id="data">
                 <thead class="table-light"><tr>
                     <th scope="col" class="table-button"></th>
@@ -61,8 +62,8 @@
             <div class="alert alert-success d-none mt-2" id="modification-update"></div>
             <div class="card mt-2">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-5">
                             <b>ID:</b> <code>{{ xss objects.application.id }}</code><br>
                             <b>Display name:</b> <code id="displayName">{{ xss objects.application.display_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editDisplayNameModal"><small>(edit)</small></a><br>
                             <b>Internal name:</b> <code id="internalName">{{ xss objects.application.internal_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editInternalNameModal"><small>(edit)</small></a>
@@ -73,9 +74,11 @@
                             <b>Time Created:</b> <span id="created">{{ unix2timestamp objects.application.created_timestamp }}</span><br>
                             <b>Last Updated:</b> <span id="lastUpdated">{{ unix2timestamp objects.application.last_updated_timestamp }}</span>
                             <br><br>
-                            <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete this application</button>
+                            <b class="text-danger">This application doesn't have any software deployed to it yet.</b> That means that this application isn't usable or downloadable until you software is deployed to it. You can deploy software by clicking <a href="{{ rboxlo.domain }}/games/application/deployment?appID={{ objects.application.id }}">here</a>.
+                            <br><br>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteApplicationModal"><i class="fas fa-times"></i> Delete this application</button>
                         </div>
-                        <div class="col-lg">
+                        <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">Version history</div>
                                 <div class="card-body">
@@ -139,9 +142,27 @@
                 </div>
             </div>
         {{/if}}
+
+        <div class="modal fade" id="deleteApplicationModal" tabindex="-1" aria-labelledby="deleteApplicationModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 title="modal-title">Delete Application</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you SURE you want to delete this application?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteApplication()">Yes, I'm sure</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/content}}
 
     {{#content "scripts" mode="append"}}
-        <script>$(document).ready(() => { fetchApplicationDataModify(true) })</script>
+        <script>$(document).ready(()=>{fetchApplicationDataModify(true)});function refreshData(){fetchApplicationDataModify();}</script>
     {{/content}}
 {{/layout}}

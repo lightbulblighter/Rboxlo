@@ -1,5 +1,68 @@
 {{#> layout}}
+    {{#content "head" mode="append"}}
+        <meta name="rboxlo-csrf" content="{{ objects.csrf }}">
+    {{/content}}
+
     {{#content "body"}}
-        <h1>Delete Application</h1>
+        <h1 class="mb-3">Delete Application</h1>
+
+        <div class="d-flex justify-content-between mb-3">
+            <h3>Choose an application to delete</h3>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-secondary" onclick="fetchApplicationDataDelete()">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+        </div>
+
+        <div class="alert alert-success d-none mt-2" id="modification-update"></div>
+
+        <table class="table table-striped table-hover table-bordered d-none" id="data">
+            <thead class="table-light"><tr>
+                <th scope="col" class="align-middle text-center">ID</th>
+                <th scope="col" class="align-middle">UUID</th>
+                <th scope="col" class="align-middle">Latest Deployed Version UUID</th>
+                <th scope="col" class="align-middle">Internal Name</th>
+                <th scope="col" class="align-middle">Display Name</th>
+                <th scope="col" class="align-middle">Last Updated</th>
+                <th scope="col" class="align-middle">Time Created</th>
+            </tr></thead>
+            <tbody id="data-body"></tbody>
+        </table>
+        
+        <div class="d-flex align-items-center justify-content-center h-50" id="data-loading">
+            <div class="text-secondary spinner-border spinner-border-lg" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
+            <div class="text-center">
+                <img src="{{ rboxlo.domain }}/img/blob-tired.png" class="error-image">
+                <h3>No applications found</h3>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteApplicationModal" tabindex="-1" aria-labelledby="deleteApplicationModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 title="modal-title">Delete Application</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you SURE you want to delete this application?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteApplication()">Yes, I'm sure</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/content}}
+
+    {{#content "scripts" mode="append"}}
+        <script>$(document).ready(()=>{fetchApplicationDataDelete(true);});function refreshData(){fetchApplicationDataDelete();}</script>
     {{/content}}
 {{/layout}}

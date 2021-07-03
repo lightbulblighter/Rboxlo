@@ -122,10 +122,25 @@ exports.updateInternalName = async (id, name) => {
  * 
  * @returns {boolean} false if app doesn't exist
  */
- exports.updateDisplayName = async (id, name) => {
+exports.updateDisplayName = async (id, name) => {
     if (!(await exports.exists(id))) {
         return false
     }
     
     await sql.run("UPDATE `applications` SET `display_name` = ? WHERE `id` = ?", [name, id])
+}
+
+/**
+ * Deletes application
+ * 
+ * @param {number} id ID of the application
+ * 
+ * @returns {boolean} false if app doesn't exist
+ */
+exports.delete = async (id) => {
+    if (!(await exports.exists(id))) {
+        return false
+    }
+
+    await sql.run("DELETE FROM `applications` WHERE `id` =? ", id)
 }

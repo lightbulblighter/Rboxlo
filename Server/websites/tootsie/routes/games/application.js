@@ -9,7 +9,7 @@ const application = require(path.join(global.rboxlo.root, "websites", "eclipse",
 const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
 
 router.get("/delete", user.authenticated, (req, res) => {
-    res.render("games/application/delete", { title: "Delete Application", laid: "games.application.delete" })
+    res.render("games/application/delete", { title: "Delete Application", laid: "games.application.delete", objects: { csrf: req.csrfToken() } })
 })
 
 router.get("/deployment", user.authenticated, (req, res) => {
@@ -39,7 +39,7 @@ router.get("/modify", user.authenticated, async (req, res) => {
             return res.redirect("/games/application/modify")
         }
     } else {
-        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { choosing: true } })
+        res.render("games/application/modify", { title: "Modify Application", laid: "games.application.modify", objects: { choosing: true, csrf: req.csrfToken() } })
     }
 })
 
@@ -116,6 +116,23 @@ router.post("/update-internal-name", user.authenticated, async (req, res) => {
             return res.json({
                 success: true,
                 newName: xss(req.body.name)
+            })
+        }
+    }
+
+    return res.json({ success: false })
+})
+
+router.post("/delete-api", user.authenticated, async (req, res) => {
+    if (req.body.hasOwnProperty("id") && !isNaN(req.body.id) && validator.isInt(req.body.id)) {
+        let id = parseInt(req.body.id)
+        if (await application.exists(id)) {
+            let info = await application.getInfo(id)
+            await application.delete(id)
+
+            return res.json({
+                success: true,
+                name: info.display_name
             })
         }
     }
