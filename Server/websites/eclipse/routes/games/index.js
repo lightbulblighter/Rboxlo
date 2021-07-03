@@ -2,8 +2,8 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
-const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
+const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 router.get("/", async (req, res) => {
     let applications = await application.fetchAll()

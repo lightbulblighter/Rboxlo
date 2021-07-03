@@ -2,7 +2,7 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 router.get("/badges", user.authenticated, (req, res) => {
     res.render("games/place/badges", { title: "Manage Place Badges", laid: "games.place.badges" })

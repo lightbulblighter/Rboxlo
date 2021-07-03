@@ -5,8 +5,8 @@ const validator = require("validator")
 const uuid = require("uuid")
 const xss = require("xss")
 
-const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
-const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
+const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 router.get("/delete", user.authenticated, (req, res) => {
     res.render("games/application/delete", { title: "Delete Application", laid: "games.application.delete", objects: { csrf: req.csrfToken() } })

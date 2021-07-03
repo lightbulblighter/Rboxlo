@@ -4,7 +4,7 @@ const path = require("path")
 const compare = require("safe-compare")
 
 const kryptshun = require(path.join(global.rboxlo.root, "kryptshun"))
-const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 // LAID: Link Active ID
 // Also what most software developers will never get before they turn 50

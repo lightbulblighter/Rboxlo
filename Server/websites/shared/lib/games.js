@@ -8,7 +8,7 @@ const uuid = require("uuid")
 const xss = require("xss")
 const sha256File = require("sha256-file")
 
-const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
+const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
 const sql = require(path.join(global.rboxlo.root, "sql"))
 
 /**

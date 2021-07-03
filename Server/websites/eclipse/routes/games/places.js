@@ -4,9 +4,9 @@ const bytes = require("bytes")
 const path = require("path")
 const validator = require("validator")
 
-const application = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "application"))
-const games = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "games"))
-const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
+const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
+const games = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "games"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 const sql = require(path.join(global.rboxlo.root, "sql"))
 
 var maxPlaceSize = bytes(games.MAX_PLACE_SIZE, { decimalPlaces: 0 })

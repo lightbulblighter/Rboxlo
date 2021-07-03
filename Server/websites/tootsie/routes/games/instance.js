@@ -2,7 +2,7 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "tootsie", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 router.get("/delete", user.authenticated, (req, res) => {
     res.render("games/instance/delete", { title: "Delete Instance", laid: "games.instance.delete" })

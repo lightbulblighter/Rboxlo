@@ -2,7 +2,7 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 /**
  * Handles an account/create submission

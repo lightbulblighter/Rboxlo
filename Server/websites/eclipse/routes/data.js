@@ -4,7 +4,7 @@ const fs = require("fs")
 const path = require("path")
 const validator = require("validator")
 
-const user = require(path.join(global.rboxlo.root, "websites", "eclipse", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 // This route is authbarred
 router.get("/thumbnail/user", user.authenticated, (req, res) => {

@@ -2,9 +2,9 @@ const moment = require("moment")
 
 const path = require("path")
 
-const session = require(path.join(__dirname, "lib", "session"))
+const session = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "session"))
 const util = require(path.join(global.rboxlo.root, "util"))
-const user = require(path.join(__dirname, "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
 
 async function middleware(req, res) {
     req.rboxlo = {}
