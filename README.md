@@ -1,5 +1,4 @@
 <p align="center">
-<i>Looking for the old Rboxlo repository? Click <a href="https://github.com/lightbulblighter/Rboxlo-old">here!</a></i><br><br>
 <img src="https://github.com/lightbulblighter/Rboxlo/raw/trunk/Branding/Logos/Primary/Big.png" width="60%"><br><i>Project Eclipse 🌙</i>
 <br><br>
 <a href="https://github.com/lightbulblighter/Rboxlo/blob/master/LICENSE">
@@ -8,9 +7,7 @@
 </p>
 <hr>
 
-<b>Before reading: Rboxlo is a contant work-in-progress! Not everything listed here is fully implemented yet!</b>
-
-Rboxlo is a **free, open-source** Roblox private server application that can be used to relive childhood memories and create new ones. Using Rboxlo, you can set-up your own Roblox private server in minutes with the ability to play Roblox clients dating all the way back to 2007, and as modern as 2017. Rboxlo was created to truly decentralize Roblox, and to eventually eclipse the proprietary closed-source Roblox revivals that exist today.
+Rboxlo is a **free and open-source** Roblox private server that can be used to relive childhood memories and create new ones. Using Rboxlo, you can set-up your own Roblox private server in minutes with the ability to play Roblox clients dating all the way back to 2007, and as modern as 2017. Rboxlo was created to truly decentralize Roblox, and to eventually eclipse the proprietary closed source Roblox revivals that exist today.
 
 ## Features
 
@@ -22,11 +19,11 @@ There is no official "Rboxlo hub" or any network where Rboxlo instances connect 
 
 **Multiple client version support**
 
-Rboxlo supports Roblox clients as old as 2007 to Roblox clients as modern as 2017. No matter what Roblox game executable you have, it will work on Rboxlo. Rboxlo also implements all Roblox API endpoints, past or present, to ensure 100% stability.
+Rboxlo supports Roblox clients as old as 2007 to Roblox clients as modern as 2017. No matter what Roblox game executable you have, it will work on Rboxlo. Rboxlo also implements all Roblox API endpoints, past or present, to ensure 100% stability with former Roblox clients and (hopefully) older applications designed to work with older APIs.
 
 **Easy to set-up**
 
-Setting up Rboxlo is a process that takes only a matter of minutes. You do not need to be a proficient sysadmin to figure out how to get the ball rolling.
+Setting up Rboxlo is a process that is very quick. You do not need to be a proficient sysadmin to figure out how to get the ball rolling.
 
 **Modern-day codebase, secure**
 
@@ -34,11 +31,7 @@ Rboxlo does not use archaic technology, and is built using modern-day containeri
 
 **Customizability**
 
-Make Rboxlo yours by customizing every single aspect of the platform. Whether it be the sites theme, the logos, the artwork, or even the color of the login button, everything is customizable from a single web panel.
-
-**Cross-platform**
-
-Rboxlo officially supports Linux and Windows out of the box at the server and client level. Though Roblox does not support Linux itself, Rboxlo attempts to use Wine to launch Roblox.
+Make Rboxlo yours by customizing every single aspect of the platform. Whether it be the sites theme, the logos, the artwork, or even the color of something as small as the login button, everything is customizable from a single web panel.
 
 ## Deployment
 
@@ -47,7 +40,7 @@ Rboxlo officially supports Linux and Windows out of the box at the server and cl
 - **Node.js** powers the server and everything surrounding it (REST API, matchmaker, etc.)
 - **MySQL** powers the server's database, where all permanent data is stored
 - **Docker** containerizes the server and runs it all in a secure fashion
-- **.NET** is what the client applications are built on for smooth execution and cross-platform support
+- **.NET** is what the client applications are built on for smooth execution
 
 **Requirements:**
 
