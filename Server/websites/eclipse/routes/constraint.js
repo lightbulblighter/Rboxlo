@@ -2,51 +2,36 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "lib", "user"))
 
 router.get("/constraint", user.loggedOut, async (req, res) => {
     let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
-
-    res.render("constraint", {
-        layout: "constraint",
-        title: "Login",
-        objects: { 
-            csrf: req.csrfToken(),
-            "challenge": challenge
-        }
-    })
+    res.render("constraint", { layout: "constraint", title: "Login", challenge: challenge })
 })
 
 router.post("/constraint", user.loggedOut, async (req, res) => {
     let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
-    let output = {
-        layout: "constraint",
-        title: "Login",
-        objects: { 
-            csrf: req.csrfToken(),
-            "challenge": challenge
-        }
-    }
+    let response
 
     if (global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
         if (await user.needsAuthenticationChallenge(req.rboxlo.ip)) {
-            if (!output.objects.form.hasOwnProperty("response") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
-                output.objects.form.response = "Please solve the captcha challenge."
+            if (!response && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
+                response = "Please solve the captcha challenge."
             }
 
-            if (!output.objects.form.hasOwnProperty("response")) {
+            if (!response) {
                 if (!user.verifyCaptcha(req.body["g-recaptcha-response"])) {
-                    output.objects.form.response = "You failed to solve the captcha challenge. Please try again."
+                    response = "You failed to solve the captcha challenge. Please try again."
                 }
             }
 
-            if (output.objects.form.hasOwnProperty("response")) {
-                return res.render("constraint", output)
+            if (response) {
+                return res.render("constraint", { layout: "constraint", title: "Login", challenge: challenge, response: response })
             }
         }
     }
 
-    var rememberMe = (req.body.hasOwnProperty("rememberMe") && (req.body.rememberMe === "true"))
+    var rememberMe = (req.body.hasOwnProperty("remember_me") && (req.body.remember_me === "true"))
 
     user.authenticate(req.body, req.rboxlo.ip, req.headers["user-agent"], 3, rememberMe).then(async (response) => {
         if (response.success === true) {
@@ -67,18 +52,18 @@ router.post("/constraint", user.loggedOut, async (req, res) => {
             }
         }
 
-        // Is this good UI? No. Do I care? Also no
+        // Failed
         let lastMessage = ""
-        for (const [target, value] of Object.entries(response.targets)) {
+        for (const [, value] of Object.entries(response.targets)) {
             lastMessage = value
         }
-        output.objects.response = lastMessage
+        response = lastMessage
 
         if (req.session.rboxlo.hasOwnProperty("redirect")) {
             delete req.session.rboxlo.redirect
         }
 
-        res.render("constraint", output)
+        res.render("constraint", { layout: "constraint", title: "Login", challenge: challenge, response: response })
     })
 })
 

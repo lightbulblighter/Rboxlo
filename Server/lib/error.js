@@ -43,52 +43,59 @@ let manifest = [
     }
 ]
 
-let emptyError = manifest.find(e => e.code === 404)
+let empty = manifest.find(e => e.code === 404)
 
 exports.empty = (req, res) => {
-    res.status(emptyError.code)
+    res.status(empty.code)
 
     if (req.accepts("html")) {
-        res.render("error", { objects: emptyError, layout: "error", title: emptyError.code })
+        empty.blob = `blobs/${empty.blob}.png`
+        res.render("error", { layout: "error", error: empty })
         return
     }
 
     if (req.accepts("json")) {
-        res.json({ success: false, statusCode: emptyError.code })
+        res.json({ success: false })
         return
     }
 
-    res.type("txt").send(emptyError.code)
+    res.type("txt").send(empty.code)
 }
 
 exports.catcher = (err, req, res, next) => {
     let error = manifest.find(e => e.code === err.status)
+    
     if (error) {
         res.status(error.code)
 
         if (req.accepts("html")) {
-            res.render("error", { objects: error, layout: "error", title: error.code })
+            error.blob = `blobs/${error.blob}.png`
+            res.render("error", { layout: "error", error: error })
+
             return
         }
     
         if (req.accepts("json")) {
-            res.json({ success: false, statusCode: error.code })
+            res.json({ success: false })
             return
         }
     
         res.type("txt").send(error.code)
         return
     } else {
-        if (req.accepts("json")) {
+        if (err.status) {
             res.status(err.status)
 
             if (req.accepts("json")) {
-                res.json({ success: false, statusCode: err.status })
+                res.json({ success: false })
                 return
             }
 
             res.type("txt").send(err.status)
             return
+        } else {
+            res.status(500)
+            throw err
         }
     }
 }

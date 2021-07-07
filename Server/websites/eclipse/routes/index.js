@@ -11,7 +11,10 @@ router.use("/my", require(path.join(__dirname, "personal")))
 router.use("/games", require(path.join(__dirname, "games")))
 router.use("/games/places", require(path.join(__dirname, "games", "places")))
 
-// Data (thumbnails, etc.)
+// Data (thumbnails, place files, etc.)
 router.use("/data", require(path.join(__dirname, "data")))
+
+// API
+router.use("/api", require(path.join(__dirname, "api")))
 
 module.exports = router

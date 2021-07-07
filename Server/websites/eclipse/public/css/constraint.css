@@ -56,6 +56,7 @@ h2 {
     text-align: center;
     margin-top: 150px;
 }
+.logo img { max-width: 400px }
 
 .error-message {
     color: #ff0000;

@@ -33,7 +33,6 @@
     "express-handlebars": "^5.2.1",
     "express-minify-html-2": "^1.0.1",
     "express-rate-limit": "^5.2.6",
-    "file-to-sha512": "0.0.1",
     "fs": "^0.0.1-security",
     "handlebars-layouts": "^3.1.4",
     "http-build-query": "^0.7.0",

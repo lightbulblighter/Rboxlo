@@ -2,8 +2,8 @@ const express = require("express")
 const path = require("path")
 const vhost = require("vhost")
 
-const manifest = require(path.join(__dirname, "websites", "manifest.json"))
-const util = require(path.join(__dirname, "util"))
+const manifest = require(path.join(__dirname, "websites", "manifest"))
+const util = require(path.join(__dirname, "lib", "base", "util"))
 
 const magic = "INDEX"
 

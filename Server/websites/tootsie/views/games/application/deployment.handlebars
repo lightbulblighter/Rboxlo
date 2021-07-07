@@ -2,16 +2,17 @@
     {{#content "body"}}
         <h1 class="mb-3">Deploy Software</h1>
 
-        {{#if objects.chose}}
-            <h3 class="mb-3">Deploying to application "{{ xss objects.app.display_name }}</h3>
-            <div class="card card-body">
-                <b>NOTE:</b> Make sure to triple-check the contents of the ZIP file before deploying<br>
+        {{#if application}}
+            <h3 class="mb-2">Deploying to application "{{ xss application.displayName }}"</h5>
+            <a href="{{ url "/games/application/deployment" }}" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
+            <div class="card card-body mt-2">
+                <p><b>NOTE:</b> Make sure to triple-check the contents of the ZIP file before deploying</p><br>
                 <div class="mb-3">
-                    <label for="place" class="form-label">Choose application ZIP (max {{ objects.maxApplicationSize }})</label>
-                    <input name="application" type="file" class="form-control" id="applicationFile">
+                    <label for="place" class="form-label">Choose application ZIP (max {{ xss maxApplicationSize }})</label>
+                    <input name="application" type="file" class="form-control">
                     <div class="form-text">Don't know what belongs in an application ZIP? Click <a href="#">here</a> for more info</div>
                 </div>
-                <button class="btn btn-primary" role="button" onclick="deployApplication()">Deploy</button>
+                <button class="btn btn-primary" role="button">Deploy</button>
             </div>
         {{else}}
             <ul id="tabination" class="nav nav-pills nav-fill">
@@ -31,7 +32,7 @@
                     <div class="d-flex justify-content-between mb-3">
                         <h3>Choose an application to deploy to</h3>
                         <div class="d-flex align-items-center">
-                            <button class="btn btn-secondary" onclick="fetchApplicationDataDeploy()">
+                            <button class="btn btn-secondary" id="data-refresh">
                                 <i class="fas fa-sync"></i> Refresh
                             </button>
                         </div>
@@ -58,7 +59,7 @@
 
                     <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
                         <div class="text-center">
-                            <img src="{{ rboxlo.domain }}/img/blobs/tired.png" class="error-image">
+                            <img src="{{ resource "blobs/tired.png" }}" class="error-image">
                             <h3>No applications found</h3>
                         </div>
                     </div>
@@ -67,29 +68,27 @@
                     <h3 class="mb-3">Deploy a new launcher</h3>
                     <div class="card card-body">
                         <div class="mb-3">
-                            <label class="form-label" for="launcher">Choose launcher EXE (max {{ objects.maxLauncherSize }})</label>
-                            <input type="file" name="launcher" class="form-control" id="launcherFile">
+                            <label class="form-label" for="launcher">Choose launcher EXE (max {{ xss maxLauncherSize }})</label>
+                            <input type="file" name="launcher" class="form-control">
                         </div>
-                        <button class="btn btn-primary" role="button" onclick="deployLauncher()">Deploy</button>
+                        <button class="btn btn-primary" role="button">Deploy</button>
                     </div>
                 </div>
                 <div class="tab-pane fade py-2" id="arbiter">
                     <h3 class="mb-3">Deploy a new arbiter</h3>
                     <div class="card card-body">
                         <div class="mb-3">
-                            <label class="form-label" for="place">Choose arbiter EXE (max {{ objects.maxArbiterSize }})</label>
-                            <input type="file" name="arbiter" class="form-control" id="arbiterFile">
+                            <label class="form-label" for="place">Choose arbiter EXE (max {{ xss maxArbiterSize }})</label>
+                            <input type="file" name="arbiter" class="form-control">
                         </div>
-                        <button class="btn btn-primary" role="button" onclick="deployArbiter()">Deploy</button>
+                        <button class="btn btn-primary" role="button">Deploy</button>
                     </div>
                 </div>
             </div>
         {{/if}}
     {{/content}}
 
-    {{#unless objects.chose}}
-        {{#content "scripts" mode="append"}}
-            <script type="text/javascript">$(document).ready(()=>{fetchApplicationDataDeploy(true)});</script>
-        {{/content}}
-    {{/unless}}
+    {{#content "scripts" mode="append"}}
+        <script src="{{ resource "games/application/deployment.js" }}"></script>
+    {{/content}}
 {{/layout}}

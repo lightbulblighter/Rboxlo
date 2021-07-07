@@ -2,9 +2,8 @@ const moment = require("moment")
 
 const path = require("path")
 
-const session = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "session"))
-const util = require(path.join(global.rboxlo.root, "util"))
-const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
+const session = require(path.join(global.rboxlo.root, "lib", "session"))
+const user = require(path.join(global.rboxlo.root, "lib", "user"))
 
 async function middleware(req, res) {
     req.rboxlo = {}
@@ -13,24 +12,7 @@ async function middleware(req, res) {
         req.session.rboxlo = {}
     }
     
-    req.session.rboxlo.bust = moment().unix() // resets contents each page req
-
-    //
-    // X-Powered-By header
-    // The string "Rboxlo" here is hardcoded in the form of a ASCII charcode array. Why?
-    //
-    // 1. Given the audience of Rboxlo, most edits scrubbing Rboxlo off of their private server will be through
-    //    complete search and replaces, rather than simply editing the environment file though that achieves the
-    //    same effect. Hardcoding it as an ASCII charcode array will hopefully deter that.
-    //
-    // 2. Rboxlo is an application that powers private servers. It is not a private server in itself. It is important
-    //    to retain the fact that it powers private servers.
-    //
-    if (global.rboxlo.env.SERVER_X_POWERED_BY) {
-        let poweredBy = [ 82, 98, 111, 120, 108, 111 ] // Literal "Rboxlo"
-        
-        res.setHeader("X-Powered-By", `${String.fromCharCode.apply(null, poweredBy)}/${util.getVersion().semver}`)
-    }
+    req.session.rboxlo.bust = moment().unix() // resets session contents each page req
 
     // Get IP and store in req.rboxlo.ip
     let realip = req.connection.remoteAddress.trim()
@@ -74,10 +56,14 @@ async function middleware(req, res) {
         }
     }
 
-    // Non-sensitive session details for view engine
-    // FYI: Session NEVER gets changed besides at registration and sign-in, so we only do this once (or at least try to-- these are set once per request)
-    if (req.session.rboxlo.hasOwnProperty("user") && !res.locals.hasOwnProperty("session")) {
-        res.locals.session = {
+    if (!res.locals.session) {
+        res.locals.session = { csrf: req.csrfToken() }
+    } else {
+        res.locals.session.csrf = req.csrfToken()
+    }
+
+    if (req.session.rboxlo.hasOwnProperty("user") && !res.locals.session.hasOwnProperty("user")) {
+        res.locals.session.user = {
             id: req.session.rboxlo.user.id,
             username: req.session.rboxlo.user.username,
             permissions: req.session.rboxlo.user.permissions
@@ -85,8 +71,8 @@ async function middleware(req, res) {
     }
 
     // Remove locals if no session
-    if (res.locals.hasOwnProperty("session") && !req.session.rboxlo.hasOwnProperty("user")) {
-        delete res.locals.session
+    if (res.locals.session.hasOwnProperty("user") && !req.session.rboxlo.hasOwnProperty("user")) {
+        delete res.locals.session.user 
     }
 }
 

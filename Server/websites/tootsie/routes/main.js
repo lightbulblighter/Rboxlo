@@ -3,26 +3,20 @@ var router = require("express").Router()
 const path = require("path")
 const compare = require("safe-compare")
 
-const kryptshun = require(path.join(global.rboxlo.root, "kryptshun"))
-const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
-
-// LAID: Link Active ID
-// Also what most software developers will never get before they turn 50
+const user = require(path.join(global.rboxlo.root, "lib", "user"))
+const session = require(path.join(global.rboxlo.root, "lib", "session"))
 
 router.get("/", user.authenticated, (req, res) => {
-    res.render("home", { title: "Home", laid: "dashboard" })
+    res.render("home", { title: "Home" })
 })
 
 router.get("/logout", (req, res) => {
-    if (req.session.rboxlo.hasOwnProperty("user")) {
-        delete req.session.rboxlo.user
-    }
-    
+    session.clear(req)
     return res.redirect("/")
 })
 
 router.get("/login", (req, res) => {
-    res.render("login", { layout: "form", title: "Login", objects: { csrf: req.csrfToken() } })
+    res.render("login", { layout: "form", title: "Login" })
 })
 
 router.post("/login", async (req, res) => {
@@ -31,7 +25,7 @@ router.post("/login", async (req, res) => {
             req.session.rboxlo.user = { in: true }
             return res.redirect("/")
         } else {
-            res.render("login", { layout: "form", title: "Login", objects: { csrf: req.csrfToken() } })
+            res.render("login", { layout: "form", title: "Login" })
         }
     }
 })

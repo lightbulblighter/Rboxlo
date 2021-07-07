@@ -19,9 +19,7 @@ COPY /Branding/Logos/Primary/Big.png ./websites/eclipse/public/img/brand/large.p
 COPY /Branding/Logos/Primary/Small.png ./websites/eclipse/public/img/brand/small.png
 
 # Copy files necessary for packaging
-RUN mkdir ./packaging
-COPY /Packaging/Version ./packaging/version
-COPY /.git/refs/heads/trunk ./packaging/commit
+COPY /.git/refs/heads/trunk ./commit
 
 # Grant permissions on application folder to all users as we are about to switch users
 RUN chmod -R 777 /app

@@ -2,7 +2,7 @@ const moment = require("moment")
 
 const path = require("path")
 
-const util = require(path.join(global.rboxlo.root, "util"))
+const util = require(path.join(global.rboxlo.root, "lib", "base", "util"))
 
 async function middleware(req, res) {
     req.rboxlo = {}
@@ -50,6 +50,12 @@ async function middleware(req, res) {
             req.session.rboxlo = {}
             req.session.rboxlo.ip = req.rboxlo.ip
         }
+    }
+    
+    if (!res.locals.session) {
+        res.locals.session = { csrf: req.csrfToken() }
+    } else {
+        res.locals.session.csrf = req.csrfToken()
     }
 }
 

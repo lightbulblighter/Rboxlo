@@ -1,7 +1,6 @@
 var exports = module.exports = {}
 
 const mysql = require("mysql2/promise")
-const path = require("path")
 
 const pool = mysql.createPool({
     host: "database",

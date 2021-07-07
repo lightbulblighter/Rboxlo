@@ -3,17 +3,21 @@
         <div class="d-flex justify-content-between my-3">
             <h2>Games</h2>
 
-            {{#if session}}
+            {{#if session.user}}
                 <div class="d-flex align-items-center">
+                    <a class="me-2" href="{{ rboxlo.domain }}/games/download">
+                        <button class="btn btn-success">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </a>
+
                     <button class="btn btn-primary btn-primary-rboxlo disabled me-2" disabled="disabled">
                         <i class="fas fa-plus"></i> New Server
                     </button>
                     
-                    {{#if session.permissions.places.creation}}
-                        <a href="{{ rboxlo.domain }}/games/places/new">
-                            <button class="btn btn-primary btn-primary-rboxlo">
-                                <i class="fas fa-plus"></i> New Place
-                            </button>
+                    {{#if session.user.permissions.places.creation}}
+                        <a href="{{ url "/games/places/new" }}" class="btn btn-primary btn-primary-rboxlo">
+                            <i class="fas fa-plus"></i> New Place
                         </a>
                     {{else}}
                         <button class="btn btn-primary btn-primary-rboxlo disabled" disabled="disabled">
@@ -21,12 +25,6 @@
                         </button>
                     {{/if}}
                 </div>
-
-                <a href="{{ rboxlo.domain }}/games/download">
-                    <button class="btn btn-success">
-                        <i class="fas fa-download"></i> Download
-                    </button>
-                </a>
             {{/if}}
         </div>
 
@@ -66,10 +64,10 @@
                                     <input type="checkbox" value="" id="view-all" name="view-all" class="form-check-input" checked="true">
                                     <label class="form-check-label" for="view-all">All</label>
                                 </div>
-                                {{#each objects.versions}}
+                                {{#each applications}}
                                     <div class="form-check form-control-sm mb-0 py-0">
-                                        <input type="checkbox" value="" id="{{ this.internal_name }}" name="{{ this.internal_name }}" class="form-check-input">
-                                        <label class="form-check-label" for="{{ this.internal_name }}">{{ this.display_name }}</label>
+                                        <input type="checkbox" value="" id="{{ xss this.internalName }}" name="{{ xss this.internalName }}" class="form-check-input">
+                                        <label class="form-check-label" for="{{ xss this.internalName }}">{{ xss this.displayName }}</label>
                                     </div>
                                 {{/each}}
                             </div>

@@ -1,12 +1,31 @@
-var exports = module.exports = {}
+const path = require("path")
 
-const moment = require("moment")
-const xss = require("xss")
+var exports = module.exports = { ... require(path.join(global.rboxlo.root, "lib", "base", "util")) }
 
-exports.unix2timestamp = (unix) => {
-    return moment.unix(unix).format("L @ h:mm A")
+const manifest = require(path.join(global.rboxlo.root, "websites", "manifest"))
+
+/**
+ * Gets a complete URL from a path, i.e. "/path/to/page" -> "https://rboxlo.com/path/to/page"
+ * 
+ * @param {string} path Path to combine with domain
+ * 
+ * @returns {string} Complete URL
+ */
+exports.url = (path) => {
+    let schema = "http" + (global.rboxlo.env.SERVER_HTPS ? "s" : "")
+    let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
+
+    return `${schema}://${subdomain}${global.rboxlo.env.SERVER_DOMAIN}${path}`
 }
 
-exports.xss = (text) => {
-    return xss(text)
+/**
+ * Gets a resource's URL from its short path, i.e. "styles.css" -> "https://rboxlo.loc/css/styles.min.css"
+ * 
+ * @param {string} name File name of resource
+ * @param {boolean} getResourceFolder Whether to get the specific folder of the resource (default: TRUE)
+ * 
+ * @returns {string} Formatted path to resource
+ */
+exports.resource = (name, getResourceFolder = true) => {
+    return exports.url(exports.resourceInternal(name, getResourceFolder))
 }

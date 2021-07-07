@@ -7,36 +7,36 @@
                 <form id="login-form" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
-                        <input id="username" name="username" type="text" class="form-control{{#if objects.form.username}} is-{{#if objects.form.username.invalid}}in{{/if}}valid{{/if}}" required="required">
-                        {{#if objects.form.username.invalid}}
-                            <div class="invalid-feedback">{{ objects.form.username.message }}</div>
+                        <input id="username" name="username" type="text" class="form-control{{#if form.username}} is-{{#if form.username.invalid}}in{{/if}}valid{{/if}}" required="required">
+                        {{#if form.username.invalid}}
+                            <div class="invalid-feedback">{{ form.username.message }}</div>
                         {{/if}}
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input id="password" name="password" type="password" class="form-control{{#if objects.form.password}} is-{{#if objects.form.password.invalid}}in{{/if}}valid{{/if}}" required="required">
-                        {{#if objects.form.password.invalid}}
-                            <div class="invalid-feedback">{{ objects.form.password.message }}</div>
+                        <input id="password" name="password" type="password" class="form-control{{#if form.password}} is-{{#if form.password.invalid}}in{{/if}}valid{{/if}}" required="required">
+                        {{#if form.password.invalid}}
+                            <div class="invalid-feedback">{{ form.password.message }}</div>
                         {{/if}}
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="true" id="rememberMe" name="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                            <input class="form-check-input" type="checkbox" value="true" id="remember_me" name="remember_me">
+                            <label class="form-check-label" for="remember_me">Remember me</label>
                         </div>
                     </div>
-                    <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
+                    <input type="hidden" name="_csrf" value="{{ session.csrf }}">
                     {{#if rboxlo.captcha.enabled}}
-                        {{#if objects.challenge}}
-                            <div class="g-recaptcha{{#if objects.form.captcha}} mb-1{{/if}}" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
-                            {{#if objects.form.captcha}}
-                                <span class="error-text">{{ objects.form.captcha.message }}</span><br>
+                        {{#if challenge}}
+                            <div class="g-recaptcha{{#if form.captcha}} mb-1{{/if}}" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
+                            {{#if form.captcha}}
+                                <span class="error-text">{{ form.captcha.message }}</span><br>
                             {{else}}
                                 <br>
                             {{/if}}
                         {{/if}}
                     {{/if}}
-                    <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo{{#if objects.form.captcha}} mt-1{{/if}}">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-primary-rboxlo{{#if form.captcha}} mt-1{{/if}}">Sign in</button>
                 </form>
             </div>
         </div>
@@ -44,7 +44,7 @@
     {{/content}}
     
     {{#if rboxlo.captcha.enabled}}
-        {{#if objects.challenge}}
+        {{#if challenge}}
             {{#content "scripts" mode="append"}}
                 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
             {{/content}}

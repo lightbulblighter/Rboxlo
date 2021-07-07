@@ -2,26 +2,26 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
+const user = require(path.join(global.rboxlo.root, "lib", "user"))
 
 router.get("/delete", user.authenticated, (req, res) => {
-    res.render("games/instance/delete", { title: "Delete Instance", laid: "games.instance.delete" })
+    res.render("games/instance/delete", { title: "Delete Instance" })
 })
 
 router.get("/jobs", user.authenticated, (req, res) => {
-    res.render("games/instance/jobs", { title: "Manage Jobs with Instance", laid: "games.instance.jobs" })
+    res.render("games/instance/jobs", { title: "Manage Jobs with Instance" })
 })
 
 router.get("/modify", user.authenticated, (req, res) => {
-    res.render("games/instance/modify", { title: "Modify Instance", laid: "games.instance.modify" })
+    res.render("games/instance/modify", { title: "Modify Instance" })
 })
 
 router.get("/register", user.authenticated, (req, res) => {
-    res.render("games/instance/register", { title: "Register Machine as Instance", laid: "games.instance.register" })
+    res.render("games/instance/register", { title: "Register Machine as Instance" })
 })
 
 router.get("/search", user.authenticated, (req, res) => {
-    res.render("games/instance/search", { title: "Search for an Instance", laid: "games.instance.search" })
+    res.render("games/instance/search", { title: "Search for an Instance" })
 })
 
 module.exports = router

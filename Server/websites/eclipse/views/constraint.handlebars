@@ -1,7 +1,7 @@
 {{#> layout}}
     {{#content "body"}}
 		<div class="logo">
-			<img src="{{ rboxlo.domain }}/img/brand/large.png" width="400">
+			<img src="{{ resource "brand/large.png" }}">
 		</div>
 		
 		<div class="sign-in">
@@ -9,31 +9,31 @@
 			<form action="/constraint" method="post">
 				<div class="field">
 					<label for="username">Username</label>
-					<img src="{{ rboxlo.domain }}/img/constraint/user.png" class="icon">
+					<img src="{{ resource "constraint/user.png" }}" class="icon">
 					<input name="username" type="text" required>
 				</div>
 				
 				<div class="field">
 					<label for="password">Password</label>
-					<img src="{{ rboxlo.domain }}/img/constraint/key.png" class="icon">
+					<img src="{{ resource "constraint/key.png" }}" class="icon">
 					<input name="password" type="text" required>
 				</div>
 
 				<div class="checkbox">
-					<input name="rememberMe" type="checkbox" value="true">
-					<label for="rememberMe">Remember me</label>
+					<input name="remember_me" type="checkbox" value="true">
+					<label for="remember_me">Remember me</label>
 				</div>
 				
-				<input type="hidden" value="{{ objects.csrf }}" name="csrf">
+				<input type="hidden" value="{{ session.csrf }}" name="csrf">
 
 				<div class="submit">
 					<input type="submit" value="Submit">
 				</div>
 			</form>
 
-            {{#if objects.response}}
+            {{#if response}}
 				<br>
-			    <div class="error-message">{{ objects.response }}</div>
+			    <div class="error-message">{{ response }}</div>
             {{/if}}
 		</div>
     {{/content}}

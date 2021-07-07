@@ -10,9 +10,9 @@ const path = require("path")
 const validator = require("validator")
 const zxcvbn = require("zxcvbn")
 
-const kryptshun = require(path.join(global.rboxlo.root, "kryptshun"))
-const sql = require(path.join(global.rboxlo.root, "sql"))
-const util = require(path.join(global.rboxlo.root, "util"))
+const locker = require(path.join(__dirname, "base", "locker"))
+const sql = require(path.join(__dirname, "base", "sql"))
+const util = require(path.join(__dirname, "base", "util"))
 
 /**
  * Time in seconds until a ping "times out" (user is no longer doing said activity)
@@ -230,12 +230,12 @@ function generateDefaultSignInHistory (ip, userAgent, stringified = true) {
  */
 async function appendToSignInHistory(userId, ip, userAgent) {
     let history = (await sql.run("SELECT `sign_in_history` FROM `users` WHERE `id` = ?", userId))[0]
-    history = kryptshun.decrypt(history.sign_in_history)
+    history = locker.decrypt(history.sign_in_history)
 
     history[moment().unix()] = { "ip": ip, "userAgent": userAgent }
     
     history = JSON.stringify(history)
-    history = kryptshun.encrypt(history)
+    history = locker.encrypt(history)
 
     await sql.run("UPDATE `users` SET `sign_in_history` = ? WHERE `id` = ?", [history, userId])
 }
@@ -452,7 +452,7 @@ exports.verifyLongTermSession = async (content) => {
 
         if ((moment().unix() - result.expires_timestamp) >= LONG_TERM_SESSION_EXPIRY) {
             await sql.run("DELETE FROM `long_term_sessions` WHERE `id` = ?", result.id)
-            // will fall through to "return false"
+            return false
         } else {
             let hash = crypto.createHash("sha256").update(validator).digest("hex")
 
@@ -590,13 +590,13 @@ exports.authenticate = (information, ip, userAgent, antiRobot = false, rememberM
     
                 if (allowEmailSignIn) {
                     query += " OR `email_blind_index` = ?"
-                    parameters = [information.username, await kryptshun.blind(information.username)]
+                    parameters = [information.username, await locker.blind(information.username)]
                 }
                 let result = await sql.run(query, parameters)
 
                 if (result.length > 0) {
                     let user = result[0]
-                    if (await kryptshun.passwordVerify(user.password_hash, information.password)) {
+                    if (await locker.passwordVerify(user.password_hash, information.password)) {
                         let out = { success: true, userId: user.id }
 
                         if (rememberMe) {
@@ -712,7 +712,7 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
             }
     
             if (!response.targets.hasOwnProperty("email")) {
-                let result = await sql.run("SELECT 1 FROM `users` WHERE `email_blind_index` = ?", (await kryptshun.blind(information.email)))
+                let result = await sql.run("SELECT 1 FROM `users` WHERE `email_blind_index` = ?", (await locker.blind(information.email)))
                 if (result.length > 3) {
                     response.targets.email = "Too many accounts exist with this E-Mail address."
                 }
@@ -755,9 +755,9 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
                 }
                 
                 // Prepare values for user row entry
-                let password = await kryptshun.passwordHash(information.password1)
-                let emailCiphertext = kryptshun.encrypt(information.email)
-                let emailBlind = await kryptshun.blind(information.email)
+                let password = await locker.passwordHash(information.password1)
+                let emailCiphertext = locker.encrypt(information.email)
+                let emailBlind = await locker.blind(information.email)
     
                 let joindate = moment().unix()
                 let last_stipend_timestamp = moment().unix()
@@ -768,8 +768,8 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
                 let avatar = generateDefaultAvatar()
     
                 // Blind our IP and encrypt the sign in history
-                let signInHistory = kryptshun.encrypt(generateDefaultSignInHistory(ip, userAgent))
-                let ipBlind = await kryptshun.blind(ip)
+                let signInHistory = locker.encrypt(generateDefaultSignInHistory(ip, userAgent))
+                let ipBlind = await locker.blind(ip)
                 
                 // Insert row for this user
                 await sql.run(
@@ -839,7 +839,7 @@ exports.authenticated = (req, res, next) => {
     }
 
     req.session.rboxlo.redirect = `${req.protocol}://${req.get("host")}${req.originalUrl}`
-    res.redirect("/account/login")
+    res.redirect("/login")
 }
 
 /**
@@ -860,6 +860,6 @@ exports.loggedOut = (req, res, next) => {
  * @returns {boolean} If user exists
  */
 exports.exists = async (userID) => {
-    let result = (await sql.run("SELECT 1 FROM `users` WHERE `id` = ?", userID))
+    let result = await sql.run("SELECT 1 FROM `users` WHERE `id` = ?", userID)
     return result.length > 0
 }

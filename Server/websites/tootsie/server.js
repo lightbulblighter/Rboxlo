@@ -9,11 +9,11 @@ const path = require("path")
 const rateLimit = require("express-rate-limit")
 const csurf = require("csurf")
 
-const hbh = require(path.join(__dirname, "helpers"))
-const util = require(path.join(global.rboxlo.root, "util"))
-const manifest = require(path.join(global.rboxlo.root, "websites", "manifest.json"))
+const helpers = require(path.join(__dirname, "helpers"))
+const util = require(path.join(global.rboxlo.root, "lib", "base", "util"))
+const manifest = require(path.join(global.rboxlo.root, "websites", "manifest"))
 
-const error = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "error"))
+const error = require(path.join(global.rboxlo.root, "lib", "error"))
 
 let app = express()
 let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domain}.` : ""
@@ -22,8 +22,7 @@ let subdomain = (manifest.tootsie.domain != "INDEX") ? `${manifest.tootsie.domai
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
     version: util.getVersion(),
-    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}${subdomain}${global.rboxlo.env.SERVER_DOMAIN}`,
-    dsr: (global.rboxlo.env.PRODUCTION ? ".min" : ""), // "Debug Static Resource"
+    subdomain: subdomain,
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
         siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
@@ -31,7 +30,7 @@ app.locals.rboxlo = {
 }
 
 // Set up view engine
-let hbs = exphbs.create({ helpers: hbh })
+let hbs = exphbs.create({ helpers: helpers })
 
 hbs.handlebars.registerHelper(layouts(hbs.handlebars))
 hbs.handlebars.registerPartial("partials/layout", "{{prefix}}")
@@ -52,9 +51,6 @@ app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 app.use(cookieParser({ secret: global.rboxlo.env.SERVER_COOKIE_SECRET }))
 
-// Use our Rboxlo middleware
-app.use(require(path.join(__dirname, "middleware")).obj)
-
 // CSRF protection
 app.use(csurf({ cookie: true }))
 app.use((err, req, res, next) => {
@@ -63,6 +59,9 @@ app.use((err, req, res, next) => {
     return res.sendStatus(403)
     // provide no further context
 })
+
+// Use our Rboxlo middleware
+app.use(require(path.join(__dirname, "middleware")).obj)
 
 // Rate limiting
 // NOTE: If you have CloudFlare limits are done automatically

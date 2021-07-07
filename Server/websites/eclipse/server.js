@@ -1,20 +1,19 @@
-const express = require("express")
-const exphbs = require("express-handlebars")
-const minifier = require("express-minify-html-2")
-const layouts = require("handlebars-layouts")
-const path = require("path")
+const bp = require("body-parser")
+const cors = require("cors")
 const cookieSession = require("cookie-session")
 const cookieParser = require("cookie-parser")
-const bp = require("body-parser")
-const rateLimit = require("express-rate-limit")
-const cors = require("cors")
-const fileUpload = require("express-fileupload")
 const csurf = require("csurf")
+const exphbs = require("express-handlebars")
+const express = require("express")
+const fileUpload = require("express-fileupload")
+const layouts = require("handlebars-layouts")
+const minifier = require("express-minify-html-2")
+const path = require("path")
+const rateLimit = require("express-rate-limit")
 
-const hbh = require(path.join(__dirname, "helpers"))
-const util = require(path.join(global.rboxlo.root, "util"))
-
-const error = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "error"))
+const helpers = require(path.join(__dirname, "helpers"))
+const error = require(path.join(global.rboxlo.root, "lib", "error"))
+const util = require(path.join(global.rboxlo.root, "lib", "base", "util"))
 
 let app = express()
 
@@ -22,8 +21,6 @@ let app = express()
 app.locals.rboxlo = {
     name: util.titlecase(global.rboxlo.env.NAME),
     version: util.getVersion(),
-    domain: `${global.rboxlo.env.SERVER_HTTPS ? "https://" : "http://"}${global.rboxlo.env.SERVER_DOMAIN}`,
-    dsr: (global.rboxlo.env.PRODUCTION ? ".min" : ""), // "Debug Static Resource"
     captcha: {
         enabled: global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED,
         siteKey: global.rboxlo.env.GOOGLE_RECAPTCHA_SITE_KEY
@@ -40,12 +37,12 @@ app.locals.rboxlo = {
 // Closed or not?
 if (global.rboxlo.env.PRIVATE_CLOSED) {
     app.use((req, res, next) => {
-        return res.send("closed")
+        return res.sendStatus(404)
     })
 }
 
 // Set up view engine
-let hbs = exphbs.create({ helpers: hbh })
+let hbs = exphbs.create({ helpers: helpers })
 
 hbs.handlebars.registerHelper(layouts(hbs.handlebars))
 hbs.handlebars.registerPartial("partials/layout", "{{prefix}}")
@@ -77,9 +74,6 @@ app.use(fileUpload({
     preserveExtension: true
 }))
 
-// Use our Rboxlo middleware
-app.use(require(path.join(__dirname, "middleware")).obj)
-
 // CSRF protection
 app.use(csurf({ cookie: true }))
 app.use((err, req, res, next) => {
@@ -90,6 +84,9 @@ app.use((err, req, res, next) => {
     
     // provide no further context
 })
+
+// Use our Rboxlo middleware
+app.use(require(path.join(__dirname, "middleware")).obj)
 
 // Rate limiting
 // NOTE: If you have CloudFlare limits are done automatically

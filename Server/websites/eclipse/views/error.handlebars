@@ -2,13 +2,13 @@
     {{#content "body"}}
         <div class="card card-body">
             <div class="text-center px-3 py-3">
-                <img class="error-blob-img" src="{{ rboxlo.domain }}/img/blobs/{{ objects.blob }}.png">
+                <img class="error-blob-img" src="{{ resource error.blob }}">
                 <hr>
-                <h3>{{ objects.code }}</h3>
-                <span>{{ objects.description }}</span>
+                <h3>{{ error.code }}</h3>
+                <span>{{ error.description }}</span>
                 <div class="d-flex justify-content-center mt-3">
                     <button class="btn btn-secondary me-3" role="button" onclick="window.history.back()">Go back</button>
-                    <a href="{{ rboxlo.domain }}/" class="btn btn-primary" role="button">Home</a>
+                    <a href="{{ url "/" }}" class="btn btn-primary" role="button">Home</a>
                 </div>
             </div>
         </div>

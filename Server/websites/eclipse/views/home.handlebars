@@ -1,7 +1,7 @@
 {{#> layout}}
     {{#content "head" mode="append"}}
         <meta property="og:title" content="{{ rboxlo.name }}">
-        <meta property="og:image" content="{{ rboxlo.domain }}/img/art/default.png">
+        <meta property="og:image" content="{{ resource "art/default.png" }}">
         <meta property="og:image:type" content="image/png">
         <meta property="og:description" content="{{ rboxlo.name }} is a recreation of a very popular online brick building game. Only {{ rboxlo.name }} allows you to relive childhood memories, create amazing games, and have fun all at the same time. Sign up now!">
     {{/content}}
@@ -10,7 +10,7 @@
         <br><br>
         <div class="row{{#unless rboxlo.privacy.registration }} justify-content-center{{/unless}}">
             <div class="col-md-6 mb-5">
-                <h1 class="text-center"><img src="{{ rboxlo.domain }}/img/brand/large.png" class="img-fluid" width="500" alt="{{ rboxlo.name }}"></h1><hr>
+                <h1 class="text-center"><img src="{{ resource "brand/large.png" }}" alt="{{ rboxlo.name }}" width="500" class="img-fluid"></h1><hr>
                 <p class="text-start">
                     {{ rboxlo.name }} is a recreation of a very popular online brick building game. Only {{ rboxlo.name }} allows you to relive childhood memories, create amazing games, and have fun all at the same time.
                 </p>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">Create an account</div>
                     <div class="card-body">
-                        <form id="register-form" method="post" action="/account/register">
+                        <form id="register-form" method="post" action="{{ url "/account/register" }}">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input id="username" name="username" aria-describedby="username-info" type="text" class="form-control" required="required">
@@ -46,9 +46,6 @@
                             <input type="hidden" name="_csrf" value="{{ objects.csrf }}">
                             {{#if rboxlo.captcha.enabled}}
                                 <div class="g-recaptcha" data-sitekey="{{ rboxlo.captcha.siteKey }}"></div>
-                                {{#if objects.form.captcha}}
-                                    <span class="error-text">{{ objects.form.captcha.message }}</span><br>
-                                {{/if}}
                             {{/if}}
                             <button id="submit" type="submit" class="btn btn-primary btn-primary-rboxlo mt-3">Sign up</button>
                         </form>

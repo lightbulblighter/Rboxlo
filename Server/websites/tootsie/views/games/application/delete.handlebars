@@ -1,21 +1,17 @@
 {{#> layout}}
-    {{#content "head" mode="append"}}
-        <meta name="rboxlo-csrf" content="{{ objects.csrf }}">
-    {{/content}}
-
     {{#content "body"}}
         <h1 class="mb-3">Delete Application</h1>
 
         <div class="d-flex justify-content-between mb-3">
             <h3>Choose an application to delete</h3>
             <div class="d-flex align-items-center">
-                <button class="btn btn-secondary" onclick="fetchApplicationDataDelete()">
+                <button class="btn btn-secondary" id="data-refresh">
                     <i class="fas fa-sync"></i> Refresh
                 </button>
             </div>
         </div>
 
-        <div class="alert alert-success d-none mt-2" id="modification-update"></div>
+        <div class="alert alert-success d-none mt-2" id="update"></div>
 
         <table class="table table-striped table-hover table-bordered d-none" id="data">
             <thead class="table-light"><tr>
@@ -38,12 +34,12 @@
 
         <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
             <div class="text-center">
-                <img src="{{ rboxlo.domain }}/img/blobs/tired.png" class="error-image">
+                <img src="{{ resource "blobs/tired.png" }}" class="error-image">
                 <h3>No applications found</h3>
             </div>
         </div>
 
-        <div class="modal fade" id="deleteApplicationModal" tabindex="-1" aria-labelledby="deleteApplicationModal" aria-hidden="true">
+        <div class="modal fade" id="delete-application-modal" tabindex="-1" aria-labelledby="delete-application-modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -55,7 +51,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteApplication()">Yes, I'm sure</button>
+                        <button type="button" class="btn btn-danger" id="delete-application-submit">Yes, I'm sure</button>
                     </div>
                 </div>
             </div>
@@ -63,6 +59,6 @@
     {{/content}}
 
     {{#content "scripts" mode="append"}}
-        <script type="text/javascript">$(document).ready(()=>{fetchApplicationDataDelete(true);});function refreshData(){fetchApplicationDataDelete();}</script>
+        <script src="{{ resource "games/application/delete.js" }}"></script>
     {{/content}}
 {{/layout}}

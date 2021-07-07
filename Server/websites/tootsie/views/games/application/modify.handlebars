@@ -1,31 +1,109 @@
 {{#> layout}}
-    {{#content "head" mode="append"}}
-        <meta name="rboxlo-csrf" content="{{ objects.csrf }}">
-        {{#unless objects.choosing}}
-            <meta name="rboxlo-application-id" content="{{ objects.application.id }}">
-        {{/unless}}
-    {{/content}}
-
     {{#content "body"}}
         <h1 class="mb-3">Modify Application</h1>
 
-        {{#if objects.choosing}}
+        {{#if application}}
+            <h3 class="mb-2">Viewing application "<span id="display-name">{{ xss application.displayName }}</span>"</h3>
+            <a href="{{ url "/games/application/modify" }}" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
+            <div class="alert alert-success d-none mt-2" id="update"></div>
+
+            <div class="card card-body mt-2">
+                <div class="row justify-content-between">
+                    <div class="col-lg-5 mb-3">
+                        <b>ID:</b> <code>{{ xss application.id }}</code><br>
+                        <b>Display name:</b> <code id="display-name">{{ xss application.displayName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#display-name-modal"><small>(edit)</small></a><br>
+                        <b>Internal name:</b> <code id="internal-name">{{ xss application.internalName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#internal-name-modal"><small>(edit)</small></a>
+                        <br><br>
+                        <b>UUID:</b> <code id="uuid">{{ xss application.uuid }}</code> <a href="#" id="regenerate-uuid"><small>(regen)</small></a> <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="regenerate-uuid-spinner"><span class="sr-only">Regenerating UUID...</span></div><br>
+                        <b>Last Deployed Version UUID:</b> {{#if lastDeployedVersionUuid.length}}<code>{{ xss application.lastDeployedVersionUuid }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
+                        <br><br>
+                        <b>Time Created:</b> <span id="created">{{ timestamp application.createdTimestamp }}</span><br>
+                        <b>Last Updated:</b> <span id="last-updated">{{ timestamp application.lastUpdatedTimestamp }}</span>
+                        <br><br>
+                        <b class="text-danger">This application doesn't have any software deployed to it yet.</b> That means that this application isn't usable or downloadable until you software is deployed to it. You can deploy software by clicking <a href="{{ url "/games/application/deployment" }}?id={{ application.id }}">here</a>.
+                        <br><br>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-application-modal"><i class="fas fa-times"></i> Delete this application</button>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">Version history</div>
+                            <div class="card-body">
+                                No software has ever been deployed to this application before
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="display-name-modal" tabindex="-1" role="dialog" aria-labelledby="display-name-modal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 title="modal-title">Edit Display Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger py-2 d-none" id="display-name-modal-update"></div>
+                            <span>Current display name: <code id="display-name">{{ xss application.displayName }}</code></span>
+                            <div class="form-group mt-1">
+                                <label for="display-name-input" class="form-label">New internal name:</label>
+                                <input id="display-name-input" type="text" class="form-control" placeholder="Enter new display name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="display-name-submit">
+                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="display-name-spinner"><span class="sr-only">Saving changes...</span></div>
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="internal-name-modal" tabindex="-1" aria-labelledby="internal-name-modal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 title="modal-title">Edit Internal Name</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger py-2 d-none" id="internal-name-status"></div>
+                            <span>Current internal name: <code id="internal-name">{{ xss application.internalName }}</code></span>
+                            <div class="form-group mt-1">
+                                <label for="internal-name-input" class="form-label">New internal name:</label>
+                                <input id="internal-name-input" type="text" class="form-control" placeholder="Enter new internal name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="internal-name-submit">
+                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="internal-name-spinner"><span class="sr-only">Saving changes...</span></div>
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{else}}
             <div class="d-flex justify-content-between mb-3">
                 <h3>Choose an application</h3>
                 <div class="d-flex align-items-center">
-                    <a href="/games/application/new">
+                    <a href="{{ url "/games/application/new" }}">
                         <button class="btn btn-primary me-2">
                             <i class="fas fa-plus"></i> New Application
                         </button>
                     </a>
 
-                    <button class="btn btn-secondary" onclick="fetchApplicationDataModify()">
+                    <button class="btn btn-secondary" id="data-refresh">
                         <i class="fas fa-sync"></i> Refresh
                     </button>
                 </div>
             </div>
 
-            <div class="alert alert-success d-none mt-2" id="modification-update"></div>
+            <div class="alert alert-success d-none mt-2" id="update"></div>
             
             <table class="table table-striped table-hover table-bordered d-none" id="data">
                 <thead class="table-light"><tr>
@@ -51,99 +129,14 @@
 
             <div class="d-flex align-items-center justify-content-center h-50 d-none" id="data-empty">
                 <div class="text-center">
-                    <img src="{{ rboxlo.domain }}/img/blobs/tired.png" class="error-image">
+                    <img src="{{ resource "blobs/tired.png" }}" class="error-image">
                     <h3>No applications found</h3>
-                    <span>Why don't you <a href="{{ rboxlo.domain }}/games/application/new">make one</a>?</span>
-                </div>
-            </div>
-        {{else}}
-            <h3 class="mb-2">Viewing application "<span id="displayNameHeader">{{ xss objects.application.display_name }}</span>"</h3>
-            <a href="/games/application/modify" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
-            <div class="alert alert-success d-none mt-2" id="modification-update"></div>
-            <div class="card mt-2">
-                <div class="card-body">
-                    <div class="row justify-content-between">
-                        <div class="col-lg-5">
-                            <b>ID:</b> <code>{{ xss objects.application.id }}</code><br>
-                            <b>Display name:</b> <code id="displayName">{{ xss objects.application.display_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editDisplayNameModal"><small>(edit)</small></a><br>
-                            <b>Internal name:</b> <code id="internalName">{{ xss objects.application.internal_name }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#editInternalNameModal"><small>(edit)</small></a>
-                            <br><br>
-                            <b>UUID:</b> <code id="uuid">{{ xss objects.application.uuid }}</code> <a href="#" onclick="regenUUIDModify()"><small>(regen)</small></a> <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-uuid"><span class="sr-only">Regenerating UUID...</span></div><br>
-                            <b>Last Deployed Version UUID:</b> {{#if objects.application.last_deployed_version_uuid.length}}<code>{{ xss objects.application.last_deployed_version_uuid }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
-                            <br><br>
-                            <b>Time Created:</b> <span id="created">{{ unix2timestamp objects.application.created_timestamp }}</span><br>
-                            <b>Last Updated:</b> <span id="lastUpdated">{{ unix2timestamp objects.application.last_updated_timestamp }}</span>
-                            <br><br>
-                            <b class="text-danger">This application doesn't have any software deployed to it yet.</b> That means that this application isn't usable or downloadable until you software is deployed to it. You can deploy software by clicking <a href="{{ rboxlo.domain }}/games/application/deployment?id={{ objects.application.id }}">here</a>.
-                            <br><br>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteApplicationModal"><i class="fas fa-times"></i> Delete this application</button>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">Version history</div>
-                                <div class="card-body">
-                                    No software has ever been deployed to this application before
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="editDisplayNameModal" tabindex="-1" role="dialog" aria-labelledby="editDisplayNameModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 title="modal-title">Edit Display Name</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="alert alert-danger py-2 d-none" id="internalNameModalError"></div>
-                            <span>Current display name: <code id="displayNameModalText">{{ xss objects.application.display_name }}</code></span>
-                            <div class="form-group mt-1">
-                                <label for="editDisplayNameInput" class="form-label">New internal name:</label>
-                                <input type="text" class="form-control" id="editDisplayNameInput" placeholder="Enter new display name">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="saveEditDisplayNameChanges()">
-                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-editDisplayName"><span class="sr-only">Saving changes...</span></div>
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="editInternalNameModal" tabindex="-1" aria-labelledby="editInternalNameModal" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 title="modal-title">Edit Internal Name</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="alert alert-danger py-2 d-none" id="internalNameModalError"></div>
-                            <span>Current internal name: <code id="internalNameModalText">{{ xss objects.application.internal_name }}</code></span>
-                            <div class="form-group mt-1">
-                                <label for="editInternalNameInput" class="form-label">New internal name:</label>
-                                <input type="text" class="form-control" id="editInternalNameInput" placeholder="Enter new internal name">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="saveEditInternalNameChanges()">
-                                <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="spinner-editInternalName"><span class="sr-only">Saving changes...</span></div>
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
+                    <span>Why don't you <a href="{{ url "/games/application/new" }}">make one</a>?</span>
                 </div>
             </div>
         {{/if}}
 
-        <div class="modal fade" id="deleteApplicationModal" tabindex="-1" aria-labelledby="deleteApplicationModal" aria-hidden="true">
+        <div class="modal fade" id="delete-application-modal" tabindex="-1" aria-labelledby="delete-application-modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -155,7 +148,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteApplication()">Yes, I'm sure</button>
+                        <button type="button" class="btn btn-danger" id="delete-application-submit">Yes, I'm sure</button>
                     </div>
                 </div>
             </div>
@@ -163,6 +156,6 @@
     {{/content}}
 
     {{#content "scripts" mode="append"}}
-        <script type="text/javascript">$(document).ready(()=>{fetchApplicationDataModify(true)});function refreshData(){fetchApplicationDataModify();}</script>
+        <script src="{{ resource "games/application/modify.js" }}"></script>
     {{/content}}
 {{/layout}}

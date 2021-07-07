@@ -42,11 +42,6 @@
 /* Sticky footer */
 main > .container { padding-top: 60px }
 
-/* Dashboard */
-.user-thumbnail-dashboard {
-	max-width: 300px;
-}
-
 /* Games */
 .games-place-img {
 	max-width: 150px;

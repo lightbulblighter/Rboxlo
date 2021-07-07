@@ -2,7 +2,8 @@ var router = require("express").Router()
 
 const path = require("path")
 
-const user = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "user"))
+const session = require(path.join(global.rboxlo.root, "lib", "session"))
+const user = require(path.join(global.rboxlo.root, "lib", "user"))
 
 /**
  * Handles an account/create submission
@@ -15,33 +16,27 @@ async function createAccount (req, res) {
         return res.sendStatus(403)
     }
 
-    let objects = {
-        "form": {
-            "username": { invalid: false },
-            "email": { invalid: false },
-            "password1": { invalid: false },
-            "password2": { invalid: false }
-        },
-        "csrf": req.csrfToken()
+    let form = {
+        username:  { invalid: false },
+        email:     { invalid: false },
+        password1: { invalid: false },
+        password2: { invalid: false }
     }
 
     if (global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
-        if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
-            objects.form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
+        if (!form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
+            form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
         }
 
-        if (!objects.form.hasOwnProperty("captcha")) {
-            if (!(await user.verifyCaptcha(req.rboxlo.ip, req.body["g-recaptcha-response"]))) {
-                objects.form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
+        if (!form.hasOwnProperty("captcha")) {
+            if (!await user.verifyCaptcha(req.rboxlo.ip, req.body["g-recaptcha-response"])) {
+                form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
             }
         }
 
-        if (objects.form.hasOwnProperty("captcha")) {
-            objects.form = {
-                "captcha": objects.form.captcha
-            }
-
-            return res.render("account/register", { "title": "Register", "objects": objects })
+        if (form.hasOwnProperty("captcha")) {
+            form = { captcha: form.captcha }
+            return res.render("account/register", { title: "Register", form: form })
         }
     }
 
@@ -50,19 +45,21 @@ async function createAccount (req, res) {
             let result = await user.getNecessarySessionInfoForUser(response.userId)
             req.session.rboxlo.user = result
             res.redirect("/my/dashboard")
+
             return
         }
 
+        // Failed
         for (const [target, value] of Object.entries(response.targets)) {
             if (target == "csrf") {
                 continue
             }
 
-            objects.form[target].invalid = true
-            objects.form[target].message = value
+            form[target].invalid = true
+            form[target].message = value
         }
 
-        res.render("account/register", { "title": "Register", "objects": objects })
+        res.render("account/register", { title: "Register", form: form })
     })
 }
 
@@ -73,41 +70,33 @@ async function createAccount (req, res) {
  * @param {array} res Result body
  */
 async function authenticate (req, res) {
-    let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
+    let challenge = await user.needsAuthenticationChallenge(req.rboxlo.ip)
 
-    let objects = {
-        "form": {
-            "username": { invalid: false },
-            "password": { invalid: false },
-        },
-        "csrf": req.csrfToken(),
-        "challenge": challenge
+    let form = {
+        username: { invalid: false },
+        password: { invalid: false },
     }
     
     if (global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
         if (await user.needsAuthenticationChallenge(req.rboxlo.ip)) {
-            if (!objects.form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
-                objects.form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
+            if (!form.hasOwnProperty("captcha") && (!req.body.hasOwnProperty("g-recaptcha-response") || req.body["g-recaptcha-response"].length == 0)) {
+                form.captcha = { invalid: true, message: "Please solve the captcha challenge." }
             }
 
-            if (!objects.form.hasOwnProperty("captcha")) {
+            if (!form.hasOwnProperty("captcha")) {
                 if (!user.verifyCaptcha(req.body["g-recaptcha-response"])) {
-                    objects.form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
+                    form.captcha = { invalid: true, message: "You failed to solve the captcha challenge. Please try again." }
                 }
             }
 
-            if (objects.form.hasOwnProperty("captcha")) {
-                objects.form = {
-                    captcha: objects.form.captcha,
-                    csrf: objects.form.csrf
-                }
-
-                return res.render("account/login", { "title": "Login", "objects": objects })
+            if (form.hasOwnProperty("captcha")) {
+                form = { captcha: form.captcha }
+                return res.render("account/login", { title: "Login", form: form, challenge: challenge })
             }
         }
     }
     
-    var rememberMe = (req.body.hasOwnProperty("rememberMe") && (req.body.rememberMe === "true"))
+    var rememberMe = (req.body.hasOwnProperty("remember_me") && (req.body.remember_me === "true"))
 
     user.authenticate(req.body, req.rboxlo.ip, req.headers["user-agent"], 3, rememberMe).then(async (response) => {
         if (response.success === true) {
@@ -128,9 +117,10 @@ async function authenticate (req, res) {
             }
         }
 
+        // Failed
         for (const [target, value] of Object.entries(response.targets)) {
-            objects.form[target].invalid = true
-            objects.form[target].message = value
+            form[target].invalid = true
+            form[target].message = value
         }
 
         if (req.session.rboxlo.hasOwnProperty("redirect")) {
@@ -138,10 +128,10 @@ async function authenticate (req, res) {
         }
 
         if (response.targets.hasOwnProperty("username") && response.targets.username == "Invalid username or password.") {
-            delete objects.form.password
+            delete form.password
         }
         
-        res.render("account/login", { "title": "Login", "objects": objects })
+        res.render("account/login", { title: "Login", form: form, challenge: challenge })
     })
 }
 
@@ -153,23 +143,20 @@ router.get("/register", user.loggedOut, (req, res) => {
         return res.sendStatus(403)
     }
     
-    res.render("account/register", { "title": "Register", "objects": { csrf: req.csrfToken() } })
+    res.render("account/register", { title: "Register" })
 })
 
 router.get("/login", user.loggedOut, async (req, res) => {
-    let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
-    res.render("account/login", { "title": "Login", "objects": { "csrf": req.csrfToken(), "challenge": challenge } })
+    let challenge = await user.needsAuthenticationChallenge(req.rboxlo.ip)
+    res.render("account/login", { title: "Login", challenge: challenge })
 })
 
 router.get("/logout", (req, res) => {
-    if (req.session.rboxlo.hasOwnProperty("user")) {
-        delete req.session.rboxlo.user
-    }
-
     if (req.cookies.hasOwnProperty("remember_me")) {
         res.clearCookie("remember_me")
     }
-
+    
+    session.clear(req)
     res.redirect("/account/login")
 })
 

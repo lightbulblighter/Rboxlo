@@ -4,12 +4,12 @@ const bytes = require("bytes")
 const fs = require("fs")
 const moment = require("moment")
 const path = require("path")
+const sha256File = require("sha256-file")
 const uuid = require("uuid")
 const xss = require("xss")
-const sha256File = require("sha256-file")
 
-const application = require(path.join(global.rboxlo.root, "websites", "shared", "lib", "application"))
-const sql = require(path.join(global.rboxlo.root, "sql"))
+const application = require(path.join(__dirname, "application"))
+const sql = require(path.join(__dirname, "base", "sql"))
 
 /**
  * Maximum place file size, in bytes
@@ -64,15 +64,15 @@ function createAllowedGearsJSON(information) {
  * @param {string} description Place description (default: "No description provided")
  * @param {number} genre Place genre (min: 1, max: 16)
  * @param {number} maxPlayers Max players (min: 1, max: 100)
- * @param {number} copying Place is copying (is a number so 0 false 1 true) default: FALSE (0)
+ * @param {number} copying Place is copying (numeric value) (Default: FALSE (0))
  * @param {string} allowedGearsJSON Allowed gears in JSON string form
  * @param {number} chatStyle Chat style (0: classic, 1: bubble, 2: both)
  * @param {number} isStartPlace If this place is a start place
  * 
  * @returns {array|boolean} Returns false if error (only potential error is if couldn't find game) or returns place information
  */
-exports.createPlace = async (gameID, name, description, genre, maxPlayers, copying = 0, allowedGearsJSON, chatStyle, isStartPlace) => {
-    let gameUUID = (await sql.run("SELECT `uuid` FROM `games` WHERE `id` = ?", [gameID]))
+exports.createPlace = async (gameID, name, description = "No description provided", genre, maxPlayers, copying = 0, allowedGearsJSON, chatStyle, isStartPlace) => {
+    let gameUUID = await sql.run("SELECT `uuid` FROM `games` WHERE `id` = ?", gameID)
     if (gameUUID.length == 0) {
         return false
     }
@@ -88,7 +88,7 @@ exports.createPlace = async (gameID, name, description, genre, maxPlayers, copyi
         [gameID, gameUUID, placeUUID, name, description, genre, maxPlayers, copying, allowedGearsJSON, chatStyle, isStartPlace, moment().unix(), moment().unix()]
     )
 
-    let place = (await sql.run("SELECT `id` FROM `places` WHERE `uuid` = ?", [placeUUID]))[0]
+    let place = (await sql.run("SELECT `id` FROM `places` WHERE `uuid` = ?", placeUUID))[0]
 
     if (isStartPlace) {
         await sql.run(
@@ -112,7 +112,7 @@ exports.createPlace = async (gameID, name, description, genre, maxPlayers, copyi
  * @param {string} app Application
  * @param {number} privacy Privacy settings (0: "Everyone", 1: "My friends", 2: "Only me") assuming from the perspective of the user with ID specified here
  * 
- * @returns {array|boolean} Returns false if error (only potential error is if couldn't find place or invalid app) or returns game information
+ * @returns {array|boolean} Returns false if error (only potential error is if couldn't find place or invalid application) or returns game information
  */
 exports.createGame = async (userID, startPlaceID, name, app, privacy) => {
     if (!application.exists(app)) {
@@ -136,7 +136,7 @@ exports.createGame = async (userID, startPlaceID, name, app, privacy) => {
         [gameUUID, startPlaceID, moment().unix(), moment().unix(), name, app, privileges, privacy]
     )
 
-    let game = (await sql.run("SELECT `id`, `uuid` FROM `games` WHERE `uuid` = ?", [gameUUID]))[0]
+    let game = (await sql.run("SELECT `id`, `uuid` FROM `games` WHERE `uuid` = ?", gameUUID))[0]
 
     return {
         id: game.id,
@@ -227,8 +227,8 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
             }
         }
 
-        let game = (await exports.createGame(userID, 0, information.name, information.application, information.privacy))
-        let place = (await exports.createPlace(game.id, information.name, information.description, information.genre, information["max_players"], information.copying, createAllowedGearsJSON(information), information["chat_style"], true))
+        let game = await exports.createGame(userID, 0, information.name, information.application, information.privacy)
+        let place = await exports.createPlace(game.id, information.name, information.description, information.genre, information["max_players"], information.copying, createAllowedGearsJSON(information), information["chat_style"], true)
 
         response.game = game
         response.place = place
@@ -243,7 +243,7 @@ exports.createGameAndPlace = (userID, information, formChecks = true) => {
  * 
  * @param {number} userID User who uploading this
  * @param {number} placeID place ID
- * @param {} file Place file
+ * @param {special} file Place file
  * 
  * @returns {boolean} Returns false if the file is too large, true otherwise
  */
