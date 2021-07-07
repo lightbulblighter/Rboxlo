@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC62A7AD-6485-486E-8997-4BE87EDDBE72}</ProjectGuid>
+    <ProjectGuid>{E2477938-53C3-4566-AD9C-509A6E0C9990}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Rboxlo.DotEnv</RootNamespace>
-    <AssemblyName>Rboxlo.DotEnv</AssemblyName>
+    <RootNamespace>Rboxlo.Arbiter</RootNamespace>
+    <AssemblyName>Rboxlo.Arbiter</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,11 +47,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Network\Port.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>1&gt;nul copy $(TargetPath) $(SolutionDir)Rboxlo.Build\$(ConfigurationName)\$(TargetFileName)
+echo Rboxlo.Build ^-^&gt; Copied bin to Build folder</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)Rboxlo.DotEnv\bin\Debug\Rboxlo.DotEnv.exe $(SolutionDir)..\.env $(SolutionDir)Rboxlo.Core\DotEnv.cs NAME SERVER_DOMAIN PRODUCTION
+1&gt;nul copy $(SolutionDir)..\Branding\Logos\Gameserver\Arbiter.ico $(ProjectDir)\Resources\Icon.ico</PreBuildEvent>
+  </PropertyGroup>
 </Project>

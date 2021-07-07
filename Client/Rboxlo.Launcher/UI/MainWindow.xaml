@@ -3,10 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Rboxlo.Launcher"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        xmlns:local="clr-namespace:Rboxlo.Launcher.UI"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Title="MainWindow" Loaded="WindowLoaded" WindowStartupLocation="CenterScreen" Icon="../Resources/Icon.ico" Closing="WindowClosing">
+    <Grid Background="White" Height="106" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="354">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="205*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Canvas Margin="0,67,0,0" Background="#FFF0F0F0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button x:Name="CancelButton" Content="CancelButton" Canvas.Left="263" Width="75" Click="CancelButtonClick" Canvas.Top="10" Foreground="Black" BorderBrush="#FFADADAD" Background="#FFE1E1E1"/>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Margin="0,66,0,8" Width="354" RenderTransformOrigin="0.5,0.5" Background="#FFE8E8E8" Grid.ColumnSpan="2">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+        </Canvas>
+        <ProgressBar x:Name="StatusProgressBar" Margin="62,34,16,26" IsIndeterminate="True" Minimum="0" Maximum="1000" Value="0" Grid.ColumnSpan="2"/>
+        <Label x:Name="StatusText" Content="StatusText" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" Margin="56,4,0,41" Width="285" Foreground="#FF003399" FontSize="15" Grid.ColumnSpan="2"/>
+        <Image x:Name="StatusImage" Margin="16,11,95,26" RenderOptions.BitmapScalingMode="Fant">
+            <Image.Source>
+                <BitmapImage x:Name="StatusBitmapImage" DecodePixelWidth="300" UriSource="/Resources/Brand.png" />
+            </Image.Source>
+        </Image>
+        <Label Name="DownloadSize" Content="DownloadSize" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"  Margin="71,43,11,7" FontSize="9" Foreground="#FF9E9D9D" Grid.Column="1"/>
     </Grid>
 </Window>

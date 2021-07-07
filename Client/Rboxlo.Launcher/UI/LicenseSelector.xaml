@@ -1,0 +1,13 @@
+﻿<Window x:Class="Rboxlo.Launcher.UI.LicenseSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rboxlo.Launcher.UI"
+        ResizeMode="NoResize" Title="LicenseSelector" SizeToContent="WidthAndHeight" Height="80" Width="520" Loaded="WindowLoaded">
+    <Grid>
+        <Label x:Name="Message1" Padding="0" Content="Message1" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Message2" Padding="0" Content="Message2" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="SelectButton" Content="SelectButton" HorizontalAlignment="Left" Margin="429,17,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.5,0.5" Click="SelectButtonClick"/>
+    </Grid>
+</Window>

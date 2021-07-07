@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Rboxlo.Arbiter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AppSettingsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AppSettings.xml</Value>
+    </Setting>
+    <Setting Name="Verbose" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="LogTransactions" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="VerboseLogging" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MaxConnections" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">256</Value>
+    </Setting>
+    <Setting Name="RccServiceJobTimeout" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:05:00</Value>
+    </Setting>
+    <Setting Name="RccServicePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\RCCService\RCCService.exe</Value>
+    </Setting>
+    <Setting Name="RccServiceArguments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/content:content\\</Value>
+    </Setting>
+    <Setting Name="PlayerPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\Player\RboxloPlayer.exe</Value>
+    </Setting>
+    <Setting Name="PlayerArguments" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="StudioPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\Studio\RboxloStudio.exe</Value>
+    </Setting>
+    <Setting Name="StudioArguments" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PortReleaseGuid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="RecycleProcesses" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SingleProcess" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

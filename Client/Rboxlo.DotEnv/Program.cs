@@ -78,7 +78,7 @@ namespace Rboxlo.DotEnv
             {
                 Console.WriteLine($"You need at least three arguments to use {ApplicationName}.");
                 Console.WriteLine("The first argument is the dotenv file to parse, the second is the output file path, and the third (and the ones after) are the constants to import.");
-                Console.WriteLine(@$"For example, '{ApplicationName}.exe .env C:\Client\Core\GeneratedConstants.cs PROJECT_NAME WEBSITE_DOMAIN'");
+                Console.WriteLine($@"For example, '{ApplicationName}.exe .env C:\Client\Core\GeneratedConstants.cs PROJECT_NAME WEBSITE_DOMAIN'");
 
                 Fail();
             }

@@ -1,33 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Interop;
-using System.Runtime.InteropServices;
+using System.Globalization;
+using System.Reflection;
 using Microsoft.Win32;
 
-namespace Rboxlo.Core.Platform.Windows
+namespace Rboxlo.Core.Common
 {
     /// <summary>
-    /// Methods and variables specific to the Windows operating system. These are all tested to work on Win10 ONLY
+    /// General purpose methods
     /// </summary>
     public static class Util
     {
-        [DllImport("user32.dll")]
-        private static extern int GetWindowLong(IntPtr hwnd, int index);
-
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hwnd, int index, int newStyle);
-
-        private const int GWL_STYLE = -16;
-        private const int GWL_EXSTYLE = -20;
-        private const int WS_EX_DLGMODALFRAME = 0x0001;
-        private const int WS_SYSMENU = 0x80000;
-
         /// <summary>
-        /// Base path to the Rboxlo registry key
+        /// Converts a string to titlecase
         /// </summary>
-        public static string BaseRegistryPath = String.Format(@"SOFTWARE\{0}", ToMachineReadable(DotEnv.NAME));
+        /// <param name="input">String to convert</param>
+        /// <returns>Titlecased string</returns>
+        public static string ToTitleCase(string input)
+        {
+            return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(input.ToLower());
+        }
 
         /// <summary>
         /// Makes a string machine-readable, by removing all special symbols
@@ -56,27 +47,26 @@ namespace Rboxlo.Core.Platform.Windows
         /// <summary>
         /// Adds a program to the uninstall registry
         /// </summary>
-        /// <param name="icon">Sets the icon of the program in the Control Panel. Path to an icon resource (can just do "game.exe,0")</param>
-        /// <param name="applicationName">Application name, not displayed</param>
-        /// <param name="displayName">Proper name displayed</param>
-        /// <param name="version">Display version</param>
-        /// <param name="uninstall">Command line arguments to uninstall the program</param>
+        /// <param name="icon">Sets the icon of the program in the Control Panel. Path to an ".ico" file</param>
         /// <param name="location">The path/folder where the program is being installed</param>
+        /// <param name="uninstall">Command line arguments to uninstall the program</param>
+        /// <param name="application">Application name</param>
+        /// <param name="proper">Proper name</param>
         /// <param name="url">About page for the application. Leave as blank if no page</param>
-        public static void AddUninstallOption(string icon, string applicationName, string displayName, string version, string location, string uninstall, string url = null)
+        public static void AddUninstallOption(string icon, string location, string uninstall, string application, string proper, string url = null)
         {
             DateTime now = DateTime.Today;
             int install = Convert.ToInt32(now.ToString("yyyymmdd"));
 
-            RegistryKey key = Registry.CurrentUser.CreateSubKey(String.Format(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{0}", applicationName));
+            RegistryKey key = Registry.CurrentUser.CreateSubKey(String.Format(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{0}", application));
             key.SetValue("DisplayIcon", icon, RegistryValueKind.String);
-            key.SetValue("DisplayName", displayName, RegistryValueKind.String);
-            key.SetValue("DisplayVersion", version, RegistryValueKind.String);
+            key.SetValue("DisplayName", proper, RegistryValueKind.String);
+            key.SetValue("DisplayVersion", GetCurrentAssembly().Version, RegistryValueKind.String);
             key.SetValue("InstallDate", install, RegistryValueKind.String);
             key.SetValue("InstallLocation", location, RegistryValueKind.String);
             key.SetValue("NoModify", 1, RegistryValueKind.DWord);
             key.SetValue("NoRepair", 1, RegistryValueKind.DWord);
-            key.SetValue("Publisher", displayName, RegistryValueKind.String);
+            key.SetValue("Publisher", proper, RegistryValueKind.String);
             key.SetValue("UninstallString", uninstall, RegistryValueKind.String);
 
             if (url != null)
@@ -106,6 +96,25 @@ namespace Rboxlo.Core.Platform.Windows
         }
 
         /// <summary>
+        /// Gets current
+        /// </summary>
+        /// <returns>Current Assembly</returns>
+        public static AssemblyName GetCurrentAssembly()
+        {
+            return Assembly.GetExecutingAssembly().GetName();
+        }
+
+        /// <summary>
+        /// Builds a URI for a given resource
+        /// </summary>
+        /// <param name="resourceName">Name of resource</param>
+        /// <returns>Built URI</returns>
+        public static Uri BuildResourceUri(string resourceName)
+        {
+            return new Uri(String.Format("pack://application:,,,/{0};component/Resources/{1}", GetCurrentAssembly().Name, resourceName));
+        }
+
+        /// <summary>
         /// Deletes an uninstall option from registry
         /// </summary>
         /// <param name="application">Name of application</param>
@@ -124,27 +133,24 @@ namespace Rboxlo.Core.Platform.Windows
         }
 
         /// <summary>
-        /// Removes the icon from a WPF window
+        /// Formats bytes to human readable form
         /// </summary>
-        /// <param name="window">Window to modify</param>
-        public static void RemoveIcon(Window window)
+        /// <param name="bytes">Bytes</param>
+        /// <param name="decimals">Max amount of decimals to display</param>
+        /// <param name="bi">Bisexual form</param>
+        public static string FormatBytes(int bytes, int decimals = 2, bool bi = true)
         {
-            IntPtr hWnd = new WindowInteropHelper(window).Handle;
-            int extendedStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+            if (bytes == 0)
+            {
+                return "";
+            }
 
-            SetWindowLong(hWnd, GWL_EXSTYLE, extendedStyle | WS_EX_DLGMODALFRAME);
-        }
+            int k = bi ? 1024 : 1000;
+            int dm = decimals < 0 ? 0 : decimals;
+            string[] sizes = bi ? new string[] { "Bytes", "KiB", "MiB", "GiB", "TiB", "PiB" } : new string[] { "Bytes", "KB", "MB", "GB", "TB", "PB" };
 
-        /// <summary>
-        /// Removes the close button from a WPF window
-        /// </summary>
-        /// <param name="window">Window to modify</param>
-        public static void RemoveCloseButton(Window window)
-        {
-            IntPtr hWnd = new WindowInteropHelper(window).Handle;
-            int style = GetWindowLong(hWnd, GWL_STYLE);
-
-            SetWindowLong(hWnd, GWL_STYLE, style & ~WS_SYSMENU);
+            int idx = Convert.ToInt32(Math.Floor(Math.Log(bytes) / Math.Log(k)));
+            return String.Format("{0} {1}", ((bytes / Math.Pow(k, idx)).ToString(String.Format("N{0}", dm))), sizes[idx]);
         }
     }
 }

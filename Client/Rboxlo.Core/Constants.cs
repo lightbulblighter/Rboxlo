@@ -5,7 +5,7 @@ using Rboxlo.Core.Common;
 namespace Rboxlo.Core
 {
     /// <summary>
-    /// Global constants compiled into each Client project. That means don't put sensitive information here. If you need to, add a .config or use the registry
+    /// Global constants. This class imports some non-sensitive information from the dotenv file.
     /// </summary>
     public static class Constants
     {
@@ -13,19 +13,24 @@ namespace Rboxlo.Core
         /// Whether we are debugging or not
         /// </summary>
 #if DEBUG
-        public static bool Debugging = true;
+        public static bool IsDebugging = true;
 #else
-        public static bool Debugging = !DotEnv.PRODUCTION;
+        public static bool IsDebugging = !DotEnv.PRODUCTION;
 #endif
 
         /// <summary>
         /// Website domain
         /// </summary>
-        public static string BaseURL = DotEnv.SERVER_DOMAIN;
+        public static string BaseURL = String.Format("{0}{1}", (IsDebugging ? "https://" : "http://"), DotEnv.SERVER_DOMAIN);
 
         /// <summary>
-        /// Proper project name (title-cased)
+        /// Project name
         /// </summary>
         public static string ProjectName = Util.ToTitleCase(DotEnv.NAME);
+
+        /// <summary>
+        /// Base path to the Rboxlo registry key
+        /// </summary>
+        public static string BaseRegistryPath = Util.ToMachineReadable(DotEnv.Name);
     }
 }

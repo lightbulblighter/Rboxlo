@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Rboxlo.Core.Common;
 
 namespace Rboxlo.Launcher
 {
@@ -15,7 +10,9 @@ namespace Rboxlo.Launcher
     {
         private void AppStartup(object sender, StartupEventArgs e)
         {
-            UI.MainWindow window = new UI.MainWindow(e.Args);
+            // open launcher with our arguments
+            InternetConnection connection = new InternetConnection();
+            UI.MainWindow window = new UI.MainWindow(e.Args, connection);
             window.Show();
         }
     }

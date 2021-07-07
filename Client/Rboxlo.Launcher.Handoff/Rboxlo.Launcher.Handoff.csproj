@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC62A7AD-6485-486E-8997-4BE87EDDBE72}</ProjectGuid>
+    <ProjectGuid>{2641D974-F553-4E5B-95EC-EACA31AD1165}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Rboxlo.DotEnv</RootNamespace>
-    <AssemblyName>Rboxlo.DotEnv</AssemblyName>
+    <RootNamespace>Rboxlo.Launcher.Handoff</RootNamespace>
+    <AssemblyName>Rboxlo.Launcher.Handoff</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,5 +52,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>1&gt;nul copy $(SolutionDir)..\Branding\Logos\Primary\Icon.ico $(ProjectDir)\Resources\Icon.ico
+echo Rboxlo.Build ^-^&gt; Successfully copied Rboxlo brand images</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>1&gt;nul copy $(TargetPath) $(SolutionDir)Rboxlo.Build\$(ConfigurationName)\$(TargetFileName)
+echo Rboxlo.Build ^-^&gt; Copied bin to Build folder</PostBuildEvent>
+  </PropertyGroup>
 </Project>
