@@ -101,6 +101,10 @@ router.post("/new", user.authenticated, async (req, res) => {
         response = "No internal name provided"
     }
 
+    if (response !== false && !validator.isAlphanumeric(req.body["internal_name"])) {
+        response = "Invalid internal name provided; internal name must only be alphanumeric characters"
+    }
+
     // If failed any of the checks, render with error
     if (response !== false) {
         return res.render("games/application/new", {

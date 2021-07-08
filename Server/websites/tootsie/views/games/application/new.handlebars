@@ -10,11 +10,13 @@
                     <div class="form-group mb-3">
                         <label for="internal_name" class="form-label">Internal name</label>
                         <input name="internal_name" id="internal_name" class="form-control" type="text">
+                        <small class="form-text text-muted">Only alphanumeric characters are allowed for the internal name</small>
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="display_name" class="form-label">Display name</label>
                         <input name="display_name" id="internal_name" class="form-control" type="text">
+                        <small class="form-text text-muted">The display name should be something short and easily recognizable</small>
                     </div>
 
                     <input type="hidden" name="_csrf" value="{{ session.csrf }}">
