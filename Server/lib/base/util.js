@@ -92,7 +92,13 @@ exports.snakeCaseToCamelCase = (string) => {
 
     for (var i = 1; i < split.length; i++) {
         let shrapnel = split[i].toLowerCase()
-        result.push((shrapnel.charAt(0).toUpperCase()) + shrapnel.slice(1))
+
+        if (shrapnel === "uuid") {
+            // lol.
+            result.push("UUID")
+        } else {
+            result.push((shrapnel.charAt(0).toUpperCase()) + shrapnel.slice(1))
+        }
     }
 
     return (split[0].toLowerCase() + result.join(""))
@@ -134,11 +140,12 @@ exports.snakeCaseToCamelCaseArrayNested = (array) => {
 
 /**
  * Gets a resource's URL from its short path, i.e. "styles.css" -> "https://rboxlo.loc/css/styles.min.css"
+ * The result of this should then be passed through a URL helper. This method should NOT be used on its own
  * 
  * @param {string} name File name of resource
  * @param {boolean} getResourceFolder Whether to get the specific folder of the resource (default: TRUE)
  * 
- * @returns {string} Formatted path to resource
+ * @returns {string} Formatted path to resource (pass this through your URL helper)
  */
 exports.resourceInternal = (name, getResourceFolder = true) => {
     if (!getResourceFolder) {

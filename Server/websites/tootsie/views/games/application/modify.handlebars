@@ -1,4 +1,10 @@
 {{#> layout}}
+    {{#if application}}
+        {{#content "head" mode="append"}}
+            <meta name="rboxlo-application-id" content="{{ application.id }}">
+        {{/content}}
+    {{/if}}
+    
     {{#content "body"}}
         <h1 class="mb-3">Modify Application</h1>
 
@@ -15,7 +21,7 @@
                         <b>Internal name:</b> <code id="internal-name">{{ xss application.internalName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#internal-name-modal"><small>(edit)</small></a>
                         <br><br>
                         <b>UUID:</b> <code id="uuid">{{ xss application.uuid }}</code> <a href="#" id="regenerate-uuid"><small>(regen)</small></a> <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="regenerate-uuid-spinner"><span class="sr-only">Regenerating UUID...</span></div><br>
-                        <b>Last Deployed Version UUID:</b> {{#if lastDeployedVersionUuid.length}}<code>{{ xss application.lastDeployedVersionUuid }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
+                        <b>Last Deployed Version UUID:</b> {{#if lastDeployedVersionUUID.length}}<code>{{ xss application.lastDeployedVersionUUID }}</code>{{else}}<i class="text-muted">none</i>{{/if}}
                         <br><br>
                         <b>Time Created:</b> <span id="created">{{ timestamp application.createdTimestamp }}</span><br>
                         <b>Last Updated:</b> <span id="last-updated">{{ timestamp application.lastUpdatedTimestamp }}</span>
@@ -70,7 +76,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="alert alert-danger py-2 d-none" id="internal-name-status"></div>
+                            <div class="alert alert-danger py-2 d-none" id="internal-name-update"></div>
                             <span>Current internal name: <code id="internal-name">{{ xss application.internalName }}</code></span>
                             <div class="form-group mt-1">
                                 <label for="internal-name-input" class="form-label">New internal name:</label>
@@ -111,10 +117,10 @@
                     <th scope="col" class="table-button"></th>
                     <th scope="col" class="table-button"></th>
                     <th scope="col" class="align-middle text-center">ID</th>
+                    <th scope="col" class="align-middle">Display Name</th>
+                    <th scope="col" class="align-middle">Internal Name</th>
                     <th scope="col" class="align-middle">UUID</th>
                     <th scope="col" class="align-middle">Latest Deployed Version UUID</th>
-                    <th scope="col" class="align-middle">Internal Name</th>
-                    <th scope="col" class="align-middle">Display Name</th>
                     <th scope="col" class="align-middle">Last Updated</th>
                     <th scope="col" class="align-middle">Time Created</th>
                 </tr></thead>
@@ -148,7 +154,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="delete-application-submit">Yes, I'm sure</button>
+                        <button type="button" class="btn btn-danger" id="delete-application-submit">
+                            <div class="text-white spinner-border spinner-border-sm d-none" role="status" id="delete-spinner"><span class="sr-only">Deleting application...</span></div>
+                            Yes, I'm sure
+                        </button>
                     </div>
                 </div>
             </div>

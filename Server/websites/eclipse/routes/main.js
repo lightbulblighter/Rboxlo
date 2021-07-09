@@ -8,8 +8,4 @@ router.get("/", user.loggedOut, (req, res) => {
     res.render("home", { title: "Home" })
 })
 
-router.get("/login", user.loggedOut, (req, res) => {
-    res.redirect("/account/login")
-})
-
 module.exports = router

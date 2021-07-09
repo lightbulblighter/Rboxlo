@@ -28,7 +28,7 @@ exports.MAX_ARBITER_SIZE = MAX_ARBITER_SIZE
 /**
  * Maximum application download size, in bytes
  */
-const MAX_APPLICATION_SIZE = bytes("25MB")
+const MAX_APPLICATION_SIZE = bytes("100MB")
 exports.MAX_APPLICATION_SIZE = MAX_APPLICATION_SIZE
 
 /**
@@ -116,26 +116,54 @@ exports.delete = async (id) => {
  * @returns {boolean} If the column exists
  */
 exports.columnExists = async (column) => {
-    return (await sql.run("SHOW COLUMNS FROM `applications` LIKE ?", column)).length > 0
+    // FIXME: Enable this once we migrate to MariaDB
+    // return (await sql.run("SHOW COLUMNS FROM `applications` LIKE ?", column)).length > 0
+    
+    // Keep in line with schema
+    let columns = [
+        "id",
+        "uuid",
+        "created_timestamp",
+        "last_updated_timestamp",
+        "last_deployed_version_uuid",
+        "internal_name",
+        "display_name"
+    ]
+
+    return columns.includes(column)
 }
 
 /**
- * Sets the value of a column for a given application. You should always call application.exists and application.columnExists before using this
+ * Sets the value of a column for a given application. You should always call application.exists before using this
  * 
  * @param {number} id Application ID
  * @param {string} column Column name
  * @param {string} value New value to assign to column
+ * 
+ * @returns {(boolean|undefined)} Returns FALSE if the column doesn't exist, otherwise does not have a return value by default
  */
 exports.setColumnValue = async (id, column, value) => {
-    await sql.run("UPDATE `applications` SET ? = ? WHERE `id` = ?", [id, column, value])
+    if (!await exports.columnExists(column)) {
+        return false
+    }
+
+    // SECURITY: Escaping SQL without prepares.
+    await sql.run(`UPDATE \`applications\` SET ${column} = ? WHERE \`id\` = ?`, [value, id])
 }
 
 /**
- * Gets the value of a column for a given application. You should always call application.exists and application.columnExists before using this
+ * Gets the value of a column for a given application. You should always call application.exists before using this
  * 
  * @param {number} id Application ID
  * @param {string} column Column name
+ * 
+ * @returns {(boolean|undefined)} Returns FALSE if the column doesn't exist, otherwise does not have a return value by default
  */
 exports.getColumnValue = async (id, column) => {
-    await sql.run("SELECT ? FROM `applications` WHERE `id` = ?", [column, id])
+    if (!await exports.columnExists(column)) {
+        return false
+    }
+
+    // SECURITY: Escaping SQL without prepares.
+    await sql.run(`SELECT ${column} FROM \`applications\` WHERE \`id\` = ?`, id)
 }

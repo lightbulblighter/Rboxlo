@@ -5,12 +5,12 @@ const path = require("path")
 const user = require(path.join(global.rboxlo.root, "lib", "user"))
 
 router.get("/constraint", user.loggedOut, async (req, res) => {
-    let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
+    let challenge = await user.needsAuthenticationChallenge(req.rboxlo.ip)
     res.render("constraint", { layout: "constraint", title: "Login", challenge: challenge })
 })
 
 router.post("/constraint", user.loggedOut, async (req, res) => {
-    let challenge = (await user.needsAuthenticationChallenge(req.rboxlo.ip))
+    let challenge = await user.needsAuthenticationChallenge(req.rboxlo.ip)
     let response
 
     if (global.rboxlo.env.GOOGLE_RECAPTCHA_ENABLED) {
@@ -42,7 +42,7 @@ router.post("/constraint", user.loggedOut, async (req, res) => {
                 })
             }
 
-            req.session.rboxlo.user = (await user.getNecessarySessionInfoForUser(response.userId))
+            req.session.rboxlo.user = await user.getNecessarySessionInfoForUser(response.userId)
 
             if (req.session.rboxlo.hasOwnProperty("redirect")) {
                 delete req.session.rboxlo.redirect

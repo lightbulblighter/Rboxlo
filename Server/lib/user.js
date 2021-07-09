@@ -296,6 +296,7 @@ async function getInviteKeyInfo (inviteKey, returnAllColumns) {
         return false
     }
 
+    // SECURITY: Escaping SQL without prepares.
     let columns = (returnAllColumns ? "*" : "`id`, `uses`, `max_uses`")
     let result = await sql.run(`SELECT ${columns} FROM \`invite_keys\` WHERE \`key\` = ?`, inviteKey)
 
@@ -712,7 +713,7 @@ exports.createAccount = (information, ip, userAgent, generateThumbnail = true) =
             }
     
             if (!response.targets.hasOwnProperty("email")) {
-                let result = await sql.run("SELECT 1 FROM `users` WHERE `email_blind_index` = ?", (await locker.blind(information.email)))
+                let result = await sql.run("SELECT 1 FROM `users` WHERE `email_blind_index` = ?", await locker.blind(information.email))
                 if (result.length > 3) {
                     response.targets.email = "Too many accounts exist with this E-Mail address."
                 }

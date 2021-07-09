@@ -1,5 +1,7 @@
 var exports = module.exports = {}
 
+const clone = require("clone-deep")
+
 let manifest = [
     {
         code: 400,
@@ -49,8 +51,10 @@ exports.empty = (req, res) => {
     res.status(empty.code)
 
     if (req.accepts("html")) {
-        empty.blob = `blobs/${empty.blob}.png`
-        res.render("error", { layout: "error", error: empty })
+        let out = clone(empty)
+        out.blob = `blobs/${out.blob}.png`
+        res.render("error", { layout: "error", error: out })
+
         return
     }
 
@@ -69,8 +73,10 @@ exports.catcher = (err, req, res, next) => {
         res.status(error.code)
 
         if (req.accepts("html")) {
-            error.blob = `blobs/${error.blob}.png`
-            res.render("error", { layout: "error", error: error })
+            // I have to deep clone this because javascript makes me cry a lot
+            let out = clone(error)
+            out.blob = `blobs/${out.blob}.png`
+            res.render("error", { layout: "error", error: out })
 
             return
         }

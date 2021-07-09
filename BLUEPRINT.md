@@ -21,20 +21,19 @@ Tree-view of Rboxlo application
             - Roblox APIs compatibile with applications designed around the Roblox API, and Roblox applications using it
             - Rboxlo APIs refer to stuff like forum endpoints, marketplace endpoints, etc.
         - User frontend
-            - There is no "ban user", "delete thread", "delete server" type of buttons integrated into the frontend if you are a moderator. These are all things that go to Tootsie. There is nothing moderator-related in Eclipse's frontend, such as an admin panel.
+            - There is no "ban user", "delete thread", "delete server" type of buttons integrated into the frontend if you are a moderator. These are all things that go to Bush. There is nothing moderator-related in Eclipse's frontend, such as an admin panel.
         - Basically where everything happens
     - Tootsie
         - Same core as Eclipse
         - Sensitive website for moderation and control of Rboxlo
         - Master panel
             - Password is independent of users, and is manually set before Rboxlo.Server runs
-            - Site customization (sort of a "Rboxlo Wix")
             - Site-wide banners ("We're going down at 3 P.M. CST", "New event!", etc.)
             - Able to lock down entire site, or conversely bring it back
             - Send Rboxlo bulk emails
             - Deploy clients
             - View of Arbiters running and all servers
-            - Can manually speak to Ok*r*a
+            - Can manually speak to Okra
         - Separated from Eclipse for utility and stability (if Eclipse goes down, Tootsie does not)
         - Small and sweet
     - Bush
@@ -51,34 +50,34 @@ Tree-view of Rboxlo application
         - Is the middleman for Arbiter communication
         - Tootsie can manually talk to Okra
         - Eclipse talks to Okra automatically to create servers
-        - Hosts chatbots
-            - IRC or Discord
+        - Hosts chatbots (i.e. verification and other things)
+            - IRC/Discord support
     - Other containers
         - These are not built into Rboxlo.Server but containers that run alongside it
         - Ghost, a blogging platform
         - MySQL, the database where everything is stored
 - Rboxlo.Client
     - .NET
-    - Cross platform (Windows & all Unix systems)
     - Rboxlo.Launcher
         - Delivered to the end-user
         - Joins Rboxlo games for users
         - Discord Rich Presence, allowing people to join each-other via Discord
         - Automatically updates itself and the Roblox game clients
-        - Fully modular (nothing that hard-coded; mostly everything is constructed through the website)
+        - Fully modular (not much that is hard-coded; mostly everything is constructed through the website)
         - On-demand patches(??)
         - Installation
             - Installs clients on-demand
             - "Part" downloads
             - **Windows:** Installation defaults to `%localappdata%\$NAME` and creates an entry in the registry for one-click uninstallation via Control Panel
-            - **Linux:** Installation location picked by user, no default
     - Rboxlo.Arbiter
+        - Cross platform (Linux/Windows)
         - Delievered to server systems
         - Creates Cron jobs automatically if Unix, installs itself as a Windows service if Windows
         - Hosts games that users join
         - Automatic updates as well and is fully modular
         - Fully licensed; you cannot use it without having a valid license
         - License is given out on a per-gameserver basis
+        - WINE(?)
 - Rboxlo.Patch
     - Assembly patch files given out to aid patching Roblox game clients
     - `.1337` format, x64dbg patch exports
@@ -86,7 +85,7 @@ Tree-view of Rboxlo application
         - Notable exception is 2016 (able to be compiled, no point in patching)
         - Security refers to RCEs; via DHTML or otherwise
             - These can be achieved through client-side Lua as well, but those types of patches, even if implemented in Rboxlo, are not listed here because it does not necessarily count as a "patch"
-        - Anticheat refers to the very mildest forms of anticheat; removing studio tools, basic textcode patch, or an Eggsploit patch(?? check back on this later)
+        - Anticheat refers to the very mildest forms of anticheat; removing studio tools, basic textcode patch, etc.
         - All patches patch for "usability"; name changing, extranet connections, rocky, etc. This is a given.
         - RobloxApp 2007: Security
         - RobloxApp 2008: Security

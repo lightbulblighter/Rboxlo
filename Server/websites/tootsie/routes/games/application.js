@@ -37,7 +37,7 @@ router.get("/deployment", user.authenticated, async (req, res) => {
     // If ID specified, render deployment view with selected application
     if (!isNaN(req.query.id) && validator.isInt(req.query.id)) {
         let id = parseInt(req.query.id)
-        if (!(await application.exists(id))) {
+        if (!await application.exists(id)) {
             return res.redirect("/games/application/deployment")
         }
 
@@ -68,7 +68,7 @@ router.get("/modify", user.authenticated, async (req, res) => {
     if (!isNaN(req.query.id) && validator.isInt(req.query.id)) {
         let id = parseInt(req.query.id)
 
-        if (!(await application.exists(id))) {
+        if (!await application.exists(id)) {
             return res.redirect("/games/application/modify")
         }
 
@@ -93,15 +93,15 @@ router.post("/new", user.authenticated, async (req, res) => {
     // Checks
     let response = false
 
-    if (!req.body.hasOwnProperty("display_name") || req.body["display_name"].length < 0) {
+    if (!response && !req.body.hasOwnProperty("display_name") || req.body["display_name"].length < 0) {
         response = "No display name provided"
     }
 
-    if (!req.body.hasOwnProperty("internal_name") || req.body["internal_name"].length < 0) {
+    if (!response && !req.body.hasOwnProperty("internal_name") || req.body["internal_name"].length < 0) {
         response = "No internal name provided"
     }
 
-    if (response !== false && !validator.isAlphanumeric(req.body["internal_name"])) {
+    if (!response && !validator.isAlphanumeric(req.body["internal_name"])) {
         response = "Invalid internal name provided; internal name must only be alphanumeric characters"
     }
 
@@ -114,7 +114,7 @@ router.post("/new", user.authenticated, async (req, res) => {
     }
 
     // Passed the checks, create application
-    let id = (await application.create(req.body["internal_name"], req.body["display_name"]))
+    let id = await application.create(req.body["internal_name"], req.body["display_name"])
     res.redirect(`/games/application/modify?id=${id}`)
 })
 

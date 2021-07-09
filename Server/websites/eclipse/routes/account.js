@@ -107,7 +107,7 @@ async function authenticate (req, res) {
                 })
             }
 
-            req.session.rboxlo.user = (await user.getNecessarySessionInfoForUser(response.userId))
+            req.session.rboxlo.user = await user.getNecessarySessionInfoForUser(response.userId)
 
             if (req.session.rboxlo.hasOwnProperty("redirect")) {
                 delete req.session.rboxlo.redirect

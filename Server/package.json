@@ -22,6 +22,7 @@
     "body-parser": "^1.19.0",
     "bytes": "^3.1.0",
     "ciphersweet-js": "^1.4.1",
+    "clone-deep": "^4.0.1",
     "connect-multiparty": "^2.2.0",
     "cookie-parser": "^1.4.5",
     "cookie-session": "^1.4.0",

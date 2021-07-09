@@ -29,9 +29,9 @@ router.get("/json", async (req, res) => {
             id: place.id,
             uuid: place.uuid,
             name: place.name,
-            isStartPlace: (place.is_start_place == 0 ? false : true),
+            isStartPlace: (place.is_start_place == 1 ? true : false),
             visits: place.visits,
-            activePlayers: (await games.getActivePlayersByPlaceID(place.id)),
+            activePlayers: await games.getActivePlayersByPlaceID(place.id),
             game: {
                 id: place.game_id,
                 uuid: place.game_uuid
