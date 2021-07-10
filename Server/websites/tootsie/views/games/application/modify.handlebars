@@ -9,7 +9,7 @@
         <h1 class="mb-3">Modify Application</h1>
 
         {{#if application}}
-            <h3 class="mb-2">Viewing application "<span id="display-name">{{ xss application.displayName }}</span>"</h3>
+            <h3 class="mb-2">Viewing application "<span class="display-name">{{ xss application.displayName }}</span>"</h3>
             <a href="{{ url "/games/application/modify" }}" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
             <div class="alert alert-success d-none mt-2" id="update"></div>
 
@@ -17,8 +17,8 @@
                 <div class="row justify-content-between">
                     <div class="col-lg-5 mb-3">
                         <b>ID:</b> <code>{{ xss application.id }}</code><br>
-                        <b>Display name:</b> <code id="display-name">{{ xss application.displayName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#display-name-modal"><small>(edit)</small></a><br>
-                        <b>Internal name:</b> <code id="internal-name">{{ xss application.internalName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#internal-name-modal"><small>(edit)</small></a>
+                        <b>Display name:</b> <code class="display-name">{{ xss application.displayName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#display-name-modal"><small>(edit)</small></a><br>
+                        <b>Internal name:</b> <code class="internal-name">{{ xss application.internalName }}</code> <a href="#" data-bs-toggle="modal" data-bs-target="#internal-name-modal"><small>(edit)</small></a>
                         <br><br>
                         <b>UUID:</b> <code id="uuid">{{ xss application.uuid }}</code> <a href="#" id="regenerate-uuid"><small>(regen)</small></a> <div class="text-secondary spinner-border spinner-border-sm d-none" role="status" id="regenerate-uuid-spinner"><span class="sr-only">Regenerating UUID...</span></div><br>
                         <b>Last Deployed Version UUID:</b> {{#if lastDeployedVersionUUID.length}}<code>{{ xss application.lastDeployedVersionUUID }}</code>{{else}}<i class="text-muted">none</i>{{/if}}

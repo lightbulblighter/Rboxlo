@@ -16,7 +16,7 @@ function deleteApplication(id) {
         let alert = $("#update")
 
         if (data.success) {
-            alert.text(`Successfully deleted application "${xss(data.deleted.displayName)}"!`)
+            alert.text(`Successfully deleted application "${data.deleted.displayName}"!`)
             alert.removeClass("d-none")
             alert.removeAttr("style")
 

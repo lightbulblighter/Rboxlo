@@ -16,7 +16,7 @@ router.get("/logout", (req, res) => {
 })
 
 router.get("/login", (req, res) => {
-    res.render("login", { layout: "form", title: "Login" })
+    res.render("account/login", { layout: "form", title: "Login" })
 })
 
 router.post("/login", async (req, res) => {
@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
             req.session.rboxlo.user = { in: true }
             return res.redirect("/")
         } else {
-            res.render("login", { layout: "form", title: "Login" })
+            res.render("account/login", { layout: "form", title: "Login" })
         }
     }
 })

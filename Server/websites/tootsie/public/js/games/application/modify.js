@@ -284,13 +284,13 @@ function displayNameSubmit() {
             input.val("")
 
             for (let i = 0; i < $(".display-name").length; i++) {
-                $(".display-name").eq(i).text(xss(value))
+                $(".display-name").eq(i).text(value)
             }
 
             $("#last-updated").text(timestamp(moment().unix()))
 
             setTimeout(() => {
-                parentAlert.fadeOut("slow")
+                formAlert.fadeOut("slow")
             }, 2250)
 
             modal.modal("toggle")
@@ -364,7 +364,7 @@ function internalNameSubmit() {
             input.val("")
 
             for (let i = 0; i < $(".internal-name").length; i++) {
-                $(".internal-name").eq(i).text(xss(value))
+                $(".internal-name").eq(i).text(value)
             }
 
             $("#last-updated").text(timestamp(moment().unix()))
@@ -417,7 +417,7 @@ function deleteApplication(id, redirect = false) {
                 return
             }
 
-            alert.text(`Successfully deleted application "${xss(data.deleted.displayName)}"!`)
+            alert.text(`Successfully deleted application "${data.deleted.displayName}"!`)
             alert.removeClass("d-none")
             alert.removeAttr("style")
 
@@ -445,7 +445,7 @@ $(document).ready(() => {
             $("#regenerate-uuid").click(() => { regenerateUUID() })
             $("#display-name-submit").click(() => { displayNameSubmit() })
             $("#internal-name-submit").click(() => { internalNameSubmit() })
-            $("#delete-application-submit").click(() => { deleteApplication($('meta[name="rboxlo-csrf"]').attr("content"), true) })
+            $("#delete-application-submit").click(() => { deleteApplication($('meta[name="rboxlo-application-id"]').attr("content"), true) })
         })
     }
 })
