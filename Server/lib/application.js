@@ -8,28 +8,22 @@ const uuid = require("uuid")
 const sql = require(path.join(__dirname, "base", "sql"))
 
 /**
- * Maximum application file size, in bytes
+ * Maximum application download size, in bytes
  */
-const MAX_PLACE_SIZE = bytes("100MB")
-exports.MAX_PLACE_SIZE = MAX_PLACE_SIZE
+const MAX_APPLICATION_SIZE = bytes(global.rboxlo.env.MAX_APPLICATION_SIZE)
+exports.MAX_APPLICATION_SIZE = MAX_APPLICATION_SIZE
 
 /**
  * Maximum launcher file size, in bytes
  */
-const MAX_LAUNCHER_SIZE = bytes("25MB")
+const MAX_LAUNCHER_SIZE = bytes(global.rboxlo.env.MAX_LAUNCHER_SIZE)
 exports.MAX_LAUNCHER_SIZE = MAX_LAUNCHER_SIZE
 
 /**
  * Maximum arbiter file size, in bytes
  */
-const MAX_ARBITER_SIZE = bytes("25MB")
+const MAX_ARBITER_SIZE = bytes(global.rboxlo.env.MAX_ARBITER_SIZE)
 exports.MAX_ARBITER_SIZE = MAX_ARBITER_SIZE
-
-/**
- * Maximum application download size, in bytes
- */
-const MAX_APPLICATION_SIZE = bytes("100MB")
-exports.MAX_APPLICATION_SIZE = MAX_APPLICATION_SIZE
 
 /**
  * Checks if a given application exists

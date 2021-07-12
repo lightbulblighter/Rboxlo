@@ -14,7 +14,7 @@ const sql = require(path.join(__dirname, "base", "sql"))
 /**
  * Maximum place file size, in bytes
  */
-const MAX_PLACE_SIZE = bytes("100MB")
+const MAX_PLACE_SIZE = bytes(global.rboxlo.env.MAX_PLACE_SIZE)
 exports.MAX_PLACE_SIZE = MAX_PLACE_SIZE
 
 /**
