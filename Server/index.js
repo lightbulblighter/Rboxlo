@@ -19,20 +19,23 @@ if (!process.env.DOCKER) {
 
 // Set environment variables to a table named global.rboxlo.env
 // These are separate from process.env as they are parsed for booleans, and are cached; accessing process.env directly blocks for each call
-global.rboxlo.env = {}
-let keys = Object.keys(process.env)
-
-for (let i = 0; i < keys.length; i++) {
-    let value = process.env[keys[i]]
+global.rboxlo.resetEnvironmentCache = () => {
+    global.rboxlo.env = {}
+    let keys = Object.keys(process.env)
     
-    if (value.toLowerCase() == "false") {
-        value = false
-    } else if (value.toLowerCase() == "true") {
-        value = true
+    for (let i = 0; i < keys.length; i++) {
+        let value = process.env[keys[i]]
+        
+        if (value.toLowerCase() == "false") {
+            value = false
+        } else if (value.toLowerCase() == "true") {
+            value = true
+        }
+        
+        global.rboxlo.env[keys[i]] = value
     }
-    
-    global.rboxlo.env[keys[i]] = value
 }
+global.rboxlo.resetEnvironmentCache()
 
 // Set root
 global.rboxlo.root = __dirname
