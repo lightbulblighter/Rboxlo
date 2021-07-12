@@ -13,19 +13,8 @@ let app = express()
 let hosting = []
 
 if (!process.env.DOCKER) {
-    // This is an unmentioned, undocumented environment override. Debugging only
-    if (!process.env.SERVER_OVERRIDE_DOCKER) {
-        console.log("Not running in Docker, exiting...")
-        process.exit(1)
-    }
-
-    // Person isn't running in Docker and they're overriding the check.
-    // They must be debugging. If they aren't, they're stupid.
-    // Will consume all host environment variables into global.rboxlo.env.
-
-    require("dotenv").config({
-        path: require("path").join(__dirname, "..", ".env")
-    })
+    console.log("Not running in Docker, exiting...")
+    process.exit(1)
 }
 
 // Set environment variables to a table named global.rboxlo.env
