@@ -15,7 +15,7 @@ services:
       - "./Containers/Server/data:/app/data"
   database:
     container_name: "${NAME}_database"
-    image: "mysql"
+    image: "mariadb"
     hostname: "database"
     command: "--init-file /usr/local/bin/structure.sql"
     environment:

@@ -6,10 +6,10 @@
             <h3 class="mb-2">Deploying to application "{{ xss application.displayName }}"</h5>
             <a href="{{ url "/games/application/deployment" }}" class="text-decoration-none"><i class="far fa-arrow-left"></i> Back</a>
             <div class="card card-body mt-2">
-                <p><b>NOTE:</b> Make sure to triple-check the contents of the ZIP file before deploying</p><br>
+                <h4><b>NOTE:</b> Make sure to triple-check the contents of the ZIP file before deploying</h4>
                 <div class="form-group mb-3">
                     <label for="place" class="form-label">Choose application ZIP (max {{ xss maxApplicationSize }})</label>
-                    <input name="application" type="file" class="form-control">
+                    <input name="application" type="file" class="form-control" accept=".zip">
                     <div class="form-text">Don't know what belongs in an application ZIP? Click <a href="#">here</a> for more info</div>
                 </div>
                 <button class="btn btn-primary" role="button">Deploy</button>
@@ -29,7 +29,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade py-2 show active" id="application">
-                    <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex justify-content-between mb-1">
                         <h3>Choose an application to deploy to</h3>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-secondary" id="data-refresh">

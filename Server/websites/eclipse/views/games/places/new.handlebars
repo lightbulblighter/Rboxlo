@@ -91,7 +91,7 @@
                         
                         <div class="mb-3">
                             <label for="file" class="form-label">Choose place file (maximum {{ maxPlaceSize }})</label>
-                            <input type="file" class="form-control form-control-sm{{#if form.file}} is-{{#if form.file.invalid}}in{{/if}}valid{{/if}}" name="file" id="place" required="required">
+                            <input type="file" accept=".rbxl,.rbxlx" class="form-control form-control-sm{{#if form.file}} is-{{#if form.file.invalid}}in{{/if}}valid{{/if}}" name="file" id="place" required="required">
                             {{#if form.file.invalid}}
                                 <div class="invalid-feedback">{{ xss form.file.message }}</div>
                             {{/if}}

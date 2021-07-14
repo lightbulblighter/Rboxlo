@@ -20,26 +20,26 @@ function populate(initializing = false) {
             $("#data-loading").addClass("d-none")
             $("#data-empty").removeClass("d-none")
         } else {
-            $(data).each((_, app) => {
+            $(data).each(function () {
                 let container = $("<tr>", {
-                    "data-rboxlo-application-id": app.id,
+                    "data-rboxlo-application-id": this.id,
                     style: "cursor: pointer"
                 })
 
-                let id = $("<td>", { class: "align-middle text-center" }).append(app.id)
-                let displayName = $("<td>", { class: "align-middle"}).append(app.displayName)
-                let internalName = $("<td>", { class: "align-middle" }).append($("<code>").append(app.internalName))
-                let uuid = $("<td>", { class: "align-middle" }).append($("<code>").append(app.uuid))
+                let id = $("<td>", { class: "align-middle text-center" }).append(this.id)
+                let displayName = $("<td>", { class: "align-middle"}).append(this.displayName)
+                let internalName = $("<td>", { class: "align-middle" }).append($("<code>").append(this.internalName))
+                let uuid = $("<td>", { class: "align-middle" }).append($("<code>").append(this.uuid))
                 let lastDeployedVersionUUID = $("<td>", { class: "align-middle" })
 
-                if (app.lastDeployedVersionUUID.length > 0) {
-                    lastDeployedVersionUUID.append($("<code>").append(app.lastDeployedVersionUUID))
+                if (this.lastDeployedVersionUUID.length > 0) {
+                    lastDeployedVersionUUID.append($("<code>").append(this.lastDeployedVersionUUID))
                 } else {
                     lastDeployedVersionUUID.append($("<i>", { class: "text-muted" }).append("none"))
                 }
 
-                let lastUpdatedTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(app.lastUpdatedTimestamp))
-                let createdTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(app.createdTimestamp))
+                let lastUpdatedTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(this.lastUpdatedTimestamp))
+                let createdTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(this.createdTimestamp))
                 
                 container.append(id)
                 container.append(displayName)
@@ -52,7 +52,7 @@ function populate(initializing = false) {
                 body.append(container)
 
                 container.on("click", () => {
-                    window.location.href = url(`/games/application/deployment?id=${app.id}`)
+                    window.location.href = url(`/games/application/deployment?id=${this.id}`)
                 })
             })
 

@@ -1,50 +1,31 @@
 function hookUpDataListEvents() {
     console.log("[rboxlo->info]: modify::hookUpDataListEvents")
 
-    // this is shit, but .each() is too
-    let deleteButtons = $(".delete-application")
-    let uuidCopyButtons = $(".data-uuid-copy")
-    let lastDeployedVersionUUIDCopyButtons = $(".data-lastDeployedVersionUUID-copy")
-    let internalNameCopyButtons = $(".data-internalName-copy")
-
-    for (let i = 0; i < deleteButtons.length; i++) {
-        let element = deleteButtons.eq(i)
-        element.on("click", () => {
-            let id = element.parent().parent().attr("data-rboxlo-application-id")
-            console.log(`[rboxlo->info]: modify::deleteApplicationModal | ID: "${id}"`)
-            deleteApplicationModal(id)
+    $(".delete-application").each(function () {
+        $(this).on("click", () => {
+            deleteApplicationModal($(this).parent().parent().attr("data-rboxlo-application-id"))
         })
-    }
+    })
 
-    for (let i = 0; i < uuidCopyButtons.length; i++) {
-        let element = uuidCopyButtons.eq(i)
-        element.on("click", () => {
-            let uuid = element.parent().find(".data-uuid").text()
-            console.log(`[rboxlo->info]: modify::data-uuid-copy | "${uuid}"`)
-            copy(uuid)
+    $(".data-uuid-copy").each(function () {
+        $(this).on("click", () => {
+            copy($(this).parent().find(".data-uuid").text())
         })
-    }
+    })
 
-    for (let i = 0; i < lastDeployedVersionUUIDCopyButtons.length; i++) {
-        let element = lastDeployedVersionUUIDCopyButtons.eq(i)
-        
-        if (!element.attr("disabled")) {
-            element.on("click", () => {
-                let uuid = element.parent().find(".data-lastDeployedVersionUUID").text()
-                console.log(`[rboxlo->info]: modify::data-lastDeployedVersionUUID-copy | "${uuid}"`)
-                copy(uuid)
+    $(".data-lastDeployedVersionUUID-copy").each(function () {
+        if (!$(this).attr("disabled")) {
+            $(this).on("click", () => {
+                copy($(this).parent().find(".data-uuid").text())
             })
         }
-    }
+    })
 
-    for (let i = 0; i < internalNameCopyButtons.length; i++) {
-        let element = internalNameCopyButtons.eq(i)
-        element.on("click", () => {
-            let internalName = element.parent().find(".data-internalName").text()
-            console.log(`[rboxlo->info]: modify::data-internalName-copy | "${internalName}"`)
-            copy(internalName)
+    $(".data-internalName-copy").each(function () { 
+        $(this).on("click", () => {
+            copy($(this).parent().find(".data-internalName").text())
         })
-    }
+    })
 }
 
 function populate(initializing = false) {
@@ -69,14 +50,14 @@ function populate(initializing = false) {
             $("#data-loading").addClass("d-none")
             $("#data-empty").removeClass("d-none")
         } else {
-            $(data).each((_, app) => {
-                let container = $("<tr>", { "data-rboxlo-application-id": app.id })
+            $(data).each(function () {
+                let container = $("<tr>", { "data-rboxlo-application-id": this.id })
                 
                 let edit = $("<td>", {
                     class: "align-middle text-center table-button",
                     scope: "row"
                 }).append($("<a>", {
-                    href: url(`/games/application/modify?id=${app.id}`)
+                    href: url(`/games/application/modify?id=${this.id}`)
                 }).append($("<button>", {
                     class: "btn btn-primary btn-sm",
                     type: "button"
@@ -100,23 +81,23 @@ function populate(initializing = false) {
                 }).append($("<a>", {
                     class: "btn btn-success btn-sm text-white",
                     type: "button",
-                    href: url(`/games/application/deployment?id=${app.id}`)
+                    href: url(`/games/application/deployment?id=${this.id}`)
                 }).append($("<i>", {
                     class: "fas fa-upload"
                 })))
 
                 let id = $("<td>", {
                     class: "align-middle text-center"
-                }).append(app.id)
+                }).append(this.id)
 
-                let displayName = $("<td>", { class: "align-middle" }).append(app.displayName)
+                let displayName = $("<td>", { class: "align-middle" }).append(this.displayName)
 
                 let internalName = $("<td>", {
                     class: "align-middle"
                 }).append($("<div>", {
                     class: "d-flex justify-content-between align-items-center"
                 }).append([
-                    $("<code>", { class: "data-internalName" }).append(app.internalName),
+                    $("<code>", { class: "data-internalName" }).append(this.internalName),
                     $("<button>", { class: "btn btn-secondary btn-sm data-internalName-copy" }).append($("<i>", { class: "fas fa-clipboard" }))
                 ]))
 
@@ -125,7 +106,7 @@ function populate(initializing = false) {
                 }).append($("<div>", {
                     class: "d-flex justify-content-between align-items-center"
                 }).append([
-                    $("<code>", { class: "data-uuid" }).append(app.uuid),
+                    $("<code>", { class: "data-uuid" }).append(this.uuid),
                     $("<button>", { class: "btn btn-secondary btn-sm data-uuid-copy" }).append($("<i>", { class: "fas fa-clipboard" }))
                 ]))
 
@@ -133,11 +114,11 @@ function populate(initializing = false) {
                     class: "align-middle"
                 })
                 
-                if (app.lastDeployedVersionUUID.length > 0) {
+                if (this.lastDeployedVersionUUID.length > 0) {
                     lastDeployedVersionUUID.append($("<div>", {
                         class: "d-flex justify-content-between align-items-center"
                     }).append([
-                        $("<code>", { class: "data-lastDeployedVersionUUID" }).append(app.lastDeployedVersionUUID),
+                        $("<code>", { class: "data-lastDeployedVersionUUID" }).append(this.lastDeployedVersionUUID),
                         $("<button>", { class: "btn btn-secondary btn-sm data-lastDeployedVersionUUID-copy" }).append($("<i>", { class: "fas fa-clipboard" }))
                     ]))
                 } else {
@@ -149,8 +130,8 @@ function populate(initializing = false) {
                     ]))
                 }
 
-                let lastUpdatedTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(app.lastUpdatedTimestamp))
-                let createdTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(app.createdTimestamp))
+                let lastUpdatedTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(this.lastUpdatedTimestamp))
+                let createdTimestamp = $("<td>", { class: "align-middle" }).append(timestamp(this.createdTimestamp))
 
                 container.append(edit)
                 container.append(trash)
@@ -441,11 +422,9 @@ $(document).ready(() => {
         populate(true)
     } else {
         // We are on the application modification page (already chose one, is modifying it now)
-        $(() => {
-            $("#regenerate-uuid").click(() => { regenerateUUID() })
-            $("#display-name-submit").click(() => { displayNameSubmit() })
-            $("#internal-name-submit").click(() => { internalNameSubmit() })
-            $("#delete-application-submit").click(() => { deleteApplication($('meta[name="rboxlo-application-id"]').attr("content"), true) })
-        })
+        $("#regenerate-uuid").click(() => { regenerateUUID() })
+        $("#display-name-submit").click(() => { displayNameSubmit() })
+        $("#internal-name-submit").click(() => { internalNameSubmit() })
+        $("#delete-application-submit").click(() => { deleteApplication($('meta[name="rboxlo-application-id"]').attr("content"), true) })
     }
 })

@@ -1,8 +1,8 @@
 var exports = module.exports = {}
 
-const mysql = require("mysql2/promise")
+const mariadb = require("mariadb")
 
-const pool = mysql.createPool({
+const pool = mariadb.createPool({
     host: "database",
     port: 3306,
     database: global.rboxlo.env.DB_NAME,
@@ -25,17 +25,22 @@ exports.run = async (query, parameters = false, net = false) => {
         net = (e) => { throw e }
     }
 
-    // This may not be the best implementation, but it works
-    // Too lazy to understand this library...
-    if (parameters != false) {
-        if (Array.isArray(parameters)) {
-            var [results] = await pool.execute(query, parameters).catch(e => net(e))
+    var results
+
+    try {
+        let connection = await pool.getConnection()
+
+        if (parameters != false) {
+            results = await connection.query(query, parameters)
         } else {
-            var [results] = await pool.execute(query, [parameters]).catch(e => net(e))
+            results = await connection.query(query, parameters)
         }
-    } else {
-        var [results] = await pool.execute(query).catch(e => net(e))
+
+        connection.end()
+    } catch (e) {
+        net(e)
     }
+
     
     return results
 }

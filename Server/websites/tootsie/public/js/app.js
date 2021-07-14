@@ -11,7 +11,7 @@ function copy(text) {
         navigator.clipboard.writeText(text)
     } else {
         let area = $("<textarea>", {
-            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent; display: none"
+            style: "position: fixed; top: 0; width: 2em; height: 2em; padding: 0; border: none; outline: none; boxShadow: none; background: transparent; display: none;"
         })
 
         area.append(text)
@@ -37,12 +37,11 @@ function url(path) {
 
 $(document).ready(() => {
     console.log(`[rboxlo->info]: app::ready | document init`)
-    
-    // FIXME: Don't modify this at ALL, it breaks if you touch anything for some reason.
+
     if ($("#tabination").length) {
-        $("#tabination a").click(function(e){
-            e.preventDefault();
-            $(this).tab('show');
-        });
+        $("#tabination a").click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
     }
 })
