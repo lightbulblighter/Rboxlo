@@ -9,6 +9,8 @@
 
 Rboxlo is a **free and open-source** Roblox private server that can be used to relive childhood memories and create new ones. Using Rboxlo, you can set-up your own Roblox private server in minutes with the ability to play Roblox clients dating all the way back to 2007, and as modern as 2017. Rboxlo was created to truly decentralize Roblox, and to eventually eclipse the proprietary closed source Roblox revivals that exist today.
 
+**NOTE:** Rboxlo hasn't had an official release yet, meaning that everything here is still in a "pre-release" stage. However, you can check the current status [here!](https://github.com/lightbulblighter/Rboxlo/blob/trunk/ROADMAP.md)
+
 ## Features
 
 <img src="https://github.com/lightbulblighter/Rboxlo/raw/trunk/Branding/Artwork/SwordNoob.png" align="right" width="20%">
@@ -38,7 +40,7 @@ Make Rboxlo yours by customizing every single aspect of the platform. Whether it
 **Tech stack:**
 
 - **Node.js** powers the server and everything surrounding it (REST API, matchmaker, etc.)
-- **MySQL** powers the server's database, where all permanent data is stored
+- **MariaDB** powers the server's database, where all permanent data is stored
 - **Docker** containerizes the server and runs it all in a secure fashion
 - **.NET** is what the client applications are built on for smooth execution
 

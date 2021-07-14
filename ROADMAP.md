@@ -1,0 +1,146 @@
+# Rboxlo v1.0.0 Roadmap
+This is a roadmap, or more realistically, a checklist of everything to be implemented to suffice a release. Don't let the amount of items overwhelm you; some are minor features while some are major. Each item checked off is 100% bug-free and implemented, meaning it probably won't change that much by the time of Rboxlo's initial launch.
+
+- [x] Rboxlo.Branding
+- [ ] Rboxlo.Client
+    - [ ] Rboxlo.Arbiter
+        - [ ] Automatically starting jobs (and other application server types)
+        - [ ] Interface with Rboxlo Interface API
+        - [ ] Automatic updates
+        - [ ] Asset thumbnail system
+        - [ ] Cross platform
+    - [ ] Rboxlo.Launcher
+        - [x] UI
+        - [x] Handoff
+        - [ ] Automatic updates
+        - [ ] Launching Rboxlo
+        - [ ] Discord Rich Presence
+        - [ ] Tray icon
+    - [x] Build process
+        - [x] Importing dotenv file
+        - [x] Importing resources
+        - [x] Shared core project
+- [ ] Rboxlo.Patch
+    - [ ] 2007
+    - [ ] 2008
+    - [ ] 2009
+    - [ ] 2010
+    - [ ] 2011
+    - [ ] 2012
+    - [ ] 2013
+    - [ ] 2014
+    - [ ] 2015
+    - [ ] 2017
+- [ ] Rboxlo.Server
+    - [x] Website autoloading
+    - [x] Server startup
+    - [x] Database
+    - [x] Docker interface
+    - [ ] Eclipse
+        - [ ] Roblox APIs
+        - [x] Constraint
+        - [x] Project privacy settings
+        - [x] Account registration / signing in
+            - [x] Remember me
+            - [x] zxcvbn password checking
+        - [ ] Frontend
+            - [x] Base
+                - [x] Error pages
+                - [x] Index page
+            - [ ] Games
+                - [x] Index
+                    - [ ] Fetch place list
+                - [x] New place
+                - [ ] View place
+                - [ ] Edit place
+            - [x] User
+                - [x] Login
+                - [x] Register
+                - [x] Logout
+                - [x] Dashboard
+        - [ ] Backend
+            - [ ] Games
+                - [x] Universe hierarchy
+                - [x] Place creation
+                - [x] Place list (JSON); sorted
+                - [ ] Place joining
+            - [x] User
+                - [x] Authentication
+                - [x] Registration
+                - [x] CSRF
+                - [x] Logout
+                - [x] Session security
+                - [x] Remember me
+            - [x] Data
+                - [x] Place files & versioning
+                - [x] User thumbnail fetching
+    - [ ] Tootsie
+        - [x] Signing in
+        - [ ] Frontend
+            - [x] Base
+                - [x] Error pages
+                - [x] Index page
+            - [x] User
+                - [x] Logout
+                - [x] Login
+            - [ ] Games
+                - [ ] Application
+                    - [x] Delete application
+                    - [x] Deploy to application
+                    - [x] Modify application
+                    - [x] New application
+                    - [ ] Find instances with application
+                    - [ ] Find jobs with application
+                - [ ] Game
+                    - [ ] Delete game
+                    - [ ] Find jobs with game
+                    - [ ] Modify game
+                    - [ ] View game
+                - [ ] Instance
+                    - [ ] Delete instance
+                    - [ ] Find jobs with instance
+                    - [ ] Modify instance
+                    - [ ] Register a new instance
+                    - [ ] Search for an instance
+                - [ ] Place
+                    - [ ] Manage place badges
+                    - [ ] Delete place
+                    - [ ] Upload new file to place
+                    - [ ] Find jobs with place
+                    - [ ] Manage place marketplace
+                    - [ ] Modify place thumbnails
+                    - [ ] Modify place
+                    - [ ] Manage place version history
+                    - [ ] View full place information
+        - [ ] Backend
+            - [x] User
+                - [x] Logout
+                - [x] Login
+            - [ ] Games
+                - [ ] Application
+                    - [x] Delete application
+                    - [x] Modify application
+                    - [x] New application
+                    - [ ] Deploy to application
+                    - [ ] Find instances with application
+                    - [ ] Find jobs with application
+                - [ ] Game
+                    - [ ] Find jobs with game
+                    - [ ] Modify game
+                - [ ] Instance
+                    - [ ] Find jobs with instance
+                    - [ ] Modify instance
+                    - [ ] Register a new instance
+                    - [ ] Search for an instance
+                - [ ] Place
+                    - [ ] Manage place badges
+                    - [ ] Upload new file to place
+                    - [ ] Find jobs with place
+                    - [ ] Manage place marketplace
+                    - [ ] Modify place thumbnails
+                    - [ ] Modify place
+                    - [ ] Manage place version history
+                    - [ ] View full place information
+    - [x] Library structure
+- [x] Rboxlo.Setup
+- [x] Rboxlo.Docker
